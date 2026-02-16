@@ -1,0 +1,105 @@
+@import "../../globalStyles.scss";
+
+.footer {
+  background-color: #020203;
+
+  &__top {
+    padding: 47px 0 36px 0;
+  }
+
+  &__topTitleBlock {
+    margin-bottom: 45px;
+  }
+
+  &__topTitle {
+    @include poppins-500;
+    font-size: 38px;
+    line-height: 132.5%;
+    color: #ffffff;
+    margin-bottom: 9px;
+  }
+
+  &__topText {
+    font-size: 16px;
+    line-height: 21px;
+    color: #ffffff;
+    @include poppins-300;
+  }
+
+  &__topNav {
+    display: flex;
+    justify-content: space-between;
+
+    & li span {
+      @include poppins-400;
+      font-size: 13px;
+      line-height: 140%;
+      color: #ffffff;
+    }
+
+    & li:not(:last-child) {
+      margin-bottom: 10px;
+    }
+  }
+
+  &__topNavTitle {
+    @include poppins-700;
+    font-size: 14px;
+    line-height: 100%;
+    color: rgba(255, 255, 255, 0.5);
+    margin-bottom: 30px;
+  }
+
+  &__topNavLink {
+    @include poppins-400;
+    font-size: 13px;
+    line-height: 140%;
+    color: #ffffff;
+  }
+
+  &__bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 17px 0;
+  }
+
+  &__topNavLinkPhone,
+  &__topNavLinkEmail {
+    color: #01a4ff;
+  }
+
+  &__bottomSocials {
+    display: flex;
+    align-items: center;
+  }
+
+  &__bottomFacebook {
+    margin-right: 11px;
+    opacity: 0.2;
+    padding: 2px;
+  }
+
+  &__bottomInst {
+    opacity: 0.2;
+    padding: 2px;
+  }
+
+  &__bottomPaymants {
+    display: flex;
+    align-items: center;
+
+    & li:not(:last-child) {
+      margin-right: 10px;
+    }
+  }
+
+  &__bottomCopyright {
+    @include poppins-500;
+    font-size: 12px;
+    line-height: 132.5%;
+    color: #ffffff;
+    opacity: 0.6;
+  }
+}
