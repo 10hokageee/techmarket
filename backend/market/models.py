@@ -123,6 +123,6 @@ class Review(models.Model):
     comment = models.CharField(max_length=512)
 
     def save(self, *args, **kwargs):
-        if 1 <= self.grade >= 5:
+        if not (1 <= self.grade <= 5):
             raise ValidationError("Grade must be between 1 and 5")
         super().save(*args, **kwargs)

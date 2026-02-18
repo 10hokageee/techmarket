@@ -17,14 +17,20 @@ class ProductSerializer(serializers.ModelSerializer):
             "sale_price",
             "description",
             "status",
+            "reviews",
+            "rating_avg",
+        ]
+        read_only_fields = [
+            "id", "reviews", "rating_avg"
         ]
 
-class ProductListSerializer(ProductSerializer):
-    series = serializers.SlugRelatedField(slug_field="name", read_only=True)
-    # reviews_count = serializers.IntegerField(read_only=True)
-    # rating_avg = serializers.DecimalField(max_digits=3, decimal_places=2, read_only=True)
-    category = serializers.CharField(read_only=True, source="get_category_display")
-    status = serializers.CharField(read_only=True, source="get_status_display")
 
-    class Meta(ProductSerializer.Meta):
-        fields = ProductSerializer.Meta.fields + ["reviews", "rating_avg"]
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+
+        data["category"] = instance.get_category_display()
+        data["status"] = instance.get_status_display()
+        data["series"] = instance.series.name
+        data["rating_avg"] = str(instance.rating_avg)
+
+        return data
