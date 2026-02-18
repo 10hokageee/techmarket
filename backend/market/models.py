@@ -1,4 +1,8 @@
 import os
+from random import (
+    uniform as _setdefault_float_value,
+    triangular as _setdefault_int_value
+)
 import uuid
 
 from django.core.exceptions import ValidationError
@@ -10,14 +14,16 @@ from django.utils.translation import gettext_lazy as _
 
 
 def _uuid_photo_save(instance: "Product", filename: str):
-    _, ext = os.path.splitext(filename)
+    value, ext = os.path.splitext(filename)
     if isinstance(instance, Product):
         attr = instance.name
+        file_path = "product_images"
     elif isinstance(instance, Signboard):
-        attr = ext[:52]
+        attr = value[:52]
+        file_path = "signboard_images"
     else:
         raise ValueError("Instance must be of type Product, Signboard")
-    return os.path.join("product_images", f"{slugify(attr)}-{uuid.uuid4()}{ext}")
+    return os.path.join(file_path, f"{slugify(attr)}-{uuid.uuid4()}{ext}")
 
 
 class Series(models.Model):
@@ -58,9 +64,20 @@ class Product(models.Model):
     description = models.TextField(blank=True, null=True)
     status = models.CharField(max_length=20, choices=STATUS_CHOICES)
 
+    rating_avg = models.FloatField()
+    reviews = models.PositiveSmallIntegerField()
+
     def save(self, *args, **kwargs):
         if self.sale_price and self.sale_price > self.original_price:
             raise ValidationError("The sale price must be lower than the original price.")
+
+        # test save
+        self.rating_avg = round(
+            _setdefault_float_value(1.0, 5.0), 2
+        )
+        self.reviews = _setdefault_int_value(3, 52, 10)
+        # --------
+
         self.full_clean()
         super().save(*args, **kwargs)
 
@@ -100,7 +117,7 @@ class Review(models.Model):
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="reviews"
     )
     product = models.ForeignKey(
-        Product, on_delete=models.CASCADE, related_name="reviews"
+        Product, on_delete=models.CASCADE, related_name="product_reviews"
     )
     grade = models.PositiveSmallIntegerField()
     comment = models.CharField(max_length=512)

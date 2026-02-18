@@ -1,6 +1,6 @@
 from rest_framework import viewsets
 
-from django.db.models import Count, Avg
+# from django.db.models import Count, Avg
 
 from market.models import Product
 from market.permissions import IsAdminOrReadOnly
@@ -12,12 +12,14 @@ class ProductViewSet(viewsets.ModelViewSet):
     permission_classes = (IsAdminOrReadOnly,)
 
     def get_queryset(self):
-        return self.queryset.annotate(
-            reviews_count=Count("reviews"),
-            rating_avg=Avg("reviews__grade"),
-        )
+        # return self.queryset.annotate(
+        #     reviews_count=Count("reviews"),
+        #     rating_avg=Avg("reviews__grade"),
+        # )
+
+        return self.queryset.all()
 
     def get_serializer_class(self):
-        if self.action in ("list", "detail"):
+        if self.action in ("list", "retrieve"):
             return ProductListSerializer
         return ProductSerializer
