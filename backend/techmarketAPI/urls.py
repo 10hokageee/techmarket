@@ -19,10 +19,27 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
+from rest_framework.routers import DefaultRouter
 
-urlpatterns = [
-    path("admin/", admin.site.urls),
-    path("products/", include("market.urls", namespace="market")),
-    path("user/", include("rest_framework.urls")),
-    path("user/", include("user.urls", namespace="user")),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+from market.views import SignboardViewSet
+
+router = DefaultRouter()
+router.register("signboards", SignboardViewSet)
+
+urlpatterns = (
+    [
+        path("admin/", admin.site.urls),
+        path("products/", include("market.urls", namespace="market")),
+        path(
+            "user/",
+            include(
+                [
+                    path("", include("rest_framework.urls")),
+                    path("", include("user.urls", namespace="user")),
+                ]
+            ),
+        ),
+    ]
+    + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    + router.urls
+)

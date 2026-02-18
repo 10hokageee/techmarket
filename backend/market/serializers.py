@@ -1,12 +1,12 @@
 from rest_framework import serializers
 
-from market.models import Product
+from market.models import Product, Signboard
 
 
 class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
-        fields = [
+        fields = (
             "id",
             "name",
             "category",
@@ -19,11 +19,8 @@ class ProductSerializer(serializers.ModelSerializer):
             "status",
             "reviews",
             "rating_avg",
-        ]
-        read_only_fields = [
-            "id", "reviews", "rating_avg"
-        ]
-
+        )
+        read_only_fields = ("id", "reviews", "rating_avg")
 
     def to_representation(self, instance):
         data = super().to_representation(instance)
@@ -34,3 +31,9 @@ class ProductSerializer(serializers.ModelSerializer):
         data["rating_avg"] = str(instance.rating_avg)
 
         return data
+
+
+class SignboardSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Signboard
+        fields = ("id", "image")

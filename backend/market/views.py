@@ -1,7 +1,8 @@
-from rest_framework import viewsets
-from market.models import Product
+from rest_framework import viewsets, mixins
+from rest_framework.permissions import IsAdminUser
+from market.models import Product, Signboard
 from market.permissions import IsAdminOrReadOnly
-from market.serializers import ProductSerializer
+from market.serializers import ProductSerializer, SignboardSerializer
 
 
 class ProductViewSet(viewsets.ModelViewSet):
@@ -14,3 +15,14 @@ class ProductViewSet(viewsets.ModelViewSet):
         if _len and _len.isdigit() and (_len := int(_len)) <= 24:
             return self.queryset[:_len]
         return self.queryset
+
+
+class SignboardViewSet(
+    mixins.CreateModelMixin,
+    mixins.ListModelMixin,
+    mixins.DestroyModelMixin,
+    viewsets.GenericViewSet,
+):
+    queryset = Signboard.objects.all()
+    serializer_class = SignboardSerializer
+    permission_classes = (IsAdminUser,)
