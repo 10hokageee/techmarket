@@ -1,0 +1,13 @@
+@import "../../globalStyles.scss";
+
+.brands {
+  &__list {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__listItem:not(:last-child) {
+    margin-right: 47px;
+  }
+}

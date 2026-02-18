@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import styles from './Slider.module.scss';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { useEffect, useRef, useState } from 'react';
+import { useRef } from 'react';
 import { Autoplay, Navigation } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -10,7 +10,6 @@ export const Slider = () => {
   const prevRef = useRef<HTMLButtonElement>(null);
   const nextRef = useRef<HTMLButtonElement>(null);
 
-  const [init, setInit] = useState(false);
   const sliderImages = [
     {
       desktop: 'images/slide-1.png',
@@ -22,10 +21,6 @@ export const Slider = () => {
       desktop: 'images/slide-3.png',
     },
   ];
-
-  useEffect(() => {
-    setInit(true);
-  }, []);
 
   return (
     <section className={styles.slider}>
@@ -44,7 +39,6 @@ export const Slider = () => {
             </button>
           </div>
 
-          {init && (
             <Swiper
               modules={[Navigation, Autoplay]}
               loop
@@ -73,7 +67,6 @@ export const Slider = () => {
                 </SwiperSlide>
               ))}
             </Swiper>
-          )}
 
           <div className={styles.slider__navigation}>
             <button
