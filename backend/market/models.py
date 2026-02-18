@@ -1,11 +1,12 @@
 import os
 from random import (
     uniform as _setdefault_float_value,
-    triangular as _setdefault_int_value
+    triangular as _setdefault_int_value,
 )
 import uuid
 
 from django.core.exceptions import ValidationError
+from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 from django.db.models import F
 from django.conf import settings
@@ -60,21 +61,28 @@ class Product(models.Model):
     image = models.ImageField(blank=True, upload_to=_uuid_photo_save)
     stock_quantity = models.PositiveSmallIntegerField()
     original_price = models.DecimalField(max_digits=10, decimal_places=2)
-    sale_price = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
+    sale_price = models.DecimalField(
+        max_digits=10, decimal_places=2, blank=True, null=True
+    )
     description = models.TextField(blank=True, null=True)
     status = models.CharField(max_length=20, choices=STATUS_CHOICES)
 
     rating_avg = models.FloatField()
     reviews = models.PositiveSmallIntegerField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ("-created_at",)
+
+    def clean(self):
+        if self.sale_price and self.sale_price > self.original_price:
+            raise ValidationError(
+                "The sale price must be lower than the original price."
+            )
 
     def save(self, *args, **kwargs):
-        if self.sale_price and self.sale_price > self.original_price:
-            raise ValidationError("The sale price must be lower than the original price.")
-
         # test save
-        self.rating_avg = round(
-            _setdefault_float_value(1.0, 5.0), 2
-        )
+        self.rating_avg = round(_setdefault_float_value(1.0, 5.0), 2)
         self.reviews = _setdefault_int_value(3, 52, 10)
         # --------
 
@@ -119,10 +127,7 @@ class Review(models.Model):
     product = models.ForeignKey(
         Product, on_delete=models.CASCADE, related_name="product_reviews"
     )
-    grade = models.PositiveSmallIntegerField()
+    grade = models.PositiveSmallIntegerField(
+        validators=(MinValueValidator(1), MaxValueValidator(5)),
+    )
     comment = models.CharField(max_length=512)
-
-    def save(self, *args, **kwargs):
-        if not (1 <= self.grade <= 5):
-            raise ValidationError("Grade must be between 1 and 5")
-        super().save(*args, **kwargs)
