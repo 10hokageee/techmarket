@@ -1,10 +1,11 @@
 import classNames from 'classnames';
 import styles from './Slider.module.scss';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { Autoplay, Navigation } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
+import { getSignboardService } from '../../services/signboardService';
 // import type { Signboard } from '../../types/Signboard';
 // import { getSignboardService } from '../../services/signboardService';
 
@@ -14,9 +15,9 @@ export const Slider = () => {
   // const [slides, setSlides] = useState<Signboard[]>([]);
 
 
-  // useEffect(() => {
-  //   getSignboardService().then(data => console.log(data));
-  // }, [])
+  useEffect(() => {
+    getSignboardService().then(data => console.log(data));
+  }, [])
 
   const sliderImages = [
     {
@@ -61,6 +62,17 @@ export const Slider = () => {
                 nav.prevEl = prevRef.current;
                 nav.nextEl = nextRef.current;
               }
+            }}
+            onSwiper={(swiper) => {
+              setTimeout(() => {
+                if (swiper.params.navigation && typeof swiper.params.navigation !== 'boolean') {
+                  swiper.params.navigation.prevEl = prevRef.current;
+                  swiper.params.navigation.nextEl = nextRef.current;
+                }
+                swiper.navigation.destroy();
+                swiper.navigation.init();
+                swiper.navigation.update();
+              });
             }}
           >
             {sliderImages.map((img, index) => (
