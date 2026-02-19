@@ -5,10 +5,18 @@ import { useRef } from 'react';
 import { Autoplay, Navigation } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
+// import type { Signboard } from '../../types/Signboard';
+// import { getSignboardService } from '../../services/signboardService';
 
 export const Slider = () => {
   const prevRef = useRef<HTMLButtonElement>(null);
   const nextRef = useRef<HTMLButtonElement>(null);
+  // const [slides, setSlides] = useState<Signboard[]>([]);
+
+
+  // useEffect(() => {
+  //   getSignboardService().then(data => console.log(data));
+  // }, [])
 
   const sliderImages = [
     {
@@ -39,34 +47,34 @@ export const Slider = () => {
             </button>
           </div>
 
-            <Swiper
-              modules={[Navigation, Autoplay]}
-              loop
-              autoplay={{
-                delay: 4000,
-                disableOnInteraction: false,
-              }}
-              className={styles.slider__box}
-              onBeforeInit={(swiper) => {
-                const nav = swiper.params.navigation;
-                if (nav && typeof nav !== 'boolean') {
-                  nav.prevEl = prevRef.current;
-                  nav.nextEl = nextRef.current;
-                }
-              }}
-            >
-              {sliderImages.map((img, index) => (
-                <SwiperSlide key={index}>
-                  <picture>
-                    <img
-                      className={styles.slider__slide}
-                      src={img.desktop}
-                      alt={`Slide ${index + 1}`}
-                    />
-                  </picture>
-                </SwiperSlide>
-              ))}
-            </Swiper>
+          <Swiper
+            modules={[Navigation, Autoplay]}
+            loop
+            autoplay={{
+              delay: 4000,
+              disableOnInteraction: false,
+            }}
+            className={styles.slider__box}
+            onBeforeInit={(swiper) => {
+              const nav = swiper.params.navigation;
+              if (nav && typeof nav !== 'boolean') {
+                nav.prevEl = prevRef.current;
+                nav.nextEl = nextRef.current;
+              }
+            }}
+          >
+            {sliderImages.map((img, index) => (
+              <SwiperSlide key={index}>
+                <picture>
+                  <img
+                    className={styles.slider__slide}
+                    src={img.desktop}
+                    alt={`Slide ${index + 1}`}
+                  />
+                </picture>
+              </SwiperSlide>
+            ))}
+          </Swiper>
 
           <div className={styles.slider__navigation}>
             <button
