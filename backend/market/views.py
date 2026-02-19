@@ -1,5 +1,4 @@
 from rest_framework import viewsets, mixins
-from rest_framework.permissions import IsAdminUser
 from market.models import Product, Signboard
 from market.permissions import IsAdminOrReadOnly
 from market.serializers import ProductSerializer, SignboardSerializer
@@ -25,4 +24,4 @@ class SignboardViewSet(
 ):
     queryset = Signboard.objects.all()
     serializer_class = SignboardSerializer
-    permission_classes = (IsAdminUser,)
+    permission_classes = (IsAdminOrReadOnly,)
