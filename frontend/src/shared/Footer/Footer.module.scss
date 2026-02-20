@@ -50,11 +50,16 @@
     margin-bottom: 30px;
   }
 
-  &__topNavLink {
+  &__topNavLink,
+  &__topNavText {
     @include poppins-400;
     font-size: 13px;
     line-height: 140%;
     color: #ffffff;
+  }
+
+  &__topNavLink {
+    @include hoverForLinks;
   }
 
   &__bottom {
@@ -79,11 +84,13 @@
     margin-right: 11px;
     opacity: 0.2;
     padding: 2px;
+    @include hoverForLinks;
   }
 
   &__bottomInst {
     opacity: 0.2;
     padding: 2px;
+    @include hoverForLinks;
   }
 
   &__bottomPaymants {

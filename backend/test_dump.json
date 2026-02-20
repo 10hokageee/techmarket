@@ -1,0 +1,239 @@
+[
+  {
+    "model": "market.series",
+    "pk": 1,
+    "fields": { "name": "ThinkPad" }
+  },
+  {
+    "model": "market.series",
+    "pk": 2,
+    "fields": { "name": "ROG Zephyrus" }
+  },
+  {
+    "model": "market.series",
+    "pk": 3,
+    "fields": { "name": "MacBook Pro" }
+  },
+  {
+    "model": "market.series",
+    "pk": 4,
+    "fields": { "name": "GeForce RTX 40 Series" }
+  },
+  {
+    "model": "market.series",
+    "pk": 5,
+    "fields": { "name": "UniFi" }
+  },
+  {
+    "model": "market.series",
+    "pk": 6,
+    "fields": { "name": "OfficeJet" }
+  },
+  {
+    "model": "market.series",
+    "pk": 7,
+    "fields": { "name": "Діагностичне обладнання" }
+  },
+  {
+    "model": "market.product",
+    "pk": 1,
+    "fields": {
+      "name": "Lenovo ThinkPad T14 Gen 3",
+      "category": "LAPTOP",
+      "series": 1,
+      "image": "",
+      "stock_quantity": 15,
+      "original_price": "1350.00",
+      "sale_price": "1200.00",
+      "description": "Надійний бізнес-ноутбук з чудовою клавіатурою.",
+      "status": "IN_STOCK",
+      "rating_avg": 4.74,
+      "reviews": 32,
+      "created_at": "2026-02-18T10:00:00Z"
+    }
+  },
+  {
+    "model": "market.product",
+    "pk": 2,
+    "fields": {
+      "name": "ASUS ROG Zephyrus G14",
+      "category": "LAPTOP",
+      "series": 2,
+      "image": "",
+      "stock_quantity": 5,
+      "original_price": "1800.00",
+      "sale_price": null,
+      "description": "Потужний ігровий ноутбук у компактному корпусі.",
+      "status": "NEW",
+      "rating_avg": 4.95,
+      "reviews": 15,
+      "created_at": "2026-02-18T10:30:00Z"
+    }
+  },
+  {
+    "model": "market.product",
+    "pk": 3,
+    "fields": {
+      "name": "Apple MacBook Pro 16 M3 Max",
+      "category": "LAPTOP",
+      "series": 3,
+      "image": "",
+      "stock_quantity": 8,
+      "original_price": "3500.00",
+      "sale_price": null,
+      "description": "Ноутбук для професіоналів з неймовірним дисплеєм.",
+      "status": "NEW",
+      "rating_avg": 4.81,
+      "reviews": 45,
+      "created_at": "2026-02-18T10:45:00Z"
+    }
+  },
+  {
+    "model": "market.product",
+    "pk": 4,
+    "fields": {
+      "name": "ASUS ROG Strix GeForce RTX 4090",
+      "category": "PC_PART",
+      "series": 4,
+      "image": "",
+      "stock_quantity": 0,
+      "original_price": "2200.00",
+      "sale_price": null,
+      "description": "Флагманська відеокарта для гри в 4K.",
+      "status": "OUT_OF_STOCK",
+      "rating_avg": 5.0,
+      "reviews": 12,
+      "created_at": "2026-02-18T11:00:00Z"
+    }
+  },
+  {
+    "model": "market.product",
+    "pk": 5,
+    "fields": {
+      "name": "MSI GeForce RTX 4070 Ventus 2X",
+      "category": "PC_PART",
+      "series": 4,
+      "image": "",
+      "stock_quantity": 24,
+      "original_price": "650.00",
+      "sale_price": "599.99",
+      "description": "Оптимальна відеокарта для 1440p геймінгу.",
+      "status": "IN_STOCK",
+      "rating_avg": 4.64,
+      "reviews": 88,
+      "created_at": "2026-02-18T11:15:00Z"
+    }
+  },
+  {
+    "model": "market.product",
+    "pk": 6,
+    "fields": {
+      "name": "Ubiquiti UniFi Dream Machine Pro",
+      "category": "NETWORK_DEVICE",
+      "series": 5,
+      "image": "",
+      "stock_quantity": 3,
+      "original_price": "450.00",
+      "sale_price": "399.00",
+      "description": "Універсальний мережевий шлюз корпоративного рівня.",
+      "status": "REFURBISHED",
+      "rating_avg": 4.50,
+      "reviews": 105,
+      "created_at": "2026-02-18T11:30:00Z"
+    }
+  },
+  {
+    "model": "market.product",
+    "pk": 7,
+    "fields": {
+      "name": "HP OfficeJet Pro 9015e",
+      "category": "PRINTER_SCANNER",
+      "series": 6,
+      "image": "",
+      "stock_quantity": 10,
+      "original_price": "250.00",
+      "sale_price": null,
+      "description": "Надійний БФП для малого офісу.",
+      "status": "IN_STOCK",
+      "rating_avg": 4.2,
+      "reviews": 22,
+      "created_at": "2026-02-18T11:45:00Z"
+    }
+  },
+  {
+    "model": "market.product",
+    "pk": 8,
+    "fields": {
+      "name": "OBD2 Сканер (сумісний з ВАЗ 2115 інжектор)",
+      "category": "OTHER",
+      "series": 7,
+      "image": "",
+      "stock_quantity": 42,
+      "original_price": "850.00",
+      "sale_price": "700.00",
+      "description": "Ідеально підходить для зчитування помилок ЕБП та моніторингу плаваючих оборотів двигуна.",
+      "status": "IN_STOCK",
+      "rating_avg": 4.81,
+      "reviews": 56,
+      "created_at": "2026-02-19T09:00:00Z"
+    }
+  },
+  {
+    "model": "market.order",
+    "pk": 1,
+    "fields": {
+      "user": 1,
+      "total_amount": "2399.98",
+      "created_at": "2026-02-19T09:15:00Z"
+    }
+  },
+  {
+    "model": "market.order",
+    "pk": 2,
+    "fields": {
+      "user": 1,
+      "total_amount": "1099.00",
+      "created_at": "2026-02-19T09:25:00Z"
+    }
+  },
+  {
+    "model": "market.orderitem",
+    "pk": 1,
+    "fields": {
+      "order": 1,
+      "product": 1,
+      "quantity": 1,
+      "unit_price": "1200.00"
+    }
+  },
+  {
+    "model": "market.orderitem",
+    "pk": 2,
+    "fields": {
+      "order": 1,
+      "product": 5,
+      "quantity": 2,
+      "unit_price": "599.99"
+    }
+  },
+  {
+    "model": "market.orderitem",
+    "pk": 3,
+    "fields": {
+      "order": 2,
+      "product": 6,
+      "quantity": 1,
+      "unit_price": "399.00"
+    }
+  },
+  {
+    "model": "market.orderitem",
+    "pk": 4,
+    "fields": {
+      "order": 2,
+      "product": 8,
+      "quantity": 1,
+      "unit_price": "700.00"
+    }
+  }
+]

@@ -5,6 +5,12 @@ import classNames from 'classnames';
 export const Header = () => {
   const favCount = 0;
 
+  const isActiveLink = ({ isActive }: { isActive: boolean }) => {
+    return classNames(styles.header__navListLink, {
+      [styles.activeLink]: isActive,
+    });
+  }
+
   return (
     <header className={styles.header}>
       <div className={styles.header__top}>
@@ -68,18 +74,18 @@ export const Header = () => {
             </NavLink>
             <ul className={styles.header__navList}>
               <li className={styles.header__navListItem}>
-                <NavLink className={styles.header__navListLink} to='catalog'>Laptops</NavLink> </li>
+                <NavLink className={isActiveLink} to='catalog'>Laptops</NavLink> </li>
               <li className={styles.header__navListItem}>
-                <NavLink className={styles.header__navListLink} to='catalog'>Desktop PCs</NavLink>  </li>
+                <NavLink className={isActiveLink} to='1'>Desktop PCs</NavLink>  </li>
               <li className={styles.header__navListItem}>
-                <NavLink className={styles.header__navListLink} to='catalog'>Networking Devices</NavLink> </li>
+                <NavLink className={isActiveLink} to='2'>Networking Devices</NavLink> </li>
               <li className={styles.header__navListItem}>
-                <NavLink className={styles.header__navListLink} to='catalog'>Printers &  Scanners</NavLink> </li>
+                <NavLink className={isActiveLink} to='3'>Printers &  Scanners</NavLink> </li>
               <li className={styles.header__navListItem}>
-                <NavLink className={styles.header__navListLink} to='catalog'>PC Parts</NavLink>
+                <NavLink className={isActiveLink} to='4'>PC Parts</NavLink>
               </li>
               <li className={styles.header__navListItem}>
-                <NavLink className={styles.header__navListLink} to='catalog'>All Other Products</NavLink></li>
+                <NavLink className={isActiveLink} to='5'>All Other Products</NavLink></li>
               <li className={styles.header__navListItem}>
                 <NavLink className={styles.header__navListLinkLogin} to='SignIn'>Sign in</NavLink></li>
             </ul>
