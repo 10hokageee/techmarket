@@ -96,6 +96,9 @@ class Product(models.Model):
         self.reviews = _setdefault_int_value(3, 52, 10)
         # --------
 
+        if not self.sale_price:
+            self.sale_price = self.original_price
+
         self.full_clean()
         super().save(*args, **kwargs)
 

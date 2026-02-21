@@ -1,7 +1,7 @@
 from rest_framework import viewsets, mixins
-from market.models import Product, Signboard
+from market.models import Product, Signboard, Order
 from market.permissions import IsAdminOrReadOnly
-from market.serializers import ProductSerializer, SignboardSerializer
+from market.serializers import ProductSerializer, SignboardSerializer, OrderSerializer
 
 
 class ProductViewSet(viewsets.ModelViewSet):
@@ -26,3 +26,19 @@ class SignboardViewSet(
     queryset = Signboard.objects.all()
     serializer_class = SignboardSerializer
     permission_classes = (IsAdminOrReadOnly,)
+
+
+class OrderViewSet(
+    mixins.CreateModelMixin,
+    mixins.RetrieveModelMixin,
+    mixins.ListModelMixin,
+    viewsets.GenericViewSet,
+):
+    queryset = Order.objects
+    serializer_class = OrderSerializer
+
+    def get_queryset(self):
+        return self.queryset.filter(user=self.request.user)
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
