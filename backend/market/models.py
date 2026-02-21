@@ -130,6 +130,7 @@ class Signboard(models.Model):
         ordering = ["-added_at"]
 
 
+# not use in dev
 class Review(models.Model):
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="reviews"
