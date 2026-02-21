@@ -45,6 +45,8 @@ ___<span style="color:purple">!!! Start this project from one console !!!</span>
 
 ___<span style="color:purple">First, log in with the created superuser (at ~user/login/)(the session key will be in cookies) and then you will be able to create elements</span>___
 ***
-### <span style="color:orange">If there is a .venv folder in the backend/ folder, use steps (1, 3, 8)</span>
+### <span style="color:yellow">If there is a .venv folder in the backend/ folder, use steps (1, 3, 8)</span>
+***
+### <span style="color:orange">If changes have been made to the database, use steps (1, 5, 7, 8)</span>
 ***
 ### <span style="color:red">If the database has been erased, follow steps (1, 5, 6, 7, 8)</span>
