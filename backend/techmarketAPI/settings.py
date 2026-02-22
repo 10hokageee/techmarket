@@ -133,4 +133,5 @@ REST_FRAMEWORK = {
 #     "http://localhost:5173",
 # ]
 
+# delete for prod
 CORS_ALLOW_ALL_ORIGINS = True

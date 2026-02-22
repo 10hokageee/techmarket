@@ -64,6 +64,8 @@ class Product(models.Model):
     sale_price = models.DecimalField(
         max_digits=10, decimal_places=2, blank=True, null=True
     )
+    characteristics = models.JSONField(default=dict)
+    color = models.CharField(max_length=7)
     description = models.TextField(blank=True, null=True)
     status = models.CharField(max_length=20, choices=STATUS_CHOICES)
 
@@ -79,6 +81,14 @@ class Product(models.Model):
             raise ValidationError(
                 "The sale price must be lower than the original price."
             )
+        try:
+            color = (
+                f"{(self.color[1:] if self.color.startswith("#") else self.color):0<6}"
+            )
+            int(color, 16)
+            self.color = f"#{color}"
+        except ValueError:
+            raise ValidationError("Invalid color code.")
 
     def save(self, *args, **kwargs):
         # test save

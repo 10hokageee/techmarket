@@ -15,6 +15,8 @@ class ProductSerializer(serializers.ModelSerializer):
             "stock_quantity",
             "original_price",
             "sale_price",
+            "characteristics",
+            "color",
             "description",
             "status",
             "reviews",
