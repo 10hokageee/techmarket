@@ -1,3 +1,5 @@
+from django.db import transaction
+from django.db.models import F
 from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
 
@@ -64,35 +66,54 @@ class OrderSerializer(serializers.ModelSerializer):
 
     def validate_items(self, value):
         unique_ids = set()
-
         for item in value:
-            product_id = item["product"].id
-            if product_id in unique_ids:
-                raise ValidationError(
-                    {"Duplicate id product": f"{product_id} were found in the order"}
-                )
-            unique_ids.add(product_id)
+            product = item["product"]
+            quantity = item["quantity"]
+
+            if product.id in unique_ids:
+                raise ValidationError({"Duplicate product": f"Product id {product.id} duplicated."})
+            if product.stock_quantity < quantity:
+                raise ValidationError({"Stock error": f"Not enough stock for {product.name}."})
+
+            unique_ids.add(product.id)
         return value
 
+    @transaction.atomic
     def create(self, validated_data):
+        items_data = validated_data.pop("items")
+
         _money_to_pay = sum(
             item["product"].sale_price * item["quantity"]
-            for item in validated_data["items"]
+            for item in items_data
         )
         order = Order.objects.create(
             user=validated_data["user"], total_amount=_money_to_pay
         )
-        OrderItem.objects.bulk_create(
-            [
+        order_items = []
+        products_to_update = []
+        for item in items_data:
+            product = item["product"]
+            quantity = item["quantity"]
+
+            product.stock_quantity = F("stock_quantity") - quantity
+            products_to_update.append(product)
+
+            order_items.append(
                 OrderItem(
                     order=order,
-                    product=item["product"],
-                    quantity=item["quantity"],
-                    unit_price=item["product"].sale_price,
+                    product=product,
+                    quantity=quantity,
+                    unit_price=product.sale_price
                 )
-                for item in validated_data["items"]
-            ]
-        )
+            )
+        try:
+            Product.objects.bulk_update(products_to_update, ("stock_quantity",))
+        except IntegrityError:
+            raise ValidationError(
+                {"error": "One of the items in your cart was out of stock during checkout."}
+            )
+        OrderItem.objects.bulk_create(order_items)
+
         return order
 
     def update(self, instance, validated_data): ...
