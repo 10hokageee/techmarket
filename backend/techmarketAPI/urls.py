@@ -20,18 +20,11 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 from debug_toolbar.toolbar import debug_toolbar_urls
-from rest_framework.routers import DefaultRouter
-
-from market.views import SignboardViewSet, OrderViewSet
-
-router = DefaultRouter()
-router.register("signboards", SignboardViewSet)
-router.register("orders", OrderViewSet)
 
 urlpatterns = (
     [
         path("admin/", admin.site.urls),
-        path("products/", include("market.urls", namespace="market")),
+        path("market/", include("market.urls", namespace="market")),
         path(
             "user/",
             include(
@@ -44,5 +37,4 @@ urlpatterns = (
     ]
     + debug_toolbar_urls()
     + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-    + router.urls
 )
