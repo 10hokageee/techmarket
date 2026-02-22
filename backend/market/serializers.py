@@ -62,16 +62,26 @@ class OrderSerializer(serializers.ModelSerializer):
         model = Order
         fields = ("id", "items")
 
+    def validate_items(self, value):
+        unique_ids = set()
+
+        for item in value:
+            product_id = item["product"].id
+            if product_id in unique_ids:
+                raise ValidationError(
+                    {"Duplicate id product": f"{product_id} were found in the order"}
+                )
+            unique_ids.add(product_id)
+        return value
+
     def create(self, validated_data):
         _money_to_pay = sum(
             item["product"].sale_price * item["quantity"]
             for item in validated_data["items"]
         )
-
         order = Order.objects.create(
             user=validated_data["user"], total_amount=_money_to_pay
         )
-
         OrderItem.objects.bulk_create(
             [
                 OrderItem(
