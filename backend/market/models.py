@@ -44,15 +44,6 @@ class Product(models.Model):
         "OTHER": _("Others product"),
     }
 
-    STATUS_CHOICES = {
-        "NEW": _("New"),
-        "IN_STOCK": _("In stock"),
-        "OUT_OF_STOCK": _("Out of stock"),
-        "EX_DISPLAY": _("Exit display"),
-        "REFURBISHED": _("Refurbished"),
-        "DISCONTINUED": _("Discontinued"),
-    }
-
     name = models.CharField(max_length=62)
     category = models.CharField(max_length=20, choices=CATEGORY_CHOICES)
     series = models.ForeignKey(
@@ -64,10 +55,10 @@ class Product(models.Model):
     sale_price = models.DecimalField(
         max_digits=10, decimal_places=2, blank=True, null=True
     )
-    characteristics = models.JSONField(default=dict)
+    characteristics = models.JSONField(default=dict, null=True, blank=True)
     color = models.CharField(max_length=7)
     description = models.TextField(blank=True, null=True)
-    status = models.CharField(max_length=20, choices=STATUS_CHOICES)
+    status = models.BooleanField(default=False)
 
     rating_avg = models.FloatField()
     reviews = models.PositiveSmallIntegerField()
@@ -92,8 +83,9 @@ class Product(models.Model):
 
     def save(self, *args, **kwargs):
         # test save
-        self.rating_avg = round(_setdefault_float_value(1.0, 5.0), 2)
-        self.reviews = _setdefault_int_value(3, 52, 10)
+        if not self.pk:
+            self.rating_avg = round(_setdefault_float_value(1.0, 5.0), 2)
+            self.reviews = _setdefault_int_value(3, 52, 10)
         # --------
 
         if not self.sale_price:

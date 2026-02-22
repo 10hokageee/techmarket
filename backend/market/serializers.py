@@ -29,7 +29,6 @@ class ProductSerializer(serializers.ModelSerializer):
         data = super().to_representation(instance)
 
         data["category"] = instance.get_category_display()
-        data["status"] = instance.get_status_display()
         data["series"] = instance.series.name
         data["rating_avg"] = str(instance.rating_avg)
 
@@ -86,5 +85,4 @@ class OrderSerializer(serializers.ModelSerializer):
         )
         return order
 
-    def update(self, instance, validated_data):
-        ...
+    def update(self, instance, validated_data): ...
