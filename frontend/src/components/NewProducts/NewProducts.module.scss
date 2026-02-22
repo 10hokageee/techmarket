@@ -1,0 +1,42 @@
+@import "../../globalStyles.scss";
+
+.newProducts {
+  padding-block: 37px 18px;
+
+  &__title {
+    @include poppins-600;
+    font-size: 22px;
+    line-height: 33px;
+    color: #000000;
+    margin-bottom: 13px;
+  }
+
+  &__btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: #666666;
+    opacity: 0.2;
+    width: 36px;
+    height: 48px;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+
+  &__btnPrev {
+    border-radius: 0 30px 30px 0;
+    left: 0;
+  }
+
+  &__btnNext {
+    border-radius: 30px 0 0 30px;
+    right: 0;
+
+    & img {
+      transform: rotate(180deg);
+    }
+  }
+}

@@ -5,6 +5,7 @@ import classNames from 'classnames';
 export const Header = () => {
   const favCount = 0;
 
+
   const isActiveLink = ({ isActive }: { isActive: boolean }) => {
     return classNames(styles.header__navListLink, {
       [styles.activeLink]: isActive,

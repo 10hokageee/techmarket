@@ -1,0 +1,40 @@
+@import "../../globalStyles.scss";
+
+.productCard {
+  max-width: 234px;
+  width: 100%;
+  padding: 26px 25px 21px 25px;
+  border: 1px solid #cacdd8;
+  height: 346px;
+  box-sizing: border-box;
+  
+  &__img {
+    margin: 0 auto;
+    object-fit: contain
+  }
+
+  &__description {
+    @include poppins-400;
+    font-size: 13px;
+    line-height: 20px;
+    color: #000000;
+    margin-bottom: 18px;
+  }
+
+  &__sale {
+    @include poppins-400;
+    font-size: 14px;
+    line-height: 140%;
+    text-decoration-line: line-through;
+    color: #666666;
+    display: block;
+  }
+
+  &__price {
+    @include poppins-600;
+    font-size: 18px;
+    line-height: 140%;
+    color: #000000;
+    display: block;
+  }
+}
