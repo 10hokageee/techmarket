@@ -44,7 +44,7 @@ class Product(models.Model):
         "OTHER": _("Others product"),
     }
 
-    name = models.CharField(max_length=62)
+    name = models.CharField(max_length=62, unique=True)
     category = models.CharField(max_length=20, choices=CATEGORY_CHOICES)
     series = models.ForeignKey(
         Series, on_delete=models.CASCADE, related_name="products"
@@ -115,6 +115,13 @@ class OrderItem(models.Model):
         output_field=models.DecimalField(max_digits=10, decimal_places=2),
         db_persist=True,
     )
+
+    class Meta:
+        constraints = (
+            models.UniqueConstraint(
+                fields=("product", "order"), name="unique_order_items"
+            ),
+        )
 
 
 class Signboard(models.Model):
