@@ -1,0 +1,237 @@
+[
+  {
+    "model": "market.series",
+    "pk": 1,
+    "fields": {
+      "name": "ThinkPad Professional"
+    }
+  },
+  {
+    "model": "market.series",
+    "pk": 2,
+    "fields": {
+      "name": "ROG Gaming"
+    }
+  },
+  {
+    "model": "market.series",
+    "pk": 3,
+    "fields": {
+      "name": "Cisco Enterprise"
+    }
+  },
+  {
+    "model": "market.series",
+    "pk": 4,
+    "fields": {
+      "name": "Epson EcoTank"
+    }
+  },
+  {
+    "model": "market.series",
+    "pk": 5,
+    "fields": {
+      "name": "AutoTech Diagnostics"
+    }
+  },
+  {
+    "model": "market.product",
+    "pk": 1,
+    "fields": {
+      "name": "Lenovo ThinkPad X1 Carbon",
+      "category": "LAPTOP",
+      "series": 1,
+      "image": "",
+      "stock_quantity": 42,
+      "original_price": "1899.99",
+      "sale_price": "1750.00",
+      "characteristics": {"cpu": "Intel Core i7-1355U", "ram": "16GB LPDDR5", "storage": "512GB SSD", "screen": "14\" WUXGA"},
+      "color": "#000000",
+      "description": "Premium business laptop with excellent keyboard and battery life.",
+      "status": true,
+      "rating_avg": 4.8,
+      "reviews": 124,
+      "created_at": "2024-01-15T10:30:00Z"
+    }
+  },
+  {
+    "model": "market.product",
+    "pk": 2,
+    "fields": {
+      "name": "ASUS ROG Strix G16",
+      "category": "LAPTOP",
+      "series": 2,
+      "image": "",
+      "stock_quantity": 15,
+      "original_price": "2199.50",
+      "sale_price": "2199.50",
+      "characteristics": {"cpu": "Intel Core i9-13980HX", "gpu": "RTX 4070 8GB", "ram": "32GB DDR5", "screen": "16\" 240Hz"},
+      "color": "#2B2B2B",
+      "description": "High-performance gaming laptop with advanced cooling.",
+      "status": true,
+      "rating_avg": 4.6,
+      "reviews": 89,
+      "created_at": "2024-02-01T14:15:00Z"
+    }
+  },
+  {
+    "model": "market.product",
+    "pk": 3,
+    "fields": {
+      "name": "Cisco Catalyst 9200L 48-port",
+      "category": "NETWORK_DEVICE",
+      "series": 3,
+      "image": "",
+      "stock_quantity": 5,
+      "original_price": "3450.00",
+      "sale_price": "3100.00",
+      "characteristics": {"ports": "48x 10/100/1000", "uplink": "4x 10G SFP+", "poe": "Partial", "management": "Managed"},
+      "color": "#C0C0C0",
+      "description": "Enterprise-grade switch for secure and reliable networking.",
+      "status": false,
+      "rating_avg": 4.9,
+      "reviews": 12,
+      "created_at": "2023-11-20T09:00:00Z"
+    }
+  },
+  {
+    "model": "market.product",
+    "pk": 4,
+    "fields": {
+      "name": "Epson EcoTank L3250 WiFi",
+      "category": "PRINTER_SCANNER",
+      "series": 4,
+      "image": "",
+      "stock_quantity": 0,
+      "original_price": "199.99",
+      "sale_price": "199.99",
+      "characteristics": {"type": "Inkjet", "functions": "Print, Scan, Copy", "connectivity": "Wi-Fi, USB", "color_printing": true},
+      "color": "#111111",
+      "description": "Cost-effective cartridge-free printer.",
+      "status": true,
+      "rating_avg": 4.2,
+      "reviews": 340,
+      "created_at": "2023-08-10T16:45:00Z"
+    }
+  },
+  {
+    "model": "market.product",
+    "pk": 5,
+    "fields": {
+      "name": "NVIDIA GeForce RTX 4090 Founders Edition",
+      "category": "PC_PART",
+      "series": 2,
+      "image": "",
+      "stock_quantity": 2,
+      "original_price": "1599.00",
+      "sale_price": "1599.00",
+      "characteristics": {"vram": "24GB GDDR6X", "cuda_cores": 16384, "tdp": "450W", "interface": "PCIe 4.0 x16"},
+      "color": "#A9A9A9",
+      "description": "The ultimate GPU for gamers and creators.",
+      "status": true,
+      "rating_avg": 4.9,
+      "reviews": 45,
+      "created_at": "2024-02-15T08:20:00Z"
+    }
+  },
+  {
+    "model": "market.product",
+    "pk": 6,
+    "fields": {
+      "name": "Intel Core i7-14700K",
+      "category": "PC_PART",
+      "series": 2,
+      "image": "",
+      "stock_quantity": 100,
+      "original_price": "409.99",
+      "sale_price": "389.99",
+      "characteristics": {"cores": 20, "threads": 28, "base_clock": "3.4 GHz", "boost_clock": "5.6 GHz", "socket": "LGA 1700"},
+      "color": "#0071C5",
+      "description": "Desktop Processor 20 cores (8 P-cores + 12 E-cores).",
+      "status": true,
+      "rating_avg": 4.7,
+      "reviews": 210,
+      "created_at": "2024-01-05T11:11:00Z"
+    }
+  },
+  {
+    "model": "market.product",
+    "pk": 7,
+    "fields": {
+      "name": "Office Master Pro Workstation",
+      "category": "PC",
+      "series": 1,
+      "image": "",
+      "stock_quantity": 8,
+      "original_price": "850.00",
+      "sale_price": "799.00",
+      "characteristics": {"cpu": "Intel Core i5-13400", "ram": "16GB DDR4", "storage": "1TB NVMe", "os": "Windows 11 Pro"},
+      "color": "#4B4B4B",
+      "description": "Reliable desktop PC for daily office tasks and multitasking.",
+      "status": true,
+      "rating_avg": 4.4,
+      "reviews": 18,
+      "created_at": "2023-12-01T10:00:00Z"
+    }
+  },
+  {
+    "model": "market.product",
+    "pk": 8,
+    "fields": {
+      "name": "ThinkPad Thunderbolt 4 Dock",
+      "category": "OTHER",
+      "series": 1,
+      "image": "",
+      "stock_quantity": 0,
+      "original_price": "299.00",
+      "sale_price": "299.00",
+      "characteristics": {"ports": "4x USB 3.2, 2x DP, 1x HDMI, 1x RJ45", "power_delivery": "100W", "cable_length": "0.8m"},
+      "color": "#1E1E1E",
+      "description": "Premium docking station for enterprise laptops.",
+      "status": false,
+      "rating_avg": 3.9,
+      "reviews": 56,
+      "created_at": "2022-05-15T12:00:00Z"
+    }
+  },
+  {
+    "model": "market.product",
+    "pk": 9,
+    "fields": {
+      "name": "ASUS ROG Swift 360Hz PG27AQN",
+      "category": "OTHER",
+      "series": 2,
+      "image": "",
+      "stock_quantity": 3,
+      "original_price": "1049.00",
+      "sale_price": "950.00",
+      "characteristics": {"panel": "Ultrafast IPS", "resolution": "2560x1440", "refresh_rate": "360Hz", "response_time": "1ms"},
+      "color": "#0F0F0F",
+      "description": "Esports monitor with NVIDIA G-SYNC analyzer.",
+      "status": true,
+      "rating_avg": 4.5,
+      "reviews": 29,
+      "created_at": "2023-09-10T15:30:00Z"
+    }
+  },
+  {
+    "model": "market.product",
+    "pk": 10,
+    "fields": {
+      "name": "OBD2 Bluetooth Scanner (Lada/VAZ)",
+      "category": "OTHER",
+      "series": 5,
+      "image": "",
+      "stock_quantity": 25,
+      "original_price": "25.50",
+      "sale_price": "19.99",
+      "characteristics": {"compatibility": "VAZ 2115 (8-valve, injector) and others", "interface": "Bluetooth 4.0", "functions": "Read/Clear DTCs, Real-time RPM monitoring, Throttle position"},
+      "color": "#0047AB",
+      "description": "Diagnostic tool perfect for troubleshooting floating RPMs or injector issues on older cars.",
+      "status": false,
+      "rating_avg": 4.8,
+      "reviews": 412,
+      "created_at": "2024-02-18T18:00:00Z"
+    }
+  }
+]
