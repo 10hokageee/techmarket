@@ -1,0 +1,42 @@
+@import "../../globalStyles.scss";
+
+.laptopsList {
+  padding-bottom: 41px;
+
+  &__btns {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+
+  &__item {
+    @include poppins-600;
+    font-size: 16px;
+    line-height: 140%;
+    color: #838383;
+
+    &:not(:last-child) {
+      margin-right: 25px;
+    }
+  }
+
+  &__btn {
+    cursor: pointer;
+    padding-bottom: 3px;
+  }
+}
+
+.activeBtn {
+  color: #000;
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    border: 2px solid #0156ff;
+    bottom: 0;
+    left: 0;
+    border-radius: 10px;
+  }
+}

@@ -27,7 +27,7 @@ export const NewProducts: React.FC<Props> = ({ products }) => {
             {products.map((product) => (
               <CarouselItem
                 key={product.id}
-                className="basis-1/2 md:basis-1/3 lg:basis-1/6"
+                className="basis-auto"
               >
                 <ProductCard product={product} />
               </CarouselItem>

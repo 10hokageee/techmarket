@@ -1,27 +1,37 @@
 @import "../../globalStyles.scss";
 
 .productCard {
-  max-width: 234px;
-  width: 100%;
+  width: 234px;
   padding: 26px 25px 21px 25px;
   border: 1px solid #cacdd8;
   height: 346px;
   box-sizing: border-box;
-  
+  position: relative;
+
   &__img {
     margin: 0 auto;
-    object-fit: contain
+    object-fit: contain;
   }
 
-  &__description {
+  &__title {
     @include poppins-400;
     font-size: 13px;
     line-height: 20px;
     color: #000000;
     margin-bottom: 18px;
+    display: block;
   }
 
-  &__sale {
+  &__salePrice,
+  &__originalPrice {
+    @include poppins-600;
+    font-size: 18px;
+    line-height: 140%;
+    color: #000000;
+    display: block;
+  }
+
+  &__throughPrice {
     @include poppins-400;
     font-size: 14px;
     line-height: 140%;
@@ -30,11 +40,18 @@
     display: block;
   }
 
-  &__price {
-    @include poppins-600;
-    font-size: 18px;
-    line-height: 140%;
-    color: #000000;
-    display: block;
+  &__statusBody {
+    position: absolute;
+    top: 0;
+    left: 25px;
+    display: flex;
+    gap: 6px;
+  }
+
+  &__status {
+    @include poppins-400;
+    font-size: 10px;
+    line-height: 210%;
+    color: #78a962;
   }
 }
