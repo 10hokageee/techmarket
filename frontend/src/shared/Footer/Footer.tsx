@@ -92,36 +92,34 @@ export const Footer = () => {
 
                 <li>
                   <span>Phones: </span>
-                  <NavLink className={classNames(styles.footer__topNavLink, styles.footer__topNavLinkPhone)} to='cart'>
+                  <a href="tel:0012345678" className={classNames(styles.footer__topNavLink, styles.footer__topNavLinkPhone)}>
                     (00) 1234 5678
-                  </NavLink>
+                  </a>
                 </li>
 
                 <li>
-                  <p className={styles.footer__topNavLink}>
+                  <p className={styles.footer__topNavText}>
                     We are open: Monday-Thursday: 9:00 AM - 5:30 PM
                   </p>
                 </li>
 
                 <li>
-                  <p className={styles.footer__topNavLink}>
+                  <p className={styles.footer__topNavText}>
                     Friday: 9:00 AM - 6:00 PM
                   </p>
                 </li>
 
                 <li>
-                  <p className={styles.footer__topNavLink}>
+                  <p className={styles.footer__topNavText}>
                     Saturday: 11:00 AM - 5:00 PM
                   </p>
                 </li>
 
                 <li>
-                  <p className={styles.footer__topNavLink}>
-                    <span>E-mail: </span>
-                    <NavLink className={classNames(styles.footer__topNavLink, styles.footer__topNavLinkEmail)} to='cart'>
-                     shop@email.com
-                    </NavLink>
-                  </p>
+                  <span>E-mail: </span>
+                  <a href="mailto:shop@email.com" className={classNames(styles.footer__topNavLink, styles.footer__topNavLinkEmail)}>
+                    shop@email.com
+                  </a>
                 </li>
               </ul>
             </div>

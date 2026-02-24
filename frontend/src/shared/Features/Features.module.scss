@@ -1,0 +1,70 @@
+@import "../../globalStyles.scss";
+
+.features {
+  padding-bottom: 46px;
+  
+  &__list {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+  }
+
+  &__listItem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 265px;
+    width: 100%;
+    text-align: center;
+  }
+
+  &__img {
+    width: 65px;
+    height: 65px;
+    background-color: #0156ff;
+    border-radius: 50%;
+    position: relative;
+    margin-bottom: 24px;
+
+    &::after {
+      content: "";
+      position: absolute;
+      width: 25px;
+      height: 25px;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: contain;
+    }
+
+    &--headphones::after {
+      background-image: url("icons/headphones-icon.svg");
+    }
+
+    &--profile::after {
+      background-image: url("icons/profile-icon.svg");
+    }
+
+    &--sale::after {
+      background-image: url("icons/sale-icon.svg");
+    }
+  }
+
+  &__title {
+    @include poppins-700;
+    font-size: 18px;
+    line-height: 132.5%;
+    color: #000000;
+    margin-bottom: 13px;
+  }
+
+  &__text {
+    @include poppins-400;
+    font-size: 14px;
+    line-height: 140%;
+    color: #000000;
+    opacity: 0.7;
+  }
+}

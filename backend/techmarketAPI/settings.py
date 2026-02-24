@@ -136,5 +136,9 @@ REST_FRAMEWORK = {
     "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.IsAuthenticated",),
 }
 
+# CORS_ALLOWED_ORIGINS = [
+#     "http://localhost:5173",
+# ]
+
 # delete for prod
 CORS_ALLOW_ALL_ORIGINS = True
