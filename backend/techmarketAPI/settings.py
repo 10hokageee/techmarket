@@ -85,7 +85,7 @@ WSGI_APPLICATION = "techmarketAPI.wsgi.application"
 # Налаштовано для Neon (PostgreSQL) з відкатом на SQLite для локальної розробки
 DATABASES = {
     "default": dj_database_url.config(
-        default=os.environ.get("DATABASE_URL", f"sqlite:///{BASE_DIR / 'db.sqlite3'}"),
+        default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}",
         conn_max_age=600,
     )
 }
