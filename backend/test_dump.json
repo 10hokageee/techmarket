@@ -2,236 +2,441 @@
   {
     "model": "market.series",
     "pk": 1,
-    "fields": {
-      "name": "ThinkPad Professional"
-    }
+    "fields": { "name": "Custom PCs" }
   },
   {
     "model": "market.series",
     "pk": 2,
-    "fields": {
-      "name": "ROG Gaming"
-    }
+    "fields": { "name": "MSI GS Series" }
   },
   {
     "model": "market.series",
     "pk": 3,
-    "fields": {
-      "name": "Cisco Enterprise"
-    }
+    "fields": { "name": "MSI GT Series" }
   },
   {
     "model": "market.series",
     "pk": 4,
-    "fields": {
-      "name": "Epson EcoTank"
-    }
+    "fields": { "name": "MSI GL Series" }
   },
   {
     "model": "market.series",
     "pk": 5,
-    "fields": {
-      "name": "AutoTech Diagnostics"
-    }
+    "fields": { "name": "MSI GE Series" }
+  },
+  {
+    "model": "market.series",
+    "pk": 6,
+    "fields": { "name": "MSI Infinute Series" }
+  },
+  {
+    "model": "market.series",
+    "pk": 7,
+    "fields": { "name": "MSI Triden" }
+  },
+  {
+    "model": "market.series",
+    "pk": 9,
+    "fields": { "name": "MSI Nightblade" }
   },
   {
     "model": "market.product",
     "pk": 1,
     "fields": {
-      "name": "Lenovo ThinkPad X1 Carbon",
+      "name": "MSI GS66 Stealth",
       "category": "LAPTOP",
-      "series": 1,
-      "image": "",
-      "stock_quantity": 42,
-      "original_price": "1899.99",
-      "sale_price": "1750.00",
-      "characteristics": {"cpu": "Intel Core i7-1355U", "ram": "16GB LPDDR5", "storage": "512GB SSD", "screen": "14\" WUXGA"},
+      "series": 2,
+      "image": null,
+      "stock_quantity": 12,
+      "original_price": "2099.99",
+      "sale_price": "1999.99",
+      "characteristics": {"CPU": "Intel Core i7", "RAM": "16GB", "Storage": "1TB SSD"},
       "color": "#000000",
-      "description": "Premium business laptop with excellent keyboard and battery life.",
+      "description": "Ultra-thin and light gaming laptop.",
       "status": true,
       "rating_avg": 4.8,
-      "reviews": 124,
-      "created_at": "2024-01-15T10:30:00Z"
+      "reviews": 32,
+      "created_at": "2026-02-24T17:41:45Z"
     }
   },
   {
     "model": "market.product",
     "pk": 2,
     "fields": {
-      "name": "ASUS ROG Strix G16",
+      "name": "MSI GS75 Stealth",
       "category": "LAPTOP",
       "series": 2,
-      "image": "",
-      "stock_quantity": 15,
-      "original_price": "2199.50",
-      "sale_price": "2199.50",
-      "characteristics": {"cpu": "Intel Core i9-13980HX", "gpu": "RTX 4070 8GB", "ram": "32GB DDR5", "screen": "16\" 240Hz"},
-      "color": "#2B2B2B",
-      "description": "High-performance gaming laptop with advanced cooling.",
+      "image": null,
+      "stock_quantity": 5,
+      "original_price": "2299.00",
+      "sale_price": "2299.00",
+      "characteristics": {"CPU": "Intel Core i9", "RAM": "32GB", "Storage": "1TB SSD"},
+      "color": "#1A1A1A",
+      "description": "17-inch premium thin gaming laptop.",
       "status": true,
-      "rating_avg": 4.6,
-      "reviews": 89,
-      "created_at": "2024-02-01T14:15:00Z"
+      "rating_avg": 4.5,
+      "reviews": 15,
+      "created_at": "2026-02-24T17:41:45Z"
     }
   },
   {
     "model": "market.product",
     "pk": 3,
     "fields": {
-      "name": "Cisco Catalyst 9200L 48-port",
-      "category": "NETWORK_DEVICE",
+      "name": "MSI GT76 Titan",
+      "category": "LAPTOP",
       "series": 3,
-      "image": "",
-      "stock_quantity": 5,
-      "original_price": "3450.00",
-      "sale_price": "3100.00",
-      "characteristics": {"ports": "48x 10/100/1000", "uplink": "4x 10G SFP+", "poe": "Partial", "management": "Managed"},
-      "color": "#C0C0C0",
-      "description": "Enterprise-grade switch for secure and reliable networking.",
-      "status": false,
+      "image": null,
+      "stock_quantity": 3,
+      "original_price": "3999.50",
+      "sale_price": "3800.00",
+      "characteristics": {"CPU": "Intel Core i9 Desktop", "RAM": "64GB", "Storage": "2TB SSD"},
+      "color": "#2C2C2C",
+      "description": "Desktop performance in a laptop.",
+      "status": true,
       "rating_avg": 4.9,
-      "reviews": 12,
-      "created_at": "2023-11-20T09:00:00Z"
+      "reviews": 42,
+      "created_at": "2026-02-24T17:41:45Z"
     }
   },
   {
     "model": "market.product",
     "pk": 4,
     "fields": {
-      "name": "Epson EcoTank L3250 WiFi",
-      "category": "PRINTER_SCANNER",
-      "series": 4,
-      "image": "",
-      "stock_quantity": 0,
-      "original_price": "199.99",
-      "sale_price": "199.99",
-      "characteristics": {"type": "Inkjet", "functions": "Print, Scan, Copy", "connectivity": "Wi-Fi, USB", "color_printing": true},
-      "color": "#111111",
-      "description": "Cost-effective cartridge-free printer.",
-      "status": true,
+      "name": "MSI GT83VR Titan SLI",
+      "category": "LAPTOP",
+      "series": 3,
+      "image": null,
+      "stock_quantity": 2,
+      "original_price": "4500.00",
+      "sale_price": "4100.00",
+      "characteristics": {"CPU": "Intel Core i7", "RAM": "32GB", "GPU": "Dual RTX 2080"},
+      "color": "#000000",
+      "description": "Mechanical keyboard and dual GPUs.",
+      "status": false,
       "rating_avg": 4.2,
-      "reviews": 340,
-      "created_at": "2023-08-10T16:45:00Z"
+      "reviews": 10,
+      "created_at": "2026-02-24T17:41:45Z"
     }
   },
   {
     "model": "market.product",
     "pk": 5,
     "fields": {
-      "name": "NVIDIA GeForce RTX 4090 Founders Edition",
-      "category": "PC_PART",
-      "series": 2,
-      "image": "",
-      "stock_quantity": 2,
-      "original_price": "1599.00",
-      "sale_price": "1599.00",
-      "characteristics": {"vram": "24GB GDDR6X", "cuda_cores": 16384, "tdp": "450W", "interface": "PCIe 4.0 x16"},
-      "color": "#A9A9A9",
-      "description": "The ultimate GPU for gamers and creators.",
+      "name": "MSI GL65 Leopard",
+      "category": "LAPTOP",
+      "series": 4,
+      "image": null,
+      "stock_quantity": 25,
+      "original_price": "1199.00",
+      "sale_price": "1099.00",
+      "characteristics": {"CPU": "Intel Core i7", "RAM": "16GB", "Storage": "512GB SSD"},
+      "color": "#333333",
+      "description": "Solid performance for everyday gaming.",
       "status": true,
-      "rating_avg": 4.9,
-      "reviews": 45,
-      "created_at": "2024-02-15T08:20:00Z"
+      "rating_avg": 4.4,
+      "reviews": 50,
+      "created_at": "2026-02-24T17:41:45Z"
     }
   },
   {
     "model": "market.product",
     "pk": 6,
     "fields": {
-      "name": "Intel Core i7-14700K",
-      "category": "PC_PART",
-      "series": 2,
-      "image": "",
-      "stock_quantity": 100,
-      "original_price": "409.99",
-      "sale_price": "389.99",
-      "characteristics": {"cores": 20, "threads": 28, "base_clock": "3.4 GHz", "boost_clock": "5.6 GHz", "socket": "LGA 1700"},
-      "color": "#0071C5",
-      "description": "Desktop Processor 20 cores (8 P-cores + 12 E-cores).",
+      "name": "MSI GL75 Leopard",
+      "category": "LAPTOP",
+      "series": 4,
+      "image": null,
+      "stock_quantity": 18,
+      "original_price": "1399.00",
+      "sale_price": "1399.00",
+      "characteristics": {"CPU": "Intel Core i7", "RAM": "16GB", "Storage": "1TB HDD + 512GB SSD"},
+      "color": "#000000",
+      "description": "17-inch screen for better immersion.",
       "status": true,
-      "rating_avg": 4.7,
-      "reviews": 210,
-      "created_at": "2024-01-05T11:11:00Z"
+      "rating_avg": 4.3,
+      "reviews": 28,
+      "created_at": "2026-02-24T17:41:45Z"
     }
   },
   {
     "model": "market.product",
     "pk": 7,
     "fields": {
-      "name": "Office Master Pro Workstation",
-      "category": "PC",
-      "series": 1,
-      "image": "",
-      "stock_quantity": 8,
-      "original_price": "850.00",
-      "sale_price": "799.00",
-      "characteristics": {"cpu": "Intel Core i5-13400", "ram": "16GB DDR4", "storage": "1TB NVMe", "os": "Windows 11 Pro"},
-      "color": "#4B4B4B",
-      "description": "Reliable desktop PC for daily office tasks and multitasking.",
+      "name": "MSI GE66 Raider",
+      "category": "LAPTOP",
+      "series": 5,
+      "image": null,
+      "stock_quantity": 10,
+      "original_price": "1899.00",
+      "sale_price": "1750.00",
+      "characteristics": {"CPU": "Intel Core i7", "RAM": "32GB", "Display": "240Hz"},
+      "color": "#111111",
+      "description": "RGB light bar and high refresh rate.",
       "status": true,
-      "rating_avg": 4.4,
-      "reviews": 18,
-      "created_at": "2023-12-01T10:00:00Z"
+      "rating_avg": 4.7,
+      "reviews": 38,
+      "created_at": "2026-02-24T17:41:45Z"
     }
   },
   {
     "model": "market.product",
     "pk": 8,
     "fields": {
-      "name": "ThinkPad Thunderbolt 4 Dock",
-      "category": "OTHER",
-      "series": 1,
-      "image": "",
-      "stock_quantity": 0,
-      "original_price": "299.00",
-      "sale_price": "299.00",
-      "characteristics": {"ports": "4x USB 3.2, 2x DP, 1x HDMI, 1x RJ45", "power_delivery": "100W", "cable_length": "0.8m"},
-      "color": "#1E1E1E",
-      "description": "Premium docking station for enterprise laptops.",
-      "status": false,
-      "rating_avg": 3.9,
-      "reviews": 56,
-      "created_at": "2022-05-15T12:00:00Z"
+      "name": "MSI GE75 Raider",
+      "category": "LAPTOP",
+      "series": 5,
+      "image": null,
+      "stock_quantity": 8,
+      "original_price": "2100.00",
+      "sale_price": "1999.00",
+      "characteristics": {"CPU": "Intel Core i9", "RAM": "16GB", "Display": "144Hz"},
+      "color": "#222222",
+      "description": "Large display enthusiast gaming laptop.",
+      "status": true,
+      "rating_avg": 4.6,
+      "reviews": 19,
+      "created_at": "2026-02-24T17:41:45Z"
     }
   },
   {
     "model": "market.product",
     "pk": 9,
     "fields": {
-      "name": "ASUS ROG Swift 360Hz PG27AQN",
-      "category": "OTHER",
-      "series": 2,
-      "image": "",
-      "stock_quantity": 3,
-      "original_price": "1049.00",
-      "sale_price": "950.00",
-      "characteristics": {"panel": "Ultrafast IPS", "resolution": "2560x1440", "refresh_rate": "360Hz", "response_time": "1ms"},
-      "color": "#0F0F0F",
-      "description": "Esports monitor with NVIDIA G-SYNC analyzer.",
+      "name": "Custom PC Build Alpha",
+      "category": "PC",
+      "series": 1,
+      "image": null,
+      "stock_quantity": 5,
+      "original_price": "1500.00",
+      "sale_price": "1450.00",
+      "characteristics": {"CPU": "AMD Ryzen 5", "RAM": "16GB", "GPU": "RTX 3060"},
+      "color": "#FFFFFF",
+      "description": "Great entry-level custom PC.",
       "status": true,
-      "rating_avg": 4.5,
-      "reviews": 29,
-      "created_at": "2023-09-10T15:30:00Z"
+      "rating_avg": 4.1,
+      "reviews": 12,
+      "created_at": "2026-02-24T17:41:45Z"
     }
   },
   {
     "model": "market.product",
     "pk": 10,
     "fields": {
-      "name": "OBD2 Bluetooth Scanner (Lada/VAZ)",
-      "category": "OTHER",
-      "series": 5,
-      "image": "",
-      "stock_quantity": 25,
-      "original_price": "25.50",
-      "sale_price": "19.99",
-      "characteristics": {"compatibility": "VAZ 2115 (8-valve, injector) and others", "interface": "Bluetooth 4.0", "functions": "Read/Clear DTCs, Real-time RPM monitoring, Throttle position"},
-      "color": "#0047AB",
-      "description": "Diagnostic tool perfect for troubleshooting floating RPMs or injector issues on older cars.",
+      "name": "Custom PC Build Beta",
+      "category": "PC",
+      "series": 1,
+      "image": null,
+      "stock_quantity": 4,
+      "original_price": "2200.00",
+      "sale_price": "2200.00",
+      "characteristics": {"CPU": "AMD Ryzen 7", "RAM": "32GB", "GPU": "RTX 3080"},
+      "color": "#000000",
+      "description": "High-end 4K gaming machine.",
+      "status": true,
+      "rating_avg": 4.9,
+      "reviews": 8,
+      "created_at": "2026-02-24T17:41:45Z"
+    }
+  },
+  {
+    "model": "market.product",
+    "pk": 11,
+    "fields": {
+      "name": "Custom PC Build Omega",
+      "category": "PC",
+      "series": 1,
+      "image": null,
+      "stock_quantity": 1,
+      "original_price": "3500.00",
+      "sale_price": "3400.00",
+      "characteristics": {"CPU": "Intel Core i9", "RAM": "64GB", "GPU": "RTX 4090"},
+      "color": "#FF0000",
+      "description": "Ultimate custom build for professionals.",
+      "status": true,
+      "rating_avg": 5.0,
+      "reviews": 3,
+      "created_at": "2026-02-24T17:41:45Z"
+    }
+  },
+  {
+    "model": "market.product",
+    "pk": 12,
+    "fields": {
+      "name": "MSI Infinite A",
+      "category": "PC",
+      "series": 6,
+      "image": null,
+      "stock_quantity": 7,
+      "original_price": "1600.00",
+      "sale_price": "1500.00",
+      "characteristics": {"CPU": "Intel Core i7", "RAM": "16GB", "GPU": "GTX 1660 Ti"},
+      "color": "#121212",
+      "description": "Pre-built gaming desktop with silent cooling.",
+      "status": true,
+      "rating_avg": 4.2,
+      "reviews": 14,
+      "created_at": "2026-02-24T17:41:45Z"
+    }
+  },
+  {
+    "model": "market.product",
+    "pk": 13,
+    "fields": {
+      "name": "MSI Infinite X",
+      "category": "PC",
+      "series": 6,
+      "image": null,
+      "stock_quantity": 4,
+      "original_price": "2500.00",
+      "sale_price": "2400.00",
+      "characteristics": {"CPU": "Intel Core i9", "RAM": "32GB", "GPU": "RTX 2080 Super"},
+      "color": "#000000",
+      "description": "Tempered glass panel and liquid cooling.",
+      "status": true,
+      "rating_avg": 4.7,
+      "reviews": 21,
+      "created_at": "2026-02-24T17:41:45Z"
+    }
+  },
+  {
+    "model": "market.product",
+    "pk": 14,
+    "fields": {
+      "name": "MSI Trident 3",
+      "category": "PC",
+      "series": 7,
+      "image": null,
+      "stock_quantity": 11,
+      "original_price": "1099.00",
+      "sale_price": "999.00",
+      "characteristics": {"CPU": "Intel Core i5", "RAM": "8GB", "Size": "Console-sized"},
+      "color": "#FFFFFF",
+      "description": "Compact PC with the footprint of a console.",
+      "status": true,
+      "rating_avg": 4.0,
+      "reviews": 45,
+      "created_at": "2026-02-24T17:41:45Z"
+    }
+  },
+  {
+    "model": "market.product",
+    "pk": 15,
+    "fields": {
+      "name": "MSI Trident X",
+      "category": "PC",
+      "series": 7,
+      "image": null,
+      "stock_quantity": 6,
+      "original_price": "2199.00",
+      "sale_price": "2199.00",
+      "characteristics": {"CPU": "Intel Core i7", "RAM": "16GB", "PSU": "SFX Form Factor"},
+      "color": "#1A1A1A",
+      "description": "Small form factor, massive power.",
+      "status": true,
+      "rating_avg": 4.6,
+      "reviews": 22,
+      "created_at": "2026-02-24T17:41:45Z"
+    }
+  },
+  {
+    "model": "market.product",
+    "pk": 16,
+    "fields": {
+      "name": "MSI Trident AS",
+      "category": "PC",
+      "series": 7,
+      "image": null,
+      "stock_quantity": 9,
+      "original_price": "1750.00",
+      "sale_price": "1600.00",
+      "characteristics": {"CPU": "Intel Core i7", "RAM": "16GB", "GPU": "RTX 3070"},
+      "color": "#000000",
+      "description": "Mid-tier compact pre-built.",
+      "status": true,
+      "rating_avg": 4.5,
+      "reviews": 11,
+      "created_at": "2026-02-24T17:41:45Z"
+    }
+  },
+  {
+    "model": "market.product",
+    "pk": 17,
+    "fields": {
+      "name": "MSI Nightblade MI3",
+      "category": "PC",
+      "series": 9,
+      "image": null,
+      "stock_quantity": 14,
+      "original_price": "950.00",
+      "sale_price": "850.00",
+      "characteristics": {"CPU": "Intel Core i5", "RAM": "8GB", "Storage": "1TB HDD"},
+      "color": "#333333",
+      "description": "Budget friendly compact gaming rig.",
+      "status": true,
+      "rating_avg": 3.8,
+      "reviews": 52,
+      "created_at": "2026-02-24T17:41:45Z"
+    }
+  },
+  {
+    "model": "market.product",
+    "pk": 18,
+    "fields": {
+      "name": "MSI Nightblade X2",
+      "category": "PC",
+      "series": 9,
+      "image": null,
+      "stock_quantity": 2,
+      "original_price": "1800.00",
+      "sale_price": "1700.00",
+      "characteristics": {"CPU": "Intel Core i7", "RAM": "16GB", "Handle": "Built-in"},
+      "color": "#000000",
+      "description": "Portable LAN party machine.",
       "status": false,
-      "rating_avg": 4.8,
-      "reviews": 412,
-      "created_at": "2024-02-18T18:00:00Z"
+      "rating_avg": 4.4,
+      "reviews": 16,
+      "created_at": "2026-02-24T17:41:45Z"
+    }
+  },
+  {
+    "model": "market.product",
+    "pk": 19,
+    "fields": {
+      "name": "MSI GS65 Stealth Thin",
+      "category": "LAPTOP",
+      "series": 2,
+      "image": null,
+      "stock_quantity": 20,
+      "original_price": "1499.99",
+      "sale_price": "1299.99",
+      "characteristics": {"CPU": "Intel Core i7", "RAM": "16GB", "Weight": "1.88kg"},
+      "color": "#000000",
+      "description": "Previous gen ultra-portable gaming.",
+      "status": true,
+      "rating_avg": 4.6,
+      "reviews": 40,
+      "created_at": "2026-02-24T17:41:45Z"
+    }
+  },
+  {
+    "model": "market.product",
+    "pk": 20,
+    "fields": {
+      "name": "MSI GE65 Raider",
+      "category": "LAPTOP",
+      "series": 5,
+      "image": null,
+      "stock_quantity": 0,
+      "original_price": "1600.00",
+      "sale_price": "1600.00",
+      "characteristics": {"CPU": "Intel Core i7", "RAM": "16GB", "GPU": "RTX 2070"},
+      "color": "#111111",
+      "description": "Reliable 15-inch powerhouse.",
+      "status": false,
+      "rating_avg": 4.3,
+      "reviews": 27,
+      "created_at": "2026-02-24T17:41:45Z"
     }
   }
 ]
