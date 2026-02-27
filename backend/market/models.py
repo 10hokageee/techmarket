@@ -74,7 +74,7 @@ class Product(models.Model):
             )
         try:
             color = (
-                f"{(self.color[1:] if self.color.startswith("#") else self.color):0<6}"
+                f"{(self.color[1:] if self.color.startswith('#') else self.color):0<6}"
             )
             int(color, 16)
             self.color = f"#{color}"
