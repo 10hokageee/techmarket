@@ -44,7 +44,7 @@ export const Slider = () => {
                 styles.slider__btnPrev
               )}
             >
-              <img src="icons/slider-arrow.svg" alt="Prev arrow" />
+              <img src="/icons/slider-arrow.svg" alt="Prev arrow" />
             </button>
           </div>
 
@@ -96,7 +96,7 @@ export const Slider = () => {
                 styles.slider__btnNext
               )}
             >
-              <img src="icons/slider-arrow.svg" alt="Next arrow" />
+              <img src="/icons/slider-arrow.svg" alt="Next arrow" />
             </button>
           </div>
         </div>

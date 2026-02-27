@@ -37,7 +37,7 @@
       position: absolute;
       width: 16px;
       height: 16px;
-      background-image: url("icons/dropdown-arrow.svg");
+      background-image: url("/icons/dropdown-arrow.svg");
     }
   }
 
@@ -213,11 +213,11 @@
     }
 
     &--open::after {
-      background-image: url("icons/time-icon.svg");
+      background-image: url("/icons/time-icon.svg");
     }
 
     &--address::after {
-      background-image: url("icons/address-icon.svg");
+      background-image: url("/icons/address-icon.svg");
     }
   }
 

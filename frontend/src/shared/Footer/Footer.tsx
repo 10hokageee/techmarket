@@ -129,19 +129,19 @@ export const Footer = () => {
         <div className={styles.footer__bottom}>
           <div className={styles.footer__bottomSocials}>
             <a className={styles.footer__bottomFacebook} href="#">
-              <img src="icons/facebook-icon.svg" alt="" />
+              <img src="/icons/facebook-icon.svg" alt="" />
             </a>
             <a className={styles.footer__bottomInst} href="#">
-              <img src="icons/inst-icon.svg" alt="" />
+              <img src="/icons/inst-icon.svg" alt="" />
             </a>
           </div>
 
           <ul className={styles.footer__bottomPaymants}>
-            <li><img src="icons/discover.svg" alt="" /></li>
-            <li><img src="icons/visa.svg" alt="" /></li>
-            <li><img src="icons/maestro.svg" alt="" /></li>
-            <li><img src="icons/discover.svg" alt="" /></li>
-            <li><img src="icons/american-express.svg" alt="" /></li>
+            <li><img src="/icons/discover.svg" alt="" /></li>
+            <li><img src="/icons/visa.svg" alt="" /></li>
+            <li><img src="/icons/maestro.svg" alt="" /></li>
+            <li><img src="/icons/discover.svg" alt="" /></li>
+            <li><img src="/icons/american-express.svg" alt="" /></li>
           </ul>
 
           <p className={styles.footer__bottomCopyright}>

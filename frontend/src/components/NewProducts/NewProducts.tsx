@@ -38,14 +38,14 @@ export const NewProducts: React.FC<Props> = ({ products }) => {
             className={`${styles.newProducts__btn} ${styles.newProducts__btnPrev}`}
             onClick={() => carouselApi?.scrollPrev()}
           >
-            <img src="icons/slider-arrow.svg" alt="Prev" />
+            <img src="/icons/slider-arrow.svg" alt="Prev" />
           </button>
 
           <button
             className={`${styles.newProducts__btn} ${styles.newProducts__btnNext}`}
             onClick={() => carouselApi?.scrollNext()}
           >
-            <img src="icons/slider-arrow.svg" alt="Next" />
+            <img src="/icons/slider-arrow.svg" alt="Next" />
           </button>
         </Carousel>
       </div>

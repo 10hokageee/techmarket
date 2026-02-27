@@ -12,7 +12,7 @@ export const ProductCard: React.FC<Props> = ({ product }) => {
     <NavLink to='10'>
       <article className={styles.productCard}>
         <div className={styles.productCard__statusBody}>
-          <img className={styles.productCard__statusImg} src="icons/stock-icon.svg" alt="" />
+          <img className={styles.productCard__statusImg} src="/icons/stock-icon.svg" alt="" />
           <span className={styles.productCard__status}>{product.status}</span>
         </div>
 
