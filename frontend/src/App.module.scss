@@ -1,0 +1,73 @@
+@import "./globalStyles.scss";
+
+.app {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  position: relative;
+}
+
+.goTop {
+  display: none;
+  z-index: 10;
+  
+  @include onTablet() {
+    position: fixed;
+    width: 40px;
+    height: 40px;
+    right: 15px;
+    background-color: #0156ff;
+    border-radius: 50%;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+
+    &::after {
+      position: absolute;
+      content: "";
+      width: 10px;
+      height: 12px;
+      background-image: url("/icons/slider-arrow.svg");
+      background-position: center;
+      background-repeat: no-repeat;
+      transform: rotate(90deg);
+    }
+  }
+
+  @include onPhone() {
+    position: fixed;
+    width: 40px;
+    height: 40px;
+    right: 15px;
+    background-color: #0156ff;
+    border-radius: 50%;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+
+    &::after {
+      position: absolute;
+      content: "";
+      width: 10px;
+      height: 12px;
+      background-image: url("/icons/slider-arrow.svg");
+      background-position: center;
+      background-repeat: no-repeat;
+      transform: rotate(90deg);
+    }
+  }
+}
+
+.main {
+  flex-grow: 1;
+}
+
+.lock {
+  overflow: hidden;
+}

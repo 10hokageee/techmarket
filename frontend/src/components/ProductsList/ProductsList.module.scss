@@ -1,16 +1,21 @@
 @import "../../globalStyles.scss";
 
 .productsList {
-   &__inner {
+  &__inner {
     display: flex;
+
+    @include onPhone() {
+      flex-direction: column;
+      justify-content: center;
+    }
   }
 
   &__banner {
     background-repeat: no-repeat;
-    background-size: 232px 350px;
+    background-size: cover;
     background-position: center;
     max-width: 232px;
-    min-height: 350px;
+    height: 346px;
     width: 100%;
     align-self: flex-start;
     display: flex;
@@ -19,6 +24,21 @@
     align-items: center;
     margin-right: 15px;
     position: relative;
+
+    @include onTablet {
+      max-width: 227px;
+    }
+
+    @include onPhone() {
+      height: 82px;
+      width: 100%;
+      margin-bottom: 15px;
+      justify-content: space-between;
+      padding-block: 15px;
+      margin-right: 0;
+      align-self: center;
+      max-width: 100%;
+    }
   }
 
   &__title {
@@ -26,15 +46,22 @@
     font-size: 22px;
     line-height: 130%;
     color: #ffffff;
+
+    @include onTablet {
+      font-size: 18px;
+    }
   }
 
   &__list {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
     align-items: center;
     gap: 15px;
     width: 100%;
+
+    @include onPhone() {
+      justify-content: center;
+    }
   }
 
   &__link {
@@ -46,5 +73,10 @@
     display: block;
     position: absolute;
     bottom: 32px;
+
+    @include onPhone() {
+      position: static;
+      font-size: 12px;
+    }
   }
 }

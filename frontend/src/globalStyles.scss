@@ -1,10 +1,14 @@
-@import './styles/mixin.scss';
-@import './styles/fonts.scss';
-@import './styles/reset.scss';
-@import './styles/vars.scss';
+@import "./mixin/mixin.scss";
+@import "./styles/fonts.scss";
+@import "./styles/reset.scss";
+@import "./styles/vars.scss";
 
 .container {
   margin: 0 auto;
   max-width: 1370px;
   padding: 0 15px;
+
+  @include onTablet() {
+    padding: 0 20px;
+  }
 }

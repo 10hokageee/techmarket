@@ -8,6 +8,10 @@
   box-sizing: border-box;
   position: relative;
 
+  @include onTablet() {
+    width: 227px;
+  }
+
   &__img {
     margin: 0 auto;
     object-fit: contain;
@@ -42,7 +46,7 @@
 
   &__statusBody {
     position: absolute;
-    top: 0;
+    top: 7px;
     left: 25px;
     display: flex;
     gap: 6px;

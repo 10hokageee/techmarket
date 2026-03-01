@@ -5,6 +5,14 @@
   border-bottom: 1px solid #cacdd8;
   position: relative;
 
+  @include onTablet() {
+    border-bottom: transparent;
+  }
+
+  @include onPhone() {
+    border-bottom: transparent;
+  }
+
   &__top {
     background-color: #020202;
   }
@@ -14,6 +22,14 @@
     justify-content: space-between;
     height: 44px;
     align-items: center;
+
+    @include onTablet() {
+      height: 40px;
+    }
+
+    @include onPhone() {
+      height: 40px;
+    }
   }
 
   &__topOpeningHours {
@@ -37,7 +53,11 @@
       position: absolute;
       width: 16px;
       height: 16px;
-      background-image: url("icons/dropdown-arrow.svg");
+      background-image: url("/icons/dropdown-arrow.svg");
+    }
+
+    @include onPhone {
+      font-size: 11px;
     }
   }
 
@@ -46,11 +66,53 @@
     font-size: 12px;
     line-height: 18px;
     color: #acacac;
+
+    @include onTablet() {
+      display: none;
+    }
+
+    @include onPhone() {
+      display: none;
+    }
   }
 
   &__topInfo {
     display: flex;
     align-items: center;
+    @include onTablet() {
+      display: none;
+    }
+
+    @include onPhone() {
+      display: none;
+    }
+  }
+
+  &__topContact {
+    display: none;
+    @include poppins-600;
+    font-size: 11px;
+    line-height: 16px;
+    color: #ffffff;
+    position: relative;
+
+    &::after {
+      content: "";
+      position: absolute;
+      width: 100%;
+      background-color: #fff;
+      bottom: 0;
+      left: 0;
+      border: 1.2px solid #ffffff;
+    }
+
+    @include onTablet() {
+      display: block;
+    }
+
+    @include onPhone() {
+      display: block;
+    }
   }
 
   &__topPhone {
@@ -60,6 +122,14 @@
     color: #ffffff;
     margin-right: 14px;
     @include hoverForLinks;
+
+    @include onTablet() {
+      display: none;
+    }
+
+    @include onPhone() {
+      display: none;
+    }
   }
 
   &__topFacebook {
@@ -73,27 +143,286 @@
     @include hoverForLinks;
   }
 
+  &__bottom {
+    @include onTablet() {
+      background-color: #0156ff;
+    }
+
+    @include onPhone() {
+      background-color: #0156ff;
+    }
+  }
+
+  &__bottomMobile {
+    display: none;
+
+    @include onTablet() {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+    }
+
+    @include onPhone() {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+    }
+  }
+
+  &__searchBox {
+    display: flex;
+    width: 100%;
+    margin-right: 30px;
+
+    @include onTablet() {
+      display: none;
+    }
+
+    @include onPhone() {
+      display: none;
+    }
+  }
+
+  &__searchLabel {
+    width: 100%;
+    background-color: #f5f7ff;
+    border-radius: 31px;
+    padding-block: 18px;
+    margin-right: 25px;
+    position: relative;
+
+    &::after {
+      position: absolute;
+      content: "";
+      width: 16px;
+      height: 16px;
+      right: 26px;
+      top: 50%;
+      transform: translateY(-50%);
+      background-image: url("/icons/search-icon-mobile.svg");
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+  }
+
+  &__search {
+    padding-inline: 15px;
+    width: 100%;
+    font-size: 14px;
+    line-height: 21px;
+    color: #a2a6b0;
+    @include poppins-400;
+  }
+
+  &__searchBtnClose {
+    cursor: pointer;
+  }
+
+  &__navBurger {
+    margin-right: 53px;
+
+    @include onPhone() {
+      margin-right: 11px;
+    }
+  }
+
+  &__navLabelSearch {
+    width: 100%;
+    background-color: #fff;
+    border-radius: 25px;
+    padding-block: 11px;
+    margin-right: 37px;
+    position: relative;
+
+    &::after {
+      position: absolute;
+      content: "";
+      width: 14px;
+      height: 14px;
+      left: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      background-image: url("/icons/search-icon-mobile.svg");
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+
+    @include onPhone() {
+      margin-right: 12px;
+    }
+  }
+
+  &__navInputSearch {
+    padding-left: 38px;
+    padding-right: 15px;
+    @include poppins-400;
+    font-size: 11px;
+    line-height: 16px;
+    display: flex;
+    color: #cacdd8;
+    position: relative;
+
+    &::after {
+      position: absolute;
+      content: "";
+      width: 14px;
+      height: 14px;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      background-image: url("/icons/search-icon-mobile.svg");
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+  }
+
+  &__navLogoMobile {
+    display: none;
+
+    @include onTablet() {
+      display: block;
+      position: absolute;
+      background-color: #0156ff;
+      top: 11px;
+      border-radius: 30px;
+      padding: 3px 9px 6px 9px;
+    }
+
+    @include onPhone() {
+      display: block;
+      position: absolute;
+      background-color: #0156ff;
+      top: 11px;
+      border-radius: 30px;
+      padding: 3px 9px 6px 9px;
+    }
+  }
+
+  &__navBtnsMobile {
+    display: none;
+
+    @include onTablet() {
+      display: flex;
+      align-items: center;
+    }
+
+    @include onPhone() {
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  &__navButtonCartMobile {
+    display: none;
+
+    @include onTablet() {
+      position: relative;
+      display: block;
+      margin-right: 30px;
+    }
+
+    @include onPhone() {
+      position: relative;
+      display: block;
+      margin-right: 18px;
+    }
+  }
+
+  &__navButtonCartCountMobile {
+    display: none;
+
+    @include onTablet() {
+      display: flex;
+      position: absolute;
+      width: 18px;
+      height: 18px;
+      background-color: #fff;
+      color: #0156ff;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      @include poppins-700;
+      font-size: 10px;
+      line-height: 15px;
+      top: -15px;
+      left: 11px;
+    }
+
+    @include onPhone() {
+      display: flex;
+      position: absolute;
+      width: 18px;
+      height: 18px;
+      background-color: #fff;
+      color: #0156ff;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      @include poppins-700;
+      font-size: 10px;
+      line-height: 15px;
+      top: -15px;
+      left: 11px;
+    }
+  }
+
   &__nav {
     display: flex;
     align-items: center;
     padding-block: 11px 12px;
+
+    @include onTablet() {
+      justify-content: space-between;
+      padding-block: 13px;
+    }
+
+    @include onPhone() {
+      justify-content: space-between;
+      padding-block: 13px;
+    }
   }
 
   &__navList {
     display: flex;
     margin-right: auto;
     align-items: center;
+
+    @include onTablet() {
+      display: none;
+    }
+
+    @include onPhone() {
+      display: none;
+    }
   }
 
   &__navLogo {
     padding: 14px 26px;
     margin-right: 30px;
     @include hoverForLinks;
+
+    @include onTablet() {
+      display: none;
+    }
+
+    @include onPhone() {
+      display: none;
+    }
   }
 
   &__navButtons {
     display: flex;
     align-items: center;
+
+    @include onTablet() {
+      display: none;
+    }
+
+    @include onPhone() {
+      display: none;
+    }
   }
 
   &__navButtonSearch {
@@ -126,19 +455,17 @@
   }
 
   &__navListItem:not(:last-child) {
-    margin-right: 10px;
+    margin-right: 25px;
   }
 
   &__navListLink {
     font-size: 14px;
     line-height: 21px;
     color: #000000;
-    // height: 80px;
     display: flex;
     align-items: center;
     @include poppins-600;
     @include hoverForLinks;
-    padding: 12px 15px;
   }
 
   &__navListLinkLogin {
@@ -165,6 +492,14 @@
     &:hover .header__topShowInfo {
       opacity: 1;
       visibility: visible;
+    }
+
+    @include onTablet() {
+      margin-left: 80px;
+    }
+
+    @include onPhone() {
+      margin-left: 84px;
     }
   }
 
@@ -213,11 +548,11 @@
     }
 
     &--open::after {
-      background-image: url("icons/time-icon.svg");
+      background-image: url("/icons/time-icon.svg");
     }
 
     &--address::after {
-      background-image: url("icons/address-icon.svg");
+      background-image: url("/icons/address-icon.svg");
     }
   }
 

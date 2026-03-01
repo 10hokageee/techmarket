@@ -30,3 +30,15 @@
     opacity: 0.5;
   }
 }
+
+@mixin onTablet() {
+  @media (max-width: 1199px) and (min-width: 769px) {
+    @content;
+  }
+}
+
+@mixin onPhone() {
+  @media (max-width: 768px) {
+    @content;
+  }
+}

@@ -8,27 +8,30 @@ import { getProducts } from "../../services/getProdcutsService";
 import { CurstomeProducts } from "@/components/CustomeProducts/CustomeProducts";
 import { LaptopsList } from "@/components/LaptopsList/LaptopsList";
 import { DesktopsList } from "@/components/DesktopsList/DesktopsList";
-import { MonitorList } from "@/components/MonitorsList/MonitorsList";
+import { ComponentsProdcuts } from "@/components/ComponentsProdcuts/ComponentsProdcuts";
 
 export const HomePage = () => {
   const [products, setProducts] = useState<Product[]>([]);
+  const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
     getProducts().then(productsFromServer => setProducts(productsFromServer))
-      .catch(e => console.log(e))
+      .catch(() => setErrorMessage('Something went wrong'))
   }, [])
 
-  const slicedProducts = products.slice(0, 4);
+  const productsByFilter = (category: string) => {
+    return products.filter(product => product.category.toLowerCase() === category.toLowerCase())
+  }
 
   return (
     <React.Fragment>
       <Slider />
-      <NewProducts products={products} />
+      <NewProducts errorMessage={errorMessage} products={products} />
       <ZipBlock />
-      <CurstomeProducts products={slicedProducts} />
-      <LaptopsList products={slicedProducts} />
-      <DesktopsList products={slicedProducts} />
-      <MonitorList products={slicedProducts}/>
+      <CurstomeProducts errorMessage={errorMessage} products={productsByFilter('Others product')} />
+      <LaptopsList errorMessage={errorMessage} products={productsByFilter('Laptops')} />
+      <DesktopsList errorMessage={errorMessage} products={productsByFilter('Desktop PC`s')} />
+      <ComponentsProdcuts errorMessage={errorMessage} products={productsByFilter('PC parts')} />
       <Brands />
     </React.Fragment>
   );
