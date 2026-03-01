@@ -28,7 +28,7 @@ class ProductSerializer(serializers.ModelSerializer):
         read_only_fields = ("id", "reviews", "rating_avg")
 
     def validate(self, attrs):
-        if attrs["sale_price"] >= attrs["original_price"]:
+        if attrs["sale_price"] and attrs["sale_price"] >= attrs["original_price"]:
             raise ValidationError(
                 {"sale_price": "The discount must be less than the original price."}
             )
