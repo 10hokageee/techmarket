@@ -1,4 +1,4 @@
-from rest_framework import viewsets, mixins
+from rest_framework import viewsets, mixins, status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from market.models import Product, Signboard, Order, Review
@@ -48,12 +48,8 @@ class OrderViewSet(
         serializer.save(user=self.request.user)
 
 
-class CorsViewSet(viewsets.GenericViewSet):
-    queryset = Review.objects
-    lookup_field = "param"
-
-    def list(self, request, *args, **kwargs):
-        return Response({"data": f"{request.META.get("HTTP_ORIGIN")}"})
-
-    def retrieve(self, request, *args, **kwargs):
-        return Response({"data": f"{request.META.get(kwargs["param"])}"})
+@api_view(["GET"])
+def check_cors(request):
+    return Response(
+        {"data": f"{request.META.get("HTTP_ORIGIN")}"}, status=status.HTTP_200_OK
+    )

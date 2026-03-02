@@ -8,8 +8,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 # Using os.getenv as suggested for cleaner syntax
 SECRET_KEY = "django-insecure-" + os.getenv(
-    "DJANGO_SECRET_KEY",
-    default="vexv7@j2sna10chbvtiu*tagwyfve6snkmir1hd!#kz!#vg2n="
+    "DJANGO_SECRET_KEY", default="vexv7@j2sna10chbvtiu*tagwyfve6snkmir1hd!#kz!#vg2n="
 )
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -39,7 +38,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
-    "whitenoise.middleware.WhiteNoiseMiddleware", # Added for serving static files on Render
+    "whitenoise.middleware.WhiteNoiseMiddleware",  # Added for serving static files on Render
     "django.contrib.sessions.middleware.SessionMiddleware",
     "debug_toolbar.middleware.DebugToolbarMiddleware",
     "corsheaders.middleware.CorsMiddleware",
@@ -80,7 +79,9 @@ DATABASES = {
 
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [
-    {"NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"},
+    {
+        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"
+    },
     {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator"},
     {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator"},
     {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"},
@@ -97,7 +98,9 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = "static/"
-STATIC_ROOT = BASE_DIR / "staticfiles" # Directory where static files will be collected for Render
+STATIC_ROOT = (
+    BASE_DIR / "staticfiles"
+)  # Directory where static files will be collected for Render
 
 # WhiteNoise settings for compression and caching
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
@@ -114,7 +117,9 @@ REST_FRAMEWORK = {
 
 # CORS settings
 # Restrict origins in production via CORS_ALLOWED_ORIGINS environment variable
-CORS_ALLOWED_ORIGINS = os.getenv(
-    "CORS_ALLOWED_ORIGINS",
-    "http://localhost:5173,http://127.0.0.1:5173"
-).split(",")
+
+CORS_ALLOW_ALL_ORIGINS = True
+
+# CORS_ALLOWED_ORIGINS = os.getenv(
+#     "CORS_ALLOWED_ORIGINS", "http://localhost:5173,http://127.0.0.1:5173"
+# ).split(",")
