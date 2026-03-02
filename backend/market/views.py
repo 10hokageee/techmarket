@@ -50,6 +50,4 @@ class OrderViewSet(
 
 @api_view(["GET"])
 def check_cors(request):
-    return Response(
-        {"data": f"{request.META.get("HTTP_ORIGIN")}"}, status=status.HTTP_200_OK
-    )
+    return Response({"data": request.META.get("HTTP_ORIGIN")})
