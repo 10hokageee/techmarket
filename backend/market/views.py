@@ -1,22 +1,20 @@
 from rest_framework import viewsets, mixins, status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from market.models import Product, Signboard, Order, Review
+from market.models import Product, Signboard, Order
 from market.permissions import IsAdminOrReadOnly
 from market.serializers import ProductSerializer, SignboardSerializer, OrderSerializer
+from market.pagination import ProductHomePagePagination
 
 
 class ProductViewSet(viewsets.ModelViewSet):
-    queryset = Product.objects
+    pagination_class = ProductHomePagePagination
     serializer_class = ProductSerializer
     permission_classes = (IsAdminOrReadOnly,)
 
     def get_queryset(self):
-        queryset = self.queryset.select_related("series")
-        _len = self.request.query_params.get("new_products")
-        if _len and _len.isdigit() and (_len := int(_len)) <= 24:
-            return queryset[:_len]
-        return queryset
+        queryset = Product.objects
+        return queryset.select_related("series")
 
 
 class SignboardViewSet(
