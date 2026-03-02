@@ -1,5 +1,6 @@
+from django.db.models import Q
 from rest_framework import viewsets, mixins, status
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from market.models import Product, Signboard, Order
 from market.permissions import IsAdminOrReadOnly
@@ -16,6 +17,21 @@ class ProductViewSet(viewsets.ModelViewSet):
         queryset = Product.objects.select_related("series")
         if search_param := self.request.query_params.get("search"):
             queryset = queryset.filter(name__icontains=search_param)
+        else:
+            default_series = {
+                "Custom PCs",
+                "MSI GS Series",
+                "MSI GT Series",
+                "MSI GL Series",
+                "MSI GE Series",
+                "MSI Infinute Series",
+                "MSI Triden",
+                "MSI Nightblade"
+            }
+            latest_ids = Product.objects.values_list("id", flat=True)[:15]
+            queryset = queryset.filter(
+                Q(series__name__in=default_series) | Q(id__in=latest_ids)
+            ).distinct().order_by("-created_at")
         return queryset
 
 
@@ -49,5 +65,6 @@ class OrderViewSet(
 
 
 @api_view(["GET"])
+@permission_classes(permission_classes=())
 def check_cors(request):
     return Response({"data": request.META.get("HTTP_ORIGIN")})

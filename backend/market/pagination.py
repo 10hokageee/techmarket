@@ -7,6 +7,8 @@ class ProductHomePagePagination(BasePagination):
     page_size = 8
 
     def paginate_queryset(self, queryset, request, view=None):
+        if not request.query_params.get("search"):
+            return None
         self.request = request
         try:
             display_page_number = max(1, int(request.query_params.get("page", 1)))
@@ -22,7 +24,7 @@ class ProductHomePagePagination(BasePagination):
 
         if len(results) > self.page_size:
             self.display_next_page = display_page_number + 1
-            results = results[:self.page_size]
+            results = results[: self.page_size]
         else:
             self.display_next_page = None
 
