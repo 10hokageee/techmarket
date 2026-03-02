@@ -13,8 +13,10 @@ class ProductViewSet(viewsets.ModelViewSet):
     permission_classes = (IsAdminOrReadOnly,)
 
     def get_queryset(self):
-        queryset = Product.objects
-        return queryset.select_related("series")
+        queryset = Product.objects.select_related("series")
+        if search_param := self.request.query_params.get("search"):
+            queryset = queryset.filter(name__icontains=search_param)
+        return queryset
 
 
 class SignboardViewSet(
@@ -48,6 +50,4 @@ class OrderViewSet(
 
 @api_view(["GET"])
 def check_cors(request):
-    return Response(
-        {"data": f"{request.META.get("HTTP_ORIGIN")}"}, status=status.HTTP_200_OK
-    )
+    return Response({"data": request.META.get("HTTP_ORIGIN")})
