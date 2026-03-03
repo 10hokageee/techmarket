@@ -1,7 +1,8 @@
 import re
 
-from django.db.models import Q
+from django.db.models import Q, QuerySet
 from django.db.models.functions import Coalesce
+from django.http import QueryDict
 from rest_framework import viewsets, mixins, status
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
@@ -31,7 +32,7 @@ class ProductViewSet(viewsets.ModelViewSet):
             }
         ):
             if search_param := params.get("search"):
-                queryset = queryset.filter(name__icontains=search_param.strip())
+                queryset = self._exec_search(param=search_param, queryset=queryset)
 
             lte_p = params.get("lte_price")
             gte_p = params.get("gte_price")
@@ -39,34 +40,14 @@ class ProductViewSet(viewsets.ModelViewSet):
                 queryset = queryset.annotate(
                     current_price=Coalesce("sale_price", "original_price")
                 )
-                if lte_p and lte_p.isdigit():  # price less than or equal to query param
-                    queryset = queryset.filter(current_price__lte=lte_p)
-                if (
-                    gte_p and gte_p.isdigit()
-                ):  # price greater than or equal to query param
-                    queryset = queryset.filter(current_price__gte=gte_p)
-
-            if colors := params.get("colors"):
-                queryset = queryset.filter(
-                    color__in={
-                        f"#{val_item.lstrip('#'):06}"
-                        for color in colors.split(",")
-                        if (val_item := color.strip())
-                    }
+                queryset = self._filter_by_price(
+                    lte_price=lte_p, gte_price=gte_p, queryset=queryset
                 )
 
-            for param_name, field_lookup in (
-                ("categories", "category__iregex"),
-                ("series", "series__name__iregex"),
-            ):
-                if values := params.get(param_name):
-                    pattern = "|".join(
-                        re.escape(item)
-                        for val in values.split(",")
-                        if (item := val.strip())
-                    )
-                    if pattern:
-                        queryset = queryset.filter(**{field_lookup: pattern})
+            if colors := params.get("colors"):
+                queryset = self._filter_by_color(colors=colors, queryset=queryset)
+
+            queryset = self._iregex_filter(params=params, queryset=queryset)
         else:
             default_series = {
                 "Custom PCs",
@@ -83,6 +64,61 @@ class ProductViewSet(viewsets.ModelViewSet):
                 Q(series__name__in=default_series) | Q(id__in=latest_ids)
             ).order_by("-created_at")
         return queryset.distinct()
+
+    @staticmethod
+    def _exec_search(param: str, queryset: QuerySet[Product]) -> QuerySet[Product]:
+        return queryset.filter(name__icontains=param.strip())
+
+    @staticmethod
+    def _filter_by_price(
+        lte_price: str, gte_price: str, queryset: QuerySet[Product]
+    ) -> QuerySet[Product]:
+        def _is_valid_param(value: str) -> bool:
+            try:
+                float(value)
+            except ValueError:
+                return False
+            else:
+                return True
+
+        if lte_price and _is_valid_param(
+            lte_price
+        ):  # price less than or equal to query param
+            queryset = queryset.filter(current_price__lte=lte_price)
+
+        if gte_price and _is_valid_param(
+            gte_price
+        ):  # price greater than or equal to query param
+            queryset = queryset.filter(current_price__gte=gte_price)
+        return queryset
+
+    @staticmethod
+    def _filter_by_color(colors: str, queryset: QuerySet[Product]) -> QuerySet[Product]:
+        return queryset.filter(
+            color__in={
+                f"#{val_item.lstrip('#'):06}"
+                for color in colors.split(",")
+                if (val_item := color.strip())
+            }
+        )
+
+    @staticmethod
+    def _iregex_filter(
+        params: QueryDict, queryset: QuerySet[Product]
+    ) -> QuerySet[Product]:
+        for param_name, field_lookup in (
+            ("categories", "category__iregex"),
+            ("series", "series__name__iregex"),
+        ):
+            if values := params.get(param_name):
+                pattern = "|".join(
+                    re.escape(item)
+                    for val in values.split(",")
+                    if (item := val.strip())
+                )
+                if pattern:
+                    queryset = queryset.filter(**{field_lookup: pattern})
+        return queryset
 
 
 class SignboardViewSet(
