@@ -2,42 +2,79 @@
   {
     "model": "market.series",
     "pk": 1,
-    "fields": { "name": "Custom PCs" }
+    "fields": {
+      "name": "Custom PCs"
+    }
   },
   {
     "model": "market.series",
     "pk": 2,
-    "fields": { "name": "MSI GS Series" }
+    "fields": {
+      "name": "MSI GS Series"
+    }
   },
   {
     "model": "market.series",
     "pk": 3,
-    "fields": { "name": "MSI GT Series" }
+    "fields": {
+      "name": "MSI GT Series"
+    }
   },
   {
     "model": "market.series",
     "pk": 4,
-    "fields": { "name": "MSI GL Series" }
+    "fields": {
+      "name": "MSI GL Series"
+    }
   },
   {
     "model": "market.series",
     "pk": 5,
-    "fields": { "name": "MSI GE Series" }
+    "fields": {
+      "name": "MSI GE Series"
+    }
   },
   {
     "model": "market.series",
     "pk": 6,
-    "fields": { "name": "MSI Infinute Series" }
+    "fields": {
+      "name": "MSI Infinute Series"
+    }
   },
   {
     "model": "market.series",
     "pk": 7,
-    "fields": { "name": "MSI Triden" }
+    "fields": {
+      "name": "MSI Triden"
+    }
   },
   {
     "model": "market.series",
     "pk": 9,
-    "fields": { "name": "MSI Nightblade" }
+    "fields": {
+      "name": "MSI Nightblade"
+    }
+  },
+  {
+    "model": "market.series",
+    "pk": 10,
+    "fields": {
+      "name": "MSI GP Series"
+    }
+  },
+  {
+    "model": "market.series",
+    "pk": 11,
+    "fields": {
+      "name": "MSI GF Series"
+    }
+  },
+  {
+    "model": "market.series",
+    "pk": 12,
+    "fields": {
+      "name": "MSI Creator Series"
+    }
   },
   {
     "model": "market.product",
@@ -50,13 +87,17 @@
       "stock_quantity": 12,
       "original_price": "2099.99",
       "sale_price": "1999.99",
-      "characteristics": {"CPU": "Intel Core i7", "RAM": "16GB", "Storage": "1TB SSD"},
+      "characteristics": {
+        "CPU": "Intel Core i7",
+        "RAM": "16GB",
+        "Storage": "1TB SSD"
+      },
       "color": "#000000",
       "description": "Ultra-thin and light gaming laptop.",
       "status": true,
       "rating_avg": 4.8,
       "reviews": 32,
-      "created_at": "2026-02-24T17:41:45Z"
+      "created_at": "2025-03-11T09:14:22Z"
     }
   },
   {
@@ -70,13 +111,17 @@
       "stock_quantity": 5,
       "original_price": "2299.00",
       "sale_price": "2299.00",
-      "characteristics": {"CPU": "Intel Core i9", "RAM": "32GB", "Storage": "1TB SSD"},
+      "characteristics": {
+        "CPU": "Intel Core i9",
+        "RAM": "32GB",
+        "Storage": "1TB SSD"
+      },
       "color": "#1A1A1A",
       "description": "17-inch premium thin gaming laptop.",
       "status": true,
       "rating_avg": 4.5,
       "reviews": 15,
-      "created_at": "2026-02-24T17:41:45Z"
+      "created_at": "2024-11-27T14:52:08Z"
     }
   },
   {
@@ -90,13 +135,17 @@
       "stock_quantity": 3,
       "original_price": "3999.50",
       "sale_price": "3800.00",
-      "characteristics": {"CPU": "Intel Core i9 Desktop", "RAM": "64GB", "Storage": "2TB SSD"},
+      "characteristics": {
+        "CPU": "Intel Core i9 Desktop",
+        "RAM": "64GB",
+        "Storage": "2TB SSD"
+      },
       "color": "#2C2C2C",
       "description": "Desktop performance in a laptop.",
       "status": true,
       "rating_avg": 4.9,
       "reviews": 42,
-      "created_at": "2026-02-24T17:41:45Z"
+      "created_at": "2024-07-03T07:30:45Z"
     }
   },
   {
@@ -110,13 +159,17 @@
       "stock_quantity": 2,
       "original_price": "4500.00",
       "sale_price": "4100.00",
-      "characteristics": {"CPU": "Intel Core i7", "RAM": "32GB", "GPU": "Dual RTX 2080"},
+      "characteristics": {
+        "CPU": "Intel Core i7",
+        "RAM": "32GB",
+        "GPU": "Dual RTX 2080"
+      },
       "color": "#000000",
       "description": "Mechanical keyboard and dual GPUs.",
       "status": false,
       "rating_avg": 4.2,
       "reviews": 10,
-      "created_at": "2026-02-24T17:41:45Z"
+      "created_at": "2023-12-19T21:05:33Z"
     }
   },
   {
@@ -130,13 +183,17 @@
       "stock_quantity": 25,
       "original_price": "1199.00",
       "sale_price": "1099.00",
-      "characteristics": {"CPU": "Intel Core i7", "RAM": "16GB", "Storage": "512GB SSD"},
+      "characteristics": {
+        "CPU": "Intel Core i7",
+        "RAM": "16GB",
+        "Storage": "512GB SSD"
+      },
       "color": "#333333",
       "description": "Solid performance for everyday gaming.",
       "status": true,
       "rating_avg": 4.4,
       "reviews": 50,
-      "created_at": "2026-02-24T17:41:45Z"
+      "created_at": "2025-01-08T11:44:17Z"
     }
   },
   {
@@ -150,13 +207,17 @@
       "stock_quantity": 18,
       "original_price": "1399.00",
       "sale_price": "1399.00",
-      "characteristics": {"CPU": "Intel Core i7", "RAM": "16GB", "Storage": "1TB HDD + 512GB SSD"},
+      "characteristics": {
+        "CPU": "Intel Core i7",
+        "RAM": "16GB",
+        "Storage": "1TB HDD + 512GB SSD"
+      },
       "color": "#000000",
       "description": "17-inch screen for better immersion.",
       "status": true,
       "rating_avg": 4.3,
       "reviews": 28,
-      "created_at": "2026-02-24T17:41:45Z"
+      "created_at": "2024-05-22T16:27:59Z"
     }
   },
   {
@@ -170,13 +231,17 @@
       "stock_quantity": 10,
       "original_price": "1899.00",
       "sale_price": "1750.00",
-      "characteristics": {"CPU": "Intel Core i7", "RAM": "32GB", "Display": "240Hz"},
+      "characteristics": {
+        "CPU": "Intel Core i7",
+        "RAM": "32GB",
+        "Display": "240Hz"
+      },
       "color": "#111111",
       "description": "RGB light bar and high refresh rate.",
       "status": true,
       "rating_avg": 4.7,
       "reviews": 38,
-      "created_at": "2026-02-24T17:41:45Z"
+      "created_at": "2025-06-14T08:03:41Z"
     }
   },
   {
@@ -190,13 +255,17 @@
       "stock_quantity": 8,
       "original_price": "2100.00",
       "sale_price": "1999.00",
-      "characteristics": {"CPU": "Intel Core i9", "RAM": "16GB", "Display": "144Hz"},
+      "characteristics": {
+        "CPU": "Intel Core i9",
+        "RAM": "16GB",
+        "Display": "144Hz"
+      },
       "color": "#222222",
       "description": "Large display enthusiast gaming laptop.",
       "status": true,
       "rating_avg": 4.6,
       "reviews": 19,
-      "created_at": "2026-02-24T17:41:45Z"
+      "created_at": "2024-09-30T19:18:06Z"
     }
   },
   {
@@ -210,13 +279,17 @@
       "stock_quantity": 5,
       "original_price": "1500.00",
       "sale_price": "1450.00",
-      "characteristics": {"CPU": "AMD Ryzen 5", "RAM": "16GB", "GPU": "RTX 3060"},
+      "characteristics": {
+        "CPU": "AMD Ryzen 5",
+        "RAM": "16GB",
+        "GPU": "RTX 3060"
+      },
       "color": "#FFFFFF",
       "description": "Great entry-level custom PC.",
       "status": true,
       "rating_avg": 4.1,
       "reviews": 12,
-      "created_at": "2026-02-24T17:41:45Z"
+      "created_at": "2023-08-05T13:59:29Z"
     }
   },
   {
@@ -230,13 +303,17 @@
       "stock_quantity": 4,
       "original_price": "2200.00",
       "sale_price": "2200.00",
-      "characteristics": {"CPU": "AMD Ryzen 7", "RAM": "32GB", "GPU": "RTX 3080"},
+      "characteristics": {
+        "CPU": "AMD Ryzen 7",
+        "RAM": "32GB",
+        "GPU": "RTX 3080"
+      },
       "color": "#000000",
       "description": "High-end 4K gaming machine.",
       "status": true,
       "rating_avg": 4.9,
       "reviews": 8,
-      "created_at": "2026-02-24T17:41:45Z"
+      "created_at": "2025-09-17T05:22:14Z"
     }
   },
   {
@@ -250,13 +327,17 @@
       "stock_quantity": 1,
       "original_price": "3500.00",
       "sale_price": "3400.00",
-      "characteristics": {"CPU": "Intel Core i9", "RAM": "64GB", "GPU": "RTX 4090"},
+      "characteristics": {
+        "CPU": "Intel Core i9",
+        "RAM": "64GB",
+        "GPU": "RTX 4090"
+      },
       "color": "#FF0000",
       "description": "Ultimate custom build for professionals.",
       "status": true,
       "rating_avg": 5.0,
       "reviews": 3,
-      "created_at": "2026-02-24T17:41:45Z"
+      "created_at": "2024-02-14T23:47:55Z"
     }
   },
   {
@@ -270,13 +351,17 @@
       "stock_quantity": 7,
       "original_price": "1600.00",
       "sale_price": "1500.00",
-      "characteristics": {"CPU": "Intel Core i7", "RAM": "16GB", "GPU": "GTX 1660 Ti"},
+      "characteristics": {
+        "CPU": "Intel Core i7",
+        "RAM": "16GB",
+        "GPU": "GTX 1660 Ti"
+      },
       "color": "#121212",
       "description": "Pre-built gaming desktop with silent cooling.",
       "status": true,
       "rating_avg": 4.2,
       "reviews": 14,
-      "created_at": "2026-02-24T17:41:45Z"
+      "created_at": "2025-04-02T10:36:48Z"
     }
   },
   {
@@ -290,13 +375,17 @@
       "stock_quantity": 4,
       "original_price": "2500.00",
       "sale_price": "2400.00",
-      "characteristics": {"CPU": "Intel Core i9", "RAM": "32GB", "GPU": "RTX 2080 Super"},
+      "characteristics": {
+        "CPU": "Intel Core i9",
+        "RAM": "32GB",
+        "GPU": "RTX 2080 Super"
+      },
       "color": "#000000",
       "description": "Tempered glass panel and liquid cooling.",
       "status": true,
       "rating_avg": 4.7,
       "reviews": 21,
-      "created_at": "2026-02-24T17:41:45Z"
+      "created_at": "2023-10-25T17:09:37Z"
     }
   },
   {
@@ -310,13 +399,17 @@
       "stock_quantity": 11,
       "original_price": "1099.00",
       "sale_price": "999.00",
-      "characteristics": {"CPU": "Intel Core i5", "RAM": "8GB", "Size": "Console-sized"},
+      "characteristics": {
+        "CPU": "Intel Core i5",
+        "RAM": "8GB",
+        "Size": "Console-sized"
+      },
       "color": "#FFFFFF",
       "description": "Compact PC with the footprint of a console.",
       "status": true,
       "rating_avg": 4.0,
       "reviews": 45,
-      "created_at": "2026-02-24T17:41:45Z"
+      "created_at": "2024-08-19T06:51:23Z"
     }
   },
   {
@@ -330,13 +423,17 @@
       "stock_quantity": 6,
       "original_price": "2199.00",
       "sale_price": "2199.00",
-      "characteristics": {"CPU": "Intel Core i7", "RAM": "16GB", "PSU": "SFX Form Factor"},
+      "characteristics": {
+        "CPU": "Intel Core i7",
+        "RAM": "16GB",
+        "PSU": "SFX Form Factor"
+      },
       "color": "#1A1A1A",
       "description": "Small form factor, massive power.",
       "status": true,
       "rating_avg": 4.6,
       "reviews": 22,
-      "created_at": "2026-02-24T17:41:45Z"
+      "created_at": "2025-07-28T20:14:02Z"
     }
   },
   {
@@ -350,13 +447,17 @@
       "stock_quantity": 9,
       "original_price": "1750.00",
       "sale_price": "1600.00",
-      "characteristics": {"CPU": "Intel Core i7", "RAM": "16GB", "GPU": "RTX 3070"},
+      "characteristics": {
+        "CPU": "Intel Core i7",
+        "RAM": "16GB",
+        "GPU": "RTX 3070"
+      },
       "color": "#000000",
       "description": "Mid-tier compact pre-built.",
       "status": true,
       "rating_avg": 4.5,
       "reviews": 11,
-      "created_at": "2026-02-24T17:41:45Z"
+      "created_at": "2023-05-30T12:28:44Z"
     }
   },
   {
@@ -370,13 +471,17 @@
       "stock_quantity": 14,
       "original_price": "950.00",
       "sale_price": "850.00",
-      "characteristics": {"CPU": "Intel Core i5", "RAM": "8GB", "Storage": "1TB HDD"},
+      "characteristics": {
+        "CPU": "Intel Core i5",
+        "RAM": "8GB",
+        "Storage": "1TB HDD"
+      },
       "color": "#333333",
       "description": "Budget friendly compact gaming rig.",
       "status": true,
       "rating_avg": 3.8,
       "reviews": 52,
-      "created_at": "2026-02-24T17:41:45Z"
+      "created_at": "2024-03-07T15:43:11Z"
     }
   },
   {
@@ -390,13 +495,17 @@
       "stock_quantity": 2,
       "original_price": "1800.00",
       "sale_price": "1700.00",
-      "characteristics": {"CPU": "Intel Core i7", "RAM": "16GB", "Handle": "Built-in"},
+      "characteristics": {
+        "CPU": "Intel Core i7",
+        "RAM": "16GB",
+        "Handle": "Built-in"
+      },
       "color": "#000000",
       "description": "Portable LAN party machine.",
       "status": false,
       "rating_avg": 4.4,
       "reviews": 16,
-      "created_at": "2026-02-24T17:41:45Z"
+      "created_at": "2025-11-03T03:07:58Z"
     }
   },
   {
@@ -410,13 +519,17 @@
       "stock_quantity": 20,
       "original_price": "1499.99",
       "sale_price": "1299.99",
-      "characteristics": {"CPU": "Intel Core i7", "RAM": "16GB", "Weight": "1.88kg"},
+      "characteristics": {
+        "CPU": "Intel Core i7",
+        "RAM": "16GB",
+        "Weight": "1.88kg"
+      },
       "color": "#000000",
       "description": "Previous gen ultra-portable gaming.",
       "status": true,
       "rating_avg": 4.6,
       "reviews": 40,
-      "created_at": "2026-02-24T17:41:45Z"
+      "created_at": "2024-06-11T22:55:36Z"
     }
   },
   {
@@ -430,13 +543,497 @@
       "stock_quantity": 0,
       "original_price": "1600.00",
       "sale_price": "1600.00",
-      "characteristics": {"CPU": "Intel Core i7", "RAM": "16GB", "GPU": "RTX 2070"},
+      "characteristics": {
+        "CPU": "Intel Core i7",
+        "RAM": "16GB",
+        "GPU": "RTX 2070"
+      },
       "color": "#111111",
       "description": "Reliable 15-inch powerhouse.",
       "status": false,
       "rating_avg": 4.3,
       "reviews": 27,
-      "created_at": "2026-02-24T17:41:45Z"
+      "created_at": "2023-04-16T18:32:19Z"
+    }
+  },
+  {
+    "model": "market.product",
+    "pk": 21,
+    "fields": {
+      "name": "MSI GP66 Leopard",
+      "category": "LAPTOP",
+      "series": 10,
+      "image": null,
+      "stock_quantity": 15,
+      "original_price": "1349.00",
+      "sale_price": "1249.00",
+      "characteristics": {
+        "CPU": "Intel Core i7",
+        "RAM": "16GB",
+        "GPU": "RTX 3070"
+      },
+      "color": "#1B1B1B",
+      "description": "The perfect balance of power and price.",
+      "status": true,
+      "rating_avg": 4.5,
+      "reviews": 33,
+      "created_at": "2025-02-19T11:08:27Z"
+    }
+  },
+  {
+    "model": "market.product",
+    "pk": 22,
+    "fields": {
+      "name": "MSI GP76 Leopard",
+      "category": "LAPTOP",
+      "series": 10,
+      "image": null,
+      "stock_quantity": 9,
+      "original_price": "1549.00",
+      "sale_price": "1449.00",
+      "characteristics": {
+        "CPU": "Intel Core i7",
+        "RAM": "32GB",
+        "Display": "144Hz IPS"
+      },
+      "color": "#2A2A2A",
+      "description": "17-inch productivity and gaming combo.",
+      "status": true,
+      "rating_avg": 4.4,
+      "reviews": 18,
+      "created_at": "2024-10-08T04:47:52Z"
+    }
+  },
+  {
+    "model": "market.product",
+    "pk": 23,
+    "fields": {
+      "name": "MSI GF63 Thin",
+      "category": "LAPTOP",
+      "series": 11,
+      "image": null,
+      "stock_quantity": 30,
+      "original_price": "799.00",
+      "sale_price": "699.00",
+      "characteristics": {
+        "CPU": "Intel Core i5",
+        "RAM": "8GB",
+        "GPU": "GTX 1650"
+      },
+      "color": "#000000",
+      "description": "Affordable entry-level gaming laptop.",
+      "status": true,
+      "rating_avg": 4.0,
+      "reviews": 87,
+      "created_at": "2023-07-22T09:23:14Z"
+    }
+  },
+  {
+    "model": "market.product",
+    "pk": 24,
+    "fields": {
+      "name": "MSI GF75 Thin",
+      "category": "LAPTOP",
+      "series": 11,
+      "image": null,
+      "stock_quantity": 22,
+      "original_price": "999.00",
+      "sale_price": "899.00",
+      "characteristics": {
+        "CPU": "Intel Core i7",
+        "RAM": "16GB",
+        "Storage": "512GB SSD"
+      },
+      "color": "#111111",
+      "description": "17-inch budget-friendly gaming.",
+      "status": true,
+      "rating_avg": 4.1,
+      "reviews": 61,
+      "created_at": "2025-08-14T17:34:03Z"
+    }
+  },
+  {
+    "model": "market.product",
+    "pk": 25,
+    "fields": {
+      "name": "MSI Creator 15",
+      "category": "LAPTOP",
+      "series": 12,
+      "image": null,
+      "stock_quantity": 7,
+      "original_price": "2799.00",
+      "sale_price": "2599.00",
+      "characteristics": {
+        "CPU": "Intel Core i7",
+        "RAM": "32GB",
+        "Display": "4K OLED"
+      },
+      "color": "#F5F5F5",
+      "description": "Professional content creation powerhouse.",
+      "status": true,
+      "rating_avg": 4.8,
+      "reviews": 24,
+      "created_at": "2024-01-30T06:15:49Z"
+    }
+  },
+  {
+    "model": "market.product",
+    "pk": 26,
+    "fields": {
+      "name": "MSI Creator 17",
+      "category": "LAPTOP",
+      "series": 12,
+      "image": null,
+      "stock_quantity": 4,
+      "original_price": "3299.00",
+      "sale_price": "3299.00",
+      "characteristics": {
+        "CPU": "Intel Core i9",
+        "RAM": "64GB",
+        "Display": "Mini LED 4K"
+      },
+      "color": "#E8E8E8",
+      "description": "Industry-grade 17-inch creator laptop.",
+      "status": true,
+      "rating_avg": 4.9,
+      "reviews": 13,
+      "created_at": "2025-10-05T20:58:31Z"
+    }
+  },
+  {
+    "model": "market.product",
+    "pk": 27,
+    "fields": {
+      "name": "Custom PC Build Gamma",
+      "category": "PC",
+      "series": 1,
+      "image": null,
+      "stock_quantity": 6,
+      "original_price": "1850.00",
+      "sale_price": "1750.00",
+      "characteristics": {
+        "CPU": "AMD Ryzen 5",
+        "RAM": "16GB",
+        "GPU": "RTX 3070 Ti"
+      },
+      "color": "#0D0D0D",
+      "description": "Mid-range build with exceptional GPU value.",
+      "status": true,
+      "rating_avg": 4.3,
+      "reviews": 9,
+      "created_at": "2023-11-13T14:20:07Z"
+    }
+  },
+  {
+    "model": "market.product",
+    "pk": 28,
+    "fields": {
+      "name": "Custom PC Build Delta",
+      "category": "PC",
+      "series": 1,
+      "image": null,
+      "stock_quantity": 3,
+      "original_price": "2800.00",
+      "sale_price": "2650.00",
+      "characteristics": {
+        "CPU": "AMD Ryzen 9",
+        "RAM": "32GB",
+        "GPU": "RTX 4080"
+      },
+      "color": "#FFFFFF",
+      "description": "Powerhouse for streaming and gaming simultaneously.",
+      "status": true,
+      "rating_avg": 4.8,
+      "reviews": 6,
+      "created_at": "2026-01-21T08:41:55Z"
+    }
+  },
+  {
+    "model": "market.product",
+    "pk": 29,
+    "fields": {
+      "name": "MSI Infinite B",
+      "category": "PC",
+      "series": 6,
+      "image": null,
+      "stock_quantity": 12,
+      "original_price": "1299.00",
+      "sale_price": "1199.00",
+      "characteristics": {
+        "CPU": "Intel Core i5",
+        "RAM": "8GB",
+        "GPU": "GTX 1650 Super"
+      },
+      "color": "#1C1C1C",
+      "description": "Entry-level pre-built with upgrade potential.",
+      "status": true,
+      "rating_avg": 3.9,
+      "reviews": 36,
+      "created_at": "2024-04-09T16:03:22Z"
+    }
+  },
+  {
+    "model": "market.product",
+    "pk": 30,
+    "fields": {
+      "name": "MSI Infinite RS",
+      "category": "PC",
+      "series": 6,
+      "image": null,
+      "stock_quantity": 3,
+      "original_price": "3200.00",
+      "sale_price": "2999.00",
+      "characteristics": {
+        "CPU": "Intel Core i9",
+        "RAM": "64GB",
+        "GPU": "RTX 3090"
+      },
+      "color": "#000000",
+      "description": "Flagship pre-built for no-compromise gaming.",
+      "status": true,
+      "rating_avg": 4.9,
+      "reviews": 7,
+      "created_at": "2025-05-27T00:12:44Z"
+    }
+  },
+  {
+    "model": "market.product",
+    "pk": 31,
+    "fields": {
+      "name": "MSI Trident S",
+      "category": "PC",
+      "series": 7,
+      "image": null,
+      "stock_quantity": 16,
+      "original_price": "899.00",
+      "sale_price": "849.00",
+      "characteristics": {
+        "CPU": "Intel Core i3",
+        "RAM": "8GB",
+        "GPU": "GTX 1060"
+      },
+      "color": "#FFFFFF",
+      "description": "Ultra-compact beginner gaming PC.",
+      "status": true,
+      "rating_avg": 3.7,
+      "reviews": 58,
+      "created_at": "2023-02-28T19:55:39Z"
+    }
+  },
+  {
+    "model": "market.product",
+    "pk": 32,
+    "fields": {
+      "name": "MSI Nightblade MI2",
+      "category": "PC",
+      "series": 9,
+      "image": null,
+      "stock_quantity": 0,
+      "original_price": "1150.00",
+      "sale_price": "1050.00",
+      "characteristics": {
+        "CPU": "Intel Core i5",
+        "RAM": "16GB",
+        "GPU": "GTX 1070"
+      },
+      "color": "#2B2B2B",
+      "description": "Sleek compact design with solid 1080p performance.",
+      "status": false,
+      "rating_avg": 4.1,
+      "reviews": 29,
+      "created_at": "2024-12-03T07:29:18Z"
+    }
+  },
+  {
+    "model": "market.product",
+    "pk": 33,
+    "fields": {
+      "name": "MSI GS76 Stealth",
+      "category": "LAPTOP",
+      "series": 2,
+      "image": null,
+      "stock_quantity": 11,
+      "original_price": "2499.00",
+      "sale_price": "2299.00",
+      "characteristics": {
+        "CPU": "Intel Core i9",
+        "RAM": "32GB",
+        "Display": "360Hz QHD"
+      },
+      "color": "#000000",
+      "description": "Next-gen ultra-slim with blazing refresh rate.",
+      "status": true,
+      "rating_avg": 4.7,
+      "reviews": 31,
+      "created_at": "2025-12-18T13:46:07Z"
+    }
+  },
+  {
+    "model": "market.product",
+    "pk": 34,
+    "fields": {
+      "name": "MSI GL66 Pulse",
+      "category": "LAPTOP",
+      "series": 4,
+      "image": null,
+      "stock_quantity": 19,
+      "original_price": "1249.00",
+      "sale_price": "1149.00",
+      "characteristics": {
+        "CPU": "Intel Core i7",
+        "RAM": "16GB",
+        "GPU": "RTX 3060"
+      },
+      "color": "#222222",
+      "description": "IPS display and fast SSD for smooth gameplay.",
+      "status": true,
+      "rating_avg": 4.5,
+      "reviews": 44,
+      "created_at": "2024-07-31T10:17:52Z"
+    }
+  },
+  {
+    "model": "market.product",
+    "pk": 35,
+    "fields": {
+      "name": "MSI GE76 Raider",
+      "category": "LAPTOP",
+      "series": 5,
+      "image": null,
+      "stock_quantity": 6,
+      "original_price": "2299.00",
+      "sale_price": "2099.00",
+      "characteristics": {
+        "CPU": "Intel Core i9",
+        "RAM": "32GB",
+        "Display": "360Hz FHD"
+      },
+      "color": "#0A0A0A",
+      "description": "Desktop-class GPU in a portable chassis.",
+      "status": true,
+      "rating_avg": 4.8,
+      "reviews": 35,
+      "created_at": "2023-09-04T22:38:16Z"
+    }
+  },
+  {
+    "model": "market.product",
+    "pk": 36,
+    "fields": {
+      "name": "MSI GP65 Leopard",
+      "category": "LAPTOP",
+      "series": 10,
+      "image": null,
+      "stock_quantity": 17,
+      "original_price": "1199.00",
+      "sale_price": "1099.00",
+      "characteristics": {
+        "CPU": "Intel Core i7",
+        "RAM": "16GB",
+        "GPU": "RTX 2060"
+      },
+      "color": "#1B1B1B",
+      "description": "Reliable performance for competitive gaming.",
+      "status": true,
+      "rating_avg": 4.3,
+      "reviews": 47,
+      "created_at": "2026-02-01T05:54:30Z"
+    }
+  },
+  {
+    "model": "market.product",
+    "pk": 37,
+    "fields": {
+      "name": "MSI Creator Z16",
+      "category": "LAPTOP",
+      "series": 12,
+      "image": null,
+      "stock_quantity": 5,
+      "original_price": "2999.00",
+      "sale_price": "2799.00",
+      "characteristics": {
+        "CPU": "Intel Core i7",
+        "RAM": "32GB",
+        "Display": "QHD+ Touch"
+      },
+      "color": "#D4D4D4",
+      "description": "Thin creative workstation with touch display.",
+      "status": true,
+      "rating_avg": 4.6,
+      "reviews": 17,
+      "created_at": "2025-03-28T15:21:43Z"
+    }
+  },
+  {
+    "model": "market.product",
+    "pk": 38,
+    "fields": {
+      "name": "Custom PC Build Sigma",
+      "category": "PC",
+      "series": 1,
+      "image": null,
+      "stock_quantity": 2,
+      "original_price": "4200.00",
+      "sale_price": "4000.00",
+      "characteristics": {
+        "CPU": "AMD Ryzen 9 7950X",
+        "RAM": "128GB",
+        "GPU": "RTX 4090"
+      },
+      "color": "#FF0000",
+      "description": "Workstation-grade build for 3D rendering and AI.",
+      "status": true,
+      "rating_avg": 5.0,
+      "reviews": 2,
+      "created_at": "2024-11-07T01:09:25Z"
+    }
+  },
+  {
+    "model": "market.product",
+    "pk": 39,
+    "fields": {
+      "name": "MSI GF65 Thin",
+      "category": "LAPTOP",
+      "series": 11,
+      "image": null,
+      "stock_quantity": 14,
+      "original_price": "899.00",
+      "sale_price": "799.00",
+      "characteristics": {
+        "CPU": "Intel Core i5",
+        "RAM": "8GB",
+        "GPU": "RTX 3050"
+      },
+      "color": "#000000",
+      "description": "Slim budget laptop with ray tracing capability.",
+      "status": true,
+      "rating_avg": 4.2,
+      "reviews": 53,
+      "created_at": "2023-06-17T18:00:11Z"
+    }
+  },
+  {
+    "model": "market.product",
+    "pk": 40,
+    "fields": {
+      "name": "MSI Nightblade X3",
+      "category": "PC",
+      "series": 9,
+      "image": null,
+      "stock_quantity": 8,
+      "original_price": "2100.00",
+      "sale_price": "1950.00",
+      "characteristics": {
+        "CPU": "Intel Core i9",
+        "RAM": "32GB",
+        "GPU": "RTX 3080"
+      },
+      "color": "#111111",
+      "description": "Premium portable LAN rig with carry handle.",
+      "status": true,
+      "rating_avg": 4.7,
+      "reviews": 20,
+      "created_at": "2025-01-14T09:33:58Z"
     }
   }
 ]
