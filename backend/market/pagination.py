@@ -7,8 +7,18 @@ class ProductHomePagePagination(BasePagination):
     page_size = 8
 
     def paginate_queryset(self, queryset, request, view=None):
-        if not request.query_params.get("search"):
+        if not set(request.query_params).intersection(
+            {
+                "search",
+                "lte_price",
+                "gte_price",
+                "colors",
+                "categories",
+                "series",
+            }
+        ):
             return None
+
         self.request = request
         try:
             display_page_number = max(1, int(request.query_params.get("page", 1)))
@@ -38,12 +48,14 @@ class ProductHomePagePagination(BasePagination):
             return replace_query_param(
                 self.request.build_absolute_uri(), "page", self.display_next_page
             )
+        return None
 
     def get_previous_link(self):
         if self.display_previous_page:
             return replace_query_param(
                 self.request.build_absolute_uri(), "page", self.display_previous_page
             )
+        return None
 
     def get_paginated_response(self, data):
         return Response(

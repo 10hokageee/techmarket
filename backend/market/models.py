@@ -82,7 +82,7 @@ class Product(models.Model):
             )
         try:
             color = (
-                f"{(self.color[1:] if self.color.startswith('#') else self.color):0<6}"
+                f"{(self.color[1:] if self.color.startswith('#') else self.color):06}"
             )
             int(color, 16)
             self.color = f"#{color}"
@@ -138,14 +138,14 @@ class Signboard(models.Model):
 
 
 # not use in dev
-class Review(models.Model):
-    user = models.ForeignKey(
-        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="reviews"
-    )
-    product = models.ForeignKey(
-        Product, on_delete=models.CASCADE, related_name="product_reviews"
-    )
-    grade = models.PositiveSmallIntegerField(
-        validators=(MinValueValidator(1), MaxValueValidator(5)),
-    )
-    comment = models.CharField(max_length=512)
+# class Review(models.Model):
+#     user = models.ForeignKey(
+#         settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="reviews"
+#     )
+#     product = models.ForeignKey(
+#         Product, on_delete=models.CASCADE, related_name="product_reviews"
+#     )
+#     grade = models.PositiveSmallIntegerField(
+#         validators=(MinValueValidator(1), MaxValueValidator(5)),
+#     )
+#     comment = models.CharField(max_length=512)
