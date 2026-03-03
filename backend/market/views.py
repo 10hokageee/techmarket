@@ -11,6 +11,8 @@ from market.permissions import IsAdminOrReadOnly
 from market.serializers import ProductSerializer, SignboardSerializer, OrderSerializer
 from market.pagination import ProductHomePagePagination
 
+NEW_PRODUCTS = 10
+
 
 class ProductViewSet(viewsets.ModelViewSet):
     pagination_class = ProductHomePagePagination
@@ -20,7 +22,6 @@ class ProductViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         queryset = Product.objects.select_related("series")
         params = self.request.query_params
-
         if set(params).intersection(  # same as &
             {
                 "search",
@@ -59,11 +60,23 @@ class ProductViewSet(viewsets.ModelViewSet):
                 "MSI Triden",
                 "MSI Nightblade",
             }
-            latest_ids = Product.objects.values_list("id", flat=True)[:10]
+            latest_ids = Product.objects.values_list("id", flat=True)[:NEW_PRODUCTS]
             queryset = queryset.filter(
                 Q(series__name__in=default_series) | Q(id__in=latest_ids)
-            ).order_by("-created_at")
-        return queryset.distinct()
+            )
+        return queryset.distinct().order_by("-created_at")
+
+    def list(self, request, *args, **kwargs):
+        response = super().list(request, *args, **kwargs)
+        if not isinstance(response.data, dict):
+            response.data = {
+                "new_products": response.data[:NEW_PRODUCTS],
+                "products": response.data[NEW_PRODUCTS:],
+            }
+            # for elem in response.data[:NEW_PRODUCTS]:
+            #     elem["is_new"] = True
+
+        return response
 
     @staticmethod
     def _exec_search(param: str, queryset: QuerySet[Product]) -> QuerySet[Product]:
