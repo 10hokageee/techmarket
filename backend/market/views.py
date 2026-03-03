@@ -1,4 +1,7 @@
+import re
+
 from django.db.models import Q
+from django.db.models.functions import Coalesce
 from rest_framework import viewsets, mixins, status
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
@@ -15,8 +18,55 @@ class ProductViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         queryset = Product.objects.select_related("series")
-        if search_param := self.request.query_params.get("search"):
-            queryset = queryset.filter(name__icontains=search_param)
+        params = self.request.query_params
+
+        if set(params).intersection(  # same as &
+            {
+                "search",
+                "lte_price",
+                "gte_price",
+                "colors",
+                "categories",
+                "series",
+            }
+        ):
+            if search_param := params.get("search"):
+                queryset = queryset.filter(name__icontains=search_param.strip())
+
+            lte_p = params.get("lte_price")
+            gte_p = params.get("gte_price")
+            if lte_p or gte_p:
+                queryset = queryset.annotate(
+                    current_price=Coalesce("sale_price", "original_price")
+                )
+                if lte_p and lte_p.isdigit():  # price less than or equal to query param
+                    queryset = queryset.filter(current_price__lte=lte_p)
+                if (
+                    gte_p and gte_p.isdigit()
+                ):  # price greater than or equal to query param
+                    queryset = queryset.filter(current_price__gte=gte_p)
+
+            if colors := params.get("colors"):
+                queryset = queryset.filter(
+                    color__in={
+                        f"#{val_item.lstrip('#'):06}"
+                        for color in colors.split(",")
+                        if (val_item := color.strip())
+                    }
+                )
+
+            for param_name, field_lookup in (
+                ("categories", "category__iregex"),
+                ("series", "series__name__iregex"),
+            ):
+                if values := params.get(param_name):
+                    pattern = "|".join(
+                        re.escape(item)
+                        for val in values.split(",")
+                        if (item := val.strip())
+                    )
+                    if pattern:
+                        queryset = queryset.filter(**{field_lookup: pattern})
         else:
             default_series = {
                 "Custom PCs",
@@ -26,13 +76,13 @@ class ProductViewSet(viewsets.ModelViewSet):
                 "MSI GE Series",
                 "MSI Infinute Series",
                 "MSI Triden",
-                "MSI Nightblade"
+                "MSI Nightblade",
             }
-            latest_ids = Product.objects.values_list("id", flat=True)[:15]
+            latest_ids = Product.objects.values_list("id", flat=True)[:10]
             queryset = queryset.filter(
                 Q(series__name__in=default_series) | Q(id__in=latest_ids)
-            ).distinct().order_by("-created_at")
-        return queryset
+            ).order_by("-created_at")
+        return queryset.distinct()
 
 
 class SignboardViewSet(
