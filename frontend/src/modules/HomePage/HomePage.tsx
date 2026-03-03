@@ -8,7 +8,7 @@ import { getProducts } from "../../services/getProdcutsService";
 import { CurstomeProducts } from "@/components/CustomeProducts/CustomeProducts";
 import { LaptopsList } from "@/components/LaptopsList/LaptopsList";
 import { DesktopsList } from "@/components/DesktopsList/DesktopsList";
-import { ComponentsProdcuts } from "@/components/ComponentsProdcuts/ComponentsProdcuts";
+import { ComponentsProducts } from "@/components/ComponentsProducts/ComponentsProdcuts";
 
 export const HomePage = () => {
   const [products, setProducts] = useState<Product[]>([]);
@@ -31,7 +31,7 @@ export const HomePage = () => {
       <CurstomeProducts errorMessage={errorMessage} products={productsByFilter('Others product')} />
       <LaptopsList errorMessage={errorMessage} products={productsByFilter('Laptops')} />
       <DesktopsList errorMessage={errorMessage} products={productsByFilter('Desktop PC`s')} />
-      <ComponentsProdcuts errorMessage={errorMessage} products={productsByFilter('PC parts')} />
+      <ComponentsProducts errorMessage={errorMessage} products={productsByFilter('PC parts')} />
       <Brands />
     </React.Fragment>
   );

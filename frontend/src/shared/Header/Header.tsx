@@ -3,6 +3,7 @@ import styles from './Header.module.scss';
 import classNames from 'classnames';
 import { useState } from 'react';
 import { Menu } from '@/components/Menu/Menu';
+import { Instagram, MenuIcon, Search, X } from 'lucide-react';
 
 export const Header = () => {
   const favCount = 0;
@@ -28,6 +29,22 @@ export const Header = () => {
     });
   }
 
+  const days = [
+    { day: 'Mon-Thu:', time: '9:00 AM - 5:30 PM' },
+    { day: 'Fr:', time: '9:00 AM - 6:00 PM' },
+    { day: 'Sat:', time: '11:00 AM - 5:00 PM' },
+  ]
+
+  const links = [
+    { text: 'Laptops', to: '1' },
+    { text: 'Desktop PCs', to: '2' },
+    { text: 'Networking Devices', to: '3' },
+    { text: 'Printers &  Scanners', to: '4' },
+    { text: 'PC Parts', to: '5' },
+    { text: 'All Other Products', to: '6' },
+    { text: 'Sign in', to: '7' },
+  ]
+
   return (
     <header className={styles.header}>
       <Menu isOpen={isOpen} closeMenu={closeMenu} />
@@ -44,15 +61,11 @@ export const Header = () => {
                     We are open:
                   </span>
                   <ul className={styles.header__topShowInfoDays}>
-                    <li className={styles.header__topShowInfoDay}>
-                      <span>Mon-Thu:</span> 9:00 AM - 5:30 PM
-                    </li>
-                    <li className={styles.header__topShowInfoDay}>
-                      <span>Fr:</span> 9:00 AM - 6:00 PM
-                    </li>
-                    <li className={styles.header__topShowInfoDay}>
-                      <span>Sat:</span> 11:00 AM - 5:00 PM
-                    </li>
+                    {days.map((day, index) => (
+                      <li key={index} className={styles.header__topShowInfoDay}>
+                        <span>{day.day}</span> {day.time}
+                      </li>
+                    ))}
                   </ul>
                 </div>
                 <div className={classNames(styles.header__topShowInfoItem, styles['header__topShowInfoItem--address'])}>
@@ -78,7 +91,7 @@ export const Header = () => {
                 <img src="/icons/facebook-icon.svg" alt="Social link to facebook" />
               </a>
               <a className={styles.header__topInst} href="#">
-                <img src="/icons/inst-icon.svg" alt="Social link to instagram" />
+                <Instagram width={'20px'} height={'20px'} fill='#fff' />
               </a>
             </div>
             <a href="tel:0012345678" className={styles.header__topContact}>Contact Us</a>
@@ -95,7 +108,7 @@ export const Header = () => {
               </NavLink>
               <div className={styles.header__navBurger}>
                 <button onClick={toggleMenu} className={styles.header__navMenu}>
-                  <img src="/icons/burger-icon.svg" alt="" />
+                  <MenuIcon color='#fff' width={'26px'} height={'20px'}/>
                 </button>
               </div>
 
@@ -125,35 +138,24 @@ export const Header = () => {
                 </label>
 
                 <button className={styles.header__searchBtnClose} type='button' onClick={() => setOpenSearch(true)}>
-                  <img src="/icons/close-search.svg" alt="" />
+                  <X color='#0156ff' width={'18px'} height={'18px'} />
                 </button>
               </div>
             )}
 
             {openSearch && (
               <ul className={styles.header__navList}>
-                <li className={styles.header__navListItem}>
-                  <NavLink className={isActiveLink} to='catalog'>Laptops</NavLink> </li>
-                <li className={styles.header__navListItem}>
-                  <NavLink className={isActiveLink} to='1'>Desktop PCs</NavLink>  </li>
-                <li className={styles.header__navListItem}>
-                  <NavLink className={isActiveLink} to='2'>Networking Devices</NavLink> </li>
-                <li className={styles.header__navListItem}>
-                  <NavLink className={isActiveLink} to='3'>Printers &  Scanners</NavLink> </li>
-                <li className={styles.header__navListItem}>
-                  <NavLink className={isActiveLink} to='4'>PC Parts</NavLink>
-                </li>
-                <li className={styles.header__navListItem}>
-                  <NavLink className={isActiveLink} to='5'>All Other Products</NavLink></li>
-                <li className={styles.header__navListItem}>
-                  <NavLink className={styles.header__navListLinkLogin} to='SignIn'>Sign in</NavLink></li>
+                {links.map((link, index) => (
+                  <li key={index} className={styles.header__navListItem}>
+                    <NavLink className={isActiveLink} to={link.to}>{link.text}</NavLink></li>
+                ))}
               </ul>
             )}
 
             <div className={styles.header__navButtons}>
               {openSearch && (
                 <button onClick={toggleSearch} className={(styles.header__navButton, styles.header__navButtonSearch)}>
-                  <img src="/icons/search-icon.svg" alt="Search" />
+                  <Search width={'18px'} height={'18px'} color='#000' />
                 </button>
               )}
 

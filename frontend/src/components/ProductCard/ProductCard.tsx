@@ -3,11 +3,11 @@ import type { Product } from "../../types/Product";
 import styles from './ProductCard.module.scss';
 import { StarRating } from "../StarRating/StarRating";
 
-type Props = {
+type ProductProps = {
   product: Product;
 }
 
-export const ProductCard: React.FC<Props> = ({ product }) => {
+export const ProductCard: React.FC<ProductProps> = ({ product }) => {
   return (
     <NavLink to='10'>
       <article className={styles.productCard}>

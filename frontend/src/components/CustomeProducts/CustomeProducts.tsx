@@ -3,12 +3,13 @@ import { ProductsList } from '../ProductsList/ProductsList';
 import styles from './CurstomeProducts.module.scss';
 import type React from 'react';
 
-type Props = {
+type CurstomeProductsProps = {
   products: Product[];
   errorMessage: string;
 }
 
-export const CurstomeProducts: React.FC<Props> = ({ products, errorMessage }) => {
+export const CurstomeProducts: React.FC<CurstomeProductsProps> = ({ products, errorMessage }) => {
+  const message = errorMessage || (!errorMessage && products.length === 0 ? 'There are no products' : null);
 
   return (
     <section className={styles.customeProducts}>
@@ -19,17 +20,10 @@ export const CurstomeProducts: React.FC<Props> = ({ products, errorMessage }) =>
 Builds'  bgBanner='url(images/custome-builds-bg.png)' toProducts='12' />
         )}
 
-        {!errorMessage && products.length === 0 && (
+        {message && (
           <div className={styles.customeProducts__error}>
             <h1 className={styles.customeProducts__title}>Custome products</h1>
-            <p className={styles.customeProducts__errorMessage}>There are no products</p>
-          </div>
-        )}
-
-        {errorMessage && (
-          <div className={styles.customeProducts__error}>
-            <h1 className={styles.customeProducts__title}>Custome products</h1>
-            <p className={styles.customeProducts__errorMessage}>{errorMessage}</p>
+            <p className={styles.customeProducts__errorMessage}>{message}</p>
           </div>
         )}
       </div>

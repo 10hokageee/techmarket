@@ -1,10 +1,10 @@
 import styles from './StarRating.module.scss';
 
-type Props = {
+type StarRatingProps = {
   rating: number;
 };
 
-export const StarRating: React.FC<Props> = ({ rating }) => {
+export const StarRating: React.FC<StarRatingProps> = ({ rating }) => {
   const fillPercentage = (rating / 5) * 100;
   const stars = [1, 2, 3, 4, 5];
 

@@ -9,20 +9,20 @@ import {
   CarouselItem,
   type CarouselApi,
 } from "@/components/ui/carousel";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
-type Props = {
+type NewProductsProps = {
   products: Product[];
   errorMessage: string;
 };
 
-export const NewProducts: React.FC<Props> = ({ products, errorMessage }) => {
+export const NewProducts: React.FC<NewProductsProps> = ({ products, errorMessage }) => {
   const [carouselApi, setCarouselApi] = useState<CarouselApi | null>(null);
 
   return (
     <section className={styles.newProducts}>
       <div className={styles.container}>
         <h1 className={styles.newProducts__title}>New Products</h1>
-
 
         {products.length > 0 && (
           <Carousel setApi={setCarouselApi} opts={{ align: "start", loop: true }}>
@@ -41,14 +41,15 @@ export const NewProducts: React.FC<Props> = ({ products, errorMessage }) => {
               className={`${styles.newProducts__btn} ${styles.newProducts__btnPrev}`}
               onClick={() => carouselApi?.scrollPrev()}
             >
-              <img src="icons/slider-arrow.svg" alt="Prev" />
+              <ChevronLeft color='#fff' width={'16px'} height={'16px'} />
+
             </button>
 
             <button
               className={`${styles.newProducts__btn} ${styles.newProducts__btnNext}`}
               onClick={() => carouselApi?.scrollNext()}
             >
-              <img src="icons/slider-arrow.svg" alt="Next" />
+               <ChevronRight color='#fff' width={'16px'} height={'16px'} />
             </button>
           </Carousel>
         )}

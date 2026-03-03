@@ -2,13 +2,15 @@ import styles from './ComponentsProdcuts.module.scss';
 import type { Product } from '@/types/Product';
 import { ProductsList } from '../ProductsList/ProductsList';
 
-type Props = {
+type ComponentsProductsProps = {
   products: Product[];
   errorMessage: string;
 }
 
+export const ComponentsProducts: React.FC<ComponentsProductsProps> = ({ products, errorMessage }) => {
 
-export const ComponentsProdcuts: React.FC<Props> = ({ products, errorMessage }) => {
+  const message = errorMessage || (!errorMessage && products.length === 0 ? 'There are no products' : null);
+
   return (
     <section className={styles.monitorList}>
       <div className={styles.container}>
@@ -17,20 +19,12 @@ export const ComponentsProdcuts: React.FC<Props> = ({ products, errorMessage }) 
           <ProductsList products={products} title='PC parts' bgBanner='url(images/msi-monitors-bg.png)' toProducts='16' />
         )}
 
-        {!errorMessage && products.length === 0 && (
+        {message && (
           <div className={styles.monitorList__error}>
             <h1 className={styles.monitorList__title}>PC parts</h1>
-            <p className={styles.monitorList__errorMessage}>There are no products</p>
+            <p className={styles.monitorList__errorMessage}>{message}</p>
           </div>
         )}
-
-        {errorMessage && (
-          <div className={styles.monitorList__error}>
-            <h1 className={styles.monitorList__title}>PC parts</h1>
-            <p className={styles.monitorList__errorMessage}>{errorMessage}</p>
-          </div>
-        )}
-
       </div>
     </section>
   );

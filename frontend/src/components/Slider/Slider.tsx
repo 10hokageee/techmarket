@@ -5,6 +5,7 @@ import { useRef } from 'react';
 import { Autoplay, Navigation } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 export const Slider = () => {
   const prevRef = useRef<HTMLButtonElement>(null);
@@ -36,7 +37,7 @@ export const Slider = () => {
                 styles.slider__btnPrev
               )}
             >
-              <img className={styles.slider__arrow} src="icons/slider-arrow.svg" alt="Prev arrow" />
+              <ChevronLeft color='#fff' width={'16px'} height={'16px'} />
             </button>
           </div>
 
@@ -88,7 +89,7 @@ export const Slider = () => {
                 styles.slider__btnNext
               )}
             >
-              <img className={styles.slider__arrow} src="icons/slider-arrow.svg" alt="Next arrow" />
+              <ChevronRight color='#fff' width={'16px'} height={'16px'} />
             </button>
           </div>
         </div>

@@ -220,6 +220,12 @@
     cursor: pointer;
   }
 
+  &__navMenu {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+  }
+
   &__navBurger {
     margin-right: 53px;
 
