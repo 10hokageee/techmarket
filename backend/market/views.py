@@ -38,22 +38,20 @@ class ProductViewSet(viewsets.ModelViewSet):
             lte_p = params.get("price_lte")
             gte_p = params.get("price_gte")
             order_by = params.get("order_by")
-            if (
-                lte_p or gte_p or order_by
-            ):  # TODO remove annotation when sorting by name
+            if lte_p or gte_p or (order_by and order_by.lstrip("-") == "current_price"):
                 queryset = queryset.annotate(
                     current_price=Coalesce("sale_price", "original_price")
                 )
                 queryset = self._filter_by_price(
                     lte_price=lte_p, gte_price=gte_p, queryset=queryset
                 )
-                # default order by created_at
-                queryset = self._order_by_param(param=order_by, queryset=queryset)
-
             if colors := params.get("colors"):
                 queryset = self._filter_by_color(colors=colors, queryset=queryset)
 
             queryset = self._iregex_filter(params=params, queryset=queryset)
+
+            # default order by -created_at
+            queryset = self._order_by_param(param=order_by, queryset=queryset)
         else:
             default_series = {
                 "Custom PCs",
