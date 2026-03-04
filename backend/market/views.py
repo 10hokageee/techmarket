@@ -69,12 +69,12 @@ class ProductViewSet(viewsets.ModelViewSet):
     def list(self, request, *args, **kwargs):
         response = super().list(request, *args, **kwargs)
         if not isinstance(response.data, dict):
-            response.data = {
-                "new_products": response.data[:NEW_PRODUCTS],
-                "products": response.data[NEW_PRODUCTS:],
-            }
-            # for elem in response.data[:NEW_PRODUCTS]:
-            #     elem["is_new"] = True
+            # response.data = {
+            #     "new_products": response.data[:NEW_PRODUCTS],
+            #     "products": response.data[NEW_PRODUCTS:],
+            # }
+            for index, elem in enumerate(response.data):
+                elem["is_new"] = index < NEW_PRODUCTS
 
         return response
 
