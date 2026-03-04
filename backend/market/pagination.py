@@ -10,8 +10,8 @@ class ProductHomePagePagination(BasePagination):
         if not set(request.query_params).intersection(
             {
                 "search",
-                "lte_price",
-                "gte_price",
+                "price_lte",
+                "price_gte",
                 "colors",
                 "categories",
                 "series",
