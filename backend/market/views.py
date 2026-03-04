@@ -25,8 +25,8 @@ class ProductViewSet(viewsets.ModelViewSet):
         if set(params).intersection(  # same as &
             {
                 "search",
-                "lte_price",
-                "gte_price",
+                "price_lte",
+                "price_gte",
                 "colors",
                 "categories",
                 "series",
@@ -35,15 +35,20 @@ class ProductViewSet(viewsets.ModelViewSet):
             if search_param := params.get("search"):
                 queryset = self._exec_search(param=search_param, queryset=queryset)
 
-            lte_p = params.get("lte_price")
-            gte_p = params.get("gte_price")
-            if lte_p or gte_p:
+            lte_p = params.get("price_lte")
+            gte_p = params.get("price_gte")
+            order_by = params.get("order_by")
+            if (
+                lte_p or gte_p or order_by
+            ):  # TODO remove annotation when sorting by name
                 queryset = queryset.annotate(
                     current_price=Coalesce("sale_price", "original_price")
                 )
                 queryset = self._filter_by_price(
                     lte_price=lte_p, gte_price=gte_p, queryset=queryset
                 )
+                # default order by created_at
+                queryset = self._order_by_param(param=order_by, queryset=queryset)
 
             if colors := params.get("colors"):
                 queryset = self._filter_by_color(colors=colors, queryset=queryset)
@@ -64,7 +69,7 @@ class ProductViewSet(viewsets.ModelViewSet):
             queryset = queryset.filter(
                 Q(series__name__in=default_series) | Q(id__in=latest_ids)
             )
-        return queryset.distinct().order_by("-created_at")
+        return queryset.distinct()
 
     def list(self, request, *args, **kwargs):
         response = super().list(request, *args, **kwargs)
@@ -75,7 +80,6 @@ class ProductViewSet(viewsets.ModelViewSet):
             # }
             for index, elem in enumerate(response.data):
                 elem["is_new"] = index < NEW_PRODUCTS
-
         return response
 
     @staticmethod
@@ -132,6 +136,14 @@ class ProductViewSet(viewsets.ModelViewSet):
                 if pattern:
                     queryset = queryset.filter(**{field_lookup: pattern})
         return queryset
+
+    @staticmethod
+    def _order_by_param(param: str, queryset: QuerySet[Product]) -> QuerySet[Product]:
+        return (
+            queryset.order_by(param)
+            if param and param.lstrip("-") in ("current_price", "name")
+            else queryset
+        )
 
 
 class SignboardViewSet(
