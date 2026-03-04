@@ -28,10 +28,13 @@ class ProductSerializer(serializers.ModelSerializer):
         read_only_fields = ("id", "reviews", "rating_avg")
 
     def validate(self, attrs):
-        if attrs["sale_price"] and attrs["sale_price"] >= attrs["original_price"]:
-            raise ValidationError(
-                {"sale_price": "The discount must be less than the original price."}
-            )
+        if sale_pr := attrs.get("sale_price"):
+            if not (orig_pr := attrs.get("original_price")) or sale_pr >= orig_pr:
+                raise ValidationError(
+                    {
+                        "sale_price": "When updating the sale_price field, you must pass the original_price field and it must be greater than sale_price."
+                    }
+                )
         return attrs
 
     def to_representation(self, instance):
