@@ -32,7 +32,9 @@ class ProductSerializer(serializers.ModelSerializer):
             if not (orig_pr := attrs.get("original_price")) or sale_pr >= orig_pr:
                 raise ValidationError(
                     {
-                        "sale_price": "When updating the sale_price field, you must pass the original_price field and it must be greater than sale_price."
+                        "sale_price": "When updating the sale_price field, "
+                        "you must pass the original_price field and "
+                        "it must be greater than sale_price."
                     }
                 )
         return attrs
@@ -56,11 +58,19 @@ class SignboardSerializer(serializers.ModelSerializer):
 class OrderItemSerializer(serializers.ModelSerializer):
     class Meta:
         model = OrderItem
-        fields = ("id", "product", "quantity")
+        fields = (
+            "id",
+            "product",
+            "quantity",
+            "unit_price",
+            "price",
+        )
+        read_only_fields = ("id", "unit_price", "price")
 
     def to_representation(self, instance):
         data = super().to_representation(instance)
         data["product"] = instance.product.name
+        data["price"] = str(instance.price)
         return data
 
 
@@ -69,7 +79,8 @@ class OrderSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Order
-        fields = ("id", "items")
+        fields = ("id", "items", "total_amount")
+        read_only_fields = ("id", "total_amount")
 
     def validate_items(self, value):
         unique_ids = set()
