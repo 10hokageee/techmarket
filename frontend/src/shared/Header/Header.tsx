@@ -128,7 +128,7 @@ export const Header = () => {
             </div>
 
             <NavLink to="/" className={styles.header__navLogo}>
-              <img src="icons/header-logo.svg" alt="Logotype" />
+              <img src="/icons/header-logo.svg" alt="Logotype" />
             </NavLink>
 
             {openSearch !== true && (

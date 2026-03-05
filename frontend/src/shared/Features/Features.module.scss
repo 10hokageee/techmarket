@@ -71,15 +71,15 @@
     }
 
     &--headphones::after {
-      background-image: url("icons/headphones-icon.svg");
+      background-image: url("/icons/headphones-icon.svg");
     }
 
     &--profile::after {
-      background-image: url("icons/profile-icon.svg");
+      background-image: url("/icons/profile-icon.svg");
     }
 
     &--sale::after {
-      background-image: url("icons/sale-icon.svg");
+      background-image: url("/icons/sale-icon.svg");
     }
   }
 

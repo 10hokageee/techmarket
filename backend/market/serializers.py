@@ -27,15 +27,19 @@ class ProductSerializer(serializers.ModelSerializer):
         )
         read_only_fields = ("id", "reviews", "rating_avg")
 
+    def validate(self, attrs):
+        if attrs["sale_price"] and attrs["sale_price"] >= attrs["original_price"]:
+            raise ValidationError(
+                {"sale_price": "The discount must be less than the original price."}
+            )
+        return attrs
+
     def to_representation(self, instance):
         data = super().to_representation(instance)
 
         data["category"] = instance.get_category_display()
         data["series"] = instance.series.name
         data["rating_avg"] = str(instance.rating_avg)
-
-        if data["sale_price"] == data["original_price"]:
-            data["sale_price"] = None
 
         return data
 
@@ -71,9 +75,13 @@ class OrderSerializer(serializers.ModelSerializer):
             quantity = item["quantity"]
 
             if product.id in unique_ids:
-                raise ValidationError({"Duplicate product": f"Product id {product.id} duplicated."})
+                raise ValidationError(
+                    {"Duplicate product": f"Product id {product.id} duplicated."}
+                )
             if product.stock_quantity < quantity:
-                raise ValidationError({"Stock error": f"Not enough stock for {product.name}."})
+                raise ValidationError(
+                    {"Stock error": f"Not enough stock for {product.name}."}
+                )
 
             unique_ids.add(product.id)
         return value
@@ -83,8 +91,7 @@ class OrderSerializer(serializers.ModelSerializer):
         items_data = validated_data.pop("items")
 
         _money_to_pay = sum(
-            item["product"].sale_price * item["quantity"]
-            for item in items_data
+            item["product"].actual_price * item["quantity"] for item in items_data
         )
         order = Order.objects.create(
             user=validated_data["user"], total_amount=_money_to_pay
@@ -103,14 +110,16 @@ class OrderSerializer(serializers.ModelSerializer):
                     order=order,
                     product=product,
                     quantity=quantity,
-                    unit_price=product.sale_price
+                    unit_price=product.actual_price,
                 )
             )
         try:
             Product.objects.bulk_update(products_to_update, ("stock_quantity",))
         except IntegrityError:
             raise ValidationError(
-                {"error": "One of the items in your cart was out of stock during checkout."}
+                {
+                    "error": "One of the items in your cart was out of stock during checkout."
+                }
             )
         OrderItem.objects.bulk_create(order_items)
 

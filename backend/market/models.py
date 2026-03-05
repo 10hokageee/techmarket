@@ -67,14 +67,22 @@ class Product(models.Model):
     class Meta:
         ordering = ("-created_at",)
 
+    @property
+    def actual_price(self):
+        """
+        if sale_price is null, returned original_price,
+        used for calculations in orders
+        """
+        return self.sale_price or self.original_price
+
     def clean(self):
-        if self.sale_price and self.sale_price > self.original_price:
+        if self.sale_price and self.sale_price >= self.original_price:
             raise ValidationError(
                 "The sale price must be lower than the original price."
             )
         try:
             color = (
-                f"{(self.color[1:] if self.color.startswith("#") else self.color):0<6}"
+                f"{(self.color[1:] if self.color.startswith('#') else self.color):0<6}"
             )
             int(color, 16)
             self.color = f"#{color}"
@@ -87,9 +95,6 @@ class Product(models.Model):
             self.rating_avg = round(_setdefault_float_value(1.0, 5.0), 2)
             self.reviews = _setdefault_int_value(3, 52, 10)
         # --------
-
-        if not self.sale_price:
-            self.sale_price = self.original_price
 
         self.full_clean()
         super().save(*args, **kwargs)
