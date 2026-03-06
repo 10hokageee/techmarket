@@ -21,7 +21,6 @@ class ProductSerializer(serializers.ModelSerializer):
             "characteristics",
             "color",
             "description",
-            "status",
             "reviews",
             "rating_avg",
         )
@@ -45,6 +44,7 @@ class ProductSerializer(serializers.ModelSerializer):
         data["category"] = instance.get_category_display()
         data["series"] = instance.series.name
         data["rating_avg"] = str(instance.rating_avg)
+        data["status"] = bool(instance.stock_quantity)
 
         return data
 

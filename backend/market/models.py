@@ -58,7 +58,6 @@ class Product(models.Model):
     characteristics = models.JSONField(default=dict, null=True, blank=True)
     color = models.CharField(max_length=7)
     description = models.TextField(blank=True, null=True)
-    status = models.BooleanField(default=False)
 
     rating_avg = models.FloatField()
     reviews = models.PositiveSmallIntegerField()
