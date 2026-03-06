@@ -7,16 +7,7 @@ class ProductHomePagePagination(BasePagination):
     page_size = 8
 
     def paginate_queryset(self, queryset, request, view=None):
-        if not set(request.query_params).intersection(
-            {
-                "search",
-                "price_lte",
-                "price_gte",
-                "colors",
-                "categories",
-                "series",
-            }
-        ):
+        if not request.pagination_flag:
             return None
 
         self.request = request

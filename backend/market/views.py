@@ -22,18 +22,25 @@ class ProductViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         queryset = Product.objects.select_related("series")
         params = self.request.query_params
-        if set(params).intersection(  # same as &
-            {
-                "search",
-                "price_lte",
-                "price_gte",
-                "colors",
-                "categories",
-                "series",
-            }
-        ):
+        pagination_params = {
+            "search",
+            "status",
+            "price_lte",
+            "price_gte",
+            "colors",
+            "categories",
+            "series",
+        }
+        self.request.pagination_flag = (
+            set(params) & pagination_params and self.query_params_validator()
+        )
+
+        if self.request.pagination_flag:
             if search_param := params.get("search"):
                 queryset = self._exec_search(param=search_param, queryset=queryset)
+
+            if status := params.get("status"):
+                queryset = self._filter_by_status(param=status, queryset=queryset)
 
             lte_p = params.get("price_lte")
             gte_p = params.get("price_gte")
@@ -48,7 +55,7 @@ class ProductViewSet(viewsets.ModelViewSet):
             if colors := params.get("colors"):
                 queryset = self._filter_by_color(colors=colors, queryset=queryset)
 
-            queryset = self._iregex_filter(params=params, queryset=queryset)
+            queryset = self._iregex_filter(queryset=queryset)
 
             # default order by -created_at
             queryset = self._order_by_param(param=order_by, queryset=queryset)
@@ -76,47 +83,31 @@ class ProductViewSet(viewsets.ModelViewSet):
                 elem["is_new"] = index < NEW_PRODUCTS
         return response
 
-    @staticmethod
-    def _exec_search(param: str, queryset: QuerySet[Product]) -> QuerySet[Product]:
-        return queryset.filter(name__icontains=param.strip())
+    def query_params_validator(self):
+        params = self.request.query_params
+        for param in params.values():
+            if param == "":
+                return False
 
-    @staticmethod
-    def _filter_by_price(
-        lte_price: str, gte_price: str, queryset: QuerySet[Product]
-    ) -> QuerySet[Product]:
-        def _is_valid_param(value: str) -> bool:
+        if (st := params.get("status")) and st.upper() not in ("TRUE", "FALSE"):
+            return False
+
+        def check_problem(value: str) -> bool:
             try:
                 float(value)
             except ValueError:
-                return False
-            else:
                 return True
 
-        if lte_price and _is_valid_param(
-            lte_price
-        ):  # price less than or equal to query param
-            queryset = queryset.filter(current_price__lte=lte_price)
+        lte_p = params.get("price_lte")
+        gte_p = params.get("price_gte")
+        if (lte_p and check_problem(value=lte_p)) or (
+            gte_p and check_problem(value=gte_p)
+        ):
+            return False
+        return True
 
-        if gte_price and _is_valid_param(
-            gte_price
-        ):  # price greater than or equal to query param
-            queryset = queryset.filter(current_price__gte=gte_price)
-        return queryset
-
-    @staticmethod
-    def _filter_by_color(colors: str, queryset: QuerySet[Product]) -> QuerySet[Product]:
-        return queryset.filter(
-            color__in={
-                f"#{val_item.lstrip('#'):06}"
-                for color in colors.split(",")
-                if (val_item := color.strip())
-            }
-        )
-
-    @staticmethod
-    def _iregex_filter(
-        params: QueryDict, queryset: QuerySet[Product]
-    ) -> QuerySet[Product]:
+    def _iregex_filter(self, queryset: QuerySet[Product]) -> QuerySet[Product]:
+        params = self.request.query_params
         for param_name, field_lookup in (
             ("categories", "category__iregex"),
             ("series", "series__name__iregex"),
@@ -130,6 +121,35 @@ class ProductViewSet(viewsets.ModelViewSet):
                 if pattern:
                     queryset = queryset.filter(**{field_lookup: pattern})
         return queryset
+
+    @staticmethod
+    def _filter_by_status(param: str, queryset: QuerySet[Product]) -> QuerySet[Product]:
+        return queryset.filter(status=param)
+
+    @staticmethod
+    def _exec_search(param: str, queryset: QuerySet[Product]) -> QuerySet[Product]:
+        return queryset.filter(name__icontains=param.strip())
+
+    @staticmethod
+    def _filter_by_price(
+        lte_price: str, gte_price: str, queryset: QuerySet[Product]
+    ) -> QuerySet[Product]:
+        if lte_price:  # price less than or equal to query param
+            queryset = queryset.filter(current_price__lte=lte_price)
+
+        if gte_price:  # price greater than or equal to query param
+            queryset = queryset.filter(current_price__gte=gte_price)
+        return queryset
+
+    @staticmethod
+    def _filter_by_color(colors: str, queryset: QuerySet[Product]) -> QuerySet[Product]:
+        return queryset.filter(
+            color__in={
+                f"#{val_item.lstrip('#'):06}"
+                for color in colors.split(",")
+                if (val_item := color.strip())
+            }
+        )
 
     @staticmethod
     def _order_by_param(param: str, queryset: QuerySet[Product]) -> QuerySet[Product]:
