@@ -1,4 +1,4 @@
-from django.db import transaction
+from django.db import transaction, IntegrityError
 from django.db.models import F
 from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
@@ -55,7 +55,29 @@ class SignboardSerializer(serializers.ModelSerializer):
         fields = ("id", "image")
 
 
+class CachedPrimaryKeyRelatedField(serializers.PrimaryKeyRelatedField):
+    def to_internal_value(self, data):
+        cache = getattr(self.root, "_products_cache", None)
+        if cache is not None:
+            try:
+                pk = (
+                    self.pk_field.to_internal_value(data)
+                    if self.pk_field
+                    else int(data)
+                )
+                product = cache.get(pk)
+                if product is None:
+                    self.fail("does_not_exist", pk_value=data)
+                return product
+            except (ValueError, TypeError):
+                self.fail("incorrect_type", data_type=type(data).__name__)
+
+        return super().to_internal_value(data)
+
+
 class OrderItemSerializer(serializers.ModelSerializer):
+    product = CachedPrimaryKeyRelatedField(queryset=Product.objects.all())
+
     class Meta:
         model = OrderItem
         fields = (
@@ -81,6 +103,19 @@ class OrderSerializer(serializers.ModelSerializer):
         model = Order
         fields = ("id", "items", "total_amount")
         read_only_fields = ("id", "total_amount")
+
+    def to_internal_value(self, data):
+        items_raw = data.get("items") or []
+        product_ids = [
+            item["product"]
+            for item in items_raw
+            if isinstance(item, dict) and item.get("product")
+        ]
+        self._products_cache = {
+            p.id: p for p in Product.objects.filter(id__in=product_ids)
+        }
+
+        return super().to_internal_value(data)
 
     def validate_items(self, value):
         unique_ids = set()
@@ -135,8 +170,9 @@ class OrderSerializer(serializers.ModelSerializer):
                     "error": "One of the items in your cart was out of stock during checkout."
                 }
             )
-        OrderItem.objects.bulk_create(order_items)
 
+        created_items = OrderItem.objects.bulk_create(order_items)
+        order._prefetched_objects_cache = {"items": created_items}
         return order
 
     def update(self, instance, validated_data): ...
