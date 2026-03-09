@@ -9,13 +9,13 @@ from rest_framework.response import Response
 from market.models import Product, Signboard, Order
 from market.permissions import IsAdminOrReadOnly
 from market.serializers import ProductSerializer, SignboardSerializer, OrderSerializer
-from market.pagination import ProductHomePagePagination
+from market.pagination import ProductCatalogPagination
 
 NEW_PRODUCTS = 10
 
 
 class ProductViewSet(viewsets.ModelViewSet):
-    pagination_class = ProductHomePagePagination
+    pagination_class = ProductCatalogPagination
     serializer_class = ProductSerializer
     permission_classes = (IsAdminOrReadOnly,)
 
