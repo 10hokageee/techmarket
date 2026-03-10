@@ -78,7 +78,7 @@ class ProductViewSet(viewsets.ModelViewSet):
 
     def list(self, request, *args, **kwargs):
         response = super().list(request, *args, **kwargs)
-        if not isinstance(response.data, dict):
+        if not request.pagination_flag:
             for index, elem in enumerate(response.data):
                 elem["is_new"] = index < NEW_PRODUCTS
         return response
@@ -124,7 +124,15 @@ class ProductViewSet(viewsets.ModelViewSet):
 
     @staticmethod
     def _filter_by_status(param: str, queryset: QuerySet[Product]) -> QuerySet[Product]:
-        return queryset.filter(status=param)
+        defaults = {
+            "FALSE": {"stock_quantity__exact": 0},
+            "TRUE": {"stock_quantity__gt": 0},
+        }
+        return (
+            queryset.filter(**_lookup)
+            if (_lookup := defaults.get(param.upper()))
+            else queryset
+        )
 
     @staticmethod
     def _exec_search(param: str, queryset: QuerySet[Product]) -> QuerySet[Product]:
