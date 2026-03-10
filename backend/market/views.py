@@ -52,6 +52,7 @@ class ProductViewSet(viewsets.ModelViewSet):
                 queryset = self._filter_by_price(
                     lte_price=lte_p, gte_price=gte_p, queryset=queryset
                 )
+
             if colors := params.get("colors"):
                 queryset = self._filter_by_color(colors=colors, queryset=queryset)
 
@@ -152,7 +153,7 @@ class ProductViewSet(viewsets.ModelViewSet):
     @staticmethod
     def _filter_by_color(colors: str, queryset: QuerySet[Product]) -> QuerySet[Product]:
         return queryset.filter(
-            color__in={
+            colors__overlap={
                 f"#{val_item.lstrip('#'):06}"
                 for color in colors.split(",")
                 if (val_item := color.strip())

@@ -19,7 +19,7 @@ class ProductSerializer(serializers.ModelSerializer):
             "original_price",
             "sale_price",
             "characteristics",
-            "color",
+            "colors",
             "description",
             "reviews",
             "rating_avg",

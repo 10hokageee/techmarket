@@ -5,6 +5,7 @@ from random import (
 )
 import uuid
 
+from django.contrib.postgres.fields import ArrayField
 from django.core.exceptions import ValidationError
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
@@ -56,7 +57,7 @@ class Product(models.Model):
         max_digits=10, decimal_places=2, blank=True, null=True
     )
     characteristics = models.JSONField(default=dict, null=True, blank=True)
-    color = models.CharField(max_length=7)
+    colors = ArrayField(models.CharField(max_length=7))
     description = models.TextField(blank=True, null=True)
 
     rating_avg = models.FloatField()
@@ -80,11 +81,10 @@ class Product(models.Model):
                 "The sale price must be lower than the original price."
             )
         try:
-            color = (
-                f"{(self.color[1:] if self.color.startswith('#') else self.color):06}"
-            )
-            int(color, 16)
-            self.color = f"#{color}"
+            for index, color in enumerate(self.colors):
+                color = f"{(color.lstrip("#") if color.startswith('#') else color):06}"
+                int(color, 16)
+                self.colors[index] = f"#{color}"
         except ValueError:
             raise ValidationError("Invalid color code.")
 
