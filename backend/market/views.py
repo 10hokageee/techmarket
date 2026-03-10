@@ -2,8 +2,7 @@ import re
 
 from django.db.models import Q, QuerySet
 from django.db.models.functions import Coalesce
-from django.http import QueryDict
-from rest_framework import viewsets, mixins, status
+from rest_framework import viewsets, mixins
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from market.models import Product, Signboard, Order

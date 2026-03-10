@@ -1,6 +1,5 @@
-from rest_framework.pagination import PageNumberPagination, BasePagination
+from rest_framework.pagination import BasePagination
 from rest_framework.response import Response
-from rest_framework.utils.urls import replace_query_param
 
 # custom pagination
 

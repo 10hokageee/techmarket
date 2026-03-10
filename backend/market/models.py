@@ -15,7 +15,7 @@ from django.conf import settings
 from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
 
-CSS3_COLORS = frozenset(map(lambda x: x.upper(), css_colors("css3")))
+CSS3_COLORS = frozenset(map(str.upper, css_colors("css3")))
 
 
 def _color_validator(colors: list, exception):
