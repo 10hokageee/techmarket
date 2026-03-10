@@ -1,3 +1,4 @@
+from market.models import _color_validator
 from django.db import transaction, IntegrityError
 from django.db.models import F
 from rest_framework import serializers
@@ -37,6 +38,9 @@ class ProductSerializer(serializers.ModelSerializer):
                     }
                 )
         return attrs
+
+    def validate_colors(self, data):
+        return _color_validator(data, ValidationError)
 
     def to_representation(self, instance):
         data = super().to_representation(instance)

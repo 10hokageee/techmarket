@@ -73,7 +73,7 @@ WSGI_APPLICATION = "techmarketAPI.wsgi.application"
 # Configured for Neon (PostgreSQL) with fallback to SQLite for local development
 DATABASES = {
     "default": dj_database_url.config(
-        default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}",
+        # default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}", The model structure requires a PostgreSQL database.
         conn_max_age=600,
     )
 }

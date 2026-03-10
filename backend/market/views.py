@@ -67,7 +67,7 @@ class ProductViewSet(viewsets.ModelViewSet):
                 "MSI GT Series",
                 "MSI GL Series",
                 "MSI GE Series",
-                "MSI Infinute Series",
+                "MSI Infinite Series",
                 "MSI Triden",
                 "MSI Nightblade",
             }
@@ -153,11 +153,7 @@ class ProductViewSet(viewsets.ModelViewSet):
     @staticmethod
     def _filter_by_color(colors: str, queryset: QuerySet[Product]) -> QuerySet[Product]:
         return queryset.filter(
-            colors__overlap={
-                f"#{val_item.lstrip('#'):06}"
-                for color in colors.split(",")
-                if (val_item := color.strip())
-            }
+            colors__overlap=(color.strip().upper() for color in colors.split(","))
         )
 
     @staticmethod
