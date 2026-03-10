@@ -81,6 +81,9 @@ class CachedPrimaryKeyRelatedField(serializers.PrimaryKeyRelatedField):
 
 class OrderItemSerializer(serializers.ModelSerializer):
     product = CachedPrimaryKeyRelatedField(queryset=Product.objects.all())
+    price = serializers.DecimalField(
+        max_digits=10, decimal_places=2, read_only=True
+    )  # added for swagger-ui documentation
 
     class Meta:
         model = OrderItem

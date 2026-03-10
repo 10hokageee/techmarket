@@ -65,9 +65,15 @@ class Product(models.Model):
     )
     image = models.ImageField(null=True, blank=True, upload_to=_uuid_photo_save)
     stock_quantity = models.PositiveSmallIntegerField()
-    original_price = models.DecimalField(max_digits=10, decimal_places=2)
+    original_price = models.DecimalField(
+        max_digits=10, decimal_places=2, validators=(MinValueValidator(0),)
+    )
     sale_price = models.DecimalField(
-        max_digits=10, decimal_places=2, blank=True, null=True
+        max_digits=10,
+        decimal_places=2,
+        blank=True,
+        null=True,
+        validators=(MinValueValidator(0),),
     )
     characteristics = models.JSONField(default=dict, null=True, blank=True)
     colors = ArrayField(models.CharField(max_length=20))
