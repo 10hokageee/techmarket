@@ -60,10 +60,8 @@ from rest_framework.response import Response
 
 
 # Simplified version
-class ProductCatalogPagination(BasePagination):
+class SimplifiedCustomPagination(BasePagination):
     def paginate_queryset(self, queryset, request, view=None):
-        if not request.pagination_flag:
-            return None
         raw_size = request.query_params.get("perPage")
         page_size = (
             int(raw_size) if raw_size and raw_size in ("4", "8", "16", "32") else 4

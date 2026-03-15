@@ -5,36 +5,42 @@ from django.db.models.functions import Coalesce
 from rest_framework import viewsets, mixins
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
-from market.models import Product, Signboard, Order
+from market.models import Product, Signboard, Order, Series
 from market.permissions import IsAdminOrReadOnly
-from market.serializers import ProductSerializer, SignboardSerializer, OrderSerializer
-from market.pagination import ProductCatalogPagination
+from market.serializers import (
+    ProductSerializer,
+    SignboardSerializer,
+    OrderSerializer,
+    SeriesSerializer,
+)
+from market.pagination import SimplifiedCustomPagination
 
 NEW_PRODUCTS = 10
 
 
 class ProductViewSet(viewsets.ModelViewSet):
-    pagination_class = ProductCatalogPagination
+    pagination_class = SimplifiedCustomPagination
     serializer_class = ProductSerializer
     permission_classes = (IsAdminOrReadOnly,)
+    pagination_params = {
+        "search",
+        "status",
+        "price_lte",
+        "price_gte",
+        "colors",
+        "categories",
+        "series",
+    }
 
     def get_queryset(self):
         queryset = Product.objects.select_related("series")
         params = self.request.query_params
-        pagination_params = {
-            "search",
-            "status",
-            "price_lte",
-            "price_gte",
-            "colors",
-            "categories",
-            "series",
-        }
-        self.request.pagination_flag = (
-            set(params) & pagination_params and self.query_params_validator()
+
+        self.pagination_flag = (
+            set(params) & self.pagination_params and self.query_params_validator()
         )
 
-        if self.request.pagination_flag:
+        if self.pagination_flag:
             if search_param := params.get("search"):
                 queryset = self._exec_search(param=search_param, queryset=queryset)
 
@@ -76,9 +82,12 @@ class ProductViewSet(viewsets.ModelViewSet):
             )
         return queryset.distinct()
 
+    def paginate_queryset(self, queryset):
+        return super().paginate_queryset(queryset) if self.pagination_flag else None
+
     def list(self, request, *args, **kwargs):
         response = super().list(request, *args, **kwargs)
-        if not request.pagination_flag:
+        if not self.pagination_flag:
             for index, elem in enumerate(response.data):
                 elem["is_new"] = index < NEW_PRODUCTS
         return response
@@ -191,6 +200,13 @@ class OrderViewSet(
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
+
+
+class SeriesViewSet(viewsets.ModelViewSet):
+    queryset = Series.objects.all()
+    permission_classes = (IsAdminOrReadOnly,)
+    serializer_class = SeriesSerializer
+    pagination_class = SimplifiedCustomPagination
 
 
 @api_view(["GET"])

@@ -1,4 +1,4 @@
-from market.models import _color_validator
+from market.models import _color_validator, Series
 from django.db import transaction, IntegrityError
 from django.db.models import F
 from rest_framework import serializers
@@ -183,3 +183,9 @@ class OrderSerializer(serializers.ModelSerializer):
         return order
 
     def update(self, instance, validated_data): ...
+
+
+class SeriesSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Series
+        fields = ("id", "name")
