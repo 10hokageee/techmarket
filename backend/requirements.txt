@@ -9,4 +9,5 @@ dj-database-url
 whitenoise
 webcolors==25.10.0
 drf-spectacular
+django-q2
 stripe

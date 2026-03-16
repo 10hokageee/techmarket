@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "django.contrib.postgres",
     "rest_framework",
+    "django_q",
     "drf_spectacular",
     "corsheaders",
     "debug_toolbar",
@@ -130,6 +131,16 @@ if not (STRIPE_PRIVATE_KEY := os.getenv("STRIPE_PRIVATE_KEY")):
     raise NotImplementedError("STRIPE_PRIVATE_KEY not set in environment")
 if not (STRIPE_WEBHOOK_KEY := os.getenv("STRIPE_WEBHOOK_KEY")):
     raise NotImplementedError("STRIPE_WEBHOOK_URL not set in environment")
+
+Q_CLUSTER = {
+    "name": "TechWorker",
+    "workers": workers if (workers := os.cpu_count() - 1) > 1 else 1,
+    "recycle": 1000,
+    "timeout": 20,
+    "retry": 25,
+    "max_attempts": 2,
+    "orm": "default",
+}
 
 # CORS settings
 # Restrict origins in production via CORS_ALLOWED_ORIGINS environment variable
