@@ -35,14 +35,14 @@ class Series(models.Model):
 
 
 class Product(models.Model):
-    CATEGORY_CHOICES = {
-        "LAPTOP": _("Laptops"),
-        "PC": _("Desktop PC`s"),
-        "NETWORK_DEVICE": _("Networking devices"),
-        "PRINTER_SCANNER": _("Printers & Scanners"),
-        "PC_PART": _("PC parts"),
-        "OTHER": _("Others product"),
-    }
+    CATEGORY_CHOICES = (
+        ("LAPTOP", _("Laptops")),
+        ("PC", _("Desktop PC`s")),
+        ("NETWORK_DEVICE", _("Networking devices")),
+        ("PRINTER_SCANNER", _("Printers & Scanners")),
+        ("PC_PART", _("PC parts")),
+        ("OTHER", _("Others product")),
+    )
 
     name = models.CharField(max_length=62, unique=True)
     category = models.CharField(max_length=20, choices=CATEGORY_CHOICES)
