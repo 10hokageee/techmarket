@@ -115,6 +115,12 @@ REST_FRAMEWORK = {
     "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.IsAuthenticated",),
 }
 
+# raise NotImplementedError if keys is missing
+if not (STRIPE_PRIVATE_KEY := os.getenv("STRIPE_PRIVATE_KEY")):
+    raise NotImplementedError("STRIPE_PRIVATE_KEY not set in environment")
+if not (STRIPE_WEBHOOK_KEY := os.getenv("STRIPE_WEBHOOK_KEY")):
+    raise NotImplementedError("STRIPE_WEBHOOK_URL not set in environment")
+
 # CORS settings
 # Restrict origins in production via CORS_ALLOWED_ORIGINS environment variable
 
