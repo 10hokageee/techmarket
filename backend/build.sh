@@ -1,6 +1,11 @@
-#!/usr/bin/env bash
-set -o errexit
+#!/usr/bin/env sh
 
-pip install -r requirements.txt
+if [ -f .env ]; then
+  set -a
+  source .env
+  set +a
+fi
+python manage.py migrate --no-input
 python manage.py collectstatic --no-input
-python manage.py migrate
+#python manage.py qluster &
+gunicorn --workers 1 --threads 2 --bind 0.0.0.0:${PORT:-10000} techmarketAPI.wsgi:application
