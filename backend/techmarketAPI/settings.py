@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     "debug_toolbar",
     "market",
     "user",
+    "payments",
 ]
 
 MIDDLEWARE = [
@@ -128,9 +129,9 @@ SPECTACULAR_SETTINGS = {
 
 # raise NotImplementedError if keys is missing
 if not (STRIPE_PRIVATE_KEY := os.getenv("STRIPE_PRIVATE_KEY")):
-    raise NotImplementedError("STRIPE_PRIVATE_KEY not set in environment")
+    raise EnvironmentError("STRIPE_PRIVATE_KEY not set in environment")
 if not (STRIPE_WEBHOOK_KEY := os.getenv("STRIPE_WEBHOOK_KEY")):
-    raise NotImplementedError("STRIPE_WEBHOOK_URL not set in environment")
+    raise EnvironmentError("STRIPE_WEBHOOK_URL not set in environment")
 
 Q_CLUSTER = {
     "name": "TechWorker",
