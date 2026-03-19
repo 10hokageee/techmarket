@@ -1,4 +1,7 @@
+from django_q.tasks import async_task
+
 from market.models import _color_validator, Series
+from payments.models import Payment
 from django.db import transaction, IntegrityError
 from django.db.models import F
 from rest_framework import serializers
@@ -33,8 +36,8 @@ class ProductSerializer(serializers.ModelSerializer):
                 raise ValidationError(
                     {
                         "sale_price": "When updating the sale_price field, "
-                        "you must pass the original_price field and "
-                        "it must be greater than sale_price."
+                                      "you must pass the original_price field and "
+                                      "it must be greater than sale_price."
                     }
                 )
         return attrs
@@ -124,7 +127,20 @@ class OrderSerializer(serializers.ModelSerializer):
 
         return super().to_internal_value(data)
 
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        payment = getattr(instance, "payment", None)
+        if payment:
+            data["payment_status"] = payment.status
+            if payment.status == "UNPAID":
+                data["payment_url"] = payment.session_url
+        else:
+            data["payment_url"] = "The payment has not been created yet."
+        return data
+
     def validate_items(self, value):
+        PRODUCTS_QUANTITY_LIMIT = 100
+
         unique_ids = set()
         for item in value:
             product = item["product"]
@@ -140,6 +156,15 @@ class OrderSerializer(serializers.ModelSerializer):
                 )
 
             unique_ids.add(product.id)
+
+        # Stripe API products limit
+        if len(unique_ids) > PRODUCTS_QUANTITY_LIMIT:
+            raise ValidationError(
+                {
+                    "Counting error": f"There should be less than {PRODUCT_QUANTITY_LIMIT} products"
+                }
+            )
+
         return value
 
     @transaction.atomic
@@ -180,6 +205,10 @@ class OrderSerializer(serializers.ModelSerializer):
 
         created_items = OrderItem.objects.bulk_create(order_items)
         order._prefetched_objects_cache = {"items": created_items}
+
+        async_task(
+            "market.tasks.create_stripe_session", order=order, items=created_items
+        )
         return order
 
     def update(self, instance, validated_data): ...
