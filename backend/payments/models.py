@@ -10,9 +10,9 @@ class Payment(models.Model):
         ("CANCELED", _("Canceled")),
     )
 
-    status = models.CharField(max_length=10, choices=STATUS_CHOICES)
+    session_id = models.CharField(max_length=100, primary_key=True)
     session_url = models.CharField(max_length=1024)
-    session_id = models.CharField(max_length=100)
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES)
     money_to_pay = models.DecimalField(max_digits=10, decimal_places=2)
     order = models.ForeignKey(Order, on_delete=models.PROTECT)
 
