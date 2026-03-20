@@ -134,6 +134,8 @@ class OrderSerializer(serializers.ModelSerializer):
             data["payment_status"] = payment.status
             if payment.status == "UNPAID":
                 data["payment_url"] = payment.session_url
+            if payment.status == "PAID":
+                data["check"] = _check if (_check := payment._check) else "Your check is being created"
         else:
             data["payment_url"] = "The payment has not been created yet."
         return data
