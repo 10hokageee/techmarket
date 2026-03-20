@@ -192,6 +192,7 @@ class OrderViewSet(
 ):
     queryset = Order.objects
     serializer_class = OrderSerializer
+    pagination_class = SimplifiedCustomPagination
 
     def get_queryset(self):
         return self.queryset.select_related("payment").prefetch_related("items__product").filter(
