@@ -36,7 +36,7 @@ def payment_webhook(request):
             case "checkout.session.completed":
                 payment.status = "PAID"
             case "charge.succeeded":
-                payment._check = event_obj.receipt_url
+                payment.receipt = event_obj.receipt_url
             case "checkout.session.expired":
                 payment.status = "CANCELED"
         payment.save()
