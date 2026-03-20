@@ -5,6 +5,7 @@ from django.views.decorators.csrf import csrf_exempt
 from rest_framework import status
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
+from payments.models import Payment
 
 WEBHOOK_KEY = settings.STRIPE_WEBHOOK_KEY
 
@@ -25,17 +26,20 @@ def payment_webhook(request):
         # for production
         event = stripe.Webhook.construct_event(payload, sig_header, WEBHOOK_KEY)
 
-    except (ValueError, KeyError, stripe.error.SignatureVerificationError) as e:
-        print(e)
+    except (ValueError, KeyError, stripe.error.SignatureVerificationError):
         return Response(status=status.HTTP_400_BAD_REQUEST)
 
-    _type = event.type
-    if _type == "payment_intent.succeeded":
-        print("DEV-LOG***Payment intent succeeded***")
-    elif _type == "payment_intent.canceled":
-        ...
-    elif _type == "payment_intent.payment_failed":
-        ...
+    event_obj = event.data.object
+    if (metadata := getattr(event_obj, "metadata", None)) and (order_pk := metadata.get("order")):
+        payment = Payment.objects.get(order_id=order_pk)
+        match event.type:
+            case "checkout.session.completed":
+                payment.status = "PAID"
+            case "charge.succeeded":
+                payment._check = event_obj.receipt_url
+            case "checkout.session.expired":
+                payment.status = "CANCELED"
+        payment.save()
+        return Response(status=status.HTTP_200_OK)
     else:
-        ...
-    return Response(status=status.HTTP_200_OK)
+        return Response(status=status.HTTP_400_BAD_REQUEST)

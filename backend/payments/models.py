@@ -15,6 +15,7 @@ class Payment(models.Model):
     status = models.CharField(max_length=10, choices=STATUS_CHOICES)
     money_to_pay = models.DecimalField(max_digits=10, decimal_places=2)
     order = models.OneToOneField(Order, on_delete=models.PROTECT, related_name="payment")
+    _check = models.URLField(null=True, blank=True, default=None)
 
     def save(self, *args, **kwargs):
         self.full_clean()
