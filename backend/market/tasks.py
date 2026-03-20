@@ -7,17 +7,20 @@ from payments.models import Payment
 
 
 def create_stripe_session(order: Order, items: QuerySet[OrderItem]) -> None:
-    print(items[0].__dict__) # TODO remove N+1 problem for OrderItem`s
     stripe.api_key = settings.STRIPE_PRIVATE_KEY
     session = stripe.checkout.Session.create(
         mode="payment",
+        payment_intent_data={
+            "metadata": {"order": order.pk}
+        },
         line_items=[
             {
                 "price_data": {
                     "currency": "usd",
                     "product_data": {
                         "name": item.product.name,
-                        "images": image if (image := item.product.image) else None,
+                        "images": (image,) if (image := item.product.image) else None,
+                        "description": item.product.description,
                     },
                     "unit_amount": int(item.unit_price * 100),
                 },
@@ -25,7 +28,7 @@ def create_stripe_session(order: Order, items: QuerySet[OrderItem]) -> None:
             }
             for item in items
         ],
-        # metadata={"order": order.pk},
+        metadata={"order": order.pk},
         success_url="https://google.com",
         cancel_url="https://google.com",
     )
