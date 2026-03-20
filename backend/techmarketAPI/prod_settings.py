@@ -17,7 +17,7 @@ for key in ENV_PARAMS:
 
 SECRET_KEY = os.environ["DJANGO_SECRET_KEY"]
 DEBUG = os.environ["DEBUG"].upper() == "TRUE"
-ALLOWED_HOSTS = os.environ["ALLOWED_HOSTS"].split(",")
+ALLOWED_HOSTS = set(os.environ["ALLOWED_HOSTS"].split(","))
 
 # The model structure requires a PostgreSQL database.
 DATABASES = {

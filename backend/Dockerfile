@@ -2,7 +2,7 @@ FROM python:3.14-alpine
 
 ENV PYTHONUNBUFFERED=1 \
     PYTHONDONTWRITEBYTECODE=1 \
-    DJANGO_SETTINGS_MODULE=techmarketAPI.settings
+    DJANGO_SETTINGS_MODULE=techmarketAPI.prod_settings
 
 WORKDIR /techmarket
 
