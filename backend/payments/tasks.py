@@ -1,4 +1,5 @@
 import stripe
+import time
 from decimal import Decimal
 from django.conf import settings
 from django.db.models import QuerySet
@@ -10,6 +11,7 @@ def create_stripe_session(order: Order, items: QuerySet[OrderItem]) -> None:
     stripe.api_key = settings.STRIPE_PRIVATE_KEY
     session = stripe.checkout.Session.create(
         mode="payment",
+        expires_at=int(time.time()) + 1800, # TODO Delete this because it was created for testing
         payment_intent_data={"metadata": {"order": order.pk}},
         line_items=[
             {

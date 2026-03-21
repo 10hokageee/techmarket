@@ -44,7 +44,7 @@ urlpatterns = (
             SpectacularSwaggerView.as_view(url_name="schema"),
             name="swagger-ui",
         ),
-        path("webhooks/", include("payments.urls", namespace="payments")),
+        path("payments/", include("payments.urls", namespace="payments")),
     ]
     + debug_toolbar_urls()
     + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
