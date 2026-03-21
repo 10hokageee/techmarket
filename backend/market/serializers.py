@@ -36,8 +36,8 @@ class ProductSerializer(serializers.ModelSerializer):
                 raise ValidationError(
                     {
                         "sale_price": "When updating the sale_price field, "
-                                      "you must pass the original_price field and "
-                                      "it must be greater than sale_price."
+                        "you must pass the original_price field and "
+                        "it must be greater than sale_price."
                     }
                 )
         return attrs
@@ -135,7 +135,11 @@ class OrderSerializer(serializers.ModelSerializer):
             if payment.status == "UNPAID":
                 data["payment_url"] = payment.session_url
             if payment.status == "PAID":
-                data["check"] = receipt if (receipt := payment.receipt) else "Your receipt is being created"
+                data["check"] = (
+                    receipt
+                    if (receipt := payment.receipt)
+                    else "Your receipt is being created"
+                )
         else:
             data["payment_url"] = "The payment has not been created yet."
         return data
@@ -209,7 +213,7 @@ class OrderSerializer(serializers.ModelSerializer):
         order._prefetched_objects_cache = {"items": created_items}
 
         async_task(
-            "market.tasks.create_stripe_session", order=order, items=created_items
+            "payments.tasks.create_stripe_session", order=order, items=created_items
         )
         return order
 
