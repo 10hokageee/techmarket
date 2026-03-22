@@ -132,14 +132,15 @@ class OrderSerializer(serializers.ModelSerializer):
         payment = getattr(instance, "payment", None)
         if payment:
             data["payment_status"] = payment.status
-            if payment.status == "UNPAID":
-                data["payment_url"] = payment.session_url
-            if payment.status == "PAID":
-                data["check"] = (
-                    receipt
-                    if (receipt := payment.receipt)
-                    else "Your receipt is being created"
-                )
+            match payment.status:
+                case "UNPAID":
+                    data["payment_url"] = payment.session_url
+                case "PAID":
+                    data["receipt"] = (
+                        receipt
+                        if (receipt := payment.receipt)
+                        else "Your receipt is being created"
+                    )
         else:
             data["payment_url"] = "The payment has not been created yet."
         return data
