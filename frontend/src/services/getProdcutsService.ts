@@ -6,5 +6,5 @@ import { getData } from "../utils/httpClient";
 // }
 
 export function getProducts() {
-  return getData<Product[]>("/products.json");
+  return getData<Product[]>("/products/");
 }

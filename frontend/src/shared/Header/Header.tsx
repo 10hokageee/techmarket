@@ -35,15 +35,17 @@ export const Header = () => {
     { day: 'Sat:', time: '11:00 AM - 5:00 PM' },
   ]
 
+  // laptop, pc, network_device, printer_scanner, pc_part, other
+
+
   const links = [
-    { text: 'Laptops', to: '1' },
-    { text: 'Desktop PCs', to: '2' },
-    { text: 'Networking Devices', to: '3' },
-    { text: 'Printers &  Scanners', to: '4' },
-    { text: 'PC Parts', to: '5' },
-    { text: 'All Other Products', to: '6' },
-    { text: 'Sign in', to: '7' },
-  ]
+    { text: 'Laptops', to: 'laptop' },
+    { text: 'Desktop PCs', to: 'pc' },
+    { text: 'Networking Devices', to: 'network_device' },
+    { text: 'Printers & Scanners', to: 'printer_scanner' },
+    { text: 'PC Parts', to: 'pc_part' },
+    { text: 'All Other Products', to: 'other' },
+  ];
 
   return (
     <header className={styles.header}>

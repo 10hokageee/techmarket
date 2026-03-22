@@ -8,13 +8,12 @@ export type Product = {
   original_price: string;
   sale_price: string;
   characteristics: {
-    functions: string;
-    interface: string;
-    compatibility: string;
+    [key: string]: string;
   };
   color: string;
   description: string;
   status: boolean;
   reviews: number;
   rating_avg: string;
+  is_new: boolean;
 };

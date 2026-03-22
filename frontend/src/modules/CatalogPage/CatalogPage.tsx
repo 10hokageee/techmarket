@@ -1,5 +1,8 @@
+import { Catalog } from "@/components/Catalog/Catalog";
+
 export const CatalogPage = () => {
+
   return (
-    <h1>Catalog page</h1>
+  <Catalog />
   );
 }
