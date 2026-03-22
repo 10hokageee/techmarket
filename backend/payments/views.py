@@ -9,7 +9,10 @@ from django_q.tasks import async_task
 from rest_framework import status
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
+
+from market.models import Order
 from payments.models import Payment
+from payments.tasks import create_stripe_session
 
 WEBHOOK_KEY = settings.STRIPE_WEBHOOK_KEY
 UPDATE_PAYMENT_MINUTES = 20
@@ -51,26 +54,58 @@ def payment_webhook(request):
     else:
         return Response(status=status.HTTP_400_BAD_REQUEST)
 
+
+def create_payment_forced(
+    order_pk: int,
+    user: settings.AUTH_USER_MODEL,
+) -> None:
+    try:
+        order = Order.objects.prefetch_related("items__product").get(
+            id=order_pk, user=user
+        )
+    except Order.DoesNotExist:
+        return Response(
+            status=status.HTTP_400_BAD_REQUEST,
+            data={"Order Error": "Order not found or you are not its owner"},
+        )
+    else:
+        create_stripe_session(order=order)
+    return Response(status=status.HTTP_200_OK)
+
+
 @csrf_exempt
 @api_view(["POST"])
 def update_payment(request):
     if order_pk := request.data.get("order"):
         try:
-            payment = Payment.objects.select_related("order__user").get(order_id=order_pk, order__user=request.user)
-        except Payment.DoesNotExist:
-            return Response(
-                status=status.HTTP_400_BAD_REQUEST, data={"Order Error": "Order not found or you are not its owner"}
+            payment = Payment.objects.select_related("order__user").get(
+                order_id=order_pk, order__user=request.user
             )
+        except Payment.DoesNotExist:
+            # TODO add 20 minutes validation
+            return create_payment_forced(order_pk=order_pk, user=request.user)
         else:
             payment_datetime = payment.created_at
             check_timedelta = timedelta(minutes=UPDATE_PAYMENT_MINUTES)
 
             if payment.status == "PAID":
-                return Response(status=status.HTTP_403_FORBIDDEN, data={"Payment Error": "This payment cannot be changed"})
-
-            if (now() - payment_datetime) > check_timedelta:
+                return Response(
+                    status=status.HTTP_403_FORBIDDEN,
+                    data={"Payment Error": "This payment cannot be changed"},
+                )
+            elif (now() - payment_datetime) > check_timedelta:
                 # async_task(..., payment=payment)
                 return Response(status=status.HTTP_200_OK)
             else:
-                return Response(status=status.HTTP_403_FORBIDDEN, data={"Payment Error": "Payment updates are only allowed every 20 minutes"})
-    return Response(status=status.HTTP_400_BAD_REQUEST, data={"Order Error": "You need to pass the 'order' parameter in the request body"})
+                return Response(
+                    status=status.HTTP_403_FORBIDDEN,
+                    data={
+                        "Payment Error": "Payment updates are only allowed every 20 minutes"
+                    },
+                )
+    return Response(
+        status=status.HTTP_400_BAD_REQUEST,
+        data={
+            "Order Error": "You need to pass the 'order' parameter in the request body"
+        },
+    )

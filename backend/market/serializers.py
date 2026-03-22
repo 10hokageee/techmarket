@@ -213,9 +213,7 @@ class OrderSerializer(serializers.ModelSerializer):
         created_items = OrderItem.objects.bulk_create(order_items)
         order._prefetched_objects_cache = {"items": created_items}
 
-        async_task(
-            "payments.tasks.create_stripe_session", order=order, items=created_items
-        )
+        async_task("payments.tasks.create_stripe_session", order=order)
         return order
 
     def update(self, instance, validated_data): ...
