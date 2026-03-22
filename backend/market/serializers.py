@@ -1,7 +1,5 @@
-from django_q.tasks import async_task
-
 from market.models import _color_validator, Series
-from payments.models import Payment
+from payments.tasks import create_stripe_session
 from django.db import transaction, IntegrityError
 from django.db.models import F
 from rest_framework import serializers
@@ -129,20 +127,17 @@ class OrderSerializer(serializers.ModelSerializer):
 
     def to_representation(self, instance):
         data = super().to_representation(instance)
-        payment = getattr(instance, "payment", None)
-        if payment:
-            data["payment_status"] = payment.status
-            match payment.status:
-                case "UNPAID":
-                    data["payment_url"] = payment.session_url
-                case "PAID":
-                    data["receipt"] = (
-                        receipt
-                        if (receipt := payment.receipt)
-                        else "Your receipt is being created"
-                    )
-        else:
-            data["payment_url"] = "The payment has not been created yet."
+        payment = instance.payment
+        data["payment_status"] = payment.status
+        match payment.status:
+            case "UNPAID":
+                data["payment_url"] = payment.session_url
+            case "PAID":
+                data["receipt"] = (
+                    receipt
+                    if (receipt := payment.receipt)
+                    else "Your receipt is being created"
+                )
         return data
 
     def validate_items(self, value):
@@ -213,7 +208,9 @@ class OrderSerializer(serializers.ModelSerializer):
         created_items = OrderItem.objects.bulk_create(order_items)
         order._prefetched_objects_cache = {"items": created_items}
 
-        async_task("payments.tasks.create_stripe_session", order=order)
+        # It can be done asynchronously on better hardware.
+        create_stripe_session(order=order)
+
         return order
 
     def update(self, instance, validated_data): ...

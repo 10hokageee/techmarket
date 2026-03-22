@@ -5,7 +5,6 @@ import stripe
 from django.conf import settings
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.timezone import now
-from django_q.tasks import async_task
 from rest_framework import status
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
@@ -73,8 +72,9 @@ def create_payment_forced(
     return Response(status=status.HTTP_200_OK)
 
 
+# Can be used if the payment is created asynchronously
 @csrf_exempt
-@api_view(["POST"])
+@api_view([]) # add the POST method here
 def update_payment(request):
     if order_pk := request.data.get("order"):
         try:

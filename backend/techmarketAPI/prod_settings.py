@@ -7,7 +7,7 @@ ENV_PARAMS = (
     "ALLOWED_HOSTS",
     "DATABASE_URL",
     "STRIPE_PRIVATE_KEY",
-    "STRIPE_WEBHOOK_URL",
+    "STRIPE_WEBHOOK_KEY",
 )
 
 # Checking environment variables
@@ -17,7 +17,8 @@ for key in ENV_PARAMS:
 
 SECRET_KEY = os.environ["DJANGO_SECRET_KEY"]
 DEBUG = os.environ["DEBUG"].upper() == "TRUE"
-ALLOWED_HOSTS = set(os.environ["ALLOWED_HOSTS"].split(","))
+ALLOWED_HOSTS = os.environ["ALLOWED_HOSTS"].split(",")
+INTERNAL_IPS = ["127.0.0.1", "localhost"]
 
 # The model structure requires a PostgreSQL database.
 DATABASES = {

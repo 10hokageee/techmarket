@@ -14,7 +14,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "django.contrib.postgres",
     "rest_framework",
-    "django_q",
+    "debug_toolbar",
     "drf_spectacular",
     "corsheaders",
     "market",
@@ -98,14 +98,4 @@ SPECTACULAR_SETTINGS = {
     "DESCRIPTION": "...",
     "VERSION": "1.0.0",
     "SERVE_INCLUDE_SCHEMA": False,
-}
-
-Q_CLUSTER = {
-    "name": "TechWorker",
-    "workers": workers if (workers := os.cpu_count() - 1) > 1 else 1,
-    "recycle": 1000,
-    "timeout": 20,
-    "retry": 25,
-    "max_attempts": 3,
-    "orm": "default",
 }
