@@ -22,10 +22,22 @@ def order_rollback(order: Order):
     items = order.items.all()
     for item in items:
         item.product.stock_quantity = F("stock_quantity") + item.quantity
-    Product.objects.bulk_update(
-        (item.product for item in items), ("stock_quantity",)
-    )
+    Product.objects.bulk_update((item.product for item in items), ("stock_quantity",))
     OrderItem.objects.filter(order=order).delete()
+
+
+def _update_payment(
+    order_pk: int, field_to_update: str, value_to_update: str, prefetch: bool = False
+) -> Payment:
+    payment = Payment.objects
+    obj = (
+        payment.prefetch_related("order__items__product").get(order_id=order_pk)
+        if prefetch
+        else payment.get(order_id=order_pk)
+    )
+    setattr(obj, field_to_update, value_to_update)
+    obj.save(update_fields=(field_to_update,))
+    return obj
 
 
 @csrf_exempt
@@ -45,25 +57,20 @@ def payment_webhook(request):
         event = stripe.Webhook.construct_event(payload, sig_header, WEBHOOK_KEY)
 
     except (ValueError, KeyError, stripe.error.SignatureVerificationError):
-        return Response(status=status.HTTP_400_BAD_REQUEST)
+        return Response(status=status.HTTP_403_FORBIDDEN)
 
     event_obj = event.data.object
     if (metadata := getattr(event_obj, "metadata", None)) and (
         order_pk := metadata.get("order")
     ):
-        payment = Payment.objects
         match event.type:
             case "checkout.session.completed":
-                payment.get(order_id=order_pk)
-                payment.status = "PAID"
+                _update_payment(order_pk, "status", "PAID")
             case "charge.succeeded":
-                payment.get(order_id=order_pk)
-                payment.receipt = event_obj.receipt_url
+                _update_payment(order_pk, "receipt", event_obj.receipt_url)
             case "checkout.session.expired":
-                payment = payment.prefetch_related("order__items__product").get(order_id=order_pk)
+                payment = _update_payment(order_pk, "status", "CANCELED", prefetch=True)
                 order_rollback(payment.order)
-                payment.status = "CANCELED"
-        payment.save()
         return Response(status=status.HTTP_200_OK)
     else:
         return Response(status=status.HTTP_400_BAD_REQUEST)
@@ -89,7 +96,7 @@ def create_payment_forced(
 
 # Can be used if the payment is created asynchronously
 @csrf_exempt
-@api_view([]) # add the POST method here
+@api_view([])  # add the POST method here
 def update_payment(request):
     if order_pk := request.data.get("order"):
         try:
