@@ -5,16 +5,27 @@ import stripe
 from django.conf import settings
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.timezone import now
+from django.db.models import F
 from rest_framework import status
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 
-from market.models import Order
+from market.models import Order, Product, OrderItem
 from payments.models import Payment
 from payments.tasks import create_stripe_session
 
 WEBHOOK_KEY = settings.STRIPE_WEBHOOK_KEY
 UPDATE_PAYMENT_MINUTES = 20
+
+
+def order_rollback(order: Order):
+    items = order.items.all()
+    for item in items:
+        item.product.stock_quantity = F("stock_quantity") + item.quantity
+    Product.objects.bulk_update(
+        (item.product for item in items), ("stock_quantity",)
+    )
+    OrderItem.objects.filter(order=order).delete()
 
 
 @csrf_exempt
@@ -40,13 +51,17 @@ def payment_webhook(request):
     if (metadata := getattr(event_obj, "metadata", None)) and (
         order_pk := metadata.get("order")
     ):
-        payment = Payment.objects.get(order_id=order_pk)
+        payment = Payment.objects
         match event.type:
             case "checkout.session.completed":
+                payment.get(order_id=order_pk)
                 payment.status = "PAID"
             case "charge.succeeded":
+                payment.get(order_id=order_pk)
                 payment.receipt = event_obj.receipt_url
             case "checkout.session.expired":
+                payment = payment.prefetch_related("order__items__product").get(order_id=order_pk)
+                order_rollback(payment.order)
                 payment.status = "CANCELED"
         payment.save()
         return Response(status=status.HTTP_200_OK)

@@ -133,11 +133,7 @@ class OrderSerializer(serializers.ModelSerializer):
             case "UNPAID":
                 data["payment_url"] = payment.session_url
             case "PAID":
-                data["receipt"] = (
-                    receipt
-                    if (receipt := payment.receipt)
-                    else "Your receipt is being created"
-                )
+                data["receipt"] = payment.receipt
         return data
 
     def validate_items(self, value):
