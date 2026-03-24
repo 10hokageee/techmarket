@@ -5,23 +5,6 @@ import dj_database_url
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# SECURITY WARNING: keep the secret key used in production secret!
-# Using os.getenv as suggested for cleaner syntax
-SECRET_KEY = "django-insecure-" + os.getenv(
-    "DJANGO_SECRET_KEY", default="vexv7@j2sna10chbvtiu*tagwyfve6snkmir1hd!#kz!#vg2n="
-)
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv("DEBUG", "True") == "True"
-
-# Updated to support Render domains and local development
-ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "127.0.0.1,localhost").split(",")
-
-INTERNAL_IPS = [
-    "127.0.0.1",
-]
-
-# Application definition
 INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
@@ -29,11 +12,14 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django.contrib.postgres",
     "rest_framework",
-    "corsheaders",
     "debug_toolbar",
+    "drf_spectacular",
+    "corsheaders",
     "market",
     "user",
+    "payments",
 ]
 
 MIDDLEWARE = [
@@ -67,15 +53,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = "techmarketAPI.wsgi.application"
-
-# Database
-# Configured for Neon (PostgreSQL) with fallback to SQLite for local development
-DATABASES = {
-    "default": dj_database_url.config(
-        default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}",
-        conn_max_age=600,
-    )
-}
 
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [
@@ -113,19 +90,12 @@ REST_FRAMEWORK = {
         "rest_framework.authentication.SessionAuthentication",
     ),
     "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.IsAuthenticated",),
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
 }
 
-# raise NotImplementedError if keys is missing
-if not (STRIPE_PRIVATE_KEY := os.getenv("STRIPE_PRIVATE_KEY")):
-    raise NotImplementedError("STRIPE_PRIVATE_KEY not set in environment")
-if not (STRIPE_WEBHOOK_KEY := os.getenv("STRIPE_WEBHOOK_KEY")):
-    raise NotImplementedError("STRIPE_WEBHOOK_URL not set in environment")
-
-# CORS settings
-# Restrict origins in production via CORS_ALLOWED_ORIGINS environment variable
-
-CORS_ALLOW_ALL_ORIGINS = True
-
-# CORS_ALLOWED_ORIGINS = os.getenv(
-#     "CORS_ALLOWED_ORIGINS", "http://localhost:5173,http://127.0.0.1:5173"
-# ).split(",")
+SPECTACULAR_SETTINGS = {
+    "TITLE": "TechMarket API",
+    "DESCRIPTION": "...",
+    "VERSION": "1.0.0",
+    "SERVE_INCLUDE_SCHEMA": False,
+}

@@ -1,10 +1,12 @@
 import os
+from webcolors import names as css_colors
 from random import (
     uniform as _setdefault_float_value,
     triangular as _setdefault_int_value,
 )
 import uuid
 
+from django.contrib.postgres.fields import ArrayField
 from django.core.exceptions import ValidationError
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
@@ -13,8 +15,20 @@ from django.conf import settings
 from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
 
+CSS3_COLORS = frozenset(map(str.upper, css_colors("css3")))
 
-def _uuid_photo_save(instance: "Product", filename: str):
+
+def _color_validator(colors: list, exception):
+    results = []
+    for color in colors:
+        color = color.upper()
+        if color not in CSS3_COLORS:
+            raise exception(f"The color '{color}' does not belong to css3 colors")
+        results.append(color)
+    return results
+
+
+def _uuid_photo_save(instance: "Product" | "Signboard", filename: str):
     value, ext = os.path.splitext(filename)
     if isinstance(instance, Product):
         attr = instance.name
@@ -49,16 +63,21 @@ class Product(models.Model):
     series = models.ForeignKey(
         Series, on_delete=models.CASCADE, related_name="products"
     )
-    image = models.ImageField(blank=True, upload_to=_uuid_photo_save)
+    image = models.ImageField(null=True, blank=True, upload_to=_uuid_photo_save)
     stock_quantity = models.PositiveSmallIntegerField()
-    original_price = models.DecimalField(max_digits=10, decimal_places=2)
+    original_price = models.DecimalField(
+        max_digits=10, decimal_places=2, validators=(MinValueValidator(0),)
+    )
     sale_price = models.DecimalField(
-        max_digits=10, decimal_places=2, blank=True, null=True
+        max_digits=10,
+        decimal_places=2,
+        blank=True,
+        null=True,
+        validators=(MinValueValidator(0),),
     )
     characteristics = models.JSONField(default=dict, null=True, blank=True)
-    color = models.CharField(max_length=7)
+    colors = ArrayField(models.CharField(max_length=20))
     description = models.TextField(blank=True, null=True)
-    status = models.BooleanField(default=False)
 
     rating_avg = models.FloatField()
     reviews = models.PositiveSmallIntegerField()
@@ -80,14 +99,7 @@ class Product(models.Model):
             raise ValidationError(
                 "The sale price must be lower than the original price."
             )
-        try:
-            color = (
-                f"{(self.color[1:] if self.color.startswith('#') else self.color):0<6}"
-            )
-            int(color, 16)
-            self.color = f"#{color}"
-        except ValueError:
-            raise ValidationError("Invalid color code.")
+        self.colors = _color_validator(self.colors, ValidationError)
 
     def save(self, *args, **kwargs):
         # test save

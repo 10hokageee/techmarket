@@ -1,4 +1,6 @@
-from django.db import transaction
+from market.models import _color_validator, Series
+from payments.tasks import create_stripe_session
+from django.db import transaction, IntegrityError
 from django.db.models import F
 from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
@@ -19,20 +21,27 @@ class ProductSerializer(serializers.ModelSerializer):
             "original_price",
             "sale_price",
             "characteristics",
-            "color",
+            "colors",
             "description",
-            "status",
             "reviews",
             "rating_avg",
         )
         read_only_fields = ("id", "reviews", "rating_avg")
 
     def validate(self, attrs):
-        if attrs["sale_price"] and attrs["sale_price"] >= attrs["original_price"]:
-            raise ValidationError(
-                {"sale_price": "The discount must be less than the original price."}
-            )
+        if sale_pr := attrs.get("sale_price"):
+            if not (orig_pr := attrs.get("original_price")) or sale_pr >= orig_pr:
+                raise ValidationError(
+                    {
+                        "sale_price": "When updating the sale_price field, "
+                        "you must pass the original_price field and "
+                        "it must be greater than sale_price."
+                    }
+                )
         return attrs
+
+    def validate_colors(self, data):
+        return _color_validator(data, ValidationError)
 
     def to_representation(self, instance):
         data = super().to_representation(instance)
@@ -40,6 +49,7 @@ class ProductSerializer(serializers.ModelSerializer):
         data["category"] = instance.get_category_display()
         data["series"] = instance.series.name
         data["rating_avg"] = str(instance.rating_avg)
+        data["status"] = bool(instance.stock_quantity)
 
         return data
 
@@ -50,14 +60,47 @@ class SignboardSerializer(serializers.ModelSerializer):
         fields = ("id", "image")
 
 
+class CachedPrimaryKeyRelatedField(serializers.PrimaryKeyRelatedField):
+    def to_internal_value(self, data):
+        cache = getattr(self.root, "_products_cache", None)
+        if cache is not None:
+            try:
+                pk = (
+                    self.pk_field.to_internal_value(data)
+                    if self.pk_field
+                    else int(data)
+                )
+                product = cache.get(pk)
+                if product is None:
+                    self.fail("does_not_exist", pk_value=data)
+                return product
+            except (ValueError, TypeError):
+                self.fail("incorrect_type", data_type=type(data).__name__)
+
+        return super().to_internal_value(data)
+
+
 class OrderItemSerializer(serializers.ModelSerializer):
+    product = CachedPrimaryKeyRelatedField(queryset=Product.objects.all())
+    price = serializers.DecimalField(
+        max_digits=10, decimal_places=2, read_only=True
+    )  # added for swagger-ui documentation
+
     class Meta:
         model = OrderItem
-        fields = ("id", "product", "quantity")
+        fields = (
+            "id",
+            "product",
+            "quantity",
+            "unit_price",
+            "price",
+        )
+        read_only_fields = ("id", "unit_price", "price")
 
     def to_representation(self, instance):
         data = super().to_representation(instance)
         data["product"] = instance.product.name
+        data["price"] = str(instance.price)
         return data
 
 
@@ -66,9 +109,36 @@ class OrderSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Order
-        fields = ("id", "items")
+        fields = ("id", "items", "total_amount")
+        read_only_fields = ("id", "total_amount")
+
+    def to_internal_value(self, data):
+        items_raw = data.get("items") or []
+        product_ids = [
+            item["product"]
+            for item in items_raw
+            if isinstance(item, dict) and item.get("product")
+        ]
+        self._products_cache = {
+            p.id: p for p in Product.objects.filter(id__in=product_ids)
+        }
+
+        return super().to_internal_value(data)
+
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        payment = instance.payment
+        data["payment_status"] = payment.status
+        match payment.status:
+            case "UNPAID":
+                data["payment_url"] = payment.session_url
+            case "PAID":
+                data["receipt"] = payment.receipt
+        return data
 
     def validate_items(self, value):
+        PRODUCTS_QUANTITY_LIMIT = 100
+
         unique_ids = set()
         for item in value:
             product = item["product"]
@@ -84,6 +154,15 @@ class OrderSerializer(serializers.ModelSerializer):
                 )
 
             unique_ids.add(product.id)
+
+        # Stripe API products limit
+        if len(unique_ids) > PRODUCTS_QUANTITY_LIMIT:
+            raise ValidationError(
+                {
+                    "Counting error": f"There should be less than {PRODUCT_QUANTITY_LIMIT} products"
+                }
+            )
+
         return value
 
     @transaction.atomic
@@ -121,8 +200,19 @@ class OrderSerializer(serializers.ModelSerializer):
                     "error": "One of the items in your cart was out of stock during checkout."
                 }
             )
-        OrderItem.objects.bulk_create(order_items)
+
+        created_items = OrderItem.objects.bulk_create(order_items)
+        order._prefetched_objects_cache = {"items": created_items}
+
+        # It can be done asynchronously on better hardware.
+        create_stripe_session(order=order)
 
         return order
 
     def update(self, instance, validated_data): ...
+
+
+class SeriesSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Series
+        fields = ("id", "name")

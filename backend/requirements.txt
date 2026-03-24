@@ -7,4 +7,6 @@ gunicorn
 psycopg2-binary
 dj-database-url
 whitenoise
+webcolors==25.10.0
+drf-spectacular
 stripe
