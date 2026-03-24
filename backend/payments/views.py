@@ -5,7 +5,7 @@ import stripe
 from django.conf import settings
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.timezone import now
-from django.db.models import F
+from django.db.models import F, Value
 from rest_framework import status
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
@@ -18,12 +18,14 @@ WEBHOOK_KEY = settings.STRIPE_WEBHOOK_KEY
 UPDATE_PAYMENT_MINUTES = 20
 
 
-def order_rollback(order: Order):
-    items = order.items.all()
-    for item in items:
-        item.product.stock_quantity = F("stock_quantity") + item.quantity
-    Product.objects.bulk_update((item.product for item in items), ("stock_quantity",))
-    OrderItem.objects.filter(order=order).delete()
+def _order_rollback(order: Order):
+    def generator(order: Order) -> Product:
+        items = order.items.all()
+        for item in items:
+            item.product.stock_quantity = F("stock_quantity") + Value(item.quantity)
+            yield item.product
+
+    Product.objects.bulk_update(generator(order), ("stock_quantity",))
 
 
 def _update_payment(
@@ -47,17 +49,11 @@ def payment_webhook(request):
     payload = request.body
     try:
         sig_header = request.META["HTTP_STRIPE_SIGNATURE"]
-
-        # for development
-        # event = stripe.Event.construct_from(
-        #     json.loads(payload), settings.STRIPE_PRIVATE_KEY
-        # )
-
-        # for production
         event = stripe.Webhook.construct_event(payload, sig_header, WEBHOOK_KEY)
-
-    except (ValueError, KeyError, stripe.error.SignatureVerificationError):
+    except (ValueError, stripe.error.SignatureVerificationError):
         return Response(status=status.HTTP_403_FORBIDDEN)
+    except KeyError:
+        return Response(status=status.HTTP_400_BAD_REQUEST)
 
     event_obj = event.data.object
     if (metadata := getattr(event_obj, "metadata", None)) and (
@@ -70,7 +66,7 @@ def payment_webhook(request):
                 _update_payment(order_pk, "receipt", event_obj.receipt_url)
             case "checkout.session.expired":
                 payment = _update_payment(order_pk, "status", "CANCELED", prefetch=True)
-                order_rollback(payment.order)
+                _order_rollback(payment.order)
         return Response(status=status.HTTP_200_OK)
     else:
         return Response(status=status.HTTP_400_BAD_REQUEST)
