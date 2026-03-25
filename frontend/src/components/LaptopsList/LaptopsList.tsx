@@ -3,60 +3,61 @@ import { ProductsList } from "../ProductsList/ProductsList";
 import styles from "./LaptopsList.module.scss";
 import { useState } from "react";
 import classNames from "classnames";
+import { listByFilter } from "@/utils/listByFilter";
+import type { Filter } from "@/types/Filter";
 
-type Props = {
+type LaptopsListProps = {
   products: Product[];
+  errorMessage: string;
 }
 
-type filter = 'all' | 'inStock' | 'sale' | 'rated' | 'premium';
+export const LaptopsList: React.FC<LaptopsListProps> = ({ products, errorMessage }) => {
+  const [selectedFilter, setSelectedFilter] = useState<Filter>('all');
 
-export const LaptopsList: React.FC<Props> = ({ products }) => {
-  const [selectedFilter, setSelectedFilter] = useState<filter>('all');
-
-  const filterdList = () => {
-    switch (selectedFilter) {
-      case 'inStock':
-        return products.filter(product => product.stock_quantity > 0)
-
-      case 'sale':
-        return products.filter(product => product.sale_price !== null)
-
-      case 'rated':
-        return products.filter(product => +product.rating_avg > 4.7)
-
-      case 'premium':
-        return products.filter(product => +product.original_price > 1000)
-
-      default:
-        return products;
-    }
-  }
 
   const isActive = (field: string) => {
     return classNames(styles.laptopsList__btn, { [styles.activeBtn]: selectedFilter === field })
   }
 
+  const filterdList = listByFilter(products, selectedFilter);
+
+  const btns: { button: string, field: Filter }[] = [
+    { button: 'All products', field: 'all' },
+    { button: 'In stock', field: 'inStock' },
+    { button: 'On Sale', field: 'sale' },
+    { button: 'Top Rated', field: 'rated' },
+    { button: 'Premium Picks', field: 'premium' },
+  ]
+
+  const message = errorMessage || (!errorMessage && products.length === 0 ? 'There are no products' : null);
+
   return (
     <section className={styles.laptopsList}>
       <div className={styles.container}>
-        <ul className={styles.laptopsList__btns}>
-          <li className={styles.laptopsList__item}>
-            <button onClick={() => setSelectedFilter('inStock')} className={isActive('inStock')}>In stock</button>
-          </li>
-          <li className={styles.laptopsList__item}>
-            <button onClick={() => setSelectedFilter('sale')} className={isActive('sale')}>On Sale</button>
+        {products.length > 0 && (
+          <>
+            <ul className={styles.laptopsList__btns}>
+              {btns.map((btn, index) => (
+                <li key={index} className={styles.laptopsList__item}>
+                  <button onClick={() => setSelectedFilter(btn.field)} className={isActive(btn.field)}>{btn.button}</button>
+                </li>
+              ))}
+            </ul>
 
-          </li>
-          <li className={styles.laptopsList__item}>
-            <button onClick={() => setSelectedFilter('rated')} className={isActive('rated')}>Top Rated</button>
+            {filterdList.length > 0 ? (
+              <ProductsList products={filterdList} title="Laptops" bgBanner="url(images/msi-laptops-bg.png)" toProducts="14" />
+            ) : (
+              <p className={styles.laptopsList__errorMessage}>No products found for this filter</p>
+            )}
+          </>
+        )}
 
-          </li>
-          <li className={styles.laptopsList__item}>
-            <button onClick={() => setSelectedFilter('premium')} className={isActive('premium')}>Premium Picks</button>
-          </li>
-        </ul>
-        <ProductsList products={filterdList()} title="MSI
-Laptops" bgBanner="url(images/msi-laptops-bg.png)" toProducts="14" />
+        {message && (
+          <div className={styles.laptopsList__error}>
+            <h1 className={styles.laptopsList__title}>Laptops</h1>
+            <p className={styles.laptopsList__errorMessage}>{message}</p>
+          </div>
+        )}
       </div>
     </section>
   );

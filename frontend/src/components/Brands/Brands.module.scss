@@ -1,15 +1,37 @@
 @import "../../globalStyles.scss";
 
 .brands {
-  padding-bottom: 42px;
-  
+  padding-bottom: 90px;
+
+  @include onPhone() {
+   padding-bottom: 16px;
+  }
+
   &__list {
     display: flex;
     align-items: center;
     justify-content: space-between;
+
+    @include onTablet() {
+      flex-wrap: wrap;
+      gap: 50px;
+    }
+
+    @include onPhone() {
+      flex-wrap: wrap;
+      gap: 20px;
+    }
   }
 
   &__listItem:not(:last-child) {
     margin-right: 47px;
+
+    @include onTablet() {
+      margin-right: 0;
+    }
+
+    @include onPhone() {
+      margin-right: 0;
+    }
   }
 }
