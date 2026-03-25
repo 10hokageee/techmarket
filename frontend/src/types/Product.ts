@@ -6,9 +6,15 @@ export type Product = {
   image: string | null;
   stock_quantity: number;
   original_price: string;
-  sale_price: string | null;
+  sale_price: string;
+  characteristics: {
+    functions: string;
+    interface: string;
+    compatibility: string;
+  };
+  color: string;
   description: string;
-  status: string;
+  status: boolean;
   reviews: number;
   rating_avg: string;
 };

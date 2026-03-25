@@ -2,16 +2,37 @@
 
 .zipBlock {
   padding-bottom: 14px;
+
+  @include onTablet() {
+    padding-bottom: 17px;
+  }
+
   &__inner {
     background-color: #f5f7ff;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 20px 0;
+    padding: 20px 5px;
+
+    @include onPhone() {
+      flex-direction: column;
+    }
   }
 
   &__logo {
     margin-right: 12px;
+
+    @include onTablet() {
+      width: 48px;
+      height: 17px;
+    }
+
+    @include onPhone() {
+      width: 37px;
+      height: 13px;
+      margin-right: 0;
+      margin-bottom: 17px;
+    }
   }
 
   &__text {
@@ -21,6 +42,11 @@
     color: #272560;
     padding-left: 15px;
     position: relative;
+
+    @include onTablet() {
+      font-size: 14px;
+      padding-left: 12px;
+    }
 
     & span {
       @include poppins-600;
@@ -35,6 +61,21 @@
       left: 0;
       top: 50%;
       transform: translateY(-50%);
+
+      @include onTablet() {
+        height: 17px;
+      }
+
+      @include onPhone() {
+        display: none;
+      }
+    }
+
+    @include onPhone() {
+      padding-left: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
   }
 
@@ -44,5 +85,10 @@
     line-height: 120.5%;
     color: #272560;
     text-decoration: underline;
+
+    @include onPhone() {
+      display: block;
+      font-size: 18px;
+    }
   }
 }

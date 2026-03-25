@@ -3,14 +3,14 @@ import styles from './ProductsList.module.scss';
 import type { Product } from '@/types/Product';
 import { ProductCard } from '../ProductCard/ProductCard';
 
-type Props = {
+type ProductsListProps = {
   products: Product[];
   title: string;
   bgBanner: string;
   toProducts: string;
 }
 
-export const ProductsList: React.FC<Props> = ({ products, title, bgBanner, toProducts }) => {
+export const ProductsList: React.FC<ProductsListProps> = ({ products, title, bgBanner, toProducts }) => {
   return (
     <div className={styles.productsList}>
         <div className={styles.productsList__inner}>

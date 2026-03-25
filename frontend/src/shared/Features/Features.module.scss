@@ -1,12 +1,23 @@
 @import "../../globalStyles.scss";
 
 .features {
-  padding-bottom: 46px;
-  
+  padding-bottom: 60px;
+
   &__list {
     display: flex;
     align-items: center;
     justify-content: space-around;
+
+    @include onTablet() {
+      justify-content: space-between;
+    }
+
+    @include onPhone() {
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+    }
   }
 
   &__listItem {
@@ -16,6 +27,10 @@
     max-width: 265px;
     width: 100%;
     text-align: center;
+
+    @include onTablet() {
+      max-width: 219px;
+    }
   }
 
   &__img {
@@ -25,6 +40,18 @@
     border-radius: 50%;
     position: relative;
     margin-bottom: 24px;
+
+    @include onTablet() {
+      width: 45px;
+      height: 45px;
+      margin-bottom: 7px;
+    }
+
+    @include onPhone() {
+      width: 45px;
+      height: 45px;
+      margin-bottom: 7px;
+    }
 
     &::after {
       content: "";
@@ -37,6 +64,10 @@
       background-position: center;
       background-repeat: no-repeat;
       background-size: contain;
+
+      @include onTablet() {
+        background-size: 17px 17px;
+      }
     }
 
     &--headphones::after {
@@ -58,6 +89,11 @@
     line-height: 132.5%;
     color: #000000;
     margin-bottom: 13px;
+
+    @include onTablet() {
+      font-size: 14px;
+      margin-bottom: 5px;
+    }
   }
 
   &__text {

@@ -3,12 +3,23 @@
 .newProducts {
   padding-block: 37px 18px;
 
+  @include onPhone() {
+    padding-block: 19px 13px;
+  }
+
   &__title {
     @include poppins-600;
     font-size: 22px;
     line-height: 33px;
     color: #000000;
     margin-bottom: 13px;
+  }
+
+  &__errorMessage {
+    @include poppins-400;
+    font-size: 18px;
+    line-height: 120.5%;
+    color: #000;
   }
 
   &__btn {
@@ -24,6 +35,14 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
+
+    @include onTablet() {
+      display: none;
+    }
+
+    @include onPhone() {
+      display: none;
+    }
   }
 
   &__btnPrev {

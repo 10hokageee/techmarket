@@ -1,23 +1,16 @@
 import classNames from 'classnames';
 import styles from './Slider.module.scss';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 import { Autoplay, Navigation } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
-import { getSignboardService } from '../../services/signboardService';
-// import type { Signboard } from '../../types/Signboard';
-// import { getSignboardService } from '../../services/signboardService';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 export const Slider = () => {
   const prevRef = useRef<HTMLButtonElement>(null);
   const nextRef = useRef<HTMLButtonElement>(null);
-  // const [slides, setSlides] = useState<Signboard[]>([]);
 
-
-  useEffect(() => {
-    getSignboardService().then(data => console.log(data));
-  }, [])
 
   const sliderImages = [
     {
@@ -44,7 +37,7 @@ export const Slider = () => {
                 styles.slider__btnPrev
               )}
             >
-              <img src="/icons/slider-arrow.svg" alt="Prev arrow" />
+              <ChevronLeft color='#fff' width={'16px'} height={'16px'} />
             </button>
           </div>
 
@@ -96,7 +89,11 @@ export const Slider = () => {
                 styles.slider__btnNext
               )}
             >
+<<<<<<< HEAD
               <img src="/icons/slider-arrow.svg" alt="Next arrow" />
+=======
+              <ChevronRight color='#fff' width={'16px'} height={'16px'} />
+>>>>>>> featrues/loader
             </button>
           </div>
         </div>

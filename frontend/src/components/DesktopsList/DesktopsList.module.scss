@@ -7,6 +7,11 @@
     display: flex;
     align-items: center;
     margin-bottom: 20px;
+
+    @include onPhone() {
+      flex-wrap: wrap;
+      gap: 9px;
+    }
   }
 
   &__item {
@@ -17,12 +22,40 @@
 
     &:not(:last-child) {
       margin-right: 25px;
+
+      @include onTablet() {
+        margin-right: 16px;
+      }
+
+      @include onPhone() {
+        margin-right: 7px;
+        font-size: 14px;
+      }
+    }
+
+    @include onTablet() {
+      font-size: 14px;
     }
   }
 
   &__btn {
     cursor: pointer;
     padding-bottom: 3px;
+  }
+
+  &__title {
+    @include poppins-600;
+    font-size: 22px;
+    line-height: 33px;
+    color: #000000;
+    margin-bottom: 25px;
+  }
+
+  &__errorMessage {
+    @include poppins-400;
+    font-size: 18px;
+    line-height: 120.5%;
+    color: #000;
   }
 }
 
