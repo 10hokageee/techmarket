@@ -13,6 +13,17 @@ import { FilterCatalog } from "../FilterCatalog/FilterCatalog";
 import classNames from "classnames";
 import { ChevronLeft } from "lucide-react";
 
+const CATEGORIES = [
+  'Laptops',
+  'Desktop PCs',
+  'Networking Devices',
+  'Printers & Scanners',
+  'All Other Product'
+];
+
+const PAGE = '1';
+const PER_PAGE = '4';
+
 export const Catalog = () => {
   const location = useLocation();
   const pathnames = location.pathname.split('/').filter(x => x);
@@ -23,10 +34,9 @@ export const Catalog = () => {
   const [errorMessage, setErrorMessage] = useState('');
   const [reload, setReload] = useState(new Date());
   const [searchParams, setSearchParams] = useSearchParams();
-  const page = +(searchParams.get('page') || '1');
-  const perPageParam = searchParams.get('perPage') || '4';
+  const page = +(searchParams.get('page') || PAGE);
+  const perPageParam = searchParams.get('perPage') || PER_PAGE;
   const perPage = +perPageParam;
-  const validCategories = ['Laptops', 'Desktop PCs', 'Networking Devices', 'Printers & Scanners', 'All Other Product'];
   const [isOpen, setIsOpen] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
   const navigate = useNavigate();
@@ -88,7 +98,7 @@ export const Catalog = () => {
     setReload(new Date());
   };
 
-  if (decodedCategory && !validCategories.includes(decodedCategory)) {
+  if (decodedCategory && !CATEGORIES.includes(decodedCategory)) {
     return <PageNotFound />;
   }
 
