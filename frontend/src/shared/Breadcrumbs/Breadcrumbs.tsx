@@ -27,7 +27,7 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ pathnames }) => {
               {!last ? (
                 <>
                   <Link to={to}>{decodedValue}</Link>
-                  <ChevronRight className="absolute right-0 top-1/2 transform translate-y-[-50%]" color="#0156FF" width={'10px'} height={'10px'} />
+                  <ChevronRight className="absolute right-0 top-1/2 transform translate-y-[-50%]" color="#0156FF" size={10} />
                 </>
               ) : (
                 <span className="block text-[#A2A6B0]">{decodedValue}</span>

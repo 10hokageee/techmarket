@@ -97,6 +97,14 @@ export const Footer = () => {
     </ul>
   );
 
+  const payments = [
+    {source: '/icons/discover.svg"', alt: ''},
+    {source: '/icons/visa.svg', alt: ''},
+    {source: '/icons/maestro.svg', alt: ''},
+    {source: '/icons/discover.svg', alt: ''},
+    {source: '/icons/american-express.svg"', alt: ''},
+  ]
+
   return (
     <footer className={styles.footer}>
       <div className={styles.container}>
@@ -148,11 +156,11 @@ export const Footer = () => {
             </div>
 
             <ul className={styles.footer__bottomPaymants}>
-              <li><img src="/icons/discover.svg" alt="" /></li>
-              <li><img src="/icons/visa.svg" alt="" /></li>
-              <li><img src="/icons/maestro.svg" alt="" /></li>
-              <li><img src="/icons/discover.svg" alt="" /></li>
-              <li><img src="/icons/american-express.svg" alt="" /></li>
+              {payments.map(pay => (
+                <li key={pay.source}>
+                  <img src={pay.source} alt={pay.alt} />
+                </li>
+              ))}
             </ul>
 
             <p className={styles.footer__bottomCopyright}>
