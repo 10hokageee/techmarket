@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import styles from './Menu.module.scss';
 import { NavLink } from 'react-router-dom';
-import { X } from 'lucide-react';
+import { MenuIcon, X } from 'lucide-react';
 
 type MenuProps = {
   isOpen: boolean;
@@ -35,7 +35,7 @@ export const Menu: React.FC<MenuProps> = ({ isOpen, closeMenu }) => {
       <nav className={styles.menu__nav}>
         <div className={styles.menu__top}>
           <NavLink onClick={closeMenu} to='home'>
-            <img src="/icons/header-logo.svg" alt="Logotype" />
+            <MenuIcon />
           </NavLink>
 
           <button onClick={closeMenu} className={styles.menu__topClose}>
