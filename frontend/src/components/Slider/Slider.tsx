@@ -89,11 +89,7 @@ export const Slider = () => {
                 styles.slider__btnNext
               )}
             >
-<<<<<<< HEAD
-              <img src="/icons/slider-arrow.svg" alt="Next arrow" />
-=======
               <ChevronRight color='#fff' width={'16px'} height={'16px'} />
->>>>>>> featrues/loader
             </button>
           </div>
         </div>

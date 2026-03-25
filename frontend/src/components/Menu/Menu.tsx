@@ -22,13 +22,13 @@ export const Menu: React.FC<MenuProps> = ({ isOpen, closeMenu }) => {
   }
 
   const links = [
-    { link: 'Laptops', to: '1' },
-    { link: 'Desktop PCs', to: '2' },
-    { link: 'Networking Devices', to: '3' },
-    { link: 'Printers & Scanners', to: '4' },
-    { link: 'PC Parts', to: '5' },
-    { link: 'All Other Products', to: '6' },
-  ]
+    { link: 'Laptops', to: 'laptop' },
+    { link: 'Desktop PCs', to: 'pc' },
+    { link: 'Networking Devices', to: 'network_device' },
+    { link: 'Printers & Scanners', to: 'pc_part' },
+    { link: 'PC Parts', to: 'pc-parts' },
+    { link: 'All Other Products', to: 'other' },
+  ];
 
   return (
     <aside className={classNames(styles.menu, { [styles.menuOpen]: isOpen })}>
