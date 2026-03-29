@@ -43,6 +43,9 @@ class SessionParameters(models.Model):
     country = CountryField(null=True)
     # channel field not implemented
 
+    class Meta:
+        db_table = "session_parameters"
+
 
 # class EventChoices(models.TextChoices):
 #         FIRST_VISIT          = "FIRST_VISIT",         _("First visit")
