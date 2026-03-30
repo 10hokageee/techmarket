@@ -1,4 +1,5 @@
 from django.db.models import Q
+from django.utils.timezone import localtime
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.status import HTTP_200_OK
@@ -8,18 +9,18 @@ from analytics.models import SessionParameters
 
 class SessionParametersDevView(APIView):
     def get(self, request):
-        queryset = SessionParameters.objects.select_related("user").filter(
-            (
-                ~(Q(device="UNKNOWN") | Q(device="BOT"))
-                & ~Q(browser="OTHER")
-                & ~Q(continent="NORTH AMERICA")
-                & ~Q(country="US")
-            )
+        queryset = SessionParameters.objects.select_related("user").exclude(
+            (Q(device="UNKNOWN") | Q(device="BOT"))
+            & Q(browser="OTHER")
+            & Q(continent="NORTH AMERICA")
+            & Q(country="US")
+            & Q(user__isnull=True)
         )
+
         result = [
             {
                 "id": obj.pk,
-                "started_at": obj.started_at,
+                "started_at": localtime(obj.started_at),
                 "device": obj.device,
                 "browser": obj.browser,
                 "continent": obj.continent,
