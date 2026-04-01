@@ -1,6 +1,6 @@
 import re
 
-from django.db.models import Q, QuerySet, Subquery, Value
+from django.db.models import Q, QuerySet, Value
 from django.db.models.functions import Coalesce, Left, StrIndex, Concat
 from rest_framework import viewsets, mixins
 from rest_framework.decorators import api_view, permission_classes
@@ -66,21 +66,11 @@ class ProductViewSet(viewsets.ModelViewSet):
             # default order by -created_at
             queryset = self._order_by_param(param=order_by, queryset=queryset)
         else:
-            default_series = {
-                "Custom PCs",
-                "MSI GS Series",
-                "MSI GT Series",
-                "MSI GL Series",
-                "MSI GE Series",
-                "MSI Infinite Series",
-                "MSI Triden",
-                "MSI Nightblade",
-            }
-            latest_ids = Product.objects.values_list("id", flat=True)[:NEW_PRODUCTS]
             queryset = queryset.filter(
-                Q(series__name__in=default_series) | Q(id__in=latest_ids)
+                Q(id__in=Product.objects.values_list("id", flat=True)[:NEW_PRODUCTS])
+                | Q(id__in=Product.objects.order_by("?").values_list("id", flat=True)[:NEW_PRODUCTS * 2])
             )
-        return queryset.distinct()
+        return queryset
 
     def get_object(self):
         lookup_url_kwarg = self.lookup_url_kwarg or self.lookup_field

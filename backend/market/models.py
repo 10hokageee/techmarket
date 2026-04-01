@@ -48,18 +48,18 @@ class Series(models.Model):
         return self.name
 
 
-class Product(models.Model):
-    CATEGORY_CHOICES = (
-        ("LAPTOP", _("Laptops")),
-        ("PC", _("Desktop PC`s")),
-        ("NETWORK_DEVICE", _("Networking devices")),
-        ("PRINTER_SCANNER", _("Printers & Scanners")),
-        ("PC_PART", _("PC parts")),
-        ("OTHER", _("Others product")),
-    )
+class CategoryChoices(models.TextChoices):
+    LAPTOP = "LAPTOP", _("Laptops")
+    PC = "PC", _("Desktop PC`s")
+    NETWORK_DEVICE = "NETWORK_DEVICE", _("Networking devices")
+    PRINTER_SCANNER = "PRINTER_SCANNER", _("Printers & Scanners")
+    PC_PART = "PC_PART", _("PC parts")
+    OTHER = "OTHER", _("Others product")
 
+
+class Product(models.Model):
     name = models.CharField(max_length=62, unique=True)
-    category = models.CharField(max_length=20, choices=CATEGORY_CHOICES)
+    category = models.CharField(max_length=20, choices=CategoryChoices.choices)
     series = models.ForeignKey(
         Series, on_delete=models.CASCADE, related_name="products"
     )
@@ -153,7 +153,7 @@ class Signboard(models.Model):
         ordering = ["-added_at"]
 
 
-# not use in dev
+# not used
 class Review(models.Model):
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="reviews"
