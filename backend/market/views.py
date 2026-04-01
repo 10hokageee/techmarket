@@ -1,7 +1,7 @@
 import re
 
-from django.db.models import Q, QuerySet
-from django.db.models.functions import Coalesce
+from django.db.models import Q, QuerySet, Subquery, Value
+from django.db.models.functions import Coalesce, Left, StrIndex, Concat
 from rest_framework import viewsets, mixins
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
@@ -84,8 +84,28 @@ class ProductViewSet(viewsets.ModelViewSet):
 
     def get_object(self):
         lookup_url_kwarg = self.lookup_url_kwarg or self.lookup_field
+        obj_ = Product.objects.select_related("series")
+        local_kwargs = {self.lookup_field: self.kwargs[lookup_url_kwarg]}
+
+        if color := self.request.query_params.get("color"):
+            base_name_subquery = (
+                Product.objects
+                .filter(
+                    **local_kwargs
+                )
+                .annotate(
+                    base_name=Left(
+                        "name", StrIndex("name", Value("__")) - 1
+                    )
+                )
+                .values("base_name")[:1]
+            )
+            return get_object_or_404(
+                obj_,
+                name=Concat(base_name_subquery, Value(f"__{color.upper()}"))
+            )
         return get_object_or_404(
-            Product.objects, **{self.lookup_field: self.kwargs[lookup_url_kwarg]}
+            obj_, **local_kwargs
         )
 
     def paginate_queryset(self, queryset):

@@ -50,12 +50,12 @@ class Series(models.Model):
 
 class Product(models.Model):
     CATEGORY_CHOICES = (
-        ("LAPTOP",          _("Laptops")),
-        ("PC",              _("Desktop PC`s")),
-        ("NETWORK_DEVICE",  _("Networking devices")),
+        ("LAPTOP", _("Laptops")),
+        ("PC", _("Desktop PC`s")),
+        ("NETWORK_DEVICE", _("Networking devices")),
         ("PRINTER_SCANNER", _("Printers & Scanners")),
-        ("PC_PART",         _("PC parts")),
-        ("OTHER",           _("Others product")),
+        ("PC_PART", _("PC parts")),
+        ("OTHER", _("Others product")),
     )
 
     name = models.CharField(max_length=62, unique=True)
@@ -63,7 +63,10 @@ class Product(models.Model):
     series = models.ForeignKey(
         Series, on_delete=models.CASCADE, related_name="products"
     )
-    image = models.ImageField(null=True, blank=True, upload_to=_uuid_photo_save)
+    # image = models.ImageField(null=True, blank=True, upload_to=_uuid_photo_save)
+    images = ArrayField(
+        models.ImageField(upload_to=_uuid_photo_save), default=list, blank=True
+    )
     stock_quantity = models.PositiveSmallIntegerField()
     original_price = models.DecimalField(
         max_digits=10, decimal_places=2, validators=(MinValueValidator(0),)
@@ -77,6 +80,7 @@ class Product(models.Model):
     )
     characteristics = models.JSONField(default=dict, null=True, blank=True)
     colors = ArrayField(models.CharField(max_length=20))
+    current_color = models.CharField(max_length=20)
     description = models.TextField(blank=True, null=True)
 
     rating_avg = models.FloatField()

@@ -1,4 +1,4 @@
-from market.models import _color_validator, Series
+from market.models import _color_validator, Series, _setdefault_float_value, _setdefault_int_value
 from payments.tasks import create_stripe_session
 from django.db import transaction, IntegrityError
 from django.db.models import F
@@ -16,7 +16,6 @@ class ProductSerializer(serializers.ModelSerializer):
             "name",
             "category",
             "series",
-            "image",
             "stock_quantity",
             "original_price",
             "sale_price",
@@ -40,6 +39,11 @@ class ProductSerializer(serializers.ModelSerializer):
                 )
         return attrs
 
+    def validate_name(self, data):
+        if "__" in data:
+            raise ValidationError('Names containing "__" are prohibited.')
+        return data
+
     def validate_colors(self, data):
         return _color_validator(data, ValidationError)
 
@@ -51,7 +55,38 @@ class ProductSerializer(serializers.ModelSerializer):
         data["rating_avg"] = str(instance.rating_avg)
         data["status"] = bool(instance.stock_quantity)
 
+        if instance.current_color:
+            data["current_color"] = instance.current_color
+
+        name_split = instance.name.split("__")
+        name_split[-1] = name_split[-1].capitalize()
+        data["name"] = " ".join(name_split)
+
         return data
+
+    def create(self, validated_data):
+        name = validated_data.pop("name")
+        products_data = (
+            Product(
+                current_color=color,
+                name=f"{name}__{color}",
+                rating_avg=round(_setdefault_float_value(1.0, 5.0), 2),
+                reviews=_setdefault_int_value(3, 52, 10),
+                **validated_data
+            )
+            for color in validated_data.get("colors")
+        )
+
+        # for to_representation ----------------------------------|
+        product = Product.objects.bulk_create(products_data)[0]
+        product.current_color = None
+        product.name = name
+        # -----------------------------------------------------|
+        return product
+
+    def update(self, instance, validated_data):
+        # TODO implement update
+        ...
 
 
 class SignboardSerializer(serializers.ModelSerializer):
