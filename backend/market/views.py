@@ -6,6 +6,7 @@ from rest_framework import viewsets, mixins
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
+from rest_framework.generics import get_object_or_404
 from market.models import Product, Signboard, Order, Series
 from market.serializers import (
     ProductSerializer,
@@ -80,6 +81,12 @@ class ProductViewSet(viewsets.ModelViewSet):
                 Q(series__name__in=default_series) | Q(id__in=latest_ids)
             )
         return queryset.distinct()
+
+    def get_object(self):
+        lookup_url_kwarg = self.lookup_url_kwarg or self.lookup_field
+        return get_object_or_404(
+            Product.objects, **{self.lookup_field: self.kwargs[lookup_url_kwarg]}
+        )
 
     def paginate_queryset(self, queryset):
         return super().paginate_queryset(queryset) if self.pagination_flag else None
@@ -194,8 +201,10 @@ class OrderViewSet(
     permission_classes = (IsAuthenticated,)
 
     def get_queryset(self):
-        return self.queryset.select_related("payment").prefetch_related("items__product").filter(
-            user=self.request.user
+        return (
+            self.queryset.select_related("payment")
+            .prefetch_related("items__product")
+            .filter(user=self.request.user)
         )
 
     def perform_create(self, serializer):
