@@ -1,4 +1,6 @@
 import os
+
+from cloudinary.models import CloudinaryField
 from webcolors import names as css_colors
 from random import (
     uniform as _setdefault_float_value,
@@ -28,19 +30,6 @@ def _color_validator(colors: list, exception):
     return results
 
 
-def _uuid_photo_save(instance: "Product" | "Signboard", filename: str):
-    value, ext = os.path.splitext(filename)
-    if isinstance(instance, Product):
-        attr = instance.name
-        file_path = "product_images"
-    elif isinstance(instance, Signboard):
-        attr = value[:52]
-        file_path = "signboard_images"
-    else:
-        raise ValueError("Instance must be of type Product, Signboard")
-    return os.path.join(file_path, f"{slugify(attr)}-{uuid.uuid4()}{ext}")
-
-
 class Series(models.Model):
     name = models.CharField(max_length=255, unique=True)
 
@@ -62,10 +51,6 @@ class Product(models.Model):
     category = models.CharField(max_length=20, choices=CategoryChoices.choices)
     series = models.ForeignKey(
         Series, on_delete=models.CASCADE, related_name="products"
-    )
-    # image = models.ImageField(null=True, blank=True, upload_to=_uuid_photo_save)
-    images = ArrayField(
-        models.ImageField(upload_to=_uuid_photo_save), default=list, blank=True
     )
     stock_quantity = models.PositiveSmallIntegerField()
     original_price = models.DecimalField(
@@ -116,6 +101,13 @@ class Product(models.Model):
         super().save(*args, **kwargs)
 
 
+class ProductImage(models.Model):
+    product = models.ForeignKey(
+        Product, on_delete=models.CASCADE, related_name="images"
+    )
+    image = CloudinaryField("TechMarketProducts")
+
+
 class Order(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(
@@ -147,7 +139,7 @@ class OrderItem(models.Model):
 
 class Signboard(models.Model):
     added_at = models.DateTimeField(auto_now_add=True)
-    image = models.ImageField(blank=True, upload_to=_uuid_photo_save)
+    image = CloudinaryField("TechMarketSignboards") # TODO visual url
 
     class Meta:
         ordering = ["-added_at"]

@@ -1,13 +1,13 @@
 import re
 
-from django.db.models import Q, QuerySet, Value
+from django.db.models import Q, QuerySet, Value, F
 from django.db.models.functions import Coalesce, Left, StrIndex, Concat
-from rest_framework import viewsets, mixins
-from rest_framework.decorators import api_view, permission_classes
+from rest_framework import viewsets, mixins, status
+from rest_framework.decorators import api_view, permission_classes, action
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.generics import get_object_or_404
-from market.models import Product, Signboard, Order, Series
+from market.models import Product, Signboard, Order, Series, ProductImage
 from market.serializers import (
     ProductSerializer,
     SignboardSerializer,
@@ -68,38 +68,47 @@ class ProductViewSet(viewsets.ModelViewSet):
         else:
             queryset = queryset.filter(
                 Q(id__in=Product.objects.values_list("id", flat=True)[:NEW_PRODUCTS])
-                | Q(id__in=Product.objects.order_by("?").values_list("id", flat=True)[:NEW_PRODUCTS * 2])
+                | Q(
+                    id__in=Product.objects.order_by("?").values_list("id", flat=True)[
+                        : NEW_PRODUCTS * 2
+                    ]
+                )
             )
         return queryset
 
     def get_object(self):
         lookup_url_kwarg = self.lookup_url_kwarg or self.lookup_field
-        obj_ = Product.objects.select_related("series")
+        obj_ = Product.objects.select_related("series").prefetch_related("images")
         local_kwargs = {self.lookup_field: self.kwargs[lookup_url_kwarg]}
 
         if color := self.request.query_params.get("color"):
             base_name_subquery = (
-                Product.objects
-                .filter(
-                    **local_kwargs
-                )
-                .annotate(
-                    base_name=Left(
-                        "name", StrIndex("name", Value("__")) - 1
-                    )
-                )
+                Product.objects.filter(**local_kwargs)
+                .annotate(base_name=Left("name", StrIndex("name", Value("__")) - 1))
                 .values("base_name")[:1]
             )
             return get_object_or_404(
-                obj_,
-                name=Concat(base_name_subquery, Value(f"__{color.upper()}"))
+                obj_, name=Concat(base_name_subquery, Value(f"__{color.upper()}"))
             )
-        return get_object_or_404(
-            obj_, **local_kwargs
-        )
+        return get_object_or_404(obj_, **local_kwargs)
 
     def paginate_queryset(self, queryset):
         return super().paginate_queryset(queryset) if self.pagination_flag else None
+
+    @action(detail=True, methods=["POST"])
+    def upload_image(self, request, **_):
+        product = self.get_object()
+        images = request.FILES.getlist("images")
+        if images:
+            for image in images:
+                ProductImage.objects.create(product=product, image=image)
+            return Response(
+                {"Upload": "The upload was completed successfully."},
+                status=status.HTTP_200_OK,
+            )
+        return Response(
+            {"Upload": "No images found."}, status=status.HTTP_400_BAD_REQUEST
+        )
 
     def list(self, request, *args, **kwargs):
         response = super().list(request, *args, **kwargs)
@@ -107,6 +116,11 @@ class ProductViewSet(viewsets.ModelViewSet):
             for index, elem in enumerate(response.data):
                 elem["is_new"] = index < NEW_PRODUCTS
         return response
+
+    def perform_destroy(self, instance):
+        base_name = instance.name.rsplit("__", 1)[0]
+        names = (f"{base_name}__{color}" for color in instance.colors)
+        Product.objects.filter(name__in=names).delete()
 
     def query_params_validator(self):
         params = self.request.query_params

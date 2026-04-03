@@ -14,3 +14,5 @@ django-countries
 user-agents
 requests
 django-ipware
+cloudinary
+django-cloudinary-storage

@@ -1,5 +1,6 @@
 import os
 from .object_settings import *
+import cloudinary
 
 ENV_PARAMS = (
     "DJANGO_SECRET_KEY",
@@ -8,6 +9,9 @@ ENV_PARAMS = (
     "DATABASE_URL",
     "STRIPE_PRIVATE_KEY",
     "STRIPE_WEBHOOK_KEY",
+    "CLOUD_NAME",
+    "API_KEY",
+    "API_SECRET",
 )
 
 # Checking environment variables
@@ -34,3 +38,16 @@ CORS_ALLOW_ALL_ORIGINS = True
 # CORS_ALLOWED_ORIGINS = os.getenv(
 #     "CORS_ALLOWED_ORIGINS", "http://localhost:5173,http://127.0.0.1:5173"
 # ).split(",")
+
+CLOUDINARY_STORAGE = {
+    "CLOUD_NAME": os.environ["CLOUD_NAME"],
+    "API_KEY": os.environ["API_KEY"],
+    "API_SECRET": os.environ["API_SECRET"],
+}
+
+cloudinary.config(
+    cloud_name=os.environ["CLOUD_NAME"],
+    api_key=os.environ["API_KEY"],
+    api_secret=os.environ["API_SECRET"],
+    secure=True,
+)
