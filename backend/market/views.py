@@ -61,7 +61,12 @@ class ProductViewSet(viewsets.ModelViewSet):
             if colors := params.get("colors"):
                 queryset = self._filter_by_color(colors=colors, queryset=queryset)
 
-            queryset = self._iregex_filter(queryset=queryset)
+            if categories := params.get("categories"):
+                queryset = self._filter_by_categories(
+                    categories=categories, queryset=queryset
+                )
+            if series := params.get("series"):
+                queryset = self._series_iregex_filter(series=series, queryset=queryset)
 
             # default order by -created_at
             queryset = self._order_by_param(param=order_by, queryset=queryset)
@@ -145,21 +150,19 @@ class ProductViewSet(viewsets.ModelViewSet):
             return False
         return True
 
-    def _iregex_filter(self, queryset: QuerySet[Product]) -> QuerySet[Product]:
-        params = self.request.query_params
-        for param_name, field_lookup in (
-            ("categories", "category__iregex"),
-            ("series", "series__name__iregex"),
-        ):
-            if values := params.get(param_name):
-                pattern = "|".join(
-                    re.escape(item)
-                    for val in values.split(",")
-                    if (item := val.strip())
-                )
-                if pattern:
-                    queryset = queryset.filter(**{field_lookup: pattern})
-        return queryset
+    def _filter_by_categories(
+        self, categories: str, queryset: QuerySet[Product]
+    ) -> QuerySet[Product]:
+        categories_split = categories.upper().split(",")
+        return queryset.filter(category__in=categories_split)
+
+    def _series_iregex_filter(
+        self, series: str, queryset: QuerySet[Product]
+    ) -> QuerySet[Product]:
+        pattern = "|".join(
+            re.escape(item) for val in series.split(",") if (item := val.strip())
+        )
+        return queryset.filter(series__name__iregex=pattern)
 
     @staticmethod
     def _filter_by_status(param: str, queryset: QuerySet[Product]) -> QuerySet[Product]:
