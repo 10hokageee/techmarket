@@ -139,7 +139,7 @@ class OrderItem(models.Model):
 
 class Signboard(models.Model):
     added_at = models.DateTimeField(auto_now_add=True)
-    image = CloudinaryField("TechMarketSignboards") # TODO visual url
+    image = CloudinaryField("TechMarketSignboards")
 
     class Meta:
         ordering = ["-added_at"]

@@ -33,7 +33,7 @@ class ProductViewSet(viewsets.ModelViewSet):
     }
 
     def get_queryset(self):
-        queryset = Product.objects.select_related("series")
+        queryset = Product.objects.select_related("series").prefetch_related("images")
         params = self.request.query_params
 
         self.pagination_flag = (

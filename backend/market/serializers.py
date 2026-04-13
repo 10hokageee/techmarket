@@ -131,6 +131,13 @@ class SignboardSerializer(serializers.ModelSerializer):
         model = Signboard
         fields = ("id", "image")
 
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        data["image"] = instance.image.build_url(
+            fetch_format="auto", quality="auto"
+        ).rsplit(".", 1)[0]
+        return data
+
 
 class CachedPrimaryKeyRelatedField(serializers.PrimaryKeyRelatedField):
     def to_internal_value(self, data):
