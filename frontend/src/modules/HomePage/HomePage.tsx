@@ -8,27 +8,41 @@ import { getProducts } from "../../services/getProdcutsService";
 import { CurstomeProducts } from "@/components/CustomeProducts/CustomeProducts";
 import { LaptopsList } from "@/components/LaptopsList/LaptopsList";
 import { DesktopsList } from "@/components/DesktopsList/DesktopsList";
-import { MonitorList } from "@/components/MonitorsList/MonitorsList";
+import { ComponentsProducts } from "@/components/ComponentsProducts/ComponentsProdcuts";
+import { Loader } from "@/components/Loader/Loader";
 
 export const HomePage = () => {
   const [products, setProducts] = useState<Product[]>([]);
+  const [errorMessage, setErrorMessage] = useState('');
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    getProducts().then(productsFromServer => setProducts(productsFromServer))
-      .catch(e => console.log(e))
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setLoading(true);
+
+    setTimeout(() => {
+      getProducts().then(productsFromServer => setProducts(productsFromServer))
+        .catch(() => setErrorMessage('Something went wrong'))
+        .finally(() => setLoading(false));
+    }, 300)
   }, [])
 
-  const slicedProducts = products.slice(0, 4);
+  const productsByFilter = (category: string) => {
+    return products.filter(product => product.category.toLowerCase() === category.toLowerCase())
+  }
 
   return (
     <React.Fragment>
+      {loading && (
+        <Loader />
+      )}
       <Slider />
-      <NewProducts products={products} />
+      <NewProducts errorMessage={errorMessage} products={products} />
       <ZipBlock />
-      <CurstomeProducts products={slicedProducts} />
-      <LaptopsList products={slicedProducts} />
-      <DesktopsList products={slicedProducts} />
-      <MonitorList products={slicedProducts}/>
+      <CurstomeProducts errorMessage={errorMessage} products={productsByFilter('Others product')} />
+      <LaptopsList errorMessage={errorMessage} products={productsByFilter('Laptops')} />
+      <DesktopsList errorMessage={errorMessage} products={productsByFilter('Desktop PC`s')} />
+      <ComponentsProducts errorMessage={errorMessage} products={productsByFilter('PC parts')} />
       <Brands />
     </React.Fragment>
   );
