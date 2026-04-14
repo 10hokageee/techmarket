@@ -1,0 +1,160 @@
+import { useState, useMemo } from "react";
+import { Eye, EyeOff } from "lucide-react";
+
+export const Login = () => {
+  const [name, setName] = useState('');
+  const [errorName, setErrorName] = useState(false);
+  const [errorNameMessage, setErrorNameMessage] = useState('');
+
+  const [email, setEmail] = useState('');
+  const [errorEmail, setErrorEmail] = useState(false);
+  const [errorEmailMessage, setErrorEmailMessage] = useState('');
+
+  const [password, setPassword] = useState('');
+  const [errorPassword, setErrorPassword] = useState(false);
+  const [errorPasswordMessage, setErrorPasswordMessage] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+
+  const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,}$/;
+  const passwordRegex = /^[A-Za-z0-9!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]+$/;
+  const nameRegex = /^[A-Za-z0-9]{3,20}$/;
+
+  const isFormValid = useMemo(() => {
+    return name.length >= 3 && email.length > 0 && password.length >= 6;
+  }, [name, email, password]);
+
+  const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setName(e.target.value.replace(/\s/g, ''));
+    setErrorName(false);
+  }
+
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setEmail(e.target.value);
+    setErrorEmail(false);
+  }
+
+  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPassword(e.target.value);
+    setErrorPassword(false);
+  }
+
+  const handleFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    let isValid = true;
+
+    if (!nameRegex.test(name)) {
+      setErrorName(true);
+      setErrorNameMessage('Username must be 3-20 characters, Latin letters and numbers only');
+      isValid = false;
+    }
+
+    const cleanEmail = email.trim().toLowerCase();
+    if (!cleanEmail) {
+      setErrorEmail(true);
+      setErrorEmailMessage('Email is required');
+      isValid = false;
+    } else if (cleanEmail.length > 254) {
+      setErrorEmail(true);
+      setErrorEmailMessage("Email is too long");
+      isValid = false;
+    } else if (!emailRegex.test(cleanEmail)) {
+      setErrorEmail(true);
+      setErrorEmailMessage("Invalid email format (e.g. user@mail.com)");
+      isValid = false;
+    }
+
+    if (password.length < 6 || password.length > 15) {
+      setErrorPassword(true);
+      setErrorPasswordMessage('Password must be 6-15 characters long');
+      isValid = false;
+    } else if (!passwordRegex.test(password)) {
+      setErrorPassword(true);
+      setErrorPasswordMessage("Only Latin letters, numbers and symbols allowed");
+      isValid = false;
+    }
+
+    if (!isValid) {
+      return;
+    }
+
+    reset();
+  }
+
+  const reset = () => {
+    setEmail('');
+    setName('');
+    setPassword('');
+  }
+
+  return (
+    <section className="pb-[16px]">
+      <div className="max-w-[1370px] px-[15px] mx-auto my-0">
+        <h1 className="text-[18px] font-semibold font-poppins mb-[16px] xl:text-[32px]">Customer Login</h1>
+
+        <div className="bg-[#F5F7FF] px-[18px] py-[20px] md:max-w-[564px] w-full flex flex-col md:mx-auto xl:px-[57px] xl:py-[37px]">
+          <h2 className="text-[14px] font-semibold font-poppins mb-[19px] xl:text-[18px]">Registered Customers</h2>
+
+          <form className="flex flex-col gap-[15px]" onSubmit={handleFormSubmit}>
+
+            <label className="flex flex-col" htmlFor="name">
+              <p className="text-[11px] font-poppins font-semibold xl:text-[13px]">Your Name <span className="text-[#C94D3F]">*</span></p>
+              <input
+                onChange={handleNameChange}
+                value={name}
+                id="name"
+                autoComplete="username"
+                className={`bg-white py-[12px] px-[13px] border-[1px] rounded-[10px] outline-none ${errorName ? 'border-[#C94D3F]' : 'border-[#A2A6B0]'}`}
+                type="text"
+                placeholder="Username"
+              />
+              {errorName && <p className="text-[#C94D3F] text-[11px] font-light mt-[5px]">{errorNameMessage}</p>}
+            </label>
+
+            <label className="flex flex-col" htmlFor="email">
+              <p className="text-[11px] font-poppins font-semibold xl:text-[13px]">Your Email <span className="text-[#C94D3F]">*</span></p>
+              <input
+                onChange={handleEmailChange}
+                value={email}
+                id="email"
+                className={`bg-white py-[12px] px-[13px] border-[1px] rounded-[10px] outline-none ${errorEmail ? 'border-[#C94D3F]' : 'border-[#A2A6B0]'}`}
+                type="email"
+                placeholder="Your Email"
+              />
+              {errorEmail && <p className="text-[#C94D3F] text-[11px] font-light mt-[5px]">{errorEmailMessage}</p>}
+            </label>
+
+            <label className="flex flex-col relative" htmlFor="password">
+              <p className="text-[11px] font-poppins font-semibold xl:text-[13px]">Your Password <span className="text-[#C94D3F]">*</span></p>
+              <div className="relative">
+                <input
+                  onChange={handlePasswordChange}
+                  value={password}
+                  id="password"
+                  className={`w-full bg-white py-[12px] px-[13px] pr-[40px] border-[1px] rounded-[10px] outline-none ${errorPassword ? 'border-[#C94D3F]' : 'border-[#A2A6B0]'}`}
+                  type={showPassword ? "text" : "password"}
+                  placeholder="Your Password"
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-[12px] top-1/2 -translate-y-1/2 text-[#A2A6B0]"
+                >
+                  {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                </button>
+              </div>
+              {errorPassword && <p className="text-[#C94D3F] text-[11px] font-light mt-[5px]">{errorPasswordMessage}</p>}
+            </label>
+
+            <button
+              className={`py-[8px] rounded-[20px] text-[13px] font-poppins font-semibold text-white mt-[16px] max-w-[133px] w-full transition-colors ${isFormValid ? 'bg-[#0156FF]' : 'bg-[#A2A6B0] cursor-not-allowed'}`}
+              type="submit"
+              disabled={!isFormValid}
+            >
+              Submit
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+  );
+}

@@ -12,13 +12,15 @@ import { getItemsPage } from "@/services/getPage";
 import { FilterCatalog } from "../FilterCatalog/FilterCatalog";
 import classNames from "classnames";
 import { ChevronLeft } from "lucide-react";
+import { useAppSelector } from "@/hooks/hook";
 
 const CATEGORIES = [
   'Laptops',
-  'Desktop PCs',
-  'Networking Devices',
+  'Desktop PC`s',
+  'Networking devices',
   'Printers & Scanners',
-  'All Other Product'
+  'Others product',
+  'PC parts'
 ];
 
 const PAGE = '1';
@@ -40,6 +42,7 @@ export const Catalog = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
   const navigate = useNavigate();
+  const wishProducts = useAppSelector(state => state.cart.products);
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
@@ -130,13 +133,14 @@ export const Catalog = () => {
 
             <div className="flex md:justify-between flex-col md:flex-row">
               <div className="flex items-center mb-[10px]">
-                <button onClick={toggleFilter} className="mr-[20px] border-[2px] py-[11px] px-10 text-[11px]/[16px] font-poppins font-semibold border-[#CACDD8] md:hidden">
-                  Filter
-                </button>
 
                 <button onClick={backButton} className="font-poppins font-semibold text-[14px]/[21px] px-[18px] relative mr-[20px] cursor-pointer py-[10px]">
                   Back
                   <ChevronLeft className="absolute left-0 top-[50%] transform translate-y-[-50%] w-[15px] h-[15px]" />
+                </button>
+
+                <button onClick={toggleFilter} className="mr-[20px] border-[2px] py-[11px] px-10 text-[11px]/[16px] font-poppins font-semibold border-[#CACDD8] md:hidden">
+                  Filter
                 </button>
 
                 <CustomSelect
@@ -166,15 +170,15 @@ export const Catalog = () => {
               </div>
             ) : (
 
-              <div className="flex justify-between md:pb-8">
-                <aside className="hidden md:block md:min-w-[234px] md:mr-1.75">
+              <div className="flex md:pb-8 gap-[10px]">
+                <aside className="md:block md:min-w-[234px] md:mr-1.75">
                   <FilterCatalog closeFilter={closeFilter} isOpen={isOpen} />
-                  <a href="">
+                  <a className="hidden md:block xl:block" href="#">
                     <img className="md:w-1/1 md:mt-[5px]" src="/images/catalog-banner.png" alt="" />
                   </a>
                 </aside>
-                <div className="flex flex-col">
-                  <ul className="flex gap-4 flex-wrap justify-center mb-[23px] md:justify-between">
+                <div className="flex flex-col w-full">
+                  <ul className="flex gap-4 flex-wrap justify-center mb-[23px]">
                     {products.map((product) => (
                       <li key={product.id}>
                         <ProductCard product={product} />
@@ -193,7 +197,19 @@ export const Catalog = () => {
 
             <div className="py-[20px] bg-[#F5F7FF] flex items-center justify-center flex-col">
               <span className="block mb-[30px] font-poppins font-bold text-black text-[16px]/[24px]">My Wish List</span>
-              <p className="text-black font-normal text-[13px]/[130%]">You have no items in your wish list.</p>
+              {wishProducts.length > 0 ? (
+
+                <ul className="flex gap-[15px] flex-wrap justify-center">
+                  {wishProducts.map(p => (
+                    <li key={p.id}>
+                      <ProductCard product={p} />
+                    </li>
+                  ))}
+
+                </ul>
+              ) : (
+                <p className="text-black font-normal text-[13px]/[130%]">You have no items in your wish list.</p>
+              )}
             </div>
 
             <div className="pt-[30px]">

@@ -1,5 +1,3 @@
-import styles from './StarRating.module.scss';
-
 type StarRatingProps = {
   rating: number;
 };
@@ -24,19 +22,19 @@ export const StarRating: React.FC<StarRatingProps> = ({ rating }) => {
         />
       </svg>
     );
-  }
+  };
 
   return (
-    <div className={styles.starRating}>
-      <div className={styles.starRating__wrapper}>
-        <div className={styles.starRating__bg}>
+    <div className="inline-flex items-center mb-[18px]">
+      <div className="relative inline-flex whitespace-nowrap">
+        <div className="flex gap-[2px] text-[#cacdd8]">
           {stars.map((_, i) => (
             <StarIcon key={i} />
           ))}
         </div>
 
         <div
-          className={styles.starRating__foreground}
+          className="absolute top-0 left-0 flex overflow-hidden text-[#e9a426] pointer-events-none gap-[2px]"
           style={{ width: `${fillPercentage}%` }}
         >
           {stars.map((_, i) => (

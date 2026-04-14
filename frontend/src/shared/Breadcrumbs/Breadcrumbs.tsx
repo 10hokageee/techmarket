@@ -4,9 +4,10 @@ import { Link } from "react-router-dom";
 
 type BreadcrumbsProps = {
   pathnames: string[];
+  lastLabel?: string;
 }
 
-export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ pathnames }) => {
+export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ pathnames, lastLabel }) => {
   return (
     <nav className="py-[11px]">
       <ul className="flex items-center"
@@ -21,6 +22,7 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ pathnames }) => {
           const last = index === pathnames.length - 1;
           const to = `/${pathnames.slice(0, index + 1).join('/')}`
           const decodedValue = fromSlug(value) || value;
+          const label = last && lastLabel ? lastLabel : decodedValue;
 
           return (
             <li key={to} className="mr-2 relative pr-[24px] font-poppins font-normal text-[12px]/[21px]">
@@ -30,7 +32,7 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ pathnames }) => {
                   <ChevronRight className="absolute right-0 top-1/2 transform translate-y-[-50%]" color="#0156FF" size={10} />
                 </>
               ) : (
-                <span className="block text-[#A2A6B0]">{decodedValue}</span>
+                <span className="block text-[#A2A6B0]">{label}</span>
               )}
             </li>
           )

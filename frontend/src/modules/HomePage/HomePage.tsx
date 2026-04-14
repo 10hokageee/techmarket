@@ -9,14 +9,22 @@ import { CurstomeProducts } from "@/components/CustomeProducts/CustomeProducts";
 import { LaptopsList } from "@/components/LaptopsList/LaptopsList";
 import { DesktopsList } from "@/components/DesktopsList/DesktopsList";
 import { ComponentsProducts } from "@/components/ComponentsProducts/ComponentsProdcuts";
+import { Loader } from "@/components/Loader/Loader";
 
 export const HomePage = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [errorMessage, setErrorMessage] = useState('');
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    getProducts().then(productsFromServer => setProducts(productsFromServer))
-      .catch(() => setErrorMessage('Something went wrong'))
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setLoading(true);
+
+    setTimeout(() => {
+      getProducts().then(productsFromServer => setProducts(productsFromServer))
+        .catch(() => setErrorMessage('Something went wrong'))
+        .finally(() => setLoading(false));
+    }, 300)
   }, [])
 
   const productsByFilter = (category: string) => {
@@ -25,6 +33,9 @@ export const HomePage = () => {
 
   return (
     <React.Fragment>
+      {loading && (
+        <Loader />
+      )}
       <Slider />
       <NewProducts errorMessage={errorMessage} products={products} />
       <ZipBlock />
