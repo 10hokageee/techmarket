@@ -47,7 +47,7 @@ class CategoryChoices(models.TextChoices):
 
 
 class Product(models.Model):
-    name = models.CharField(max_length=62, unique=True)
+    name = models.CharField(max_length=255, unique=True)
     category = models.CharField(max_length=20, choices=CategoryChoices.choices)
     series = models.ForeignKey(
         Series, on_delete=models.CASCADE, related_name="products"

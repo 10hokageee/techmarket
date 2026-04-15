@@ -78,9 +78,7 @@ class ProductViewSet(viewsets.ModelViewSet):
             # default order by -created_at
             queryset = self._order_by_param(param=order_by, queryset=queryset)
         else:
-            base_q_request = Q(
-                id__in=Product.objects.values_list("id", flat=True)[:NEW_PRODUCTS]
-            )
+            base_q_request = Q()
             for choice in CategoryChoices.values:
                 base_q_request = base_q_request.__or__(
                     Q(
