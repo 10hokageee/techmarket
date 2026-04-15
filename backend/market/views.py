@@ -7,7 +7,14 @@ from rest_framework.decorators import api_view, permission_classes, action
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.generics import get_object_or_404
-from market.models import Product, Signboard, Order, Series, ProductImage
+from market.models import (
+    Product,
+    Signboard,
+    Order,
+    Series,
+    ProductImage,
+    CategoryChoices,
+)
 from market.serializers import (
     ProductSerializer,
     SignboardSerializer,
@@ -16,7 +23,7 @@ from market.serializers import (
 )
 from market.pagination import SimplifiedCustomPagination
 
-NEW_PRODUCTS = 10
+NEW_PRODUCTS = 8
 
 
 class ProductViewSet(viewsets.ModelViewSet):
@@ -71,14 +78,18 @@ class ProductViewSet(viewsets.ModelViewSet):
             # default order by -created_at
             queryset = self._order_by_param(param=order_by, queryset=queryset)
         else:
-            queryset = queryset.filter(
-                Q(id__in=Product.objects.values_list("id", flat=True)[:NEW_PRODUCTS])
-                | Q(
-                    id__in=Product.objects.order_by("?").values_list("id", flat=True)[
-                        : NEW_PRODUCTS * 2
-                    ]
-                )
+            base_q_request = Q(
+                id__in=Product.objects.values_list("id", flat=True)[:NEW_PRODUCTS]
             )
+            for choice in CategoryChoices.values:
+                base_q_request = base_q_request.__or__(
+                    Q(
+                        id__in=Product.objects.filter(category=choice)
+                        .order_by("?")
+                        .values_list("id", flat=True)[:NEW_PRODUCTS]
+                    )
+                )
+            queryset = queryset.filter(base_q_request)
         return queryset
 
     def get_object(self):
