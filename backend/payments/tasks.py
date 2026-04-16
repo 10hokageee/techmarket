@@ -19,7 +19,6 @@ def create_stripe_session(order: Order) -> None:
                     "currency": "usd",
                     "product_data": {
                         "name": item.product.name,
-                        "images": (image,) if (image := item.product.image) else None,
                         "description": item.product.description,
                     },
                     "unit_amount": int(item.unit_price * 100),
