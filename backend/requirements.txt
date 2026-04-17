@@ -16,3 +16,4 @@ requests
 django-ipware
 cloudinary
 django-cloudinary-storage
+djangorestframework-simplejwt
