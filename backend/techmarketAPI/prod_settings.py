@@ -1,9 +1,10 @@
 import os
-from .object_settings import *
+from techmarketAPI.object_settings import *
 import cloudinary
 
 ENV_PARAMS = (
     "DJANGO_SECRET_KEY",
+    "CSRF_TRUSTED_ORIGINS",
     "DEBUG",
     "ALLOWED_HOSTS",
     "DATABASE_URL",
@@ -24,7 +25,11 @@ DEBUG = os.environ["DEBUG"].upper() == "TRUE"
 ALLOWED_HOSTS = os.environ["ALLOWED_HOSTS"].split(",")
 INTERNAL_IPS = ["127.0.0.1", "localhost"]
 
-# The model structure requires a PostgreSQL database.
+SECURE_SSL_REDIRECT = True
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+
 DATABASES = {
     "default": dj_database_url.config(
         conn_max_age=600,
@@ -34,10 +39,10 @@ DATABASES = {
 STRIPE_PRIVATE_KEY = os.environ["STRIPE_PRIVATE_KEY"]
 STRIPE_WEBHOOK_KEY = os.environ["STRIPE_WEBHOOK_KEY"]
 
-CORS_ALLOW_ALL_ORIGINS = True
-# CORS_ALLOWED_ORIGINS = os.getenv(
-#     "CORS_ALLOWED_ORIGINS", "http://localhost:5173,http://127.0.0.1:5173"
-# ).split(",")
+
+CORS_ALLOWED_ORIGINS = os.environ["CSRF_TRUSTED_ORIGINS"].split(",")
+CSRF_TRUSTED_ORIGINS = os.environ["CSRF_TRUSTED_ORIGINS"].split(",")
+CORS_ALLOW_CREDENTIALS = True
 
 CLOUDINARY_STORAGE = {
     "CLOUD_NAME": os.environ["CLOUD_NAME"],
