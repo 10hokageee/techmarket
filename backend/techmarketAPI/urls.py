@@ -21,9 +21,9 @@ from django.contrib import admin
 from django.urls import path, include, re_path
 from debug_toolbar.toolbar import debug_toolbar_urls
 from django.views.static import serve
-from drf_spectacular.views import (
-    SpectacularAPIView,
-    SpectacularSwaggerView,
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
 )
 
 urlpatterns = (
@@ -36,23 +36,19 @@ urlpatterns = (
                 "document_root": settings.BASE_DIR / "techmarketAPI",
             },
         ),
+        path("api/token/", TokenObtainPairView.as_view(), name="token_obtain_pair"),
+        path("api/token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
         path("admin/", admin.site.urls),
         path("market/", include("market.urls", namespace="market")),
-        path(
-            "user/",
-            include(
-                [
-                    path("", include("rest_framework.urls")),
-                    path("", include("user.urls", namespace="user")),
-                ]
-            ),
-        ),
-        path("docs/", SpectacularAPIView.as_view(), name="schema"),
-        path(
-            "docs/swagger/",
-            SpectacularSwaggerView.as_view(url_name="schema"),
-            name="swagger-ui",
-        ),
+        # path(
+        #     "user/",
+        #     include(
+        #         [
+        #             path("", include("rest_framework.urls")),
+        #             path("", include("user.urls", namespace="user")),
+        #         ]
+        #     ),
+        # ),
         path("payments/", include("payments.urls", namespace="payments")),
     ]
     + debug_toolbar_urls()
