@@ -178,7 +178,8 @@ class OrderItemSerializer(serializers.ModelSerializer):
 
     def to_representation(self, instance):
         data = super().to_representation(instance)
-        data["product"] = instance.product.name
+        base_name, color = instance.product.name.rsplit("__", 1)
+        data["product"] = " ".join((base_name, color.capitalize()))
         data["price"] = str(instance.price)
         return data
 
