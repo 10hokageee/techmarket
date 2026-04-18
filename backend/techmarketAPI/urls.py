@@ -21,10 +21,7 @@ from django.contrib import admin
 from django.urls import path, include, re_path
 from debug_toolbar.toolbar import debug_toolbar_urls
 from django.views.static import serve
-from rest_framework_simplejwt.views import (
-    TokenObtainPairView,
-    TokenRefreshView,
-)
+
 
 urlpatterns = (
     [
@@ -36,19 +33,9 @@ urlpatterns = (
                 "document_root": settings.BASE_DIR / "techmarketAPI",
             },
         ),
-        path("user/login/", TokenObtainPairView.as_view(), name="token_obtain_pair"),
-        path("user/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
         path("admin/", admin.site.urls),
         path("market/", include("market.urls", namespace="market")),
-        # path(
-        #     "user/",
-        #     include(
-        #         [
-        #             path("", include("rest_framework.urls")),
-        #             path("", include("user.urls", namespace="user")),
-        #         ]
-        #     ),
-        # ),
+        path("user/", include("user.urls", namespace="user")),
         path("payments/", include("payments.urls", namespace="payments")),
     ]
     + debug_toolbar_urls()

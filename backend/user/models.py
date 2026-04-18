@@ -1,5 +1,7 @@
 import os
 import uuid
+
+from cloudinary.models import CloudinaryField
 from django.contrib.auth.models import AbstractUser
 from django.utils.text import slugify
 from django.db import models
@@ -13,4 +15,8 @@ def _uuid_photo_save(instance: "Product", filename: str):
 
 
 class User(AbstractUser):
-    icon = models.ImageField(blank=True, upload_to=_uuid_photo_save)
+    icon = CloudinaryField("UserAvatar", null=True, blank=True)
+    email = models.EmailField(unique=True)
+
+    USERNAME_FIELD = "email"
+    REQUIRED_FIELDS = ["username"]

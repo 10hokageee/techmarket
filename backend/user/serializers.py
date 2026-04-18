@@ -22,6 +22,13 @@ class UserSerializer(serializers.ModelSerializer):
         read_only_fields = ("id", "is_staff")
         extra_kwargs = {"password": {"write_only": True}}
 
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        data["icon"] = instance.icon.build_url(
+            fetch_format="auto", quality="auto"
+        ).rsplit(".", 1)[0]
+        return data
+
     def create(self, validated_data):
         return USER_MODEL.objects.create_user(**validated_data)
 

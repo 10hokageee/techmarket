@@ -8,6 +8,10 @@ from payments.models import Payment
 
 
 def create_stripe_session(order: Order) -> None:
+    def get_name(name: str) -> str:
+        base_name, color = name.rsplit("__", 1)
+        return f"{base_name} {color.capitalize()}"
+
     items = order.items.all()
     stripe.api_key = settings.STRIPE_PRIVATE_KEY
     session = stripe.checkout.Session.create(
@@ -18,7 +22,7 @@ def create_stripe_session(order: Order) -> None:
                 "price_data": {
                     "currency": "usd",
                     "product_data": {
-                        "name": item.product.name,
+                        "name": get_name(item.product.name),
                         "description": item.product.description,
                     },
                     "unit_amount": int(item.unit_price * 100),
