@@ -7,16 +7,13 @@ from django.utils.text import slugify
 from django.db import models
 
 
-def _uuid_photo_save(instance: "Product", filename: str):
-    _, ext = os.path.splitext(filename)
-    return os.path.join(
-        "user_icons", f"{slugify(instance.username)}-{uuid.uuid4()}{ext}"
-    )
-
-
 class User(AbstractUser):
     icon = CloudinaryField("UserAvatar", null=True, blank=True)
     email = models.EmailField(unique=True)
+
+    @property
+    def get_avatar(self):
+        return self.icon.build_url(fetch_format="auto", quality="auto").rsplit(".", 1)[0] if self.icon else ""
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = ["username"]

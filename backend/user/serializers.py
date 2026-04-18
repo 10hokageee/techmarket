@@ -24,9 +24,10 @@ class UserSerializer(serializers.ModelSerializer):
 
     def to_representation(self, instance):
         data = super().to_representation(instance)
-        data["icon"] = instance.icon.build_url(
-            fetch_format="auto", quality="auto"
-        ).rsplit(".", 1)[0]
+        if data["icon"]:
+            data["icon"] = instance.icon.build_url(
+                fetch_format="auto", quality="auto"
+            ).rsplit(".", 1)[0]
         return data
 
     def create(self, validated_data):

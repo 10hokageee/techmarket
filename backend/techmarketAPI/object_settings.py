@@ -17,7 +17,7 @@ INSTALLED_APPS = [
     "cloudinary",
     "django.contrib.postgres",
     "rest_framework",
-    'rest_framework_simplejwt',
+    "rest_framework_simplejwt",
     "debug_toolbar",
     "drf_spectacular",
     "corsheaders",
@@ -82,7 +82,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = "static/"
 STATIC_ROOT = (
-        BASE_DIR / "staticfiles"
+    BASE_DIR / "staticfiles"
 )  # Directory where static files will be collected for Render
 
 # WhiteNoise settings for compression and caching

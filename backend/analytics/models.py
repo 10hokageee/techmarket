@@ -38,15 +38,15 @@ class SessionParameters(models.Model):
     access_token = models.CharField(max_length=510, null=True, editable=False)
     device = models.CharField(max_length=7, choices=DeviceChoices.choices)
     browser = models.CharField(max_length=15, choices=BrowserChoices.choices)
-    continent = models.CharField(max_length=13, choices=ContinentChoices.choices, null=True)
+    continent = models.CharField(
+        max_length=13, choices=ContinentChoices.choices, null=True
+    )
     country = CountryField(null=True)
     # channel field not implemented
 
     @property
     def channel(self):
-        raise NotImplementedError(
-            "Channel not implemented for this model."
-        )
+        raise NotImplementedError("Channel not implemented for this model.")
 
     class Meta:
         db_table = "session_parameters"
