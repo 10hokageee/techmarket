@@ -4,9 +4,9 @@ from django.db.models import Q, QuerySet
 from django.db.models.functions import Coalesce
 from rest_framework import viewsets, mixins
 from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from market.models import Product, Signboard, Order, Series
-from market.permissions import IsAdminOrReadOnly
 from market.serializers import (
     ProductSerializer,
     SignboardSerializer,
@@ -21,7 +21,6 @@ NEW_PRODUCTS = 10
 class ProductViewSet(viewsets.ModelViewSet):
     pagination_class = SimplifiedCustomPagination
     serializer_class = ProductSerializer
-    permission_classes = (IsAdminOrReadOnly,)
     pagination_params = {
         "search",
         "status",
@@ -181,7 +180,6 @@ class SignboardViewSet(
 ):
     queryset = Signboard.objects.all()
     serializer_class = SignboardSerializer
-    permission_classes = (IsAdminOrReadOnly,)
 
 
 class OrderViewSet(
@@ -193,6 +191,7 @@ class OrderViewSet(
     queryset = Order.objects
     serializer_class = OrderSerializer
     pagination_class = SimplifiedCustomPagination
+    permission_classes = (IsAuthenticated,)
 
     def get_queryset(self):
         return self.queryset.select_related("payment").prefetch_related("items__product").filter(
@@ -205,7 +204,6 @@ class OrderViewSet(
 
 class SeriesViewSet(viewsets.ModelViewSet):
     queryset = Series.objects.all()
-    permission_classes = (IsAdminOrReadOnly,)
     serializer_class = SeriesSerializer
     pagination_class = SimplifiedCustomPagination
 

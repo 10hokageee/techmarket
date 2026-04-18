@@ -1,5 +1,6 @@
 from django.contrib.auth import login
 from rest_framework import status, generics
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
 from user.serializers import UserSerializer
@@ -20,6 +21,7 @@ class CreateUserView(generics.GenericAPIView):
 
 class ManageUserView(generics.RetrieveUpdateAPIView):
     serializer_class = UserSerializer
+    permission_classes = (IsAuthenticated,)
 
     def get_object(self):
         return self.request.user
