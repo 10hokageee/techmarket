@@ -1,4 +1,5 @@
 import os
+from email.mime import image
 
 from cloudinary.models import CloudinaryField
 from webcolors import names as css_colors
@@ -76,6 +77,20 @@ class Product(models.Model):
         ordering = ("-created_at",)
 
     @property
+    def get_name(self):
+        base_name, color = self.name.rsplit("__", 1)
+        return f"{base_name} {color.capitalize()}"
+
+    @property
+    def get_list_images(self):
+        return [
+            product_image.image.build_url(fetch_format="auto", quality="auto").rsplit(
+                ".", 1
+            )[0]
+            for product_image in self.images.all()
+        ]
+
+    @property
     def actual_price(self):
         """
         if sale_price is null, returned original_price,
@@ -140,6 +155,12 @@ class OrderItem(models.Model):
 class Signboard(models.Model):
     added_at = models.DateTimeField(auto_now_add=True)
     image = CloudinaryField("TechMarketSignboards")
+
+    @property
+    def get_image_url(self):
+        return self.image.build_url(fetch_format="auto", quality="auto").rsplit(".", 1)[
+            0
+        ]
 
     class Meta:
         ordering = ["-added_at"]

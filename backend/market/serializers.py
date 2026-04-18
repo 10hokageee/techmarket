@@ -64,22 +64,13 @@ class ProductSerializer(serializers.ModelSerializer):
         data["series"] = instance.series.name
         data["rating_avg"] = str(instance.rating_avg)
         data["status"] = bool(instance.stock_quantity)
+        data["name"] = instance.get_name
 
         if not hasattr(instance, "ext_images"):
-            data["images"] = [
-                product_image.image.build_url(
-                    fetch_format="auto", quality="auto"
-                ).rsplit(".", 1)[0]
-                for product_image in instance.images.all()
-            ]
+            data["images"] = instance.get_list_images
 
         if instance.current_color:
             data["current_color"] = instance.current_color
-
-        name_split = instance.name.split("__")
-        name_split[-1] = name_split[-1].capitalize()
-        data["name"] = " ".join(name_split)
-
         return data
 
     def create(self, validated_data):
@@ -94,9 +85,10 @@ class ProductSerializer(serializers.ModelSerializer):
             )
             for color in validated_data.get("colors")
         )
+        products = Product.objects.bulk_create(products_data)
 
         # for to_representation ----------------------------------|
-        product = Product.objects.bulk_create(products_data)[0]
+        product = products[0]
         product.current_color = None
         product.name = name
         product.ext_images = True
@@ -133,9 +125,7 @@ class SignboardSerializer(serializers.ModelSerializer):
 
     def to_representation(self, instance):
         data = super().to_representation(instance)
-        data["image"] = instance.image.build_url(
-            fetch_format="auto", quality="auto"
-        ).rsplit(".", 1)[0]
+        data["image"] = instance.get_image_url
         return data
 
 
@@ -178,8 +168,7 @@ class OrderItemSerializer(serializers.ModelSerializer):
 
     def to_representation(self, instance):
         data = super().to_representation(instance)
-        base_name, color = instance.product.name.rsplit("__", 1)
-        data["product"] = " ".join((base_name, color.capitalize()))
+        data["product"] = instance.product.get_name
         data["price"] = str(instance.price)
         return data
 
