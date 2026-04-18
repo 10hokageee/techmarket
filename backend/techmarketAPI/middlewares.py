@@ -1,6 +1,5 @@
 from user_agents.parsers import UserAgent
 
-
 class TechMarketSessionParametersMiddleware:
     def __init__(self, get_response):
         self.get_response = get_response
@@ -14,7 +13,7 @@ class TechMarketSessionParametersMiddleware:
             DeviceChoices.MOBILE if ua.is_mobile else
             DeviceChoices.TABLET if ua.is_tablet else
             DeviceChoices.DESKTOP if ua.is_pc else
-            "UNKNOWN"
+            DeviceChoices.UNKNOWN
         )
 
     def get_browser(self, ua: UserAgent) -> str:
@@ -43,25 +42,34 @@ class TechMarketSessionParametersMiddleware:
         return None, None
 
     def __call__(self, request):
-        if not request.session.session_key:
+        req_path = request.path
+        response = self.get_response(request)
+
+        if req_path in ("/user/login/", "/user/register/") and (refresh := response.data.get("refresh")):
             import user_agents
+
+            from rest_framework_simplejwt.tokens import RefreshToken
             from analytics.models import SessionParameters
             from ipware import get_client_ip
 
             ip, is_routable = get_client_ip(request)
-            if is_routable:
+            if is_routable is False:
                 user_agent = user_agents.parse(request.META.get("HTTP_USER_AGENT", ""))
 
                 device_type = self.get_device_type(ua=user_agent)
                 browser = self.get_browser(ua=user_agent)
-                location = self.get_continent_and_country_by_ip(ip=ip)
+                continent, country = self.get_continent_and_country_by_ip(ip=ip)
 
                 if device_type != "BOT":
-                    request.session.create()
-                    request.session["_ses_param"] = SessionParameters.objects.create(
+                    refresh = RefreshToken(refresh)
+                    user_id = refresh.payload.get("user_id")
+
+                    SessionParameters.objects.create(
                         device=device_type,
                         browser=browser,
-                        continent=location[0],
-                        country=location[1],
-                    ).pk
-        return self.get_response(request)
+                        continent=continent,
+                        country=country,
+                        user_id=user_id,
+                        access_token=response.data.get("access"),
+                    )
+        return response

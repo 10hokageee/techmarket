@@ -1,7 +1,6 @@
 from django.conf import settings
 from django.db import models
 from django.utils.text import gettext_lazy as _
-from django.contrib.sessions.models import Session
 from django_countries.fields import CountryField
 
 
@@ -36,12 +35,18 @@ class SessionParameters(models.Model):
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True
     )
-    # session_id = models.OneToOneField(Session, on_delete=models.SET_NULL, null=True)
+    access_token = models.CharField(max_length=510, null=True, editable=False)
     device = models.CharField(max_length=7, choices=DeviceChoices.choices)
     browser = models.CharField(max_length=15, choices=BrowserChoices.choices)
     continent = models.CharField(max_length=13, choices=ContinentChoices.choices, null=True)
     country = CountryField(null=True)
     # channel field not implemented
+
+    @property
+    def channel(self):
+        raise NotImplementedError(
+            "Channel not implemented for this model."
+        )
 
     class Meta:
         db_table = "session_parameters"
