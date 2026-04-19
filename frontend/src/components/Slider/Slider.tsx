@@ -1,22 +1,23 @@
 import { Swiper, SwiperSlide } from "swiper/react";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Autoplay, Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import type { Signboard } from "@/types/Signboard";
+import { getSignboardService } from "@/services/signboardService";
 
 export const Slider = () => {
   const prevRef = useRef<HTMLButtonElement>(null);
   const nextRef = useRef<HTMLButtonElement>(null);
+  const [sliderImages, setSliderImages] = useState<Signboard[]>([]);
 
-  const sliderImages = [
-    { desktop: "images/slide-1.png" },
-    { desktop: "images/slide-2.png" },
-    { desktop: "images/slide-3.png" },
-  ];
+  useEffect(() => {
+   getSignboardService().then((signboards) => setSliderImages(signboards))
+  }, [])
 
   return (
-    <section className="pt-[12px] md:pt-[19px]">
+    <section className="pt-[12px]">
       <div className="max-w-[1370px] px-[15px] mx-auto my-0 w-[100%]">
         <div className="relative">
 
@@ -56,13 +57,13 @@ export const Slider = () => {
               });
             }}
           >
-            {sliderImages.map((img, index) => (
-              <SwiperSlide key={index}>
+            {sliderImages.map((img) => (
+              <SwiperSlide key={img.id}>
                 <picture>
                   <img
                     className="w-full"
-                    src={img.desktop}
-                    alt={`Slide ${index + 1}`}
+                    src={img.image}
+                    alt={`Slide ${img.id}`}
                   />
                 </picture>
               </SwiperSlide>

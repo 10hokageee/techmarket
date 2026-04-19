@@ -50,8 +50,8 @@ const cartSlice = createSlice({
       }
     },
 
-    clearCart: (state, action: PayloadAction<[]>) => {
-      state.products = action.payload;
+    clearCart: (state) => {
+      state.products = [];
     },
   },
 });

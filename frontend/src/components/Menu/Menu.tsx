@@ -62,7 +62,7 @@ export const Menu: React.FC<MenuProps> = ({ isOpen, closeMenu }) => {
         <NavLink
           onClick={closeMenu}
           className="inline-block py-[8px] px-[50px] border-[2px] border-[#0156ff] rounded-[50px] font-poppins font-semibold text-[13px] leading-[20px] text-[#0156ff]"
-          to="/login"
+          to="/Login"
         >
           Sign In
         </NavLink>

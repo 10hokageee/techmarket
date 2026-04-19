@@ -3,5 +3,5 @@ import { getData } from "@/utils/httpClient";
 
 export const getProductDetails = (id: number, color?: string) => {
   const query = color ? `?color=${color}` : '';
-  return getData<Product>(`/products/${id}/${query}`);
+  return getData<Product>(`/market/products/${id}/${query}`);
 };

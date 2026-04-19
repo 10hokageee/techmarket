@@ -2,8 +2,8 @@ import { MoveRight } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const links = [
-  { link: 'About Us', to: '/about' },
-  { link: 'FAQ', to: '/faq' },
+  { link: 'About Us', to: '/About' },
+  { link: 'FAQ', to: '/FAQ' },
 ];
 
 export const SupportBlock = () => {

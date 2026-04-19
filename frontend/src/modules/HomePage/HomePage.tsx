@@ -10,11 +10,16 @@ import { LaptopsList } from "@/components/LaptopsList/LaptopsList";
 import { DesktopsList } from "@/components/DesktopsList/DesktopsList";
 import { ComponentsProducts } from "@/components/ComponentsProducts/ComponentsProdcuts";
 import { Loader } from "@/components/Loader/Loader";
+import { getOrders } from "@/utils/order";
 
 export const HomePage = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [errorMessage, setErrorMessage] = useState('');
   const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+     console.log(getOrders())
+  }, [])
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
@@ -30,6 +35,7 @@ export const HomePage = () => {
   const productsByFilter = (category: string) => {
     return products.filter(product => product.category.toLowerCase() === category.toLowerCase())
   }
+
 
   return (
     <React.Fragment>

@@ -15,7 +15,6 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ pathnames, lastLabel }
         <li className="mr-2 relative font-poppins font-normal text-[12px]/[21px]">
           <Link className="pr-[20px]" to='/'>Home</Link>
           <ChevronRight className="absolute right-0 top-1/2 transform translate-y-[-50%]" color="#0156FF" width={'10px'} height={'10px'} />
-
         </li>
 
         {pathnames.map((value, index) => {
