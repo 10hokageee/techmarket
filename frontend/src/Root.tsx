@@ -8,10 +8,15 @@ import { ProductDetailsPage } from "./modules/ProductDetailsPage/ProductDetailsP
 import { FaqPage } from "./modules/FaqPage/FaqPage";
 import { CartPage } from "./modules/CartPage/CartPage";
 import { LoginPage } from "./modules/LoginPage/LoginPage";
+import { RegisterPage } from "./modules/RegisterPage/RegisterPage";
+import { ScrollToTop } from "./utils/scrollToTop";
+import { OurTeamPage } from "./modules/OurTeamPage/OurTeamPage";
+import { SuccessOrdersPage } from "./modules/SuccessOrdersPage/SuccessOrdersPage";
 
 export const Root = () => {
   return (
     <HashRouter>
+      <ScrollToTop />
       <Routes>
         <Route path="/" element={<App />}>
           <Route index element={<HomePage />} />
@@ -21,10 +26,13 @@ export const Root = () => {
             <Route path=":id" element={<ProductDetailsPage />} />
           </Route>
           <Route path="*" element={<PageNotFound />} />
-          <Route path="about" element={<AboutUsPage />} />
-          <Route path="faq" element={<FaqPage />} />
-          <Route path="cart" element={<CartPage />} />
-          <Route path="login" element={<LoginPage />} />
+          <Route path="About" element={<AboutUsPage />} />
+          <Route path="FAQ" element={<FaqPage />} />
+          <Route path="Cart" element={<CartPage />} />
+          <Route path="Login" element={<LoginPage />} />
+          <Route path="Register" element={<RegisterPage />} />
+          <Route path="Team" element={<OurTeamPage />} />
+          <Route path="SuccessOrders" element={<SuccessOrdersPage />} />
         </Route>
       </Routes>
     </HashRouter>

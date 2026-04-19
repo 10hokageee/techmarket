@@ -14,5 +14,5 @@ export const getItemsPage = (
     ...filters
   });
 
-  return getData<Product[]>(`/products/?${queryParams.toString()}`);
+  return getData<Product[]>(`/market/products/?${queryParams.toString()}`);
 };

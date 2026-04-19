@@ -1,12 +1,14 @@
-import { useState, useMemo, useEffect } from "react";
+import { useState, useMemo } from "react";
 import { Eye, EyeOff } from "lucide-react";
-import { NavLink } from "react-router-dom";
+import { register } from "@/utils/auth";
 import { Loader } from "../Loader/Loader";
-import type { User } from "@/types/User";
-import { getMe } from "@/utils/getMe";
-import { login } from "@/utils/auth";
+import { useNavigate } from "react-router-dom";
 
-export const Login = () => {
+export const Register = () => {
+  const [name, setName] = useState('');
+  const [errorName, setErrorName] = useState(false);
+  const [errorNameMessage, setErrorNameMessage] = useState('');
+
   const [email, setEmail] = useState('');
   const [errorEmail, setErrorEmail] = useState(false);
   const [errorEmailMessage, setErrorEmailMessage] = useState('');
@@ -16,33 +18,21 @@ export const Login = () => {
   const [errorPasswordMessage, setErrorPasswordMessage] = useState('');
   const [showPassword, setShowPassword] = useState(false);
 
-  const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,}$/;
   const passwordRegex = /^[A-Za-z0-9!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]+$/;
+  const nameRegex = /^[A-Za-z0-9]{3,20}$/;
 
   const isFormValid = useMemo(() => {
-    return email.length > 0 && password.length >= 6;
-  }, [email, password]);
+    return name.length >= 3 && email.length > 0 && password.length >= 6;
+  }, [name, email, password]);
 
-  useEffect(() => {
-    const token = localStorage.getItem("access_token");
-
-    if (!token) {
-      return;
-    }
-
-    getMe()
-      .then((data) => {
-        setUser(data);
-      })
-      .catch(() => {
-        localStorage.removeItem("access_token");
-        localStorage.removeItem("refresh_token");
-      })
-  }, []);
-
+  const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setName(e.target.value.replace(/\s/g, ''));
+    setErrorName(false);
+  }
 
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
@@ -58,6 +48,11 @@ export const Login = () => {
     event.preventDefault();
     let isValid = true;
 
+    if (!nameRegex.test(name)) {
+      setErrorName(true);
+      setErrorNameMessage('Username must be 3-20 characters, Latin letters and numbers only');
+      isValid = false;
+    }
 
     const cleanEmail = email.trim().toLowerCase();
     if (!cleanEmail) {
@@ -91,66 +86,52 @@ export const Login = () => {
     try {
       setLoading(true);
 
-      await login(cleanEmail, password);
+      await register(name, email, password);
 
-      const userData = await getMe();
-      setUser(userData);
+      navigate('/Login')
 
       reset();
 
-    } catch (error) {
-      console.error(error);
-
-      setErrorPassword(true);
-      setErrorPasswordMessage("Wrong email or password");
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
+      setErrorEmail(true);
+      setErrorEmailMessage(error.message);
     } finally {
+
       setLoading(false);
     }
   }
 
   const reset = () => {
     setEmail('');
+    setName('');
     setPassword('');
   }
 
-  const handleLogout = () => {
-    localStorage.removeItem("access_token");
-    localStorage.removeItem("refresh_token");
-    setUser(null);
-  };
-
   if (loading) {
-    return <Loader />;
-  }
-
-  if (user) {
-    return (
-      <div className="max-w-[1370px] px-[15px] mx-auto my-0">
-        <div className="flex flex-col justify-center items-center"> 
-          <h1 className="font-semibold mb-[10px] font-poppins font-bold text-[18px]/[27px] xl:text-[27px]/[34px]">Welcome {user.first_name}!</h1>
-          <img className="w-[80px] h-[80px] rounded-[50%] xl:w-[120px] xl:h-[120px]" src={user.icon} alt="" />
-          <p className="text-[14px]/[20px] font-poppins font-light mb-[5px] xl:text-[18px]/[24px]">Your Email: {user.email}</p>
-          <p className="text-[14px]/[20px] font-poppins font-light mb-[5px] xl:text-[18px]/[24px]">Your Name: {user.first_name}</p>
-          <p className="text-[14px]/[20px] font-poppins font-light mb-[5px] xl:text-[18px]/[24px]">Your Username: {user.username}</p>
-
-          <button
-            onClick={handleLogout}
-            className="mt-[15px] px-4 py-2 bg-red-500 text-white rounded-[30px] font-poppins font-semibold text-[14px]/[20px]"
-          >
-            Logout
-          </button>
-        </div>
-      </div >
-    );
+    return <Loader />
   }
 
   return (
     <section className="pb-[16px]">
       <div className="max-w-[1370px] px-[15px] mx-auto my-0">
         <div className="bg-[#F5F7FF] px-[18px] py-[20px] md:max-w-[564px] w-full flex flex-col md:mx-auto xl:px-[57px] xl:py-[37px]">
-          <h2 className="text-[14px] font-semibold font-poppins mb-[19px] xl:text-[18px]">Sign in to your account</h2>
+          <h2 className="text-[14px] font-semibold font-poppins mb-[19px] xl:text-[18px]">Create your account</h2>
 
           <form className="flex flex-col gap-[15px]" onSubmit={handleFormSubmit}>
+
+            <label className="flex flex-col" htmlFor="name">
+              <input
+                onChange={handleNameChange}
+                value={name}
+                id="name"
+                autoComplete="username"
+                className={`bg-white py-[12px] px-[13px] border-[1px] rounded-[10px] outline-none ${errorName ? 'border-[#C94D3F]' : 'border-[#A2A6B0]'}`}
+                type="text"
+                placeholder="Your Username"
+              />
+              {errorName && <p className="text-[#C94D3F] text-[11px] font-light mt-[5px]">{errorNameMessage}</p>}
+            </label>
 
             <label className="flex flex-col" htmlFor="email">
               <input
@@ -185,18 +166,13 @@ export const Login = () => {
               {errorPassword && <p className="text-[#C94D3F] text-[11px] font-light mt-[5px]">{errorPasswordMessage}</p>}
             </label>
 
-
-            <div className="flex justify-between items-center mt-[16px] ">
-              <button
-                className={`py-[8px] rounded-[20px] text-[13px] font-poppins font-semibold text-white max-w-[133px] w-full transition-colors ${isFormValid ? 'bg-[#0156FF]' : 'bg-[#A2A6B0] cursor-not-allowed'}`}
-                type="submit"
-                disabled={!isFormValid}
-              >
-                Submit
-              </button>
-              <button className="text-[11px]/[20px] text-[#0156FF] font-poppins font-normal cursor-pointer">Forgot Your Password?</button>
-              <NavLink className="text-[11px]/[20px] text-[#0156FF] font-poppins font-normal" to="/Register">Create account</NavLink>
-            </div>
+            <button
+              className={`py-[8px] rounded-[20px] text-[13px] font-poppins font-semibold text-white mt-[16px] max-w-[133px] w-full transition-colors ${isFormValid ? 'bg-[#0156FF]' : 'bg-[#A2A6B0] cursor-not-allowed'}`}
+              type="submit"
+              disabled={!isFormValid}
+            >
+              Submit
+            </button>
           </form>
         </div>
       </div>

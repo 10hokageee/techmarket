@@ -6,32 +6,25 @@ import {
 } from "@/components/ui/accordion"
 import classNames from "classnames";
 import { X } from "lucide-react";
-import { useState, useEffect } from "react";
-import { useSearchParams } from "react-router-dom";
+import React from "react";
 
 type FilterCatalogProps = {
   isOpen: boolean;
   closeFilter: () => void;
+  tempFilters: Record<string, string>;
+  setTempFilters: React.Dispatch<React.SetStateAction<Record<string, string>>>;
+  applyFilters: () => void;
+  clearFilters: () => void;
 }
 
-export const FilterCatalog: React.FC<FilterCatalogProps> = ({ isOpen, closeFilter }) => {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const [tempFilters, setTempFilters] = useState<Record<string, string>>({});
-
-  useEffect(() => {
-    if (isOpen) {
-      const currentFilters: Record<string, string> = {};
-      searchParams.forEach((value, key) => {
-        if (key !== 'page' && key !== 'perPage') {
-          currentFilters[key] = value;
-        }
-      });
-
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      setTempFilters(currentFilters);
-    }
-  }, [isOpen, searchParams]);
-
+export const FilterCatalog: React.FC<FilterCatalogProps> = ({ 
+  isOpen, 
+  closeFilter, 
+  tempFilters, 
+  setTempFilters, 
+  applyFilters, 
+  clearFilters 
+}) => {
   const body = document.getElementById('body') as HTMLElement;
   if (isOpen) {
     body?.classList.add('lock');
@@ -112,37 +105,6 @@ export const FilterCatalog: React.FC<FilterCatalogProps> = ({ isOpen, closeFilte
 
       return copy;
     });
-  };
-
-  const applyFilters = () => {
-    const newParams = new URLSearchParams();
-    const perPage = searchParams.get('perPage');
-
-    if (perPage) {
-      newParams.set('perPage', perPage);
-    }
-
-    newParams.set('page', '1');
-
-    Object.entries(tempFilters).forEach(([key, value]) => {
-      newParams.set(key, value);
-    });
-
-    setSearchParams(newParams);
-    closeFilter();
-  };
-
-  const clearFilters = () => {
-    setTempFilters({});
-    const newParams = new URLSearchParams();
-    const perPage = searchParams.get('perPage');
-
-    if (perPage) {
-      newParams.set('perPage', perPage);
-    }
-
-    newParams.set('page', '1');
-    setSearchParams(newParams);
   };
 
   const isPriceActive = (label: string) => {

@@ -111,7 +111,7 @@ export const ProductsDetails: React.FC<ProductsDetailsProps> = ({ product }) => 
           </div>
         </div>
 
-        <div className="hidden xl:flex flex gap-[11px] mb-8 absolute bottom-0 right-0">
+        <div className="hidden xl:flex flex gap-[11px] mb-8 absolute bottom-[-50px]">
           {images.map((_, idx) => (
             <button
               key={idx}
@@ -125,12 +125,6 @@ export const ProductsDetails: React.FC<ProductsDetailsProps> = ({ product }) => 
           ))}
         </div>
 
-        <div className="max-w-[230px] w-full flex items-center mb-[20px]">
-          <img className="mr-[7px]" src="/icons/zip-logo.svg" alt="" />
-          <p className="font-poppins relative font-light text-[10px]/[120%] pl-[9px] border-l-2 border-[#00AEB8]">
-            own it now, up to 6 months interest free <span className="underline cursor-pointer">learn more</span>
-          </p>
-        </div>
       </div>
 
       <div className="bg-[#F5F7FF] md:w-[424px] xl:w-[600px] flex-1 p-[20px] rounded-lg">

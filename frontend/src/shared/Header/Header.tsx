@@ -2,11 +2,10 @@ import { NavLink } from 'react-router-dom';
 import classNames from 'classnames';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { Menu } from '@/components/Menu/Menu';
-import { Instagram, MenuIcon, Search, Star, X } from 'lucide-react';
+import { CircleUserRound, Instagram, MenuIcon, Search, Star, X } from 'lucide-react';
 import { useAppSelector } from '@/hooks/hook';
 import { getProducts } from '@/services/getProdcutsService';
 import type { Product } from '@/types/Product';
-// import { toSlug } from '@/utils/slug';
 
 export const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -66,7 +65,8 @@ export const Header = () => {
     { day: 'Mon-Thu:', time: '9:00 AM - 5:30 PM' },
     { day: 'Fr:', time: '9:00 AM - 6:00 PM' },
     { day: 'Sat:', time: '11:00 AM - 5:00 PM' },
-  ]
+    { day: 'Sun:', time: '11:00 AM - 7:00 PM' },
+  ];
 
   const links = [
     { text: "Laptops", to: "laptop" },
@@ -89,7 +89,7 @@ export const Header = () => {
           <div className="flex justify-between items-center h-10 xl:h-[44px]">
             <div className="relative cursor-pointer group ml-[84px] md:ml-20 xl:ml-0">
               <div className="relative pr-5 font-poppins font-semibold text-[11px] md:text-xs leading-4.5 text-white after:content-[''] after:absolute after:right-0 after:top-1/2 after:-translate-y-1/2 after:w-4 after:h-4 after:bg-[url('/icons/dropdown-arrow.svg')]">
-                <span className="text-[#a2a6b0]">Mon-Thu:</span> 9:00 AM - 5:30 PM
+                <span className="text-[#a2a6b0]">Mon - Fr:</span> 9:00 AM - 5:30 PM
               </div>
               <div className="absolute top-[30px] left-0 z-[100] w-[262px] bg-white border border-[#cacdd8] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 after:content-[''] after:absolute after:-top-2 after:left-[19px] after:w-3.5 after:h-3.5 after:bg-white after:border-l after:border-t after:border-[#cacdd8] after:rotate-45 after:-z-10">
                 <div className="relative border-b border-[#cacdd8] py-2.5 pr-6 pl-[50px] after:content-[''] after:absolute after:left-[13px] after:top-2.5 after:w-[25px] after:h-[25px] after:bg-[url('/icons/time-icon.svg')] after:bg-contain after:bg-no-repeat">
@@ -106,7 +106,7 @@ export const Header = () => {
                 </div>
                 <div className="relative border-b border-[#cacdd8] py-2.5 pr-6 pl-[50px] after:content-[''] after:absolute after:left-[13px] after:top-2.5 after:w-[25px] after:h-[25px] after:bg-[url('/icons/address-icon.svg')] after:bg-contain after:bg-no-repeat">
                   <address className="not-italic font-poppins font-normal text-[13px] leading-[140%] text-black">
-                    Address: 1234 Street Adress, City Address, 1234
+                    Address: 1540 Market Street, San Francisco, CA 94102
                   </address>
                 </div>
                 <div className="py-[11px] pb-[17px] pl-[21px]">
@@ -120,13 +120,13 @@ export const Header = () => {
               </div>
             </div>
 
-            <address className="hidden md:hidden xl:block not-italic font-poppins font-semibold text-xs leading-[18px] text-[#acacac]">Visit our showroom in 1234 Street Adress City Address, 1234</address>
+            <address className="hidden md:hidden xl:block not-italic font-poppins font-semibold text-xs leading-[18px] text-[#acacac]">Address: 1540 Market Street, San Francisco, CA 94102</address>
             <div className="hidden md:hidden xl:flex items-center">
               <a className="font-poppins font-semibold text-xs leading-[18px] text-white mr-3.5 transition-opacity duration-300 hover:opacity-50" href="tel:0012345678">Call Us: (00) 1234 5678</a>
-              <a className="mr-2 p-[2px] transition-opacity duration-300 hover:opacity-50" href="#">
+              <a className="mr-2 p-[2px] transition-opacity duration-300 hover:opacity-50">
                 <img src="/icons/facebook-icon.svg" alt="Social link to facebook" />
               </a>
-              <a className="p-[2px] transition-opacity duration-300 hover:opacity-50" href="#">
+              <a className="p-[2px] transition-opacity duration-300 hover:opacity-50">
                 <Instagram width={'20px'} height={'20px'} fill='#fff' />
               </a>
             </div>
@@ -180,13 +180,13 @@ export const Header = () => {
               </div>
 
               <div className="flex items-center">
-                <NavLink to='/cart' className="relative block mr-[18px] md:mr-[30px]">
+                <NavLink to='/Cart' className="relative block mr-[18px] md:mr-[30px]">
                   <img src="/icons/cart-icon-mobile.svg" alt="Cart" />
                   {totalCount > 0 && (
                     <span className="flex absolute w-[18px] h-[18px] bg-white text-[#0156ff] items-center justify-center rounded-full font-poppins font-bold text-[10px] leading-[15px] -top-[15px] left-[11px]">{totalCount}</span>
                   )}
                 </NavLink>
-                <NavLink to="/login">
+                <NavLink to="/Login">
                   <img src="/icons/profile-icon-mobile.svg" alt="Profile picture" />
                 </NavLink>
               </div>
@@ -247,7 +247,7 @@ export const Header = () => {
                   <Search width={'18px'} height={'18px'} color='#000' />
                 </button>
               )}
-              <NavLink to="cart" className="mr-7 relative cursor-pointer">
+              <NavLink to="Cart" className="mr-7 relative cursor-pointer">
                 <img src="/icons/cart-icon.svg" alt="Cart" />
 
                 {totalCount > 0 && (
@@ -255,8 +255,8 @@ export const Header = () => {
                 )}
 
               </NavLink>
-              <NavLink to="/login" className="cursor-pointer">
-                <img src="images/profile-picture.jpg" alt="Profile picture" className="rounded-full" />
+              <NavLink to="/Login" className="cursor-pointer">
+                <CircleUserRound color='black' className='w-[20px] h-[20px]' />
               </NavLink>
             </div>
           </nav>

@@ -25,7 +25,8 @@ export const Footer = () => {
       title: "PC Parts",
       links: [
         { label: "Catalog", to: "pc_part" },
-        { label: "Cart", to: "cart" },
+        { label: "Cart", to: "Cart" },
+        { label: "Our Team", to: "Team" },
       ],
     },
     {
@@ -33,7 +34,8 @@ export const Footer = () => {
       title: "Desktop PCs",
       links: [
         { label: "Catalog", to: "pc" },
-        { label: "Cart", to: "cart" },
+        { label: "Cart", to: "Cart" },
+        { label: "Our Team", to: "Team" },
       ],
     },
     {
@@ -41,7 +43,8 @@ export const Footer = () => {
       title: "Laptops",
       links: [
         { label: "Catalog", to: "laptop" },
-        { label: "Cart", to: "cart" },
+        { label: "Cart", to: "Cart" },
+        { label: "Our Team", to: "Team" },
       ],
     },
   ];
@@ -64,19 +67,16 @@ export const Footer = () => {
   const AddressContent = (
     <ul>
       <li className="mb-[10px] last:mb-0">
-        <NavLink
-          className="font-poppins text-[13px] md:text-[12px] leading-[140%] md:leading-[170%] text-white transition-opacity hover:opacity-50"
-          to="cart"
-        >
-          <address>Address: 1234 Street Adress City Address, 1234</address>
-        </NavLink>
+        <p className="font-poppins font-normal text-[13px] md:text-[12px] leading-[140%] md:leading-[170%] text-white transition-opacity">
+          Address: 1540 Market Street, San Francisco, CA 94102
+        </p>
       </li>
 
       <li className="mb-[10px] last:mb-0">
-        <span className="text-white">Phones: </span>
+        <span className="font-poppins font-normal text-[13px] md:text-[12px] leading-[140%] md:leading-[170%] text-white">Phones: </span>
         <a
           href="tel:0012345678"
-          className="text-[#01a4ff] transition-opacity hover:opacity-50"
+          className="text-[#01a4ff] transition-opacity hover:opacity-50 font-poppins font-normal text-[13px] md:text-[12px] leading-[140%] md:leading-[170%]"
         >
           (00) 1234 5678
         </a>
@@ -84,27 +84,27 @@ export const Footer = () => {
 
       <li className="mb-[10px] last:mb-0">
         <p className="font-poppins font-normal text-[13px] md:text-[12px] leading-[140%] md:leading-[170%] text-white">
-          We are open: Monday-Thursday: 9:00 AM - 5:30 PM
+          We are open: Monday - Friday 9:00 AM - 9:00 PM
         </p>
       </li>
 
       <li className="mb-[10px] last:mb-0">
         <p className="font-poppins font-normal text-[13px] md:text-[12px] leading-[140%] md:leading-[170%] text-white">
-          Friday: 9:00 AM - 6:00 PM
+          Saturday 9:00 AM - 8:00 PM
         </p>
       </li>
 
       <li className="mb-[10px] last:mb-0">
         <p className="font-poppins font-normal text-[13px] md:text-[12px] leading-[140%] md:leading-[170%] text-white">
-          Saturday: 11:00 AM - 5:00 PM
+          Sunday 11:00 AM - 7:00 PM
         </p>
       </li>
 
       <li>
-        <span className="text-white">E-mail: </span>
+        <span className="font-poppins font-normal text-[13px] md:text-[12px] leading-[140%] md:leading-[170%] text-white">E-mail: </span>
         <a
           href="mailto:shop@email.com"
-          className="text-[#01a4ff] transition-opacity hover:opacity-50"
+          className="text-[#01a4ff] transition-opacity hover:opacity-50 font-poppins font-normal text-[13px] md:text-[12px] leading-[140%] md:leading-[170%]"
         >
           shop@email.com
         </a>
