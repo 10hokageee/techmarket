@@ -28,8 +28,8 @@ def create_stripe_session(order: Order) -> None:
             for item in items
         ],
         metadata={"order": order.pk},
-        success_url="https://google.com",
-        cancel_url="https://google.com",
+        success_url=settings.STRIPE_SUCCESS_URL,
+        cancel_url=settings.STRIPE_CANCELED_URL,
     )
     Payment.objects.create(
         session_url=session.url,
