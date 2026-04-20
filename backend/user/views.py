@@ -4,7 +4,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
 
-from user.serializers import UserSerializer
+from user.serializers import UserSerializer, ManageUserSerializer
 
 
 class CreateUserView(generics.GenericAPIView):
@@ -27,8 +27,12 @@ class CreateUserView(generics.GenericAPIView):
 
 
 class ManageUserView(generics.RetrieveUpdateAPIView):
-    serializer_class = UserSerializer
     permission_classes = (IsAuthenticated,)
 
     def get_object(self):
         return self.request.user
+
+    def get_serializer_class(self):
+        if self.request.method in ("PUT", "PATCH"):
+            return ManageUserSerializer
+        return UserSerializer

@@ -55,7 +55,7 @@ class TechMarketSessionParametersMiddleware:
         req_path = request.path
         response = self.get_response(request)
 
-        if req_path in ("/user/login/", "/user/register/") and (
+        if req_path in ("/user/login/", "/user/register/") and hasattr(response, "data") and (
             refresh := response.data.get("refresh")
         ):
             import user_agents
