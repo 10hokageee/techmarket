@@ -56,23 +56,26 @@ export async function register(
 export async function refreshToken() {
   const refresh = localStorage.getItem("refresh_token");
 
-  const res = await fetch(`${BASE_URL}/user/refresh/`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ refresh }),
-  });
+  if (refresh !== null) {
+    const res = await fetch(`${BASE_URL}/user/refresh/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ refresh }),
+    });
 
-  if (!res.ok) {
-    throw new Error("Refresh failed");
-  }
+    if (!res.ok) {
+      throw new Error("Refresh failed");
+    }
 
-  const data = await res.json();
+    const data = await res.json();
 
-  localStorage.setItem("access_token", data.access);
+    localStorage.setItem("access_token", data.access);
 
-  return data.access;
+    return data.access;
+  };
+  
 }
 
 // import { BASE_URL } from "@/api/configs";
