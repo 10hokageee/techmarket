@@ -62,9 +62,8 @@ export const Header = () => {
   }
 
   const days = [
-    { day: 'Mon-Thu:', time: '9:00 AM - 5:30 PM' },
-    { day: 'Fr:', time: '9:00 AM - 6:00 PM' },
-    { day: 'Sat:', time: '11:00 AM - 5:00 PM' },
+    { day: 'Mon-Fr:', time: '9:00 AM - 9:00 PM' },
+    { day: 'Sat:', time: '9:00 AM - 8:00 PM' },
     { day: 'Sun:', time: '11:00 AM - 7:00 PM' },
   ];
 
@@ -247,7 +246,7 @@ export const Header = () => {
                   <Search width={'18px'} height={'18px'} color='#000' />
                 </button>
               )}
-              <NavLink to="Cart" className="mr-7 relative cursor-pointer">
+              <NavLink to="Cart" className="mr-7 relative cursor-pointer w-[16px] h-[16px]">
                 <img src="/icons/cart-icon.svg" alt="Cart" />
 
                 {totalCount > 0 && (

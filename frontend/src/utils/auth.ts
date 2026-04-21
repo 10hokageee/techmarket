@@ -1,4 +1,5 @@
 import { BASE_URL } from "@/api/configs";
+import { authFetch } from "./authFetch";
 
 export async function login(email: string, password: string) {
   const res = await fetch(`${BASE_URL}/user/login/`, {
@@ -24,17 +25,10 @@ export async function login(email: string, password: string) {
   return data;
 }
 
-export async function register(
-  username: string,
-  email: string,
-  password: string,
-) {
+export async function register(formData: FormData) {
   const res = await fetch(`${BASE_URL}/user/register/`, {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ username, email, password }),
+    body: formData,
   });
 
   if (!res.ok) {
@@ -52,6 +46,35 @@ export async function register(
 
   return data;
 }
+
+// export async function register(
+//   username: string,
+//   email: string,
+//   password: string,
+// ) {
+//   const res = await fetch(`${BASE_URL}/user/register/`, {
+//     method: "POST",
+//     headers: {
+//       "Content-Type": "application/json",
+//     },
+//     body: JSON.stringify({ username, email, password }),
+//   });
+
+//   if (!res.ok) {
+//     const error = await res.json();
+//     throw new Error(error.detail || "Registration failed");
+//   }
+
+//   const data = await res.json();
+
+//   const access = data.access_token || data.access;
+//   const refresh = data.refresh_token || data.refresh;
+
+//   localStorage.setItem("access_token", access);
+//   localStorage.setItem("refresh_token", refresh);
+
+//   return data;
+// }
 
 export async function refreshToken() {
   const refresh = localStorage.getItem("refresh_token");
@@ -74,8 +97,23 @@ export async function refreshToken() {
     localStorage.setItem("access_token", data.access);
 
     return data.access;
-  };
-  
+  }
+}
+
+export async function updateProfilePicture(file: File) {
+  const formData = new FormData();
+  formData.append("icon", file);
+
+  const res = await authFetch("/user/me/", {
+    method: "PATCH",
+    body: formData,
+  });
+
+  if (!res.ok) {
+    throw new Error("Failed to update avatar");
+  }
+
+  return res.json();
 }
 
 // import { BASE_URL } from "@/api/configs";

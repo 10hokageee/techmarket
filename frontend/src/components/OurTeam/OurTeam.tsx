@@ -80,10 +80,10 @@ export const OurTeam = () => {
         <ul className="flex flex-col justify-center items-center gap-[25px] md:flex-row xl:gap-[40px]">
           {teammates.map(t => (
             <li className="flex flex-col items-center max-w-[254px] w-full text-center xl:max-w-[274px] justify-between xl:min-h-[300px] min-h-[261px]" key={t.id}>
-              <img className="rounded-[50%] w-[80px] h-[80px] object-cover xl:w-[136px] xl:h-[136px] mb-[10px]" src={t.picture} alt="" />
-              <span className="font-poppins font-bold text-[16px]/[22px] xl:text-[16px]/[22px] mb-[3px]">{t.name}</span>
-              <span className="font-poppins font-bold text-[16px]/[22px] xl:text-[16px]/[22px] mb-[10px]">{t.role}</span>
-              <p className="font-poppins font-light text-[12px]/[22px] xl:text-[14px]/[22px] mb-[10px]">Tools & Skills - {t.tools}</p>
+              <img className="rounded-[50%] w-[80px] h-[80px] object-cover xl:w-[136px] xl:h-[136px]" src={t.picture} alt="" />
+              <span className="font-poppins font-bold text-[16px]/[22px] xl:text-[16px]/[22px]">{t.name}</span>
+              <span className="font-poppins font-bold text-[16px]/[22px] xl:text-[16px]/[22px]">{t.role}</span>
+              <p className="font-poppins font-light text-[12px]/[22px] xl:text-[14px]/[22px]">Tools & Skills - {t.tools}</p>
 
               <div className="flex gap-[10px]">
                 {t.socials.map(s => (

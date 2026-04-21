@@ -111,7 +111,7 @@ export const ProductsDetails: React.FC<ProductsDetailsProps> = ({ product }) => 
           </div>
         </div>
 
-        <div className="hidden xl:flex flex gap-[11px] mb-8 absolute bottom-[-50px]">
+        <div className="hidden md:flex flex gap-[11px] mb-8 absolute bottom-[-50px]">
           {images.map((_, idx) => (
             <button
               key={idx}
