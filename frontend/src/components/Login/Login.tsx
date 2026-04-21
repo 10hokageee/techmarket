@@ -5,6 +5,8 @@ import { Loader } from "../Loader/Loader";
 import type { User } from "@/types/User";
 import { getMe } from "@/utils/getMe";
 import { login, updateProfilePicture } from "@/utils/auth";
+import { clearCart } from "@/features/addToCart";
+import { useAppDispatch } from "@/hooks/hook";
 
 export const Login = () => {
   const [email, setEmail] = useState('');
@@ -22,6 +24,7 @@ export const Login = () => {
 
   const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,}$/;
   const passwordRegex = /^[A-Za-z0-9!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]+$/;
+  const dispatch = useAppDispatch();
 
   const isFormValid = useMemo(() => {
     return email.length > 0 && password.length >= 6;
@@ -105,6 +108,7 @@ export const Login = () => {
       setErrorPassword(true);
       setErrorPasswordMessage("Wrong email or password");
     } finally {
+      dispatch(clearCart());
       setLoading(false);
     }
   }
@@ -118,6 +122,7 @@ export const Login = () => {
     localStorage.removeItem("access_token");
     localStorage.removeItem("refresh_token");
     setUser(null);
+    dispatch(clearCart());
   };
 
   if (loading) {
