@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useRef } from "react";
 import { Eye, EyeOff } from "lucide-react";
 import { register } from "@/utils/auth";
 import { Loader } from "../Loader/Loader";
@@ -17,10 +17,11 @@ export const Register = () => {
   const [errorPassword, setErrorPassword] = useState(false);
   const [errorPasswordMessage, setErrorPasswordMessage] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const [profilePicture, setProfilePircute] = useState<File | null>(null);
 
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
   const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,}$/;
   const passwordRegex = /^[A-Za-z0-9!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]+$/;
   const nameRegex = /^[A-Za-z0-9]{3,20}$/;
@@ -86,20 +87,45 @@ export const Register = () => {
     try {
       setLoading(true);
 
-      await register(name, email, password);
+      const formData = new FormData();
+      formData.append("username", name);
+      formData.append("email", email.trim().toLowerCase());
+      formData.append("password", password);
 
-      navigate('/Login')
+      if (profilePicture) {
+        formData.append("icon", profilePicture);
+      }
 
+      await register(formData);
+
+      navigate('/Login');
       reset();
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       setErrorEmail(true);
       setErrorEmailMessage(error.message);
     } finally {
-
       setLoading(false);
     }
+
+    // try {
+    //   setLoading(true);
+
+    //   await register(name, email, password);
+
+    //   navigate('/Login')
+
+    //   reset();
+
+    //   // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    // } catch (error: any) {
+    //   setErrorEmail(true);
+    //   setErrorEmailMessage(error.message);
+    // } finally {
+
+    //   setLoading(false);
+    // }
   }
 
   const reset = () => {
@@ -165,9 +191,40 @@ export const Register = () => {
               </div>
               {errorPassword && <p className="text-[#C94D3F] text-[11px] font-light mt-[5px]">{errorPasswordMessage}</p>}
             </label>
+            <label className="flex flex-col" htmlFor="avatar">
+              <input
+                id="avatar"
+                type="file"
+                ref={fileInputRef}
+
+                accept="image/*"
+                onChange={(e) => {
+                  const file = e.target.files?.[0];
+                  if (!file) {
+                    return;
+                  }
+
+                  if (e.target.files?.[0]) {
+                    setProfilePircute(e.target.files[0]);
+                  }
+                }}
+                className="hidden mt-[-10px]"
+              />
+            </label>
+
+
+            <div className="flex justify-between items-center">
+              <button onClick={() => fileInputRef.current?.click()} type="button" className="bg-[#0156FF] py-[8px] w-[180px] h-[35px] rounded-[20px] text-white text-[14px]/[21px] font-poppins font-semibold cursor-pointer">Add avatar</button>
+              {profilePicture && (
+                <p className="text-[11px]/[20px] text-[#0156FF] font-poppins font-normal text-center block">
+                  Selected: {profilePicture.name}
+                </p>
+              )}
+            </div>
+
 
             <button
-              className={`py-[8px] rounded-[20px] text-[13px] font-poppins font-semibold text-white mt-[16px] max-w-[133px] w-full transition-colors ${isFormValid ? 'bg-[#0156FF]' : 'bg-[#A2A6B0] cursor-not-allowed'}`}
+              className={`py-[8px] rounded-[20px] text-[13px] font-poppins font-semibold text-white  max-w-[133px] w-full transition-colors ${isFormValid ? 'bg-[#0156FF]' : 'bg-[#A2A6B0] cursor-not-allowed'}`}
               type="submit"
               disabled={!isFormValid}
             >

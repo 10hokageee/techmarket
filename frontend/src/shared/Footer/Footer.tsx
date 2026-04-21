@@ -126,11 +126,11 @@ export const Footer = () => {
           <div className="pt-[47px] pb-[36px]">
             <div className="mb-[15px] text-center lg:text-left lg:mb-[45px]">
               <h1 className="font-poppins font-medium text-[18px] lg:text-[38px] leading-[132.5%] text-white mb-[5px] lg:mb-[9px]">
-                Sign Up To Our Newsletter.
+                TechMarket
               </h1>
 
               <p className="font-poppins font-light text-[12px] lg:text-[16px] leading-[132.5%] lg:leading-[21px] text-white">
-                Be the first to hear about the latest offers.
+                Be the first to hear about us.
               </p>
             </div>
 

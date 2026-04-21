@@ -201,16 +201,16 @@ export const Catalog = () => {
                 />
               </div>
 
-              <button onClick={() => navigate(-1)} className="font-poppins font-semibold text-[14px]/[21px] px-[18px] relative mr-[20px] cursor-pointer py-[10px]">
+              <button onClick={() => navigate(-1)} className="font-poppins font-semibold text-[14px]/[21px] px-[18px] relative mr-[20px] cursor-pointer py-[10px] max-w-[120px] w-full">
                 Back
                 <ChevronLeft className="absolute left-0 top-[50%] transform translate-y-[-50%] w-[15px] h-[15px]" />
               </button>
             </div>
 
             {errorMessage ? (
-              <div className="text-center py-10">
-                <p className="text-red-400 mb-4">{errorMessage}</p>
-                <button onClick={reloadPage} className="underline">Try again</button>
+              <div className="font-poppins font-light text-center py-10">
+                <p className="text-red-400 mb-4 font-poppins font-light">{errorMessage}</p>
+                <button onClick={reloadPage} className="underline font-poppins font-light">Try again</button>
               </div>
             ) : products.length === 0 ? (
               <div className="text-center py-10">

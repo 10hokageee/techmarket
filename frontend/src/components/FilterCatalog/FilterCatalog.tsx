@@ -34,15 +34,6 @@ export const FilterCatalog: React.FC<FilterCatalogProps> = ({
 
   const filters = [
     {
-      id: "category",
-      title: "Category",
-      filter: [
-        { label: "CUSTOM PCS" },
-        { label: "MSI ALL-IN-ONE PCS" },
-        { label: "HP/COMPAQ PCS" },
-      ],
-    },
-    {
       id: "price",
       title: "Price",
       filter: [
@@ -66,16 +57,6 @@ export const FilterCatalog: React.FC<FilterCatalogProps> = ({
         { color: "#808080", name: "GRAY" },
       ],
       filter: [],
-    },
-    {
-      id: "series",
-      title: "Series",
-      filter: [
-        { label: "ASUS" },
-        { label: "HP" },
-        { label: "MSI" },
-        { label: "Lenovo" },
-      ],
     },
   ];
 
