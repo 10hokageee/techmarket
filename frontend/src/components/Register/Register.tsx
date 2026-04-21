@@ -3,6 +3,8 @@ import { Eye, EyeOff } from "lucide-react";
 import { register } from "@/utils/auth";
 import { Loader } from "../Loader/Loader";
 import { useNavigate } from "react-router-dom";
+import { useAppDispatch } from "@/hooks/hook";
+import { clearCart } from "@/features/addToCart";
 
 export const Register = () => {
   const [name, setName] = useState('');
@@ -25,6 +27,7 @@ export const Register = () => {
   const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,}$/;
   const passwordRegex = /^[A-Za-z0-9!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]+$/;
   const nameRegex = /^[A-Za-z0-9]{3,20}$/;
+  const dispatch = useAppDispatch();
 
   const isFormValid = useMemo(() => {
     return name.length >= 3 && email.length > 0 && password.length >= 6;
@@ -106,26 +109,9 @@ export const Register = () => {
       setErrorEmail(true);
       setErrorEmailMessage(error.message);
     } finally {
+      dispatch(clearCart());
       setLoading(false);
     }
-
-    // try {
-    //   setLoading(true);
-
-    //   await register(name, email, password);
-
-    //   navigate('/Login')
-
-    //   reset();
-
-    //   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    // } catch (error: any) {
-    //   setErrorEmail(true);
-    //   setErrorEmailMessage(error.message);
-    // } finally {
-
-    //   setLoading(false);
-    // }
   }
 
   const reset = () => {

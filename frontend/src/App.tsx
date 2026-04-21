@@ -2,6 +2,7 @@ import { Outlet } from "react-router-dom";
 import { Header } from "./shared/Header/Header";
 import { Footer } from "./shared/Footer/Footer";
 import { Features } from "./shared/Features/Features";
+import { Toaster } from "react-hot-toast";
 
 export const App = () => {
   const scrollToTop = () => {
@@ -14,7 +15,7 @@ export const App = () => {
   return (
     <div className="flex flex-col h-screen relative">
       <Header />
-
+      <Toaster position="top-center" reverseOrder={false} />
       <button
         onClick={scrollToTop}
         className="

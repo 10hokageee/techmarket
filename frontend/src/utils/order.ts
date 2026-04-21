@@ -7,7 +7,13 @@ export async function order(items: { product: number; quantity: number }[]) {
   });
 
   if (!res.ok) {
-    throw new Error("Order failed");
+    const errorData = await res.json().catch(() => ({}));
+
+    const errorMessage = errorData.items
+      ? Object.values(errorData.items)[0]
+      : "Order failed";
+
+    throw new Error(errorMessage as string);
   }
 
   return res.json();
