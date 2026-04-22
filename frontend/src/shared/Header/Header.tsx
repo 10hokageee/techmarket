@@ -122,10 +122,10 @@ export const Header = () => {
             <address className="hidden md:hidden xl:block not-italic font-poppins font-semibold text-xs leading-[18px] text-[#acacac]">Address: 1540 Market Street, San Francisco, CA 94102</address>
             <div className="hidden md:hidden xl:flex items-center">
               <a className="font-poppins font-semibold text-xs leading-[18px] text-white mr-3.5 transition-opacity duration-300 hover:opacity-50" href="tel:0012345678">Call Us: (00) 1234 5678</a>
-              <a className="mr-2 p-[2px] transition-opacity duration-300 hover:opacity-50">
+              <a className="mr-2 p-[2px] transition-opacity duration-300 hover:opacity-50 cursor-pointer">
                 <img src="/icons/facebook-icon.svg" alt="Social link to facebook" />
               </a>
-              <a className="p-[2px] transition-opacity duration-300 hover:opacity-50">
+              <a className="p-[2px] transition-opacity duration-300 hover:opacity-50 cursor-pointer">
                 <Instagram width={'20px'} height={'20px'} fill='#fff' />
               </a>
             </div>

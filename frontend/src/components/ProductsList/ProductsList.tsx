@@ -116,6 +116,7 @@ export const ProductsList: React.FC<ProductsListProps> = ({
               cursor-pointer
               rounded-r-[30px]
               z-[100]
+              transition-opacity duration-300 hover:opacity-50 cursor-pointer
               "
           >
             <ChevronLeft color="#fff" width="16px" height="16px" />
@@ -137,6 +138,7 @@ export const ProductsList: React.FC<ProductsListProps> = ({
               cursor-pointer
               rounded-l-[30px]
               z-[100]
+              transition-opacity duration-300 hover:opacity-50 cursor-pointer
               "
           >
             <ChevronRight color="#fff" width="16px" height="16px" />

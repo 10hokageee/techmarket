@@ -41,7 +41,7 @@ export const CustomSelect: React.FC<Props> = ({
     options.find(option => option.value === value)?.label || '';
 
   return (
-    <div className="border-2 relative w-1/1 font-poppins font-semibold max-w-[179px] xl:max-w-[185px]">
+    <div className="border-2 relative w-1/1 font-poppins font-semibold max-w-[179px] xl:max-w-[185px] cursor-pointer">
       <div className='relative' ref={wrapperRef}>
         <div
           className="py-[11px] pl-[15px] pr-[42px] text-[11px]/[16px] xl:text-[13px]/[210%] xl:pr-[30px]"

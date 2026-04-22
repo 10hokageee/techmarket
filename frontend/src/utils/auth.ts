@@ -33,7 +33,7 @@ export async function register(formData: FormData) {
 
   if (!res.ok) {
     const error = await res.json();
-    throw new Error(error.detail || "Registration failed");
+    throw new Error(error.detail || "This email or username is already registered");
   }
 
   const data = await res.json();
@@ -46,35 +46,6 @@ export async function register(formData: FormData) {
 
   return data;
 }
-
-// export async function register(
-//   username: string,
-//   email: string,
-//   password: string,
-// ) {
-//   const res = await fetch(`${BASE_URL}/user/register/`, {
-//     method: "POST",
-//     headers: {
-//       "Content-Type": "application/json",
-//     },
-//     body: JSON.stringify({ username, email, password }),
-//   });
-
-//   if (!res.ok) {
-//     const error = await res.json();
-//     throw new Error(error.detail || "Registration failed");
-//   }
-
-//   const data = await res.json();
-
-//   const access = data.access_token || data.access;
-//   const refresh = data.refresh_token || data.refresh;
-
-//   localStorage.setItem("access_token", access);
-//   localStorage.setItem("refresh_token", refresh);
-
-//   return data;
-// }
 
 export async function refreshToken() {
   const refresh = localStorage.getItem("refresh_token");

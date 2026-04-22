@@ -128,7 +128,7 @@ export const FilterCatalog: React.FC<FilterCatalogProps> = ({
         <Accordion type="multiple" className="mb-[17px] overflow-y-auto max-h-[70vh]">
           {filters.map(filter => (
             <AccordionItem key={filter.id} value={filter.id}>
-              <AccordionTrigger className="font-poppins font-semibold text-[14px]/[21px]">
+              <AccordionTrigger className="font-poppins font-semibold text-[14px]/[21px] cursor-pointer">
                 {filter.title}
               </AccordionTrigger>
               <AccordionContent className="text-[13px]/[28px]">
@@ -180,7 +180,7 @@ export const FilterCatalog: React.FC<FilterCatalogProps> = ({
 
       <button
         onClick={applyFilters}
-        className="bg-[#0156FF] text-[#fff] text-[13px]/[20px] mx-auto w-full max-w-[200px] py-[12px] font-poppins font-semibold rounded-[50px] shadow-lg hover:bg-blue-700 transition-colors md:text-[14px]/[21px] md:py-[8px]"
+        className="bg-[#0156FF] text-[#fff] text-[13px]/[20px] mx-auto w-full max-w-[200px] py-[12px] font-poppins font-semibold rounded-[50px] shadow-lg hover:bg-blue-700 transition-colors md:text-[14px]/[21px] md:py-[8px] cursor-pointer"
       >
         Apply Filters ({Object.keys(tempFilters).length})
       </button>
