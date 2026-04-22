@@ -200,7 +200,7 @@ export const Register = () => {
 
 
             <div className="flex justify-between items-center">
-              <button onClick={() => fileInputRef.current?.click()} type="button" className="bg-[#0156FF] py-[8px] w-[180px] h-[35px] rounded-[20px] text-white text-[14px]/[21px] font-poppins font-semibold cursor-pointer">Add avatar</button>
+              <button onClick={() => fileInputRef.current?.click()} type="button" className="bg-[#0156FF] py-[8px] w-[180px] h-[35px] rounded-[20px] text-white text-[14px]/[21px] font-poppins font-semibold cursor-pointer hover:bg-[#0044cc] transition-all duration-300 ease-in-out">Add avatar</button>
               {profilePicture && (
                 <p className="text-[11px]/[20px] text-[#0156FF] font-poppins font-normal text-center block">
                   Selected: {profilePicture.name}
@@ -210,7 +210,7 @@ export const Register = () => {
 
 
             <button
-              className={`py-[8px] rounded-[20px] text-[13px] font-poppins font-semibold text-white  max-w-[133px] w-full transition-colors ${isFormValid ? 'bg-[#0156FF]' : 'bg-[#A2A6B0] cursor-not-allowed'}`}
+              className={`py-[8px] rounded-[20px] text-[13px] font-poppins font-semibold text-white  max-w-[133px] w-full transition-colors ${isFormValid ? 'bg-[#0156FF] hover:bg-[#0044cc] transition-all duration-300 ease-in-out cursor-pointer' : 'bg-[#A2A6B0] cursor-not-allowed'}`}
               type="submit"
               disabled={!isFormValid}
             >

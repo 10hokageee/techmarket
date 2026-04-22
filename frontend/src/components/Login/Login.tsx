@@ -141,10 +141,10 @@ export const Login = () => {
                 <p className="text-[14px]/[20px] font-poppins font-light mb-[5px] xl:text-[18px]/[24px]">Your Email: {user.email}</p>
               </div>
               <div className="flex flex-col gap-[10px]">
-                <button onClick={() => fileInputRef.current?.click()} className="bg-[#0156FF] py-[8px] w-[180px] h-[35px] rounded-[20px] text-white text-[14px]/[21px] font-poppins font-semibold cursor-pointer">Edit profile picture</button>
+                <button onClick={() => fileInputRef.current?.click()} className="bg-[#0156FF] py-[8px] w-[180px] h-[35px] rounded-[20px] text-white text-[14px]/[21px] font-poppins font-semibold cursor-pointer hover:bg-[#0044cc] transition-all duration-300 ease-in-out">Edit profile picture</button>
                 <button
                   onClick={handleLogout}
-                  className="px-4 py-2 bg-red-500 text-white rounded-[30px] font-poppins font-semibold text-[14px]/[20px] w-[180px] h-[35px] cursor-pointer"
+                  className="px-4 py-2 bg-red-500 text-white rounded-[30px] font-poppins font-semibold text-[14px]/[20px] w-[180px] h-[35px] cursor-pointer hover:bg-red-600 transition-all duration-300 ease-in-out"
                 >
                   Logout
                 </button>
@@ -227,13 +227,13 @@ export const Login = () => {
 
             <div className="flex justify-between items-center mt-[16px] ">
               <button
-                className={`py-[8px] rounded-[20px] text-[13px] font-poppins font-semibold text-white max-w-[133px] w-full transition-colors ${isFormValid ? 'bg-[#0156FF]' : 'bg-[#A2A6B0] cursor-not-allowed'}`}
+                className={`py-[8px] rounded-[20px] text-[13px] font-poppins font-semibold text-white max-w-[133px] w-full transition-colors ${isFormValid ? 'bg-[#0156FF] hover:bg-[#0044cc] transition-all duration-300 ease-in-out cursor-pointer' : 'bg-[#A2A6B0] cursor-not-allowed'}`}
                 type="submit"
                 disabled={!isFormValid}
               >
                 Submit
               </button>
-              <NavLink className="text-[11px]/[20px] text-[#0156FF] font-poppins font-normal" to="/Register">Create account</NavLink>
+              <NavLink className="text-[11px]/[20px] text-[#0156FF] font-poppins font-normal hover:text-[#0044cc] transition-all duration-300 ease-in-out" to="/Register">Create account</NavLink>
             </div>
           </form>
         </div>
