@@ -16,7 +16,7 @@ export const DesktopsList: React.FC<DesktopsListProps> = ({
   const [selectedFilter, setSelectedFilter] = useState<Filter>("all");
 
   const isActive = (field: Filter) =>
-    `cursor-pointer pb-[3px] font-poppins font-semibold text-[16px] md:text-[14px] lg:text-[16px] ${
+    `cursor-pointer pb-[3px] font-poppins font-semibold text-[16px] md:text-[14px] lg:text-[16px] transition-opacity duration-300 hover:opacity-50 cursor-pointer ${
       selectedFilter === field
         ? "text-black relative after:content-[''] after:absolute after:w-full after:border-[2px] after:border-[#0156ff] after:bottom-0 after:left-0 after:rounded-[10px]"
         : "text-[#838383]"

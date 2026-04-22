@@ -27,7 +27,7 @@ export const ProductCard: React.FC<ProductProps> = ({ product }) => {
             <>
               <img src="icons/check-availability-icon.svg" alt="" />
               <span className="font-poppins font-normal text-[10px] leading-[210%] text-[#C94D3F]">
-                check availability
+                sold out
               </span>
             </>
           )}

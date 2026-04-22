@@ -201,7 +201,7 @@ export const Catalog = () => {
                 />
               </div>
 
-              <button onClick={() => navigate(-1)} className="font-poppins font-semibold text-[14px]/[21px] px-[18px] relative mr-[20px] cursor-pointer py-[10px] max-w-[120px] w-full">
+              <button onClick={() => navigate(-1)} className="font-poppins font-semibold text-[14px]/[21px] px-[18px] relative mr-[20px] py-[10px] max-w-[120px] w-full transition-opacity duration-300 hover:opacity-50 cursor-pointer">
                 Back
                 <ChevronLeft className="absolute left-0 top-[50%] transform translate-y-[-50%] w-[15px] h-[15px]" />
               </button>
@@ -303,7 +303,7 @@ export const Catalog = () => {
                 {!isExpanded && <div className="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-white to-transparent" />}
               </div>
               <div className="flex justify-center mt-4">
-                <button onClick={() => setIsExpanded(!isExpanded)} className="px-8 py-2 border-2 border-[#A2A6B0] rounded-full text-[#A2A6B0] text-[11px] font-semibold">
+                <button onClick={() => setIsExpanded(!isExpanded)} className="px-8 py-2 border-2 border-[#A2A6B0] rounded-full text-[#A2A6B0] text-[11px] font-semibold cursor-pointer">
                   {isExpanded ? 'Less' : 'More'}
                 </button>
               </div>

@@ -56,6 +56,7 @@ export const Cart = () => {
         }
 
         setPayment(false);
+        
         toast.error("Payment check failed.");
       }
     }, 3000);
@@ -105,7 +106,7 @@ export const Cart = () => {
         </p>
         <button
           onClick={() => navigate(-1)}
-          className="bg-[#0156FF] py-[8px] max-w-[130px] w-[100%] rounded-[20px] text-white text-[14px]/[21px] font-poppins font-normal"
+          className="bg-[#0156FF] py-[8px] max-w-[130px] w-[100%] rounded-[20px] text-white text-[14px]/[21px] font-poppins font-normal cursor-pointer"
         >
           Back
         </button>
@@ -131,7 +132,7 @@ export const Cart = () => {
         </p>
         <button
           onClick={handleCancelPayment}
-          className="w-[163px] bg-[#0156FF] py-[8px] rounded-[30px] text-[13px]/[20px] font-poppins font-semibold text-white mb-[10px] cursor-pointer xl:text-[14px]/[21px] xl:py-[15px]"
+          className="w-[163px] bg-[#0156FF] py-[8px] rounded-[30px] text-[13px]/[20px] font-poppins font-semibold text-white mb-[10px] cursor-pointer xl:text-[14px]/[21px] xl:py-[15px] cursor-pointer"
         >
           Cancel payment
         </button>

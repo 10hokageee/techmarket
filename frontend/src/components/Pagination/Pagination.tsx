@@ -31,7 +31,7 @@ export const Pagination: React.FC<Props> = ({
   };
 
   const buttonBaseClass = "border-[2px] rounded-[50%] w-[38px] h-[38px] flex items-center justify-center transition-colors duration-200";
-  const buttonActiveHover = "hover:bg-[#A2A6B0] hover:text-black text-[#A2A6B0] border-[#A2A6B0]";
+  const buttonActiveHover = "hover:bg-[#A2A6B0] hover:text-black text-[#A2A6B0] border-[#A2A6B0] cursor-pointer";
   const buttonDisabled = "cursor-not-allowed opacity-50";
 
   return (

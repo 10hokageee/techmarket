@@ -13,8 +13,8 @@ export const SupportBlock = () => {
         <ul className="flex flex-col gap-[14px] w-full pl-[26px]">
           {links.map(link => (
             <li key={link.link}>
-              <Link className="relative max-w-[243px] w-[100%] py-[15px] px-[20px] font-poppins font-medium text-[#313131] text-[12px]/[18px] border-[#CACDD8] border-1 block rounded-[10px] xl:text-[16px]/[24px] xl:max-w-[347px]" to={link.to}>{link.link}
-                <MoveRight size="16px" className="absolute right-[11px] top-[50%] transform translate-y-[-50%]" color="#0156FF" />
+              <Link className="relative max-w-[243px] w-[100%] py-[15px] px-[20px] font-poppins font-medium text-[#313131] text-[12px]/[18px] border-[#CACDD8] border-1 block rounded-[10px] xl:text-[16px]/[24px] xl:max-w-[347px] group" to={link.to}>{link.link}
+                <MoveRight size="16px" className="absolute right-[11px] top-[50%] -translate-y-1/2 transition-transform duration-200 group-hover:translate-x-[-10px]" color="#0156FF" />
               </Link>
             </li>
           ))}
