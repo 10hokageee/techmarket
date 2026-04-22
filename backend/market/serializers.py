@@ -1,3 +1,5 @@
+from django.conf import settings
+from django.core.files.uploadedfile import InMemoryUploadedFile, TemporaryUploadedFile
 from django.db.models.functions import Replace
 
 from payments.tasks import create_stripe_session
@@ -122,6 +124,25 @@ class SignboardSerializer(serializers.ModelSerializer):
     class Meta:
         model = Signboard
         fields = ("id", "image")
+
+    def validate(self, attrs):
+        MAX_SIZE_IMAGE = settings.MAX_SIZE_IMAGE
+        if attrs.get("image") and not isinstance(
+            attrs["image"], (InMemoryUploadedFile, TemporaryUploadedFile)
+        ):
+            raise ValidationError(
+                {
+                    "detail": "Icon must be a byte string.",
+                }
+            )
+
+        if attrs["image"].size > MAX_SIZE_IMAGE:
+            raise ValidationError(
+                {
+                    "detail": "Icon must be less than 10 megabytes.",
+                }
+            )
+        return attrs
 
     def to_representation(self, instance):
         data = super().to_representation(instance)

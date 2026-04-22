@@ -1,6 +1,7 @@
+from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.contrib.auth.hashers import check_password
-from django.core.files.uploadedfile import InMemoryUploadedFile
+from django.core.files.uploadedfile import InMemoryUploadedFile, TemporaryUploadedFile
 from rest_framework import serializers
 from rest_framework.exceptions import PermissionDenied, ValidationError
 
@@ -31,20 +32,13 @@ class UserSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         return USER_MODEL.objects.create_user(**validated_data)
 
-    def update(self, instance, validated_data):
-        ...
+    def update(self, instance, validated_data): ...
 
 
 class ManageUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = USER_MODEL
-        fields = (
-            "username",
-            "email",
-            "first_name",
-            "last_name",
-            "icon"
-        )
+        fields = ("username", "email", "first_name", "last_name", "icon")
         extra_kwargs = {
             "username": {"required": False},
             "email": {"required": False},
@@ -54,16 +48,27 @@ class ManageUserSerializer(serializers.ModelSerializer):
         }
 
     def validate(self, attrs):
+        MAX_SIZE_IMAGE = settings.MAX_SIZE_IMAGE
         if not attrs:
+
             raise ValidationError(
                 {
                     "detail": "You need to supply at least one field.",
                 }
             )
-        if attrs.get("icon") and not isinstance(attrs["icon"], InMemoryUploadedFile):
+        if attrs.get("icon") and not isinstance(
+            attrs["icon"], (InMemoryUploadedFile, TemporaryUploadedFile)
+        ):
             raise ValidationError(
                 {
                     "detail": "Icon must be a byte string.",
+                }
+            )
+
+        if attrs["icon"].size > MAX_SIZE_IMAGE:
+            raise ValidationError(
+                {
+                    "detail": "Icon must be less than 10 megabytes.",
                 }
             )
         return attrs
@@ -73,5 +78,4 @@ class ManageUserSerializer(serializers.ModelSerializer):
         data["icon"] = instance.get_avatar
         return data
 
-    def create(self, validated_data):
-        ...
+    def create(self, validated_data): ...

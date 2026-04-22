@@ -1,9 +1,12 @@
 import re
 
+from django.conf import settings
+from django.core.files.uploadedfile import InMemoryUploadedFile, TemporaryUploadedFile
 from django.db.models import Q, QuerySet, Value, F
 from django.db.models.functions import Coalesce, Left, StrIndex, Concat
 from rest_framework import viewsets, mixins, status
 from rest_framework.decorators import api_view, permission_classes, action
+from rest_framework.exceptions import ValidationError
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.generics import get_object_or_404
@@ -111,10 +114,17 @@ class ProductViewSet(viewsets.ModelViewSet):
 
     @action(detail=True, methods=["POST"])
     def upload_image(self, request, **_):
+        MAX_SIZE_IMAGE = settings.MAX_SIZE_IMAGE
         product = self.get_object()
         images = request.FILES.getlist("images")
         if images:
             for image in images:
+                if image.size > MAX_SIZE_IMAGE:
+                    raise ValidationError(
+                        {
+                            "detail": "Icon must be less than 10 megabytes.",
+                        }
+                    )
                 ProductImage.objects.create(product=product, image=image)
             return Response(
                 {"Upload": "The upload was completed successfully."},
