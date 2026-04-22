@@ -172,7 +172,7 @@ export const ProductsDetails: React.FC<ProductsDetailsProps> = ({ product }) => 
           </div>
 
           <div className="flex justify-between mb-[15px]">
-            <button onClick={handleAddToCart} className="font-poppins font-semibold text-[13px] text-white bg-[#0156FF] px-10 py-[12px] rounded-[30px] hover:bg-[#0044cc] transition-colors w-full md:w-auto cursor-pointer">
+            <button onClick={handleAddToCart} className="font-poppins font-semibold text-[13px] text-white bg-[#0156FF] px-10 py-[12px] rounded-[30px] hover:bg-[#0044cc] w-full md:w-auto cursor-pointer hover:bg-[#0044cc] transition-all duration-300 ease-in-out">
               Add to Cart
             </button>
           </div>

@@ -93,7 +93,7 @@ export const SuccessOrders = () => {
 
         <button
           onClick={() => navigate(-1)}
-          className="bg-[#0156FF] py-[8px] max-w-[130px] w-[100%] rounded-[20px] text-white text-[14px]/[21px] font-poppins font-normal"
+          className="bg-[#0156FF] py-[8px] max-w-[130px] w-[100%] rounded-[20px] text-white text-[14px]/[21px] font-poppins font-normal hover:bg-[#0044cc] transition-all duration-300 ease-in-out cursor-pointer"
         >
           Back
         </button>
@@ -155,14 +155,14 @@ export const SuccessOrders = () => {
 
             {order.payment_status === "PAID" ? (
               <button
-                className="w-[175px] bg-[#0156FF] h-[35px] rounded-[30px] text-[13px]/[20px] font-poppins font-semibold text-white cursor-pointer xl:text-[14px]/[21px] xl:py-[5px]"
+                className="w-[175px] bg-[#0156FF] h-[35px] rounded-[30px] text-[13px]/[20px] font-poppins font-semibold text-white cursor-pointer xl:text-[14px]/[21px] xl:py-[5px] hover:bg-[#0044cc] transition-all duration-300 ease-in-out"
                 onClick={() => window.open(order.receipt, "_blank")}
               >
                 View receipt
               </button>
             ) : (
               <button
-                className="w-[175px] bg-[#0156FF] h-[35px] rounded-[30px] text-[13px]/[20px] font-poppins font-semibold text-white cursor-pointer xl:text-[14px]/[21px] xl:py-[5px]"
+                className="w-[175px] bg-[#0156FF] h-[35px] rounded-[30px] text-[13px]/[20px] font-poppins font-semibold text-white cursor-pointer xl:text-[14px]/[21px] xl:py-[5px] hover:bg-[#0044cc] transition-all duration-300 ease-in-out"
                 onClick={() => window.open(order.payment_url, "_blank")}
               >
                 Pay

@@ -56,7 +56,7 @@ export const Cart = () => {
         }
 
         setPayment(false);
-        
+
         toast.error("Payment check failed.");
       }
     }, 3000);
@@ -106,12 +106,12 @@ export const Cart = () => {
         </p>
         <button
           onClick={() => navigate(-1)}
-          className="bg-[#0156FF] py-[8px] max-w-[130px] w-[100%] rounded-[20px] text-white text-[14px]/[21px] font-poppins font-normal cursor-pointer"
+          className="bg-[#0156FF] py-[8px] max-w-[130px] w-[100%] rounded-[20px] text-white text-[14px]/[21px] font-poppins font-normal cursor-pointer hover:bg-[#0044cc] transition-all duration-300 ease-in-out"
         >
           Back
         </button>
         <NavLink
-          className="mb-[15px] text-[11px]/[20px] text-[#0156FF] font-poppins font-normal mt-[15px]"
+          className="mb-[15px] text-[11px]/[20px] text-[#0156FF] font-poppins font-normal mt-[15px] hover:text-[#0044cc] transition-all duration-300 ease-in-out hover:text-[#0044cc] transition-all duration-300 ease-in-out"
           to="/SuccessOrders"
         >
           Check my orders
@@ -132,7 +132,7 @@ export const Cart = () => {
         </p>
         <button
           onClick={handleCancelPayment}
-          className="w-[163px] bg-[#0156FF] py-[8px] rounded-[30px] text-[13px]/[20px] font-poppins font-semibold text-white mb-[10px] cursor-pointer xl:text-[14px]/[21px] xl:py-[15px] cursor-pointer"
+          className="w-[163px] bg-[#0156FF] py-[8px] rounded-[30px] text-[13px]/[20px] font-poppins font-semibold text-white mb-[10px] cursor-pointer xl:text-[14px]/[21px] xl:py-[15px] cursor-pointer hover:bg-[#0044cc] transition-all duration-300 ease-in-out"
         >
           Cancel payment
         </button>
@@ -187,13 +187,13 @@ export const Cart = () => {
               <span className="text-[12px]/[18px] font-poppins font-semibold xl:text-[18px]/[210%]">${totalCartPrice.toFixed(2)}</span>
             </div>
             <div>
-              <button onClick={handleOrder} className="w-[100%] bg-[#0156FF] py-[8px] rounded-[30px] text-[13px]/[20px] font-poppins font-semibold text-white mb-[10px] cursor-pointer xl:text-[14px]/[21px] xl:py-[15px]">
+              <button onClick={handleOrder} className="w-[100%] bg-[#0156FF] py-[8px] rounded-[30px] text-[13px]/[20px] font-poppins font-semibold text-white mb-[10px] cursor-pointer xl:text-[14px]/[21px] xl:py-[15px] hover:bg-[#0044cc] transition-all duration-300 ease-in-out">
                 Proceed to Checkout
               </button>
               <button onClick={() => dispatch(clearCart())} className="relative w-[100%] bg-black py-[8px] rounded-[30px] text-[13px]/[20px] font-poppins font-semibold text-white mb-[10px] cursor-pointer xl:text-[14px]/[21px] xl:py-[15px]">
                 Clear Shopping Cart
               </button>
-              <NavLink className="text-[11px]/[20px] text-[#0156FF] font-poppins font-normal mt-[15px] text-center block" to="/SuccessOrders">
+              <NavLink className="text-[11px]/[20px] text-[#0156FF] font-poppins font-normal mt-[15px] text-center block hover:text-[#0044cc] transition-all duration-300 ease-in-out" to="/SuccessOrders">
                 Check my orders
               </NavLink>
             </div>
