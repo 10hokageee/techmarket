@@ -11,7 +11,7 @@ export async function order(items: { product: number; quantity: number }[]) {
 
     const errorMessage = errorData.items
       ? Object.values(errorData.items)[0]
-      : "Order failed";
+      : "Please log in to your account to make an order.";
 
     throw new Error(errorMessage as string);
   }

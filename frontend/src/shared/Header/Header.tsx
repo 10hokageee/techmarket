@@ -88,7 +88,7 @@ export const Header = () => {
           <div className="flex justify-between items-center h-10 xl:h-[44px]">
             <div className="relative cursor-pointer group ml-[84px] md:ml-20 xl:ml-0">
               <div className="relative pr-5 font-poppins font-semibold text-[11px] md:text-xs leading-4.5 text-white after:content-[''] after:absolute after:right-0 after:top-1/2 after:-translate-y-1/2 after:w-4 after:h-4 after:bg-[url('/icons/dropdown-arrow.svg')]">
-                <span className="text-[#a2a6b0]">Mon - Fr:</span> 9:00 AM - 5:30 PM
+                <span className="text-[#a2a6b0]">Mon - Fr:</span> 9:00 AM - 9:00 PM
               </div>
               <div className="absolute top-[30px] left-0 z-[100] w-[262px] bg-white border border-[#cacdd8] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 after:content-[''] after:absolute after:-top-2 after:left-[19px] after:w-3.5 after:h-3.5 after:bg-white after:border-l after:border-t after:border-[#cacdd8] after:rotate-45 after:-z-10">
                 <div className="relative border-b border-[#cacdd8] py-2.5 pr-6 pl-[50px] after:content-[''] after:absolute after:left-[13px] after:top-2.5 after:w-[25px] after:h-[25px] after:bg-[url('/icons/time-icon.svg')] after:bg-contain after:bg-no-repeat">
