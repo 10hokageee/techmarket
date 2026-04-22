@@ -6,6 +6,8 @@ import { useEffect, useRef, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { Loader } from "../Loader/Loader";
 import toast from "react-hot-toast";
+import { fromSlug } from "@/utils/slug";
+import { categoryToSlug } from "@/utils/categoryToSlug";
 
 export const Cart = () => {
   const dispatch = useAppDispatch();
@@ -151,8 +153,10 @@ export const Cart = () => {
           <div className="xl:w-[100%]">
             {products.map((product) => {
               const unitPrice = parseFloat(product.sale_price || product.original_price);
+              const slug = categoryToSlug[product.category];
+
               return (
-                <div key={product.id} className="flex flex-wrap border-b-[1px] border-b-[#CACDD8] mb-[17px] gap-[13px] pb-[18px] w-[100%] xl:flex-nowrap">
+                <NavLink to={`/${slug}/${product.id}`} key={product.id} className="flex flex-wrap border-b-[1px] border-b-[#CACDD8] mb-[17px] gap-[13px] pb-[18px] w-[100%] xl:flex-nowrap">
                   <div className="flex gap-[18px] items-center">
                     <img className="w-[68px] h-[68px] xl:w-[120px] xl:h-[120px]" src={product.images[0]} alt="" />
                     <h2 className="text-[10px]/[15px] font-poppins font-normal xl:text-[14px]/[21px]">{product.name}</h2>
@@ -176,7 +180,7 @@ export const Cart = () => {
                       <X onClick={() => dispatch(deleteProduct(product.id))} className="border-[2px] border-[CACDD8] rounded-[50%] cursor-pointer" color="#A1A1A1" size="16px" />
                     </div>
                   </div>
-                </div>
+                </NavLink>
               );
             })}
           </div>
