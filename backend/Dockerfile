@@ -10,7 +10,7 @@ COPY requirements.txt /techmarket/
 RUN python -m pip install --no-cache-dir -r requirements.txt
 
 RUN addgroup -S django && \
-    adduser -S -G django -H tech_user
+    adduser -S -G django tech_user
 
 COPY . /techmarket/
 RUN chmod +x /techmarket/build.sh && \

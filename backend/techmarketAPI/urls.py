@@ -24,6 +24,9 @@ from drf_spectacular.views import (
     SpectacularAPIView,
     SpectacularSwaggerView,
 )
+# ------------
+from analytics.views import SessionParametersDevView # TODO delete for prod
+# ------------
 
 urlpatterns = (
     [
@@ -45,6 +48,10 @@ urlpatterns = (
             name="swagger-ui",
         ),
         path("payments/", include("payments.urls", namespace="payments")),
+
+        # -----------------
+        path("dev-get-analytics/", SessionParametersDevView.as_view(), name="dev-get-analytics") # TODO delete for prod
+        # -----------------
     ]
     + debug_toolbar_urls()
     + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

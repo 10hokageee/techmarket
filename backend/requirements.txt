@@ -10,3 +10,7 @@ whitenoise
 webcolors==25.10.0
 drf-spectacular
 stripe
+django-countries
+user-agents
+requests
+django-ipware
