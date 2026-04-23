@@ -50,13 +50,18 @@ class ManageUserSerializer(serializers.ModelSerializer):
     def validate(self, attrs):
         MAX_SIZE_IMAGE = settings.MAX_SIZE_IMAGE
         if not attrs:
-
             raise ValidationError(
                 {
                     "detail": "You need to supply at least one field.",
                 }
             )
-        if attrs.get("icon") and not isinstance(
+        icon = attrs.get("icon")
+
+        if not icon:
+            attrs["icon"] = None
+            return attrs
+
+        if icon and not isinstance(
             attrs["icon"], (InMemoryUploadedFile, TemporaryUploadedFile)
         ):
             raise ValidationError(
@@ -64,7 +69,6 @@ class ManageUserSerializer(serializers.ModelSerializer):
                     "detail": "Icon must be a byte string.",
                 }
             )
-
         if attrs["icon"].size > MAX_SIZE_IMAGE:
             raise ValidationError(
                 {
