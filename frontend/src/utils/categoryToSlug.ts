@@ -3,6 +3,6 @@ export const categoryToSlug: Record<string, string> = {
   "Laptops": "laptop",
   "Networking devices": "network_device",
   "Printers & Scanners": "printer_scanner",
-  "Others product": "other",
+  "Other products": "other",
   "Desktop PC`s": "pc",
 };

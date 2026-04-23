@@ -4,9 +4,10 @@ import { NavLink } from "react-router-dom";
 import { Loader } from "../Loader/Loader";
 import type { User } from "@/types/User";
 import { getMe } from "@/utils/getMe";
-import { login, updateProfilePicture } from "@/utils/auth";
+import { deleteProfilePicture, login, updateProfilePicture } from "@/utils/auth";
 import { clearCart } from "@/features/addToCart";
 import { useAppDispatch } from "@/hooks/hook";
+import toast from "react-hot-toast";
 
 export const Login = () => {
   const [email, setEmail] = useState('');
@@ -125,6 +126,22 @@ export const Login = () => {
     dispatch(clearCart());
   };
 
+  const handleDeleteProfPicture = async () => {
+    try {
+      setLoading(true);
+
+      await deleteProfilePicture();
+
+      const updatedUser = await getMe();
+      setUser(updatedUser);
+      toast.success("Profile picture deleted")
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   if (loading) {
     return <Loader />;
   }
@@ -137,11 +154,21 @@ export const Login = () => {
           <div className="flex flex-col items-center">
             <div className="flex flex-col justify-between w-full items-center md:flex-row md:justify-around">
               <div>
-                <img className="w-[80px] h-[80px] rounded-[50%] xl:w-[120px] xl:h-[120px] mb-[15px] mx-auto md:mx-0" src={user.icon} alt="" />
+
+                {user.icon !== null && (
+                  <img className="w-[80px] h-[80px] rounded-[50%] xl:w-[120px] xl:h-[120px] mb-[15px] mx-auto md:mx-0" src={user.icon} alt="" />
+                )}
+
                 <p className="text-[14px]/[20px] font-poppins font-light mb-[5px] xl:text-[18px]/[24px]">Your Email: {user.email}</p>
               </div>
+
               <div className="flex flex-col gap-[10px]">
-                <button onClick={() => fileInputRef.current?.click()} className="bg-[#0156FF] py-[8px] w-[180px] h-[35px] rounded-[20px] text-white text-[14px]/[21px] font-poppins font-semibold cursor-pointer hover:bg-[#0044cc] transition-all duration-300 ease-in-out">Edit profile picture</button>
+                <button onClick={() => fileInputRef.current?.click()} className="bg-[#0156FF] py-[8px] w-[180px] h-[35px] rounded-[20px] text-white text-[14px]/[21px] font-poppins font-semibold cursor-pointer hover:bg-[#0044cc] transition-all duration-300 ease-in-out">{user.icon === null ? "Add profile picture" : "Edit profile picture"}</button>
+
+                {user.icon !== null && (
+                  <button onClick={handleDeleteProfPicture} className="bg-[#0156FF] py-[8px] w-[180px] h-[35px] rounded-[20px] text-white text-[14px]/[21px] font-poppins font-semibold cursor-pointer hover:bg-[#0044cc] transition-all duration-300 ease-in-out">Delete profile picture</button>
+                )}
+
                 <button
                   onClick={handleLogout}
                   className="px-4 py-2 bg-red-500 text-white rounded-[30px] font-poppins font-semibold text-[14px]/[20px] w-[180px] h-[35px] cursor-pointer hover:bg-red-600 transition-all duration-300 ease-in-out"
@@ -161,6 +188,20 @@ export const Login = () => {
                     return;
                   }
 
+                  const MAX_SIZE = 10 * 1024 * 1024;
+
+                  if (!file.type.startsWith("image/")) {
+                    toast.error("Only images are allowed");
+                    e.target.value = "";
+                    return;
+                  }
+
+                  if (file.size > MAX_SIZE) {
+                    toast.error("Image must be less than 10MB");
+                    e.target.value = "";
+                    return;
+                  }
+
                   try {
                     setLoading(true);
 
@@ -168,9 +209,11 @@ export const Login = () => {
 
                     const updatedUser = await getMe();
                     setUser(updatedUser);
+                    toast.success("Profile picture updated");
 
                   } catch (e) {
                     console.log(e);
+                    toast.error("Failed to update avatar");
                   } finally {
                     setLoading(false);
                   }

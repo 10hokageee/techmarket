@@ -19,7 +19,7 @@ const CATEGORIES = [
   'Desktop PC`s',
   'Networking devices',
   'Printers & Scanners',
-  'Others product',
+  'Other products',
   'PC parts'
 ];
 
@@ -262,11 +262,14 @@ export const Catalog = () => {
 
 
                   <ul className="flex gap-4 flex-wrap justify-center mb-[23px]">
-                    {products.map((product) => (
-                      <li key={product.id}>
-                        <ProductCard product={product} />
-                      </li>
-                    ))}
+                        {products.map((product) => {
+                      console.log(product.category)
+                      return (
+                        <li key={product.id}>
+                          <ProductCard product={product} />
+                        </li>
+                      );
+                    })}
                   </ul>
                   <Pagination
                     currentPage={page}

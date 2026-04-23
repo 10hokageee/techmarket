@@ -4,5 +4,5 @@ export const categoryMap = {
   network_device: "Networking devices",
   printer_scanner: "Printers & Scanners",
   pc_part: "PC parts",
-  other: "Others product",
+  other: "Other products",
 } as const;

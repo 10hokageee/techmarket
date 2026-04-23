@@ -23,7 +23,7 @@ export const CurstomeProducts: React.FC<CurstomeProductsProps> = ({
         {products.length > 0 && (
           <ProductsList
             products={products}
-            title="Custome Builds"
+            title="Other products"
             bgBanner="url(images/custome-builds-bg.png)"
             toProducts="other"
           />

@@ -13,8 +13,7 @@ export default defineConfig({
   },
     server: {
     allowedHosts: [
-        'devices-catalog.onrender.com',
-        'techmarket-shop.onrender.com'
+        'techmarket-shop.onrender.com',
     ],
   }
 });

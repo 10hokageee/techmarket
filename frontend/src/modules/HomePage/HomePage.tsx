@@ -40,7 +40,7 @@ export const HomePage = () => {
       <Slider />
       <NewProducts errorMessage={errorMessage} products={products} />
       <ZipBlock />
-      <CurstomeProducts errorMessage={errorMessage} products={productsByFilter('Others product')} />
+      <CurstomeProducts errorMessage={errorMessage} products={productsByFilter('Other products')} />
       <LaptopsList errorMessage={errorMessage} products={productsByFilter('Laptops')} />
       <DesktopsList errorMessage={errorMessage} products={productsByFilter('Desktop PC`s')} />
       <ComponentsProducts errorMessage={errorMessage} products={productsByFilter('PC parts')} />
