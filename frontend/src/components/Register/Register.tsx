@@ -20,6 +20,7 @@ export const Register = () => {
   const [errorPasswordMessage, setErrorPasswordMessage] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [profilePicture, setProfilePircute] = useState<File | null>(null);
+  const [fileError, setFileError] = useState('');
 
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -190,9 +191,24 @@ export const Register = () => {
                     return;
                   }
 
-                  if (e.target.files?.[0]) {
-                    setProfilePircute(e.target.files[0]);
+                  const MAX_SIZE = 10 * 1024 * 1024;
+
+                  if (!file.type.startsWith("image/")) {
+                    setFileError("Only images are allowed");
+                    setProfilePircute(null);
+                    e.target.value = "";
+                    return;
                   }
+
+                  if (file.size > MAX_SIZE) {
+                    setFileError("File must be less than 10MB");
+                    setProfilePircute(null);
+                    e.target.value = "";
+                    return;
+                  }
+
+                  setFileError('');
+                  setProfilePircute(file);
                 }}
                 className="hidden mt-[-10px]"
               />
@@ -201,11 +217,13 @@ export const Register = () => {
 
             <div className="flex justify-between items-center">
               <button onClick={() => fileInputRef.current?.click()} type="button" className="bg-[#0156FF] py-[8px] w-[180px] h-[35px] rounded-[20px] text-white text-[14px]/[21px] font-poppins font-semibold cursor-pointer hover:bg-[#0044cc] transition-all duration-300 ease-in-out">Add avatar</button>
-              {profilePicture && (
+              {fileError ? (
+                <p className="text-red-500 text-[11px]/[20px] font-poppins font-normal text-center block">{fileError}</p>
+              ) : profilePicture ? (
                 <p className="text-[11px]/[20px] text-[#0156FF] font-poppins font-normal text-center block">
                   Selected: {profilePicture.name}
                 </p>
-              )}
+              ) : null}
             </div>
 
 

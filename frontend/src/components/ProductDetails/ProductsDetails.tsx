@@ -10,7 +10,6 @@ type ProductsDetailsProps = {
   product: Product;
 };
 
-
 export const ProductsDetails: React.FC<ProductsDetailsProps> = ({ product }) => {
   const [activeTab, setActiveTab] = useState('tab1');
   const [searchParams, setSearchParams] = useSearchParams();
@@ -172,9 +171,14 @@ export const ProductsDetails: React.FC<ProductsDetailsProps> = ({ product }) => 
           </div>
 
           <div className="flex justify-between mb-[15px]">
-            <button onClick={handleAddToCart} className="font-poppins font-semibold text-[13px] text-white bg-[#0156FF] px-10 py-[12px] rounded-[30px] hover:bg-[#0044cc] w-full md:w-auto cursor-pointer hover:bg-[#0044cc] transition-all duration-300 ease-in-out">
-              Add to Cart
-            </button>
+            {product.status ? (
+              <button onClick={handleAddToCart} className="font-poppins font-semibold text-[13px] text-white bg-[#0156FF] px-10 py-[12px] rounded-[30px] hover:bg-[#0044cc] w-full md:w-auto cursor-pointer hover:bg-[#0044cc] transition-all duration-300 ease-in-out">
+                Add to Cart
+              </button>
+            ) : (
+              <p className="text-[12px]/[20px] font-poppins font-light mb-[15px] xl:text-[18px]/[30px] xl:mb-[46px]">
+                Сurrently out of stock</p>
+            )}
           </div>
 
           <div className="bg-white/50 text-center py-[11px] rounded-[15px] border border-gray-100 flex items-center justify-between px-[10px]">

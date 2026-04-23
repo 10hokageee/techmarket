@@ -184,14 +184,12 @@ export const Footer = () => {
           <div className="flex flex-col lg:flex-row items-center justify-between gap-[15px] lg:gap-0 py-[15px] lg:py-[17px] lg:border-t lg:border-white/20">
             <div className="flex items-center">
               <a
-                href="#"
                 className="mr-[11px] opacity-[0.2] p-[2px] transition-opacity hover:opacity-50"
               >
                 <img src="/icons/facebook-icon.svg" alt="" />
               </a>
 
               <a
-                href="#"
                 className="opacity-[0.2] p-[2px] transition-opacity hover:opacity-50"
               >
                 <Instagram width="20px" height="20px" fill="#fff" />

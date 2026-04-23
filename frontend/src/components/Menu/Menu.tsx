@@ -25,7 +25,7 @@ export const Menu: React.FC<MenuProps> = ({ isOpen, closeMenu }) => {
     { text: "Networking Devices", to: "network_device" },
     { text: "Printers & Scanners", to: "printer_scanner" },
     { text: "PC Parts", to: "pc_part" },
-    { text: "All Other Products", to: "other" },
+    { text: "Other Products", to: "other" },
   ];
   
   return (

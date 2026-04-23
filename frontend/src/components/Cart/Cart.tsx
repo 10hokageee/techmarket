@@ -6,7 +6,6 @@ import { useEffect, useRef, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { Loader } from "../Loader/Loader";
 import toast from "react-hot-toast";
-import { fromSlug } from "@/utils/slug";
 import { categoryToSlug } from "@/utils/categoryToSlug";
 
 export const Cart = () => {
@@ -156,10 +155,10 @@ export const Cart = () => {
               const slug = categoryToSlug[product.category];
 
               return (
-                <NavLink to={`/${slug}/${product.id}`} key={product.id} className="flex flex-wrap border-b-[1px] border-b-[#CACDD8] mb-[17px] gap-[13px] pb-[18px] w-[100%] xl:flex-nowrap">
+                <div key={product.id} className="flex flex-wrap border-b-[1px] border-b-[#CACDD8] mb-[17px] gap-[13px] pb-[18px] w-[100%] xl:flex-nowrap">
                   <div className="flex gap-[18px] items-center">
                     <img className="w-[68px] h-[68px] xl:w-[120px] xl:h-[120px]" src={product.images[0]} alt="" />
-                    <h2 className="text-[10px]/[15px] font-poppins font-normal xl:text-[14px]/[21px]">{product.name}</h2>
+                    <NavLink to={`/${slug}/${product.id}`} className="text-[10px]/[15px] font-poppins font-normal xl:text-[14px]/[21px]">{product.name}</NavLink>
                   </div>
                   <div className="flex gap-[45px] w-[100%] justify-between items-center">
                     <div className="flex flex-col gap-[7px]">
@@ -170,7 +169,7 @@ export const Cart = () => {
                       <span className="text-[11px]/[17px] font-poppins font-semibold xl:text-[14px]/[21px]">Qty</span>
                       <div className="bg-[#F5F7FF] rounded-[15px] flex w-[56px] justify-between px-[11px] py-[5px] items-center cursor-pointer xl:w-[100px]">
                         <span className="text-[11px]/[210%] font-poppins font-semibold text-center block xl:text-[14px]">{product.quanity}</span>
-                        <div>
+                        <div className="z-20">
                           <ChevronUp onClick={() => dispatch(changeQuantity({ id: product.id, d: 1 }))} color="#A2A6B0" size={`16px`} className="mb-[10px]" />
                           <ChevronDown onClick={() => dispatch(changeQuantity({ id: product.id, d: -1 }))} color="#A2A6B0" size={`16px`} />
                         </div>
@@ -180,7 +179,7 @@ export const Cart = () => {
                       <X onClick={() => dispatch(deleteProduct(product.id))} className="border-[2px] border-[CACDD8] rounded-[50%] cursor-pointer" color="#A1A1A1" size="16px" />
                     </div>
                   </div>
-                </NavLink>
+                </div>
               );
             })}
           </div>

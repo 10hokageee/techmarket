@@ -5,6 +5,7 @@ import { Features } from "./shared/Features/Features";
 import { Toaster } from "react-hot-toast";
 
 export const App = () => {
+  
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,

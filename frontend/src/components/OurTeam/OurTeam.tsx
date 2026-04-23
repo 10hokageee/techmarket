@@ -25,7 +25,7 @@ export const OurTeam = () => {
         {
           id: 2,
           icon: "/icons/linkedin-svgrepo-com.svg",
-          to: "https://www.linkedin.com/feed/",
+          to: "https://www.linkedin.com/in/iryna-savelieva-0a056a383",
         },
       ],
     },
@@ -40,7 +40,7 @@ export const OurTeam = () => {
         {
           id: 3,
           icon: "/icons/linkedin-svgrepo-com.svg",
-          to: "https://www.linkedin.com/feed/",
+          to: "https://www.linkedin.com/in/mykyta-serdiukov-761883404",
         },
 
         {

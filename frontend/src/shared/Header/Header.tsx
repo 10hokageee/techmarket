@@ -6,6 +6,7 @@ import { CircleUserRound, Instagram, MenuIcon, Search, Star, X } from 'lucide-re
 import { useAppSelector } from '@/hooks/hook';
 import { getProducts } from '@/services/getProdcutsService';
 import type { Product } from '@/types/Product';
+import { categoryToSlug } from '@/utils/categoryToSlug';
 
 export const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -73,7 +74,7 @@ export const Header = () => {
     { text: "Networking Devices", to: "network_device" },
     { text: "Printers & Scanners", to: "printer_scanner" },
     { text: "PC Parts", to: "pc_part" },
-    { text: "All Other Products", to: "other" },
+    { text: "Other Products", to: "other" },
   ];
 
   const closeSearch = () => {
@@ -155,19 +156,23 @@ export const Header = () => {
                 {query && (
                   <ul className="flex flex-col absolute z-30 bg-[#F5F7FF] top-9 gap-5 md:p-[15px] shadow-lg w-[100%] p-[5px]">
                     {searchedProducts.length > 0 ? (
-                      searchedProducts.map(p => (
-                        <NavLink key={p.id} to={`/${p.category}/${p.id}`} onClick={closeSearch}>
-                          <li className="flex justify-between hover:bg-white md:p-[10px] p-[5px] transition duration-300 ease-in-out">
-                            <span className="hidden md:block text-[13px]/[20px] font-poppins font-normal">{p.status ? "In stock" : "Check availability"}</span>
-                            <p className="text-[13px]/[20px] font-poppins font-normal md:max-w-[260px] w-[100%] md:text-left text-center">{p.name}</p>
-                            <span className='hidden md:block text-[11px]/[20px] font-poppins font-semibold max-w-[80px] w-[100%] text-left'>${p.sale_price || p.original_price}</span>
-                            <span className='hidden md:block relative pr-5 text-[13px]/[20px] font-poppins font-normal'>
-                              {p.rating_avg}
-                              <Star size={'16px'} className='absolute top-[1px] right-0' />
-                            </span>
-                          </li>
-                        </NavLink>
-                      ))
+                      searchedProducts.map(p => {
+                        const slug = categoryToSlug[p.category];
+
+                        return (
+                          <NavLink key={p.id} to={`/${slug}/${p.id}`} onClick={closeSearch}>
+                            <li className="flex justify-between hover:bg-white md:p-[10px] p-[5px] transition duration-300 ease-in-out">
+                              <span className="hidden md:block text-[13px]/[20px] font-poppins font-normal">{p.status ? "In stock" : "Sold out"}</span>
+                              <p className="text-[13px]/[20px] font-poppins font-normal md:max-w-[260px] w-[100%] md:text-left text-center">{p.name}</p>
+                              <span className='hidden md:block text-[11px]/[20px] font-poppins font-semibold max-w-[80px] w-[100%] text-left'>${p.sale_price || p.original_price}</span>
+                              <span className='hidden md:block relative pr-5 text-[13px]/[20px] font-poppins font-normal'>
+                                {p.rating_avg}
+                                <Star size={'16px'} className='absolute top-[1px] right-0' />
+                              </span>
+                            </li>
+                          </NavLink>
+                        );
+                      })
                     ) : (
                       <li className="text-center text-[13px] font-poppins p-[10px] text-gray-500">
                         Product not found
@@ -207,19 +212,23 @@ export const Header = () => {
                 {query && (
                   <ul className="flex flex-col absolute z-30 bg-[#F5F7FF] top-[60px] gap-5 md:p-[15px] shadow-lg w-[96%] p-[5px]">
                     {searchedProducts.length > 0 ? (
-                      searchedProducts.map(p => (
-                        <NavLink key={p.id} to={`/${p.category}/${p.id}`} onClick={closeSearch}>
-                          <li className="flex justify-between hover:bg-white md:p-[10px] p-[5px] transition duration-300 ease-in-out">
-                            <span className="hidden md:block text-[13px]/[20px] font-poppins font-normal">{p.status ? "In stock" : "Check availability"}</span>
-                            <p className="text-[13px]/[20px] font-poppins font-normal md:max-w-[260px] w-[100%] md:text-left text-center">{p.name}</p>
-                            <span className='hidden md:block text-[11px]/[20px] font-poppins font-semibold max-w-[80px] w-[100%] text-left'>${p.sale_price || p.original_price}</span>
-                            <span className='hidden md:block relative pr-5 text-[13px]/[20px] font-poppins font-normal'>
-                              {p.rating_avg}
-                              <Star size={'16px'} className='absolute top-[1px] right-0' />
-                            </span>
-                          </li>
-                        </NavLink>
-                      ))
+                      searchedProducts.map(p => {
+                        const slug = categoryToSlug[p.category];
+
+                        return (
+                          <NavLink key={p.id} to={`/${slug}/${p.id}`} onClick={closeSearch}>
+                            <li className="flex justify-between hover:bg-white md:p-[10px] p-[5px] transition duration-300 ease-in-out">
+                              <span className="hidden md:block text-[13px]/[20px] font-poppins font-normal">{p.status ? "In stock" : "Sold out"}</span>
+                              <p className="text-[13px]/[20px] font-poppins font-normal md:max-w-[260px] w-[100%] md:text-left text-center">{p.name}</p>
+                              <span className='hidden md:block text-[11px]/[20px] font-poppins font-semibold max-w-[80px] w-[100%] text-left'>${p.sale_price || p.original_price}</span>
+                              <span className='hidden md:block relative pr-5 text-[13px]/[20px] font-poppins font-normal'>
+                                {p.rating_avg}
+                                <Star size={'16px'} className='absolute top-[1px] right-0' />
+                              </span>
+                            </li>
+                          </NavLink>
+                        );
+                      })
                     ) : (
                       <li className="text-center text-[13px] font-poppins p-[10px] text-gray-500">
                         Product not found
