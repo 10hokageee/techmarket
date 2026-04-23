@@ -66,10 +66,10 @@ class ProductSerializer(serializers.ModelSerializer):
         data["series"] = instance.series.name
         data["rating_avg"] = str(instance.rating_avg)
         data["status"] = bool(instance.stock_quantity)
+        data["name"] = instance.get_name
 
         if not hasattr(instance, "ext_images"):
             data["images"] = instance.get_list_images
-            data["name"] = instance.get_name
 
         if instance.current_color:
             data["current_color"] = instance.current_color
@@ -240,7 +240,7 @@ class OrderSerializer(serializers.ModelSerializer):
                 )
             if product.stock_quantity < quantity:
                 raise ValidationError(
-                    {"Stock error": f"Not enough stock for {product.name}."}
+                    {"Stock error": f"Not enough stock for {product.get_name}."}
                 )
 
             unique_ids.add(product.id)

@@ -44,7 +44,7 @@ class CategoryChoices(models.TextChoices):
     NETWORK_DEVICE = "NETWORK_DEVICE", _("Networking devices")
     PRINTER_SCANNER = "PRINTER_SCANNER", _("Printers & Scanners")
     PC_PART = "PC_PART", _("PC parts")
-    OTHER = "OTHER", _("Others product")
+    OTHER = "OTHER", _("Other products")
 
 
 class Product(models.Model):
@@ -78,8 +78,9 @@ class Product(models.Model):
 
     @property
     def get_name(self):
-        base_name, color = self.name.rsplit("__", 1)
-        return f"{base_name} {color.capitalize()}"
+        color_split = self.name.rsplit("__", 1)
+        base_name, color = color_split if len(color_split) == 2 else (self.name, "")
+        return f"{base_name} {color.capitalize()}".rstrip()
 
     @property
     def get_list_images(self):
