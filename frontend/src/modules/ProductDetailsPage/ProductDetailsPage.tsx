@@ -9,6 +9,7 @@ import { AboutDetailBlock } from "@/components/AboutDetailBlock/AboutDetailBlock
 import { Breadcrumbs } from "@/shared/Breadcrumbs/Breadcrumbs";
 import { SupportBlock } from "@/components/SupportBlock/SupportBlock";
 import { FeaturesBlock } from "@/components/FeaturesBlock/FeaturesBlock";
+import { analyticsEvent } from "@/utils/analytics";
 
 export const ProductDetailsPage = () => {
   const { id } = useParams();
@@ -20,6 +21,10 @@ export const ProductDetailsPage = () => {
   const color = searchParams.get('color');
 
   useEffect(() => {
+    analyticsEvent("page_view", {
+      page: "Product details"
+    })
+
     if (id) {
       // eslint-disable-next-line react-hooks/set-state-in-effect
       setLoading(true);
