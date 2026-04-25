@@ -1,6 +1,6 @@
 import type { Order } from "@/types/Order";
 import { getOrders } from "@/utils/order";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Loader } from "../Loader/Loader";
 import {
   Accordion,
@@ -11,6 +11,7 @@ import {
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { Pagination } from "../Pagination/Pagination";
 import { CustomSelect } from "../CustomeSelect/CustomeSelect";
+import { analyticsEvent } from "@/utils/analytics";
 
 const PER_PAGE_OPTIONS = [
   { label: "4", value: "4" },
@@ -35,6 +36,7 @@ export const SuccessOrders = () => {
   const perPageParam = searchParams.get("perPage") || "4";
   const perPage = +perPageParam;
   const navigate = useNavigate();
+  const sentOrders = useRef(new Set());
 
   const fetchOrders = async () => {
     try {
@@ -47,6 +49,22 @@ export const SuccessOrders = () => {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    orders.forEach((order) => {
+      if (
+        order.payment_status === "PAID" &&
+        !sentOrders.current.has(order.id)
+      ) {
+        analyticsEvent("purchase", {
+          order_id: order.id,
+          payment_status: order.payment_status,
+        });
+
+        sentOrders.current.add(order.id);
+      }
+    });
+  }, [orders]);
 
   useEffect(() => {
     fetchOrders();

@@ -7,6 +7,7 @@ import { useAppSelector } from '@/hooks/hook';
 import { getProducts } from '@/services/getProdcutsService';
 import type { Product } from '@/types/Product';
 import { categoryToSlug } from '@/utils/categoryToSlug';
+import { analyticsEvent } from '@/utils/analytics';
 
 export const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -78,6 +79,9 @@ export const Header = () => {
   ];
 
   const closeSearch = () => {
+    analyticsEvent("view_search_results", {
+      search_term: query,
+    })
     setQuery('');
   }
 

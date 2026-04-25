@@ -1,6 +1,7 @@
 import { addProduct } from "@/features/addToCart";
 import { useAppDispatch } from "@/hooks/hook";
 import type { Product } from "@/types/Product";
+import { analyticsEvent } from "@/utils/analytics";
 import classNames from "classnames";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import React, { useState, useRef } from "react";
@@ -32,6 +33,10 @@ export const ProductsDetails: React.FC<ProductsDetailsProps> = ({ product }) => 
 
   const handleAddToCart = () => {
     dispatch(addProduct({ product, quantity: localQty }));
+
+    analyticsEvent("add_to_cart", {
+      product_name: product.name,
+    });
   };
 
   const onTouchStart = (e: React.TouchEvent) => {

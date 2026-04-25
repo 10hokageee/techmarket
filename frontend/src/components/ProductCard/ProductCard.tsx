@@ -2,6 +2,7 @@ import { NavLink } from "react-router-dom";
 import type { Product } from "../../types/Product";
 import { StarRating } from "../StarRating/StarRating";
 import { categoryToSlug } from "@/utils/categoryToSlug";
+import { analyticsEvent } from "@/utils/analytics";
 
 type ProductProps = {
   product: Product;
@@ -11,8 +12,16 @@ export const ProductCard: React.FC<ProductProps> = ({ product }) => {
   const image = product.images[0];
   const slug = categoryToSlug[product.category];
 
+  const handleEventClick = () => {
+    analyticsEvent("select_item", {
+      product_name: product.name,
+      category: product.category,
+      product_id: product.id
+    })
+  }
+
   return (
-    <NavLink to={`/${slug}/${product.id}`}>
+    <NavLink to={`/${slug}/${product.id}`} onClick={handleEventClick}>
       <article className="group relative box-border w-[234px] md:w-[227px] h-[346px] border border-[#cacdd8] pt-[26px] pb-[21px] px-[25px] bg-white">
 
         <div className="absolute top-[7px] left-[25px] flex gap-[6px]">

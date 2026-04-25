@@ -13,6 +13,7 @@ import { FilterCatalog } from "../FilterCatalog/FilterCatalog";
 import classNames from "classnames";
 import { ChevronLeft, X } from "lucide-react";
 import { useAppSelector } from "@/hooks/hook";
+import { analyticsEvent } from "@/utils/analytics";
 
 const CATEGORIES = [
   'Laptops',
@@ -67,17 +68,25 @@ export const Catalog = () => {
       }
     });
 
+
     const timer = setTimeout(() => {
       if (category) {
         getItemsPage(category, page, perPage, filters)
           .then((productsFromServer) => {
             if (productsFromServer.length === 0 && page > 1) {
+
               const params = new URLSearchParams(searchParams);
               params.set('page', String(page - 1));
+
               setSearchParams(params);
+
             } else {
               setProducts(productsFromServer);
               setErrorMessage('');
+
+              analyticsEvent("view_item", {
+                products: productsFromServer,
+              })
             }
           })
           .catch(() => setErrorMessage('Something went wrong'))
@@ -262,7 +271,7 @@ export const Catalog = () => {
 
 
                   <ul className="flex gap-4 flex-wrap justify-center mb-[23px]">
-                        {products.map((product) => {
+                    {products.map((product) => {
                       console.log(product.category)
                       return (
                         <li key={product.id}>
