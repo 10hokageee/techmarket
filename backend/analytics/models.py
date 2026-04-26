@@ -51,20 +51,20 @@ class SessionParameters(models.Model):
         db_table = "session_parameters"
 
 
-# class EventChoices(models.TextChoices):
-#         FIRST_VISIT          = "FIRST_VISIT",         _("First visit")
-#         BEGIN_CHECKOUT       = "BEGIN_CHECKOUT",      _("Begin checkout")
-#         PAGE_VIEW            = "PAGE_VIEW",           _("Page view")
-#         VIEW_ITEM            = "VIEW_ITEM",           _("View item")
-#         VIEW_SEARCH_RESULTS  = "VIEW_SEARCH_RESULTS", _("View search results")
-#         ADD_PAYMENT_INFO     = "ADD_PAYMENT_INFO",    _("Add payment info")
-#         ADD_TO_CART          = "ADD_TO_CART",         _("Add to cart")
-#         VIEW_ITEM_LIST       = "VIEW_ITEM_LIST",      _("View item list")
-#         SELECT_ITEM          = "SELECT_ITEM",         _("Select item")
-#         PURCHASE             = "PURCHASE",            _("Purchase")
-#
-#
-# class Event(models.Model):
-#     session_parameters = models.ForeignKey(SessionParameters, on_delete=models.CASCADE)
-#     event_name = models.CharField()
-#     timestamp = models.DateTimeField(auto_now_add=True)
+class EventChoices(models.TextChoices):
+    FIRST_VISIT = "FIRST_VISIT", _("First visit")
+    BEGIN_CHECKOUT = "BEGIN_CHECKOUT", _("Begin checkout")
+    PAGE_VIEW = "PAGE_VIEW", _("Page view")
+    VIEW_ITEM = "VIEW_ITEM", _("View item")
+    VIEW_SEARCH_RESULTS = "VIEW_SEARCH_RESULTS", _("View search results")
+    ADD_TO_CART = "ADD_TO_CART", _("Add to cart")
+    VIEW_ITEM_LIST = "VIEW_ITEM_LIST", _("View item list")
+    SELECT_ITEM = "SELECT_ITEM", _("Select item")
+    PURCHASE = "PURCHASE", _("Purchase")
+
+
+class Event(models.Model):
+    session_parameters = models.ForeignKey(SessionParameters, on_delete=models.CASCADE)
+    event_name = models.CharField(choices=EventChoices.choices, max_length=20)
+    event_data = models.CharField(max_length=511, null=True, blank=True)
+    timestamp = models.DateTimeField(auto_now_add=True)

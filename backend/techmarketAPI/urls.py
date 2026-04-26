@@ -36,6 +36,7 @@ urlpatterns = (
         path("market/", include("market.urls", namespace="market")),
         path("user/", include("user.urls", namespace="user")),
         path("payments/", include("payments.urls", namespace="payments")),
+        path("analytics/", include("analytics.urls", namespace="analytics")),
     ]
     + debug_toolbar_urls()
     + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
