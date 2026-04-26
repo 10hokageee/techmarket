@@ -1,3 +1,6 @@
+from datetime import datetime
+from zoneinfo import ZoneInfo
+
 from user_agents.parsers import UserAgent
 
 
@@ -53,10 +56,14 @@ class TechMarketSessionParametersMiddleware:
 
     def __call__(self, request):
         req_path = request.path
+        ukrainian_tz = ZoneInfo("Europe/Kyiv")
+
         response = self.get_response(request)
 
-        if req_path in ("/user/login/", "/user/register/") and hasattr(response, "data") and (
-            refresh := response.data.get("refresh")
+        if (
+            req_path in ("/user/login/", "/user/register/")
+            and hasattr(response, "data")
+            and (refresh := response.data.get("refresh"))
         ):
             import user_agents
 
@@ -77,11 +84,11 @@ class TechMarketSessionParametersMiddleware:
                     user_id = refresh.payload.get("user_id")
 
                     SessionParameters.objects.create(
+                        started_at=datetime.now(tz=ukrainian_tz),
                         device=device_type,
                         browser=browser,
                         continent=continent,
                         country=country,
                         user_id=user_id,
-                        access_token=response.data.get("access"),
                     )
         return response

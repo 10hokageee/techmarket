@@ -31,11 +31,10 @@ class ContinentChoices(models.TextChoices):
 
 
 class SessionParameters(models.Model):
-    started_at = models.DateTimeField(auto_now_add=True)
+    started_at = models.DateTimeField()
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True
     )
-    access_token = models.CharField(max_length=510, null=True, editable=False)
     device = models.CharField(max_length=7, choices=DeviceChoices.choices)
     browser = models.CharField(max_length=15, choices=BrowserChoices.choices)
     continent = models.CharField(
