@@ -6,7 +6,7 @@ export const CatalogPage = () => {
 
   useEffect(() => {
     analyticsEvent("page_view", {
-      page: "Catalog"
+      page_path: "Catalog"
     })
   }, [])
 

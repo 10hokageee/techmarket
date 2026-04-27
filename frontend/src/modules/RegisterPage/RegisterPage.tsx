@@ -10,7 +10,7 @@ export const RegisterPage = () => {
 
   useEffect(() => {
     analyticsEvent("page_view", {
-      page: "Register"
+      pagepage_path: "Register"
     })
   }, []);
 

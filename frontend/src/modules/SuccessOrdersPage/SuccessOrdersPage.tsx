@@ -6,7 +6,7 @@ export const SuccessOrdersPage = () => {
 
   useEffect(() => {
     analyticsEvent("page_view", {
-      page: "Success orders"
+      page_path: "Success orders"
     })
   }, [])
 

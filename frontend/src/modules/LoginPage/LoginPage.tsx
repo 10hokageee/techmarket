@@ -10,7 +10,7 @@ export const LoginPage = () => {
 
   useEffect(() => {
     analyticsEvent("page_view", {
-      page: "Login"
+      page_path: "Login"
     })
   }, [])
 

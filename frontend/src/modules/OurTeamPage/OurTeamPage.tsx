@@ -10,7 +10,7 @@ export const OurTeamPage = () => {
 
   useEffect(() => {
     analyticsEvent("page_view", {
-      page: "Our Team"
+      page_path: "Our Team"
     })
   }, [])
 

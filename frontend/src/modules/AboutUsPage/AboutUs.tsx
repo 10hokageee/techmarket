@@ -57,7 +57,7 @@ export const AboutUsPage = () => {
 
   useEffect(() => {
     analyticsEvent("page_view", {
-      page: "About Us"
+      page_path: "About Us"
     })
   }, [])
 
