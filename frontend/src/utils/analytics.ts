@@ -1,4 +1,4 @@
-import { BASE_URL } from "@/api/configs";
+import { authFetch } from "./authFetch";
 
 export const analyticsEvent = async (event: string, params = {}) => {
   const payload = {
@@ -6,7 +6,7 @@ export const analyticsEvent = async (event: string, params = {}) => {
     ...params,
   };
 
-  const res = await fetch(`${BASE_URL}/analytics/events/`, {
+  const res = await authFetch(`/analytics/events/`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
