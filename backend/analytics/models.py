@@ -6,32 +6,32 @@ from django_countries.fields import CountryField
 
 class DeviceChoices(models.TextChoices):
     DESKTOP = "DESKTOP", _("Desktop")
-    MOBILE  = "MOBILE",  _("Mobile")
-    TABLET  = "TABLET",  _("Tablet")
-    BOT     = "BOT",     _("Bot")
+    MOBILE = "MOBILE", _("Mobile")
+    TABLET = "TABLET", _("Tablet")
+    BOT = "BOT", _("Bot")
     UNKNOWN = "UNKNOWN", _("Unknown")
 
 
 class BrowserChoices(models.TextChoices):
-    CHROME  = "CHROME",  _("Chrome")
-    SAFARI  = "SAFARI",  _("Safari")
-    EDGE    = "EDGE",    _("Edge")
+    CHROME = "CHROME", _("Chrome")
+    SAFARI = "SAFARI", _("Safari")
+    EDGE = "EDGE", _("Edge")
     FIREFOX = "FIREFOX", _("Firefox")
-    OTHER   = "OTHER",   _("Other")
+    OTHER = "OTHER", _("Other")
 
 
 class ContinentChoices(models.TextChoices):
-    ASIA          = "ASIA",          _("Asia")
-    AFRICA        = "AFRICA",        _("Africa")
+    ASIA = "ASIA", _("Asia")
+    AFRICA = "AFRICA", _("Africa")
     NORTH_AMERICA = "NORTH_AMERICA", _("North America")
     SOUTH_AMERICA = "SOUTH_AMERICA", _("South America")
-    ANTARCTICA    = "ANTARCTICA",    _("Antarctica")
-    EUROPE        = "EUROPE",        _("Europe")
-    OCEANIA       = "OCEANIA",       _("Oceania")
+    ANTARCTICA = "ANTARCTICA", _("Antarctica")
+    EUROPE = "EUROPE", _("Europe")
+    OCEANIA = "OCEANIA", _("Oceania")
 
 
 class SessionParameters(models.Model):
-    started_at = models.DateTimeField()
+    started_at = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True
     )
@@ -41,6 +41,7 @@ class SessionParameters(models.Model):
         max_length=13, choices=ContinentChoices.choices, null=True
     )
     country = CountryField(null=True)
+    access_token = models.CharField(max_length=511, null=False, unique=True)
     # channel field not implemented
 
     @property

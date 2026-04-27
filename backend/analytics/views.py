@@ -25,15 +25,15 @@ class CollectAnalyticsView(APIView):
                 status=status.HTTP_400_BAD_REQUEST,
                 data={"error": "Events may be a dict type"},
             )
-        if "event" not in data and len(data) != 2:
+        if "event" not in data:
             return Response(
                 status=status.HTTP_400_BAD_REQUEST, data={"error": "Event not valid"}
             )
         try:
             data_name = events_data_dict.get(data["event"])
-            session = SessionParameters.objects.get(user_id=request.user.id)
+            session = SessionParameters.objects.get(access_token=str(request.auth))
             Event.objects.create(
-                session_parameter=session,
+                session_parameters=session,
                 event_name=data["event"],
                 event_data=data.get(data_name),
             )

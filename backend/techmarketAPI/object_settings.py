@@ -77,7 +77,7 @@ LOGIN_REDIRECT_URL = "user:account-user"
 LANGUAGE_CODE = "en-us"
 TIME_ZONE = "Europe/Kyiv"
 USE_I18N = True
-# USE_TZ = True
+USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = "static/"

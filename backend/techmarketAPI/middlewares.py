@@ -1,6 +1,3 @@
-from datetime import datetime
-from zoneinfo import ZoneInfo
-
 from user_agents.parsers import UserAgent
 
 
@@ -56,20 +53,18 @@ class TechMarketSessionParametersMiddleware:
 
     def __call__(self, request):
         req_path = request.path
-        ukrainian_tz = ZoneInfo("Europe/Kyiv")
 
         response = self.get_response(request)
 
-        if (
-            req_path in ("/user/login/", "/user/register/")
-            and hasattr(response, "data")
-            and (refresh := response.data.get("refresh"))
-        ):
+        if req_path in ("/user/login/", "/user/register/", "/user/refresh/") and str(
+            response.status_code
+        ).startswith(
+            "2"
+        ):  # 2xx status codes
             import user_agents
-
-            from rest_framework_simplejwt.tokens import RefreshToken
             from analytics.models import SessionParameters
             from ipware import get_client_ip
+            from rest_framework_simplejwt.tokens import AccessToken
 
             ip, is_routable = get_client_ip(request)
             if is_routable:
@@ -79,16 +74,15 @@ class TechMarketSessionParametersMiddleware:
                 browser = self.get_browser(ua=user_agent)
                 continent, country = self.get_continent_and_country_by_ip(ip=ip)
 
-                if device_type != "BOT":
-                    refresh = RefreshToken(refresh)
-                    user_id = refresh.payload.get("user_id")
+                access_token = AccessToken(response.data["access"])
 
+                if device_type != "BOT":
                     SessionParameters.objects.create(
-                        started_at=datetime.now(tz=ukrainian_tz),
                         device=device_type,
                         browser=browser,
                         continent=continent,
                         country=country,
-                        user_id=user_id,
+                        user_id=access_token.payload["user_id"],
+                        access_token=response.data["access"],
                     )
         return response
