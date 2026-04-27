@@ -10,6 +10,8 @@ from rest_framework.exceptions import ValidationError
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.generics import get_object_or_404
+
+from market import color_variables
 from market.models import (
     Product,
     Signboard,
@@ -25,6 +27,7 @@ from market.serializers import (
     SeriesSerializer,
 )
 from market.pagination import SimplifiedCustomPagination
+from market.color_variables import colors as color_dict
 
 NEW_PRODUCTS = 8
 
@@ -212,9 +215,13 @@ class ProductViewSet(viewsets.ModelViewSet):
 
     @staticmethod
     def _filter_by_color(colors: str, queryset: QuerySet[Product]) -> QuerySet[Product]:
-        return queryset.filter(
-            current_color__in=(color.strip().upper() for color in colors.split(","))
-        )
+        color_variables = set()
+        for color in colors.split(","):
+            color = color.strip().upper()
+            variables = color_dict.get(color)
+            if variables:
+                color_variables = color_variables.union(variables)
+        return queryset.filter(current_color__in=color_variables)
 
     @staticmethod
     def _order_by_param(param: str, queryset: QuerySet[Product]) -> QuerySet[Product]:
