@@ -6,7 +6,7 @@ export const FaqPage = () => {
 
   useEffect(() => {
     analyticsEvent("page_view", {
-      page: "FAQ"
+      page_path: "FAQ"
     })
   }, [])
 

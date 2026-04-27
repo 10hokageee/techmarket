@@ -22,7 +22,7 @@ export const ProductDetailsPage = () => {
 
   useEffect(() => {
     analyticsEvent("page_view", {
-      page: "Product details"
+      page_path: "Product details"
     })
 
     if (id) {

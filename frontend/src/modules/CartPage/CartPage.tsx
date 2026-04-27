@@ -10,7 +10,7 @@ export const CartPage = () => {
 
   useEffect(() => {
     analyticsEvent("page_view", {
-      page: "Cart"
+      page_path: "Cart"
     })
   }, [])
 
