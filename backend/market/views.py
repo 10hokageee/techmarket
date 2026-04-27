@@ -213,7 +213,7 @@ class ProductViewSet(viewsets.ModelViewSet):
     @staticmethod
     def _filter_by_color(colors: str, queryset: QuerySet[Product]) -> QuerySet[Product]:
         return queryset.filter(
-            colors__overlap=(color.strip().upper() for color in colors.split(","))
+            current_color__in=(color.strip().upper() for color in colors.split(","))
         )
 
     @staticmethod
