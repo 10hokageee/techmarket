@@ -2,6 +2,7 @@ from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.request import Request
 from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated
 from analytics.models import SessionParameters, Event
 
 events_data_dict = {
@@ -15,6 +16,8 @@ events_data_dict = {
 
 
 class CollectAnalyticsView(APIView):
+    permission_classes = (IsAuthenticated,)
+
     def post(self, request: Request):
         data = request.data
         if not isinstance(data, dict):
