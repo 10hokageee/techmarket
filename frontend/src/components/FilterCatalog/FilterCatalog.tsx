@@ -65,6 +65,7 @@ export const FilterCatalog: React.FC<FilterCatalogProps> = ({
   const handleSelectFilter = (key: string, value: string) => {
     setTempFilters(prev => {
       const copy = { ...prev };
+
       if (copy[key] === value) {
         delete copy[key];
       } else {
@@ -86,11 +87,15 @@ export const FilterCatalog: React.FC<FilterCatalogProps> = ({
       delete copy['price_lte'];
 
       if (parts.length === 2) {
+
         copy['price_gte'] = parts[0].trim();
         copy['price_lte'] = parts[1].trim();
+
       } else if (cleanLabel.includes('Above')) {
+
         copy['price_gte'] = '7000';
         delete copy['price_lte'];
+
       }
 
       return copy;
@@ -198,7 +203,7 @@ export const FilterCatalog: React.FC<FilterCatalogProps> = ({
                         placeholder="from"
                         value={tempFilters.price_gte || ''}
                         onChange={(e) => {
-                          const value = e.target.value === "" ? 0 : Number(e.target.value)
+                          const value = e.target.value;
 
                           return handleCustomPrice('price_gte', String(value))
                         }
@@ -213,7 +218,7 @@ export const FilterCatalog: React.FC<FilterCatalogProps> = ({
                         step="100"
                         value={tempFilters.price_lte || ''}
                         onChange={(e) => {
-                          const value = e.target.value === "" ? 0 : Number(e.target.value)
+                          const value = e.target.value;
 
                           return handleCustomPrice('price_lte', String(value))
                         }

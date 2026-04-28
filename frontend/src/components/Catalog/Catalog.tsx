@@ -245,27 +245,55 @@ export const Catalog = () => {
 
                   {tempFilters && (
                     <ul className="flex items-center gap-2 mb-[20px] flex-wrap">
-                      {Object.entries(tempFilters).map(([key, value]) => {
-                        if (key === 'price_lte') return null;
+                      {(() => {
+                        const items = [];
 
-                        let label = value;
-                        if (key === 'price_gte') {
-                          const lte = tempFilters['price_lte'];
-                          label = lte ? `${value} - ${lte}` : `${value} And Above`;
+                        const { price_gte, price_lte, ...rest } = tempFilters;
+
+                        if (price_gte || price_lte) {
+                          let label = '';
+
+                          if (price_gte && price_lte) {
+                            label = `${price_gte} - ${price_lte}`;
+                          } else if (price_gte) {
+                            label = `From ${price_gte}`;
+                          } else if (price_lte) {
+                            label = `Up to ${price_lte}`;
+                          }
+
+                          if (label) {
+                            items.push(
+                              <li key="price" className="font-poppins font-semibold text-[13px]/[20px] pl-[17px] pr-[32px] border-[1px] rounded-[5px] relative py-[5px]">
+                                {label.toUpperCase()}
+                                <button
+                                  onClick={() => removeFilter('price')}
+                                  className="bg-[#C94D3F] w-[20px] h-[20px] rounded-[50%] flex items-center justify-center absolute right-[6px] z-10 top-[50%] transform translate-y-[-50%] cursor-pointer"
+                                >
+                                  <X color="white" className="w-[12px] h-[12px]" />
+                                </button>
+                              </li>
+                            );
+                          }
                         }
 
-                        return (
-                          <li key={key} className="font-poppins font-semibold text-[13px]/[20px] pl-[17px] pr-[32px] border-[1px] rounded-[5px] relative py-[5px]">
-                            {label.toUpperCase()}
-                            <button
-                              onClick={() => removeFilter(key === 'price_gte' ? 'price' : key)}
-                              className="bg-[#C94D3F] w-[20px] h-[20px] rounded-[50%] flex items-center justify-center absolute right-[6px] z-10 top-[50%] transform translate-y-[-50%] cursor-pointer"
-                            >
-                              <X color="white" className="w-[12px] h-[12px]" />
-                            </button>
-                          </li>
-                        );
-                      })}
+                        Object.entries(rest).forEach(([key, value]) => {
+                          if (!value) return;
+
+                          items.push(
+                            <li key={key} className="font-poppins font-semibold text-[13px]/[20px] pl-[17px] pr-[32px] border-[1px] rounded-[5px] relative py-[5px]">
+                              {value.toUpperCase()}
+                              <button
+                                onClick={() => removeFilter(key)}
+                                className="bg-[#C94D3F] w-[20px] h-[20px] rounded-[50%] flex items-center justify-center absolute right-[6px] z-10 top-[50%] transform translate-y-[-50%] cursor-pointer"
+                              >
+                                <X color="white" className="w-[12px] h-[12px]" />
+                              </button>
+                            </li>
+                          );
+                        });
+
+                        return items;
+                      })()}
                     </ul>
                   )}
 
