@@ -272,7 +272,6 @@ export const Catalog = () => {
 
                   <ul className="flex gap-4 flex-wrap justify-center mb-[23px]">
                     {products.map((product) => {
-                      console.log(product.category)
                       return (
                         <li key={product.id}>
                           <ProductCard product={product} />

@@ -153,12 +153,14 @@ export const Header = () => {
               </div>
 
               <div ref={searchRef} className="flex w-[100%] mr-[15px] md:mr-[30px] relative rounded-[20px]">
-                <label className="w-full bg-white rounded-[25px] py-[11px] relative after:content-[''] after:absolute after:left-[15px] after:top-1/2 after:-translate-y-1/2 after:w-3.5 after:h-3.5 after:bg-[url('/icons/search-icon-mobile.svg')] after:bg-center after:bg-no-repeat" htmlFor="search">
+                <label className={classNames("w-full bg-white rounded-tl-[25px] rounded-tr-[25px] py-[11px] relative after:content-[''] after:absolute after:left-[15px] after:top-1/2 after:-translate-y-1/2 after:w-3.5 after:h-3.5 after:bg-[url('/icons/search-icon-mobile.svg')] after:bg-center after:bg-no-repeat", query.length > 0
+                  ? "rounded-bl-0 rounded-br-0"
+                  : "rounded-bl-[30px] rounded-br-[30px]")} htmlFor="search">
                   <input value={query} onChange={event => setQuery(event.target.value)} className="pl-[38px] pr-[15px] font-poppins font-normal text-[11px] leading-4 text-[#cacdd8] flex bg-transparent outline-none" name="search" id="search" type='text' placeholder='Search here' />
                 </label>
 
                 {query && (
-                  <ul className="flex flex-col absolute z-30 bg-[#F5F7FF] top-9 gap-5 md:p-[15px] shadow-lg w-[100%] p-[5px]">
+                  <ul className="flex flex-col absolute z-30 bg-[#F5F7FF] top-9 gap-5 md:p-[15px] shadow-lg w-[100%] p-[5px] rounded-bl-[30px] rounded-br-[30px]">
                     {searchedProducts.length > 0 ? (
                       searchedProducts.map(p => {
                         const slug = categoryToSlug[p.category];
@@ -206,15 +208,20 @@ export const Header = () => {
 
             {openSearch !== true && (
               <div ref={searchRef} className="hidden xl:flex w-full mr-[30px] relative">
-                <label className="w-full bg-[#f5f7ff] rounded-[31px] py-[18px] mr-[25px] relative after:content-[''] after:absolute after:right-[26px] after:top-1/2 after:-translate-y-1/2 after:w-4 after:h-4 after:bg-[url('/icons/search-icon-mobile.svg')] after:bg-center after:bg-no-repeat" htmlFor="searchDesk">
-                  <input value={query} onChange={event => setQuery(event.target.value)} className="px-[15px] w-full text-sm leading-[21px] text-[#a2a6b0] font-poppins font-normal bg-transparent outline-none" name="searchDesk" id="searchDesk" type='text' placeholder='Search here' />
+                <label className={classNames(
+                  "w-full bg-[#f5f7ff] rounded-tl-[30px] rounded-tr-[30px] py-[18px] mr-[25px] relative after:content-[''] after:absolute after:right-[26px] after:top-1/2 after:-translate-y-1/2 after:w-4 after:h-4 after:bg-[url('/icons/search-icon-mobile.svg')] after:bg-center after:bg-no-repeat",
+                  query.length > 0
+                    ? "rounded-bl-0 rounded-br-0"
+                    : "rounded-bl-[30px] rounded-br-[30px]"
+                )} htmlFor="searchDesk">
+                  <input value={query} onChange={event => setQuery(event.target.value)} className="px-[15px] w-full text-sm text-[#a2a6b0] font-poppins font-normal bg-transparent outline-none" name="searchDesk" id="searchDesk" type='text' placeholder='Search here' />
                 </label>
                 <button className="cursor-pointer" type='button' onClick={() => setOpenSearch(true)}>
                   <X color='#0156ff' width={'18px'} height={'18px'} />
                 </button>
 
                 {query && (
-                  <ul className="flex flex-col absolute z-30 bg-[#F5F7FF] top-[60px] gap-5 md:p-[15px] shadow-lg w-[96%] p-[5px]">
+                  <ul className="flex flex-col absolute z-30 bg-[#F5F7FF] top-[60px] gap-5 md:p-[15px] shadow-lg w-[96%] p-[5px] rounded-bl-[30px] rounded-br-[30px]">
                     {searchedProducts.length > 0 ? (
                       searchedProducts.map(p => {
                         const slug = categoryToSlug[p.category];

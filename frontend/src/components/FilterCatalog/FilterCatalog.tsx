@@ -17,13 +17,13 @@ type FilterCatalogProps = {
   clearFilters: () => void;
 }
 
-export const FilterCatalog: React.FC<FilterCatalogProps> = ({ 
-  isOpen, 
-  closeFilter, 
-  tempFilters, 
-  setTempFilters, 
-  applyFilters, 
-  clearFilters 
+export const FilterCatalog: React.FC<FilterCatalogProps> = ({
+  isOpen,
+  closeFilter,
+  tempFilters,
+  setTempFilters,
+  applyFilters,
+  clearFilters
 }) => {
   const body = document.getElementById('body') as HTMLElement;
   if (isOpen) {
@@ -55,6 +55,8 @@ export const FilterCatalog: React.FC<FilterCatalogProps> = ({
         { color: "#DB0000", name: "RED" },
         { color: "#0000FF", name: "BLUE" },
         { color: "#808080", name: "GRAY" },
+        { color: "#008000", name: "GREEN" },
+        { color: "#FFFFFF", name: "WHITE" },
       ],
       filter: [],
     },
@@ -63,8 +65,12 @@ export const FilterCatalog: React.FC<FilterCatalogProps> = ({
   const handleSelectFilter = (key: string, value: string) => {
     setTempFilters(prev => {
       const copy = { ...prev };
-      if (copy[key] === value) delete copy[key];
-      else copy[key] = value;
+      if (copy[key] === value) {
+        delete copy[key];
+      } else {
+        copy[key] = value;
+      }
+
       return copy;
     });
   };
@@ -75,6 +81,9 @@ export const FilterCatalog: React.FC<FilterCatalogProps> = ({
 
     setTempFilters(prev => {
       const copy = { ...prev };
+
+      delete copy['price_gte'];
+      delete copy['price_lte'];
 
       if (parts.length === 2) {
         copy['price_gte'] = parts[0].trim();
@@ -93,17 +102,26 @@ export const FilterCatalog: React.FC<FilterCatalogProps> = ({
     const parts = cleanLabel.split(' - ');
 
     if (parts.length === 2) {
+
       return (
         tempFilters.price_gte === parts[0].trim() &&
         tempFilters.price_lte === parts[1].trim()
       );
+
     }
 
     if (cleanLabel.includes('Above')) {
       return tempFilters.price_gte === '7000';
     }
-    
+
     return false;
+  };
+
+  const handleCustomPrice = (key: 'price_gte' | 'price_lte', value: string) => {
+    setTempFilters(prev => ({
+      ...prev,
+      [key]: value,
+    }));
   };
 
   return (
@@ -170,6 +188,28 @@ export const FilterCatalog: React.FC<FilterCatalogProps> = ({
                         </button>
                       </li>
                     ))}
+
+                    <li className="flex gap-[15px] mt-[15px]">
+                      <input
+                        type="number"
+                        min="0"
+                        step="100"
+                        className="bg-white w-[80px] h-[30px] pl-[10px] rounded-[10px]"
+                        placeholder="from"
+                        value={tempFilters.price_gte || ''}
+                        onChange={(e) => handleCustomPrice('price_gte', e.target.value)}
+                      />
+
+                      <input
+                        type="number"
+                        min="0"
+                        className="bg-white w-[80px] h-[30px]  pl-[10px] rounded-[10px]"
+                        placeholder="to"
+                        step="100"
+                        value={tempFilters.price_lte || ''}
+                        onChange={(e) => handleCustomPrice('price_lte', e.target.value)}
+                      />
+                    </li>
                   </ul>
                 )}
               </AccordionContent>
