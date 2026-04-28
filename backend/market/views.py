@@ -151,16 +151,13 @@ class ProductViewSet(viewsets.ModelViewSet):
 
     def query_params_validator(self):
         params = self.request.query_params
-        for param in params.values():
-            if param == "":
-                return False
-
         if (st := params.get("status")) and st.upper() not in ("TRUE", "FALSE"):
             return False
 
         def check_problem(value: str) -> bool:
             try:
-                float(value)
+                if value:
+                    float(value)
             except ValueError:
                 return True
 
