@@ -45,6 +45,11 @@ export const Catalog = () => {
   const navigate = useNavigate();
   const wishProducts = useAppSelector(state => state.cart.products);
   const [tempFilters, setTempFilters] = useState<Record<string, string>>({});
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+      window.scrollTo(0, 0);
+  }, [pathname]);
 
   useEffect(() => {
     const currentFilters: Record<string, string> = {};
@@ -277,7 +282,9 @@ export const Catalog = () => {
                         }
 
                         Object.entries(rest).forEach(([key, value]) => {
-                          if (!value) return;
+                          if (!value) {
+                            return;
+                          }
 
                           items.push(
                             <li key={key} className="font-poppins font-semibold text-[13px]/[20px] pl-[17px] pr-[32px] border-[1px] rounded-[5px] relative py-[5px]">

@@ -18,16 +18,21 @@ export const Pagination: React.FC<Props> = ({
   const isFirstPage = currentPage === 1;
   const isLastPage = itemsLength < perPage;
 
+
   const handlePrev = () => {
     if (!isFirstPage) {
       onPageChange(currentPage - 1);
     }
+
+    window.scrollTo(0, 0);
   };
 
   const handleNext = () => {
     if (!isLastPage) {
       onPageChange(currentPage + 1);
     }
+
+    window.scrollTo(0, 0);
   };
 
   const buttonBaseClass = "border-[2px] rounded-[50%] w-[38px] h-[38px] flex items-center justify-center transition-colors duration-200";
