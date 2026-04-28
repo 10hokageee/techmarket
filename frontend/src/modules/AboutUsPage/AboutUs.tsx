@@ -20,7 +20,7 @@ const aboutSections = [
     textColor: "black",
     bgColor: "white",
     source: "/images/about-2.png",
-    title: "techmarket.shop",
+    title: "techmarket-shop.onrender.com",
     desc: "TechMarket is an online store offering a wide range of IT products — from components to complete solutions. We work with individual customers, businesses, and organizations, providing reliable products and professional service.",
   },
   {

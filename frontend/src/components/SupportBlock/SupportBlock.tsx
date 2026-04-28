@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const links = [
   { link: 'About Us', to: '/About' },
-  { link: 'FAQ', to: '/FAQ' },
+  { link: 'Terms & Conditions', to: '/T&C' },
 ];
 
 export const SupportBlock = () => {
