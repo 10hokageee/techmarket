@@ -6,12 +6,12 @@ const items = [
     text: `In the following Terms and Conditions of sale, unless the context requires otherwise
 
       (a) "Shop" means Shop Pty Ltd ABN 11 222 333 444;
-(b) "Customer" means the person or corporation placing an order for the purchase of goods or services from Shop;
-(c) "Products" means any goods, materials, equipment or services provided to the Customer by Shop;
-(d) if the Customer comprises more than one person, each of those person’s liability is joint and several;
-(e) references to a party or a person includes any form of entity and their respective successors, assigns and representatives;
-(f) for all periods and times specified in clauses 5 and 11, time is of the essence; and
-  (g) all references to currency are references to Australian dollars.`, id: 'definitions',
+      (b) "Customer" means the person or corporation placing an order for the purchase of goods or services from Shop;
+      (c) "Products" means any goods, materials, equipment or services provided to the Customer by Shop;
+      (d) if the Customer comprises more than one person, each of those person’s liability is joint and several;
+      (e) references to a party or a person includes any form of entity and their respective successors, assigns and representatives;
+      (f) for all periods and times specified in clauses 5 and 11, time is of the essence; and
+      (g) all references to currency are references to Australian dollars.`, id: 'definitions',
   },
   { title: 'General', text: `By ordering the Products and/or accepting delivery of the Products from Shop, the Customer agrees that it is bound by these Terms and Conditions of sale. Customer orders, including orders placed via the internet, are subject to acceptance by Shop. The acceptance of the Customer's order by Shop is expressly made conditional upon the Customer's assent to these Terms and Conditions which will prevail notwithstanding anything that may be stated to the contrary on the Customer's order. Shop reserves the right to vary any of these terms at any time and any subsequent orders placed by the Customer will constitute an acceptance of the terms as varied. Once a Customer order has been placed and accepted by Shop, the Customer agrees that the Customer has no right to cancel or vary the order at any time, unless agreed upon in writing by both parties.`, id: 'general', },
 
@@ -22,20 +22,20 @@ const items = [
   {
     title: 'Terms of Payment', text: `Credit Card Payments may attract a surcharge, and Shop will inform the Customer if this is to be the case before processing the transaction.
 
-Unless otherwise agreed in writing by Shop, where Shop has not agreed in writing to provide commercial credit to the Customer, the total purchase price for Products supplied will be due for payment in cash prior to delivery.
+    Unless otherwise agreed in writing by Shop, where Shop has not agreed in writing to provide commercial credit to the Customer, the total purchase price for Products supplied will be due for payment in cash prior to delivery.
 
-Where Shop has agreed in writing to provide commercial credit to the Customer, the Customer must make payments in accordance with the payment terms provided by Shop.
+    Where Shop has agreed in writing to provide commercial credit to the Customer, the Customer must make payments in accordance with the payment terms provided by Shop.
 
-Where Shop has approved the provision of a commercial credit arrangement with the Customer but has not provided notice of the payment terms to the Customer, the Customer must pay the total purchase price for Products supplied within seven days of the statement date.
+    Where Shop has approved the provision of a commercial credit arrangement with the Customer but has not provided notice of the payment terms to the Customer, the Customer must pay the total purchase price for Products supplied within seven days of the statement date.
 
-Credit Card Payment at an Invoice or transaction level may also be offered to the Customer as a stand-alone payment method, or in conjunction with Credit Card Direct Debit Authorisation.`, id: 'termsofpayment',
+    Credit Card Payment at an Invoice or transaction level may also be offered to the Customer as a stand-alone payment method, or in conjunction with Credit Card Direct Debit Authorisation.`, id: 'termsofpayment',
   },
 
-  { title: 'Credit Accounts', text: `Any commercial credit arrangements that are provided to the Customer by Shop will continue until terminated by Shop at it sole discretion. In the event that Shop terminates the Customer's commercial credit arrangement, the Customer will be notified in writing and termination will take effect upon receipt of that notification by the Customer.`, id: 'creditaccounts', },
+  { title: 'Credit Accounts', text: `Any commercial credit arrangements that are provided to the Customer by Shop will continue until terminated by Shop at it sole discretion. In the event    that Shop terminates the Customer's commercial credit arrangement, the Customer will be notified in writing and termination will take effect upon receipt of that notification by the Customer.`, id: 'creditaccounts', },
   {
     title: 'Change of Ownership', text: `Trading accounts are approved by Shop based on the information supplied and the representations made by the Customer. In the event that there is a change in ownership of the Customer, whether total or partial, the Customer must immediately provide written notice to Shop informing Shop of these changes. Until Shop receives written notice from the Customer of a change in ownership, the Customer (including where it is a company or trustee, each of the Directors thereof) holds Shop indemnified against any and all losses, unpaid accounts, interest, damages, costs, charges, fees and expenses incurred or suffered by Shop in trading with any person, company (including the same company but with a different shareholder or shareholders) or other entity (including a trust) which may have purchased the Customer's business or any interest in the Customer's business or any of the shares in the Customer and used the Customer's previously approved account for trading.
 
-Where a Customer has been authorised by Shop to make payments through Credit Card Direct Debit, the Customer must provide notice in writing at least five (5) days prior to any change in ownership of the business to allow Shop sufficient time to contact the new owner to obtain and confirm new Credit Card information if applicable.`,
+    Where a Customer has been authorised by Shop to make payments through Credit Card Direct Debit, the Customer must provide notice in writing at least five (5) days prior to any change in ownership of the business to allow Shop sufficient time to contact the new owner to obtain and confirm new Credit Card information if applicable.`,
     id: 'changeofownership',
   },
 
@@ -43,7 +43,7 @@ Where a Customer has been authorised by Shop to make payments through Credit Car
   {
     title: 'Delivery', text: `The means of delivering the Products to the Customer will be at Shop' discretion. Shop reserves the right to deliver Products in part deliveries. In the event that Shop incurs additional costs for meeting special (i.e. Tasmania / Northern Territory Deliveries) or urgent delivery arrangements, these additional costs may be charged to the Customer and may include the cost of airfreight where it is not the normal method of delivery. The Customer agrees to accept delivery of the Products sold at any time during normal business hours.
 
-Shop will not be liable for any loss or damage resulting from any late delivery of the Products and late delivery will not entitle the Customer to rescind or repudiate the Customer's order for the Products`, id: 'delivery',
+    Shop will not be liable for any loss or damage resulting from any late delivery of the Products and late delivery will not entitle the Customer to rescind or repudiate the Customer's order for the Products`, id: 'delivery',
   },
 ];
 
@@ -96,7 +96,7 @@ export const FaqBlock = () => {
       <div className="max-w-[1370px] px-[15px] mx-auto my-0">
         <div className="flex justify-between">
           <div className="md:max-w-[444px] md:w-[100%] xl:max-w-[1039px]">
-            <h1 className="text-[18px]/[27px] font-semibold font-poppins mb-[19px] xl:text-[32px]/[48px] xl:mb-[26px]">Tecs Terms & Conditions</h1>
+            <h1 className="text-[18px]/[27px] font-semibold font-poppins mb-[19px] xl:text-[32px]/[48px] xl:mb-[26px]">Terms & Conditions</h1>
 
             <Accordion className="mb-[16px] md:hidden" type="single" collapsible defaultValue="shipping">
               <AccordionItem value="Definitions & Interpretation">

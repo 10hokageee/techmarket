@@ -197,7 +197,12 @@ export const FilterCatalog: React.FC<FilterCatalogProps> = ({
                         className="bg-white w-[80px] h-[30px] pl-[10px] rounded-[10px]"
                         placeholder="from"
                         value={tempFilters.price_gte || ''}
-                        onChange={(e) => handleCustomPrice('price_gte', e.target.value)}
+                        onChange={(e) => {
+                          const value = e.target.value === "" ? 0 : Number(e.target.value)
+
+                          return handleCustomPrice('price_gte', String(value))
+                        }
+                        }
                       />
 
                       <input
@@ -207,7 +212,12 @@ export const FilterCatalog: React.FC<FilterCatalogProps> = ({
                         placeholder="to"
                         step="100"
                         value={tempFilters.price_lte || ''}
-                        onChange={(e) => handleCustomPrice('price_lte', e.target.value)}
+                        onChange={(e) => {
+                          const value = e.target.value === "" ? 0 : Number(e.target.value)
+
+                          return handleCustomPrice('price_lte', String(value))
+                        }
+                        }
                       />
                     </li>
                   </ul>
