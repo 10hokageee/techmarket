@@ -162,7 +162,7 @@ export const Cart = () => {
               return (
                 <div key={product.id} className="flex flex-wrap border-b-[1px] border-b-[#CACDD8] mb-[17px] gap-[13px] pb-[18px] w-[100%] xl:flex-nowrap">
                   <div className="flex gap-[18px] items-center">
-                    <img className="w-[68px] h-[68px] xl:w-[120px] xl:h-[120px]" src={product.images[0]} alt="" />
+                    <img className="w-[68px] h-[68px] xl:w-[120px] xl:h-[120px] object-contain" src={product.images[0]} alt="" />
                     <NavLink to={`/${slug}/${product.id}`} className="text-[10px]/[15px] font-poppins font-normal xl:text-[14px]/[21px]">{product.name}</NavLink>
                   </div>
                   <div className="flex gap-[45px] w-[100%] justify-between items-center">

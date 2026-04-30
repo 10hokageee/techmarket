@@ -25,6 +25,7 @@ export const Root = () => {
             <Route index element={<CatalogPage />} />
             <Route path=":id" element={<ProductDetailsPage />} />
           </Route>
+          <Route path="search" element={<CatalogPage />} />
           <Route path="*" element={<PageNotFound />} />
           <Route path="About" element={<AboutUsPage />} />
           <Route path="T&C" element={<TermsAndConditions />} />

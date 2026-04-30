@@ -17,6 +17,4 @@ export const analyticsEvent = async (event: string, params = {}) => {
   if (!res.ok) {
     throw new Error("Failed");
   }
-
-  return res.json();
 };

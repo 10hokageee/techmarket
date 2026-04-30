@@ -14,6 +14,7 @@ import classNames from "classnames";
 import { ChevronLeft, X } from "lucide-react";
 import { useAppSelector } from "@/hooks/hook";
 import { analyticsEvent } from "@/utils/analytics";
+import { searchProducts } from "@/services/search";
 
 const CATEGORIES = [
   'Laptops',
@@ -46,9 +47,10 @@ export const Catalog = () => {
   const wishProducts = useAppSelector(state => state.cart.products);
   const [tempFilters, setTempFilters] = useState<Record<string, string>>({});
   const { pathname } = useLocation();
+  const searchQuery = searchParams.get('query') || '';
 
   useEffect(() => {
-      window.scrollTo(0, 0);
+    window.scrollTo(0, 0);
   }, [pathname]);
 
   useEffect(() => {
@@ -73,9 +75,18 @@ export const Catalog = () => {
       }
     });
 
+    console.log(products)
 
     const timer = setTimeout(() => {
-      if (category) {
+      if (searchQuery) {
+        searchProducts(searchQuery, page, perPage, filters)
+          .then((productsFromServer) => {
+            setProducts(productsFromServer);
+            setErrorMessage('');
+          })
+          .catch(() => setErrorMessage('Something went wrong'))
+          .finally(() => setLoading(false));
+      } else if (category) {
         getItemsPage(category, page, perPage, filters)
           .then((productsFromServer) => {
             if (productsFromServer.length === 0 && page > 1) {
@@ -194,7 +205,7 @@ export const Catalog = () => {
             <img className="xl:block md:hidden" src="/images/shop-now-catalog.png" alt="" />
             <Breadcrumbs pathnames={pathnames} />
             <h1 className="font-semibold font-poppins text-[18px]/[27px] mb-[13px] xl:text-[32px]/[48px] xl:font-bold xl:mb-[19px]">
-              {decodedCategory}
+              {searchQuery ? `You search: ${searchQuery}` : decodedCategory}
             </h1>
 
             <div className="flex md:justify-between flex-col md:flex-row">
