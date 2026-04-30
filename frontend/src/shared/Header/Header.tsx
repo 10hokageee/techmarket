@@ -1,13 +1,13 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import classNames from 'classnames';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { Menu } from '@/components/Menu/Menu';
 import { CircleUserRound, Instagram, MenuIcon, Search, Star, X } from 'lucide-react';
 import { useAppSelector } from '@/hooks/hook';
-import { getProducts } from '@/services/getProdcutsService';
 import type { Product } from '@/types/Product';
 import { categoryToSlug } from '@/utils/categoryToSlug';
 import { analyticsEvent } from '@/utils/analytics';
+import { search } from '@/services/search';
 
 export const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -17,10 +17,12 @@ export const Header = () => {
   const searchRef = useRef<HTMLDivElement>(null);
   const cartProducts = useAppSelector((state) => state.cart.products);
   const totalCount = cartProducts.reduce((sum, p) => sum + p.quanity, 0);
+  const navigate = useNavigate();
+
 
   useEffect(() => {
-    getProducts().then(productsFormServer => setProducts(productsFormServer))
-  }, []);
+    search(query.toLowerCase().trim()).then(setProducts)
+  }, [query])
 
   useEffect(() => {
 
@@ -57,6 +59,19 @@ export const Header = () => {
     setIsOpen(false);
   };
 
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    const trimmed = query.trim();
+
+    if (!trimmed) {
+      return; 
+    }
+    
+    if (event.key === 'Enter' && query !== '') {
+      navigate(`/search?query=${encodeURIComponent(query)}`);
+      setQuery('');
+    }
+  }
+
   const isActiveLink = ({ isActive }: { isActive: boolean }) => {
     return classNames("text-[14px] leading-[21px] text-black flex items-center font-poppins font-semibold transition-opacity duration-300 hover:opacity-50", {
       "bg-[#0156ff] rounded-[100px] text-white px-4 py-1": isActive,
@@ -82,6 +97,7 @@ export const Header = () => {
     analyticsEvent("view_search_results", {
       search_term: query,
     })
+
     setQuery('');
   }
 
@@ -156,7 +172,7 @@ export const Header = () => {
                 <label className={classNames("w-full bg-white rounded-tl-[25px] rounded-tr-[25px] py-[11px] relative after:content-[''] after:absolute after:left-[15px] after:top-1/2 after:-translate-y-1/2 after:w-3.5 after:h-3.5 after:bg-[url('/icons/search-icon-mobile.svg')] after:bg-center after:bg-no-repeat", query.length > 0
                   ? "rounded-bl-0 rounded-br-0"
                   : "rounded-bl-[30px] rounded-br-[30px]")} htmlFor="search">
-                  <input value={query} onChange={event => setQuery(event.target.value)} className="pl-[38px] pr-[15px] font-poppins font-normal text-[11px] leading-4 text-[#cacdd8] flex bg-transparent outline-none" name="search" id="search" type='text' placeholder='Search here' />
+                  <input value={query} onChange={event => setQuery(event.target.value)} onKeyDown={handleKeyDown} className="pl-[38px] pr-[15px] font-poppins font-normal text-[11px] leading-4 text-[#cacdd8] flex bg-transparent outline-none" name="search" id="search" type='text' placeholder='Search here' />
                 </label>
 
                 {query && (
@@ -184,7 +200,6 @@ export const Header = () => {
                         Product not found
                       </li>
                     )}
-
                   </ul>
                 )}
               </div>
@@ -214,7 +229,8 @@ export const Header = () => {
                     ? "rounded-bl-0 rounded-br-0"
                     : "rounded-bl-[30px] rounded-br-[30px]"
                 )} htmlFor="searchDesk">
-                  <input value={query} onChange={event => setQuery(event.target.value)} className="px-[15px] w-full text-sm text-[#a2a6b0] font-poppins font-normal bg-transparent outline-none" name="searchDesk" id="searchDesk" type='text' placeholder='Search here' />
+                  <input value={query} onChange={event => setQuery(event.target.value)} onKeyDown={handleKeyDown} className="px-[15px] w-full text-sm text-[#a2a6b0] font-poppins font-normal bg-transparent outline-none" name="searchDesk" id="searchDesk" type='text' placeholder='Search here' />
+
                 </label>
                 <button className="cursor-pointer" type='button' onClick={() => setOpenSearch(true)}>
                   <X color='#0156ff' width={'18px'} height={'18px'} />
