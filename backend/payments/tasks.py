@@ -12,16 +12,13 @@ def create_stripe_session(order: Order) -> None:
     stripe.api_key = settings.STRIPE_PRIVATE_KEY
     session = stripe.checkout.Session.create(
         mode="payment",
-        expires_at=int(time.time())
-        + 1800,  # TODO Delete this because it was created for testing
         payment_intent_data={"metadata": {"order": order.pk}},
         line_items=[
             {
                 "price_data": {
                     "currency": "usd",
                     "product_data": {
-                        "name": item.product.name,
-                        "images": (image,) if (image := item.product.image) else None,
+                        "name": item.product.get_name,
                         "description": item.product.description,
                     },
                     "unit_amount": int(item.unit_price * 100),
@@ -31,8 +28,8 @@ def create_stripe_session(order: Order) -> None:
             for item in items
         ],
         metadata={"order": order.pk},
-        success_url="https://google.com",
-        cancel_url="https://google.com",
+        success_url=settings.STRIPE_SUCCESS_URL,
+        cancel_url=settings.STRIPE_CANCELED_URL,
     )
     Payment.objects.create(
         session_url=session.url,

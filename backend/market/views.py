@@ -1,12 +1,25 @@
 import re
 
-from django.db.models import Q, QuerySet
-from django.db.models.functions import Coalesce
-from rest_framework import viewsets, mixins
-from rest_framework.decorators import api_view, permission_classes
+from django.conf import settings
+from django.core.files.uploadedfile import InMemoryUploadedFile, TemporaryUploadedFile
+from django.db.models import Q, QuerySet, Value, F
+from django.db.models.functions import Coalesce, Left, StrIndex, Concat
+from rest_framework import viewsets, mixins, status
+from rest_framework.decorators import api_view, permission_classes, action
+from rest_framework.exceptions import ValidationError
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
-from market.models import Product, Signboard, Order, Series
+from rest_framework.generics import get_object_or_404
+
+from market import color_variables
+from market.models import (
+    Product,
+    Signboard,
+    Order,
+    Series,
+    ProductImage,
+    CategoryChoices,
+)
 from market.serializers import (
     ProductSerializer,
     SignboardSerializer,
@@ -14,8 +27,9 @@ from market.serializers import (
     SeriesSerializer,
 )
 from market.pagination import SimplifiedCustomPagination
+from market.color_variables import colors as color_dict
 
-NEW_PRODUCTS = 10
+NEW_PRODUCTS = 8
 
 
 class ProductViewSet(viewsets.ModelViewSet):
@@ -32,7 +46,7 @@ class ProductViewSet(viewsets.ModelViewSet):
     }
 
     def get_queryset(self):
-        queryset = Product.objects.select_related("series")
+        queryset = Product.objects.select_related("series").prefetch_related("images")
         params = self.request.query_params
 
         self.pagination_flag = (
@@ -60,29 +74,68 @@ class ProductViewSet(viewsets.ModelViewSet):
             if colors := params.get("colors"):
                 queryset = self._filter_by_color(colors=colors, queryset=queryset)
 
-            queryset = self._iregex_filter(queryset=queryset)
+            if categories := params.get("categories"):
+                queryset = self._filter_by_categories(
+                    categories=categories, queryset=queryset
+                )
+            if series := params.get("series"):
+                queryset = self._series_iregex_filter(series=series, queryset=queryset)
 
             # default order by -created_at
             queryset = self._order_by_param(param=order_by, queryset=queryset)
         else:
-            default_series = {
-                "Custom PCs",
-                "MSI GS Series",
-                "MSI GT Series",
-                "MSI GL Series",
-                "MSI GE Series",
-                "MSI Infinite Series",
-                "MSI Triden",
-                "MSI Nightblade",
-            }
-            latest_ids = Product.objects.values_list("id", flat=True)[:NEW_PRODUCTS]
-            queryset = queryset.filter(
-                Q(series__name__in=default_series) | Q(id__in=latest_ids)
+            base_q_request = Q()
+            for choice in CategoryChoices.values:
+                base_q_request = base_q_request.__or__(
+                    Q(
+                        id__in=Product.objects.filter(category=choice)
+                        .order_by("?")
+                        .values_list("id", flat=True)[:NEW_PRODUCTS]
+                    )
+                )
+            queryset = queryset.filter(base_q_request)
+        return queryset
+
+    def get_object(self):
+        lookup_url_kwarg = self.lookup_url_kwarg or self.lookup_field
+        obj_ = Product.objects.select_related("series").prefetch_related("images")
+        local_kwargs = {self.lookup_field: self.kwargs[lookup_url_kwarg]}
+
+        if color := self.request.query_params.get("color"):
+            base_name_subquery = (
+                Product.objects.filter(**local_kwargs)
+                .annotate(base_name=Left("name", StrIndex("name", Value("__")) - 1))
+                .values("base_name")[:1]
             )
-        return queryset.distinct()
+            return get_object_or_404(
+                obj_, name=Concat(base_name_subquery, Value(f"__{color.upper()}"))
+            )
+        return get_object_or_404(obj_, **local_kwargs)
 
     def paginate_queryset(self, queryset):
         return super().paginate_queryset(queryset) if self.pagination_flag else None
+
+    @action(detail=True, methods=["POST"])
+    def upload_image(self, request, **_):
+        MAX_SIZE_IMAGE = settings.MAX_SIZE_IMAGE
+        product = self.get_object()
+        images = request.FILES.getlist("images")
+        if images:
+            for image in images:
+                if image.size > MAX_SIZE_IMAGE:
+                    raise ValidationError(
+                        {
+                            "detail": "Icon must be less than 10 megabytes.",
+                        }
+                    )
+                ProductImage.objects.create(product=product, image=image)
+            return Response(
+                {"Upload": "The upload was completed successfully."},
+                status=status.HTTP_200_OK,
+            )
+        return Response(
+            {"Upload": "No images found."}, status=status.HTTP_400_BAD_REQUEST
+        )
 
     def list(self, request, *args, **kwargs):
         response = super().list(request, *args, **kwargs)
@@ -91,18 +144,20 @@ class ProductViewSet(viewsets.ModelViewSet):
                 elem["is_new"] = index < NEW_PRODUCTS
         return response
 
+    def perform_destroy(self, instance):
+        base_name = instance.name.rsplit("__", 1)[0]
+        names = (f"{base_name}__{color}" for color in instance.colors)
+        Product.objects.filter(name__in=names).delete()
+
     def query_params_validator(self):
         params = self.request.query_params
-        for param in params.values():
-            if param == "":
-                return False
-
         if (st := params.get("status")) and st.upper() not in ("TRUE", "FALSE"):
             return False
 
         def check_problem(value: str) -> bool:
             try:
-                float(value)
+                if value:
+                    float(value)
             except ValueError:
                 return True
 
@@ -114,21 +169,19 @@ class ProductViewSet(viewsets.ModelViewSet):
             return False
         return True
 
-    def _iregex_filter(self, queryset: QuerySet[Product]) -> QuerySet[Product]:
-        params = self.request.query_params
-        for param_name, field_lookup in (
-            ("categories", "category__iregex"),
-            ("series", "series__name__iregex"),
-        ):
-            if values := params.get(param_name):
-                pattern = "|".join(
-                    re.escape(item)
-                    for val in values.split(",")
-                    if (item := val.strip())
-                )
-                if pattern:
-                    queryset = queryset.filter(**{field_lookup: pattern})
-        return queryset
+    def _filter_by_categories(
+        self, categories: str, queryset: QuerySet[Product]
+    ) -> QuerySet[Product]:
+        categories_split = categories.upper().split(",")
+        return queryset.filter(category__in=categories_split)
+
+    def _series_iregex_filter(
+        self, series: str, queryset: QuerySet[Product]
+    ) -> QuerySet[Product]:
+        pattern = "|".join(
+            re.escape(item) for val in series.split(",") if (item := val.strip())
+        )
+        return queryset.filter(series__name__iregex=pattern)
 
     @staticmethod
     def _filter_by_status(param: str, queryset: QuerySet[Product]) -> QuerySet[Product]:
@@ -159,9 +212,13 @@ class ProductViewSet(viewsets.ModelViewSet):
 
     @staticmethod
     def _filter_by_color(colors: str, queryset: QuerySet[Product]) -> QuerySet[Product]:
-        return queryset.filter(
-            colors__overlap=(color.strip().upper() for color in colors.split(","))
-        )
+        color_variables = set()
+        for color in colors.split(","):
+            color = color.strip().upper()
+            variables = color_dict.get(color)
+            if variables:
+                color_variables = color_variables.union(variables)
+        return queryset.filter(current_color__in=color_variables)
 
     @staticmethod
     def _order_by_param(param: str, queryset: QuerySet[Product]) -> QuerySet[Product]:
@@ -194,8 +251,10 @@ class OrderViewSet(
     permission_classes = (IsAuthenticated,)
 
     def get_queryset(self):
-        return self.queryset.select_related("payment").prefetch_related("items__product").filter(
-            user=self.request.user
+        return (
+            self.queryset.select_related("payment")
+            .prefetch_related("items__product")
+            .filter(user=self.request.user)
         )
 
     def perform_create(self, serializer):

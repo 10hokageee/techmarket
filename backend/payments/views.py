@@ -57,7 +57,7 @@ def payment_webhook(request):
 
     event_obj = event.data.object
     if (metadata := getattr(event_obj, "metadata", None)) and (
-        order_pk := metadata.get("order")
+        order_pk := getattr(metadata, "order", None)
     ):
         match event.type:
             case "checkout.session.completed":

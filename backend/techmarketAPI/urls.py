@@ -18,40 +18,25 @@ Including another URLconf
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, include, re_path
 from debug_toolbar.toolbar import debug_toolbar_urls
-from drf_spectacular.views import (
-    SpectacularAPIView,
-    SpectacularSwaggerView,
-)
-# ------------
-from analytics.views import SessionParametersDevView # TODO delete for prod
-# ------------
+from django.views.static import serve
 
 urlpatterns = (
     [
+        re_path(
+            r"^favicon\.ico$",
+            serve,
+            {
+                "path": "favicon.ico",
+                "document_root": settings.BASE_DIR / "techmarketAPI",
+            },
+        ),
         path("admin/", admin.site.urls),
         path("market/", include("market.urls", namespace="market")),
-        path(
-            "user/",
-            include(
-                [
-                    path("", include("rest_framework.urls")),
-                    path("", include("user.urls", namespace="user")),
-                ]
-            ),
-        ),
-        path("docs/", SpectacularAPIView.as_view(), name="schema"),
-        path(
-            "docs/swagger/",
-            SpectacularSwaggerView.as_view(url_name="schema"),
-            name="swagger-ui",
-        ),
+        path("user/", include("user.urls", namespace="user")),
         path("payments/", include("payments.urls", namespace="payments")),
-
-        # -----------------
-        path("dev-get-analytics/", SessionParametersDevView.as_view(), name="dev-get-analytics") # TODO delete for prod
-        # -----------------
+        path("analytics/", include("analytics.urls", namespace="analytics")),
     ]
     + debug_toolbar_urls()
     + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

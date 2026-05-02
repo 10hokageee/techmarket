@@ -1,7 +1,9 @@
+from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.contrib.auth.hashers import check_password
+from django.core.files.uploadedfile import InMemoryUploadedFile, TemporaryUploadedFile
 from rest_framework import serializers
-from rest_framework.exceptions import PermissionDenied
+from rest_framework.exceptions import PermissionDenied, ValidationError
 
 USER_MODEL = get_user_model()
 
@@ -22,20 +24,62 @@ class UserSerializer(serializers.ModelSerializer):
         read_only_fields = ("id", "is_staff")
         extra_kwargs = {"password": {"write_only": True}}
 
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        data["icon"] = instance.get_avatar
+        return data
+
     def create(self, validated_data):
         return USER_MODEL.objects.create_user(**validated_data)
 
-    def update(self, instance, validated_data):
-        password = self.validated_data.pop(
-            "password",
-        )
-        if check_password(password, instance.password):
-            user = super().update(instance, validated_data)
-            user.set_password(password)
-            user.save()
-            return user
-        raise PermissionDenied(
-            {
-                "Password": "Password incorrect",
-            }
-        )
+    def update(self, instance, validated_data): ...
+
+
+class ManageUserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = USER_MODEL
+        fields = ("username", "email", "first_name", "last_name", "icon")
+        extra_kwargs = {
+            "username": {"required": False},
+            "email": {"required": False},
+            "first_name": {"required": False},
+            "last_name": {"required": False},
+            "icon": {"required": False},
+        }
+
+    def validate(self, attrs):
+        MAX_SIZE_IMAGE = settings.MAX_SIZE_IMAGE
+        if not attrs:
+            raise ValidationError(
+                {
+                    "detail": "You need to supply at least one field.",
+                }
+            )
+        icon = attrs.get("icon")
+
+        if not icon:
+            attrs["icon"] = None
+            return attrs
+
+        if icon and not isinstance(
+            attrs["icon"], (InMemoryUploadedFile, TemporaryUploadedFile)
+        ):
+            raise ValidationError(
+                {
+                    "detail": "Icon must be a byte string.",
+                }
+            )
+        if attrs["icon"].size > MAX_SIZE_IMAGE:
+            raise ValidationError(
+                {
+                    "detail": "Icon must be less than 10 megabytes.",
+                }
+            )
+        return attrs
+
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        data["icon"] = instance.get_avatar
+        return data
+
+    def create(self, validated_data): ...

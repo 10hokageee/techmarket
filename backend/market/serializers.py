@@ -1,11 +1,23 @@
-from market.models import _color_validator, Series
+from django.conf import settings
+from django.core.files.uploadedfile import InMemoryUploadedFile, TemporaryUploadedFile
+from django.db.models.functions import Replace
+
 from payments.tasks import create_stripe_session
 from django.db import transaction, IntegrityError
-from django.db.models import F
+from django.db.models import F, Value
 from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
 
-from market.models import Product, Signboard, Order, OrderItem
+from market.models import (
+    Product,
+    Signboard,
+    Order,
+    OrderItem,
+    _color_validator,
+    Series,
+    _setdefault_float_value,
+    _setdefault_int_value,
+)
 
 
 class ProductSerializer(serializers.ModelSerializer):
@@ -16,7 +28,6 @@ class ProductSerializer(serializers.ModelSerializer):
             "name",
             "category",
             "series",
-            "image",
             "stock_quantity",
             "original_price",
             "sale_price",
@@ -40,6 +51,11 @@ class ProductSerializer(serializers.ModelSerializer):
                 )
         return attrs
 
+    def validate_name(self, data):
+        if "__" in data:
+            raise ValidationError('Names containing "__" are prohibited.')
+        return data
+
     def validate_colors(self, data):
         return _color_validator(data, ValidationError)
 
@@ -50,14 +66,88 @@ class ProductSerializer(serializers.ModelSerializer):
         data["series"] = instance.series.name
         data["rating_avg"] = str(instance.rating_avg)
         data["status"] = bool(instance.stock_quantity)
+        data["name"] = instance.get_name
 
+        if not hasattr(instance, "ext_images"):
+            data["images"] = instance.get_list_images
+
+        if instance.current_color:
+            data["current_color"] = instance.current_color
         return data
+
+    def create(self, validated_data):
+        name = validated_data.pop("name")
+        products_data = (
+            Product(
+                current_color=color,
+                name=f"{name}__{color}",
+                rating_avg=round(_setdefault_float_value(1.0, 5.0), 2),
+                reviews=_setdefault_int_value(3, 52, 10),
+                **validated_data,
+            )
+            for color in validated_data.get("colors")
+        )
+        products = Product.objects.bulk_create(products_data)
+
+        # for to_representation ----------------------------------|
+        product = products[0]
+        product.current_color = None
+        product.name = name
+        product.ext_images = True
+        # --------------------------------------------------------|
+        return product
+
+    def update(self, instance, validated_data):
+        update_fields = {
+            key: validated_data[key]
+            for key in validated_data
+            if getattr(instance, key) != validated_data[key]
+        }
+        if name := update_fields.pop("name", None):
+            base_name = instance.name.rsplit("__", 1)[0]
+            names = (f"{base_name}__{color}" for color in instance.colors)
+            Product.objects.filter(name__in=names).update(
+                name=Replace("name", Value(base_name), Value(name))
+            )
+            instance.name = f"{name}__{instance.current_color}"
+
+        for key, value in update_fields.items():
+            setattr(instance, key, value)
+        instance.save(update_fields=update_fields.keys())
+
+        # TODO implement update with category, series, current_color or colors
+
+        return instance
 
 
 class SignboardSerializer(serializers.ModelSerializer):
     class Meta:
         model = Signboard
         fields = ("id", "image")
+
+    def validate(self, attrs):
+        MAX_SIZE_IMAGE = settings.MAX_SIZE_IMAGE
+        if attrs.get("image") and not isinstance(
+            attrs["image"], (InMemoryUploadedFile, TemporaryUploadedFile)
+        ):
+            raise ValidationError(
+                {
+                    "detail": "Icon must be a byte string.",
+                }
+            )
+
+        if attrs["image"].size > MAX_SIZE_IMAGE:
+            raise ValidationError(
+                {
+                    "detail": "Icon must be less than 10 megabytes.",
+                }
+            )
+        return attrs
+
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        data["image"] = instance.get_image_url
+        return data
 
 
 class CachedPrimaryKeyRelatedField(serializers.PrimaryKeyRelatedField):
@@ -99,7 +189,7 @@ class OrderItemSerializer(serializers.ModelSerializer):
 
     def to_representation(self, instance):
         data = super().to_representation(instance)
-        data["product"] = instance.product.name
+        data["product"] = instance.product.get_name
         data["price"] = str(instance.price)
         return data
 
@@ -150,7 +240,7 @@ class OrderSerializer(serializers.ModelSerializer):
                 )
             if product.stock_quantity < quantity:
                 raise ValidationError(
-                    {"Stock error": f"Not enough stock for {product.name}."}
+                    {"Stock error": f"Not enough stock for {product.get_name}."}
                 )
 
             unique_ids.add(product.id)
