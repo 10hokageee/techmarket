@@ -67,7 +67,7 @@ export const OurTeam = () => {
         {
           id: 6,
           icon: "/icons/github-svgrepo-com.svg",
-          to: "https://github.com/BossUA1998",
+          to: "https://github.com/PythonBossUA",
         },
       ],
     },
