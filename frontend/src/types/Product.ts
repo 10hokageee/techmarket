@@ -3,12 +3,24 @@ export type Product = {
   name: string;
   category: string;
   series: string;
-  image: string | null;
   stock_quantity: number;
   original_price: string;
-  sale_price: string | null;
+  sale_price: string;
+  characteristics: {
+    Type: string;
+    InkSystem: string;
+    Resolution: string;
+    PaperTrays: string;
+    PrintSpeed: string;
+    Connectivity: string;
+    MaxPrintWidth: string;
+    BorderlessPrinting: string;
+  };
+  colors: string[];
   description: string;
-  status: string;
   reviews: number;
   rating_avg: string;
+  status: boolean;
+  images: string[];
+  current_color: string;
 };

@@ -1,5 +1,7 @@
 export const PageNotFound = () => {
   return (
-    <h1>page not found</h1>
+    <div className="flex items-center justify-center py-[30px]">
+      <h1 className="text-[30px] font-poppins font-semibold">Page not found</h1>
+    </div>
   );
 }

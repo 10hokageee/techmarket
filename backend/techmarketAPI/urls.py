@@ -18,22 +18,25 @@ Including another URLconf
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, include, re_path
 from debug_toolbar.toolbar import debug_toolbar_urls
+from django.views.static import serve
 
 urlpatterns = (
     [
+        re_path(
+            r"^favicon\.ico$",
+            serve,
+            {
+                "path": "favicon.ico",
+                "document_root": settings.BASE_DIR / "techmarketAPI",
+            },
+        ),
         path("admin/", admin.site.urls),
         path("market/", include("market.urls", namespace="market")),
-        path(
-            "user/",
-            include(
-                [
-                    path("", include("rest_framework.urls")),
-                    path("", include("user.urls", namespace="user")),
-                ]
-            ),
-        ),
+        path("user/", include("user.urls", namespace="user")),
+        path("payments/", include("payments.urls", namespace="payments")),
+        path("analytics/", include("analytics.urls", namespace="analytics")),
     ]
     + debug_toolbar_urls()
     + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

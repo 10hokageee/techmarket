@@ -3,235 +3,1477 @@
     "model": "market.series",
     "pk": 1,
     "fields": {
-      "name": "ThinkPad Professional"
+      "name": "ROG"
     }
   },
   {
     "model": "market.series",
     "pk": 2,
     "fields": {
-      "name": "ROG Gaming"
+      "name": "ThinkPad"
     }
   },
   {
     "model": "market.series",
     "pk": 3,
     "fields": {
-      "name": "Cisco Enterprise"
+      "name": "MacBook"
     }
   },
   {
     "model": "market.series",
     "pk": 4,
     "fields": {
-      "name": "Epson EcoTank"
+      "name": "XPS"
     }
   },
   {
     "model": "market.series",
     "pk": 5,
     "fields": {
-      "name": "AutoTech Diagnostics"
+      "name": "GeForce RTX 40"
+    }
+  },
+  {
+    "model": "market.series",
+    "pk": 6,
+    "fields": {
+      "name": "Ryzen 7000"
+    }
+  },
+  {
+    "model": "market.series",
+    "pk": 7,
+    "fields": {
+      "name": "LaserJet Pro"
+    }
+  },
+  {
+    "model": "market.series",
+    "pk": 8,
+    "fields": {
+      "name": "Catalyst"
+    }
+  },
+  {
+    "model": "market.series",
+    "pk": 9,
+    "fields": {
+      "name": "EliteBook"
+    }
+  },
+  {
+    "model": "market.series",
+    "pk": 10,
+    "fields": {
+      "name": "Dominator Platinum"
+    }
+  },
+  {
+    "model": "market.series",
+    "pk": 11,
+    "fields": {
+      "name": "MSI Titan"
+    }
+  },
+  {
+    "model": "market.series",
+    "pk": 12,
+    "fields": {
+      "name": "Samsung 990 Pro"
+    }
+  },
+  {
+    "model": "market.series",
+    "pk": 13,
+    "fields": {
+      "name": "PIXMA"
     }
   },
   {
     "model": "market.product",
     "pk": 1,
     "fields": {
-      "name": "Lenovo ThinkPad X1 Carbon",
+      "name": "ASUS ROG Zephyrus G14 2024__BLACK",
       "category": "LAPTOP",
       "series": 1,
-      "image": "",
-      "stock_quantity": 42,
-      "original_price": "1899.99",
-      "sale_price": "1750.00",
-      "characteristics": {"cpu": "Intel Core i7-1355U", "ram": "16GB LPDDR5", "storage": "512GB SSD", "screen": "14\" WUXGA"},
-      "color": "#000000",
-      "description": "Premium business laptop with excellent keyboard and battery life.",
-      "status": true,
-      "rating_avg": 4.8,
-      "reviews": 124,
-      "created_at": "2024-01-15T10:30:00Z"
+      "stock_quantity": 12,
+      "original_price": "2199.99",
+      "sale_price": "1899.99",
+      "characteristics": {
+        "CPU": "AMD Ryzen 9 8945HS (8C/16T, up to 5.2 GHz)",
+        "GPU": "NVIDIA GeForce RTX 4070 8 GB GDDR6",
+        "RAM": "16 GB LPDDR5X-7500",
+        "Storage": "1 TB PCIe 4.0 NVMe SSD",
+        "Display": "14\" OLED 2880×1800 120 Hz, 100% DCI-P3",
+        "Battery": "73 Wh, up to 10 h",
+        "Connectivity": "Wi-Fi 6E, Bluetooth 5.3",
+        "Ports": "2× USB-C (TB4), 2× USB-A 3.2, HDMI 2.1, MicroSD",
+        "Weight": "1.65 kg",
+        "OS": "Windows 11 Home"
+      },
+      "colors": [
+        "BLACK",
+        "WHITE"
+      ],
+      "current_color": "BLACK",
+      "description": "The ASUS ROG Zephyrus G14 2024 is a pinnacle of ultra-portable gaming excellence. Powered by the AMD Ryzen 9 8945HS processor and paired with the NVIDIA GeForce RTX 4070, it delivers desktop-class performance in a chassis weighing just 1.65 kg. The stunning 14-inch OLED display with 2880×1800 resolution and 120 Hz refresh rate produces vivid colours, deep blacks, and silky-smooth motion. The 73 Wh battery supports extended creative and gaming sessions, while the innovative AniMe Matrix LED lid lets you personalise your rig like no other laptop on the market.",
+      "rating_avg": 4.87,
+      "reviews": 234,
+      "created_at": "2024-02-10T09:00:00Z"
     }
   },
   {
     "model": "market.product",
     "pk": 2,
     "fields": {
-      "name": "ASUS ROG Strix G16",
+      "name": "ASUS ROG Zephyrus G14 2024__WHITE",
       "category": "LAPTOP",
-      "series": 2,
-      "image": "",
-      "stock_quantity": 15,
-      "original_price": "2199.50",
-      "sale_price": "2199.50",
-      "characteristics": {"cpu": "Intel Core i9-13980HX", "gpu": "RTX 4070 8GB", "ram": "32GB DDR5", "screen": "16\" 240Hz"},
-      "color": "#2B2B2B",
-      "description": "High-performance gaming laptop with advanced cooling.",
-      "status": true,
-      "rating_avg": 4.6,
-      "reviews": 89,
-      "created_at": "2024-02-01T14:15:00Z"
+      "series": 1,
+      "stock_quantity": 12,
+      "original_price": "2199.99",
+      "sale_price": "1899.99",
+      "characteristics": {
+        "CPU": "AMD Ryzen 9 8945HS (8C/16T, up to 5.2 GHz)",
+        "GPU": "NVIDIA GeForce RTX 4070 8 GB GDDR6",
+        "RAM": "16 GB LPDDR5X-7500",
+        "Storage": "1 TB PCIe 4.0 NVMe SSD",
+        "Display": "14\" OLED 2880×1800 120 Hz, 100% DCI-P3",
+        "Battery": "73 Wh, up to 10 h",
+        "Connectivity": "Wi-Fi 6E, Bluetooth 5.3",
+        "Ports": "2× USB-C (TB4), 2× USB-A 3.2, HDMI 2.1, MicroSD",
+        "Weight": "1.65 kg",
+        "OS": "Windows 11 Home"
+      },
+      "colors": [
+        "BLACK",
+        "WHITE"
+      ],
+      "current_color": "WHITE",
+      "description": "The ASUS ROG Zephyrus G14 2024 is a pinnacle of ultra-portable gaming excellence. Powered by the AMD Ryzen 9 8945HS processor and paired with the NVIDIA GeForce RTX 4070, it delivers desktop-class performance in a chassis weighing just 1.65 kg. The stunning 14-inch OLED display with 2880×1800 resolution and 120 Hz refresh rate produces vivid colours, deep blacks, and silky-smooth motion. The 73 Wh battery supports extended creative and gaming sessions, while the innovative AniMe Matrix LED lid lets you personalise your rig like no other laptop on the market.",
+      "rating_avg": 4.87,
+      "reviews": 234,
+      "created_at": "2024-02-10T09:00:00Z"
     }
   },
   {
     "model": "market.product",
     "pk": 3,
     "fields": {
-      "name": "Cisco Catalyst 9200L 48-port",
-      "category": "NETWORK_DEVICE",
-      "series": 3,
-      "image": "",
-      "stock_quantity": 5,
-      "original_price": "3450.00",
-      "sale_price": "3100.00",
-      "characteristics": {"ports": "48x 10/100/1000", "uplink": "4x 10G SFP+", "poe": "Partial", "management": "Managed"},
-      "color": "#C0C0C0",
-      "description": "Enterprise-grade switch for secure and reliable networking.",
-      "status": false,
-      "rating_avg": 4.9,
-      "reviews": 12,
-      "created_at": "2023-11-20T09:00:00Z"
+      "name": "Lenovo ThinkPad X1 Carbon Gen11__BLACK",
+      "category": "LAPTOP",
+      "series": 2,
+      "stock_quantity": 20,
+      "original_price": "1749.00",
+      "sale_price": null,
+      "characteristics": {
+        "CPU": "Intel Core i7-1365U vPro (10C, up to 5.2 GHz)",
+        "RAM": "32 GB LPDDR5-6400 (soldered)",
+        "Storage": "1 TB PCIe 4.0 NVMe SSD",
+        "Display": "14\" IPS 2560×1600 400 nits, 100% sRGB",
+        "Battery": "57 Wh, Rapid Charge (0→80% in 60 min)",
+        "Security": "Fingerprint reader, IR camera, TPM 2.0",
+        "Connectivity": "Wi-Fi 6E, Bluetooth 5.3, 4G LTE (optional)",
+        "Ports": "2× TB4, 2× USB-A 3.2, HDMI 2.0, SD, 3.5 mm",
+        "Weight": "1.12 kg",
+        "OS": "Windows 11 Pro"
+      },
+      "colors": [
+        "BLACK",
+        "SILVER"
+      ],
+      "current_color": "BLACK",
+      "description": "Built for professionals who demand the best, the Lenovo ThinkPad X1 Carbon Gen 11 combines legendary ThinkPad durability with a featherlight 1.12 kg carbon-fibre chassis. Certified to 12 MIL-SPEC standards, it withstands extreme temperature, humidity, dust, and altitude. The 14-inch IPS display covers 100% sRGB with factory colour calibration, while the keyboard — widely considered the finest in the industry — ensures fatigue-free typing across marathon work sessions. Intel vPro with Evo Platform certification rounds out a truly enterprise-grade package.",
+      "rating_avg": 4.79,
+      "reviews": 312,
+      "created_at": "2024-01-22T08:30:00Z"
     }
   },
   {
     "model": "market.product",
     "pk": 4,
     "fields": {
-      "name": "Epson EcoTank L3250 WiFi",
-      "category": "PRINTER_SCANNER",
-      "series": 4,
-      "image": "",
-      "stock_quantity": 0,
-      "original_price": "199.99",
-      "sale_price": "199.99",
-      "characteristics": {"type": "Inkjet", "functions": "Print, Scan, Copy", "connectivity": "Wi-Fi, USB", "color_printing": true},
-      "color": "#111111",
-      "description": "Cost-effective cartridge-free printer.",
-      "status": true,
-      "rating_avg": 4.2,
-      "reviews": 340,
-      "created_at": "2023-08-10T16:45:00Z"
+      "name": "Lenovo ThinkPad X1 Carbon Gen11__SILVER",
+      "category": "LAPTOP",
+      "series": 2,
+      "stock_quantity": 20,
+      "original_price": "1749.00",
+      "sale_price": null,
+      "characteristics": {
+        "CPU": "Intel Core i7-1365U vPro (10C, up to 5.2 GHz)",
+        "RAM": "32 GB LPDDR5-6400 (soldered)",
+        "Storage": "1 TB PCIe 4.0 NVMe SSD",
+        "Display": "14\" IPS 2560×1600 400 nits, 100% sRGB",
+        "Battery": "57 Wh, Rapid Charge (0→80% in 60 min)",
+        "Security": "Fingerprint reader, IR camera, TPM 2.0",
+        "Connectivity": "Wi-Fi 6E, Bluetooth 5.3, 4G LTE (optional)",
+        "Ports": "2× TB4, 2× USB-A 3.2, HDMI 2.0, SD, 3.5 mm",
+        "Weight": "1.12 kg",
+        "OS": "Windows 11 Pro"
+      },
+      "colors": [
+        "BLACK",
+        "SILVER"
+      ],
+      "current_color": "SILVER",
+      "description": "Built for professionals who demand the best, the Lenovo ThinkPad X1 Carbon Gen 11 combines legendary ThinkPad durability with a featherlight 1.12 kg carbon-fibre chassis. Certified to 12 MIL-SPEC standards, it withstands extreme temperature, humidity, dust, and altitude. The 14-inch IPS display covers 100% sRGB with factory colour calibration, while the keyboard — widely considered the finest in the industry — ensures fatigue-free typing across marathon work sessions. Intel vPro with Evo Platform certification rounds out a truly enterprise-grade package.",
+      "rating_avg": 4.79,
+      "reviews": 312,
+      "created_at": "2024-01-22T08:30:00Z"
     }
   },
   {
     "model": "market.product",
     "pk": 5,
     "fields": {
-      "name": "NVIDIA GeForce RTX 4090 Founders Edition",
-      "category": "PC_PART",
-      "series": 2,
-      "image": "",
-      "stock_quantity": 2,
-      "original_price": "1599.00",
-      "sale_price": "1599.00",
-      "characteristics": {"vram": "24GB GDDR6X", "cuda_cores": 16384, "tdp": "450W", "interface": "PCIe 4.0 x16"},
-      "color": "#A9A9A9",
-      "description": "The ultimate GPU for gamers and creators.",
-      "status": true,
-      "rating_avg": 4.9,
-      "reviews": 45,
-      "created_at": "2024-02-15T08:20:00Z"
+      "name": "Apple MacBook Pro 16 M3 Max__SILVER",
+      "category": "LAPTOP",
+      "series": 3,
+      "stock_quantity": 8,
+      "original_price": "3999.00",
+      "sale_price": "3699.00",
+      "characteristics": {
+        "Chip": "Apple M3 Max (16-core CPU, 40-core GPU, 16-core Neural Engine)",
+        "RAM": "48 GB unified memory",
+        "Storage": "1 TB SSD (up to 8 TB)",
+        "Display": "16.2\" Liquid Retina XDR 3456×2234, 1000/1600 nits, P3",
+        "Battery": "100 Wh, 22+ h video playback",
+        "Camera": "12 MP Center Stage",
+        "Ports": "3× TB4, HDMI 2.1, SD, MagSafe 3, 3.5 mm (high-impedance)",
+        "Audio": "6-speaker system with spatial audio",
+        "Weight": "2.14 kg",
+        "OS": "macOS Sonoma"
+      },
+      "colors": [
+        "SILVER",
+        "GRAY"
+      ],
+      "current_color": "SILVER",
+      "description": "The Apple MacBook Pro 16-inch with M3 Max redefines professional mobile computing. The M3 Max chip — featuring a 16-core CPU and 40-core GPU — handles the most demanding creative workloads including 8K video editing, 3D rendering, and complex ML training without breaking a sweat. The Liquid Retina XDR display delivers 1000 nits of sustained brightness and up to 1600 nits peak for HDR content. With 22+ hours of battery life, you genuinely will not run out of power before ideas.",
+      "rating_avg": 4.95,
+      "reviews": 189,
+      "created_at": "2024-03-05T11:00:00Z"
     }
   },
   {
     "model": "market.product",
     "pk": 6,
     "fields": {
-      "name": "Intel Core i7-14700K",
-      "category": "PC_PART",
-      "series": 2,
-      "image": "",
-      "stock_quantity": 100,
-      "original_price": "409.99",
-      "sale_price": "389.99",
-      "characteristics": {"cores": 20, "threads": 28, "base_clock": "3.4 GHz", "boost_clock": "5.6 GHz", "socket": "LGA 1700"},
-      "color": "#0071C5",
-      "description": "Desktop Processor 20 cores (8 P-cores + 12 E-cores).",
-      "status": true,
-      "rating_avg": 4.7,
-      "reviews": 210,
-      "created_at": "2024-01-05T11:11:00Z"
+      "name": "Apple MacBook Pro 16 M3 Max__GRAY",
+      "category": "LAPTOP",
+      "series": 3,
+      "stock_quantity": 8,
+      "original_price": "3999.00",
+      "sale_price": "3699.00",
+      "characteristics": {
+        "Chip": "Apple M3 Max (16-core CPU, 40-core GPU, 16-core Neural Engine)",
+        "RAM": "48 GB unified memory",
+        "Storage": "1 TB SSD (up to 8 TB)",
+        "Display": "16.2\" Liquid Retina XDR 3456×2234, 1000/1600 nits, P3",
+        "Battery": "100 Wh, 22+ h video playback",
+        "Camera": "12 MP Center Stage",
+        "Ports": "3× TB4, HDMI 2.1, SD, MagSafe 3, 3.5 mm (high-impedance)",
+        "Audio": "6-speaker system with spatial audio",
+        "Weight": "2.14 kg",
+        "OS": "macOS Sonoma"
+      },
+      "colors": [
+        "SILVER",
+        "GRAY"
+      ],
+      "current_color": "GRAY",
+      "description": "The Apple MacBook Pro 16-inch with M3 Max redefines professional mobile computing. The M3 Max chip — featuring a 16-core CPU and 40-core GPU — handles the most demanding creative workloads including 8K video editing, 3D rendering, and complex ML training without breaking a sweat. The Liquid Retina XDR display delivers 1000 nits of sustained brightness and up to 1600 nits peak for HDR content. With 22+ hours of battery life, you genuinely will not run out of power before ideas.",
+      "rating_avg": 4.95,
+      "reviews": 189,
+      "created_at": "2024-03-05T11:00:00Z"
     }
   },
   {
     "model": "market.product",
     "pk": 7,
     "fields": {
-      "name": "Office Master Pro Workstation",
-      "category": "PC",
-      "series": 1,
-      "image": "",
-      "stock_quantity": 8,
-      "original_price": "850.00",
-      "sale_price": "799.00",
-      "characteristics": {"cpu": "Intel Core i5-13400", "ram": "16GB DDR4", "storage": "1TB NVMe", "os": "Windows 11 Pro"},
-      "color": "#4B4B4B",
-      "description": "Reliable desktop PC for daily office tasks and multitasking.",
-      "status": true,
-      "rating_avg": 4.4,
-      "reviews": 18,
-      "created_at": "2023-12-01T10:00:00Z"
+      "name": "Dell XPS 15 9530 OLED Touch__SILVER",
+      "category": "LAPTOP",
+      "series": 4,
+      "stock_quantity": 10,
+      "original_price": "2499.00",
+      "sale_price": "2199.00",
+      "characteristics": {
+        "CPU": "Intel Core i9-13900H (14C/20T, up to 5.4 GHz)",
+        "GPU": "NVIDIA GeForce RTX 4070 8 GB GDDR6",
+        "RAM": "32 GB DDR5-4800",
+        "Storage": "1 TB PCIe 4.0 NVMe SSD",
+        "Display": "15.6\" OLED Touch 3456×2160 60 Hz, 400 nits, 100% DCI-P3",
+        "Battery": "86 Wh",
+        "Ports": "2× TB4, USB-C 3.2, SD UHS-III, 3.5 mm",
+        "Connectivity": "Wi-Fi 6E, Bluetooth 5.3",
+        "Weight": "1.86 kg",
+        "OS": "Windows 11 Pro"
+      },
+      "colors": [
+        "SILVER",
+        "BLACK"
+      ],
+      "current_color": "SILVER",
+      "description": "The Dell XPS 15 9530 pairs a gorgeous 15.6-inch OLED touch display — one of the best screens ever fitted to a Windows laptop — with formidable Intel Core i9-13900H power and NVIDIA RTX 4070 graphics. Its CNC aluminium and carbon-fibre construction feels premium in every interaction. The thin bezels push screen-to-body ratio to 93.7%, creating an immersive canvas for content creators and power users alike. With Thunderbolt 4 and a robust SD card slot, connectivity leaves nothing to be desired.",
+      "rating_avg": 4.71,
+      "reviews": 156,
+      "created_at": "2024-04-18T14:00:00Z"
     }
   },
   {
     "model": "market.product",
     "pk": 8,
     "fields": {
-      "name": "ThinkPad Thunderbolt 4 Dock",
-      "category": "OTHER",
-      "series": 1,
-      "image": "",
-      "stock_quantity": 0,
-      "original_price": "299.00",
-      "sale_price": "299.00",
-      "characteristics": {"ports": "4x USB 3.2, 2x DP, 1x HDMI, 1x RJ45", "power_delivery": "100W", "cable_length": "0.8m"},
-      "color": "#1E1E1E",
-      "description": "Premium docking station for enterprise laptops.",
-      "status": false,
-      "rating_avg": 3.9,
-      "reviews": 56,
-      "created_at": "2022-05-15T12:00:00Z"
+      "name": "Dell XPS 15 9530 OLED Touch__BLACK",
+      "category": "LAPTOP",
+      "series": 4,
+      "stock_quantity": 10,
+      "original_price": "2499.00",
+      "sale_price": "2199.00",
+      "characteristics": {
+        "CPU": "Intel Core i9-13900H (14C/20T, up to 5.4 GHz)",
+        "GPU": "NVIDIA GeForce RTX 4070 8 GB GDDR6",
+        "RAM": "32 GB DDR5-4800",
+        "Storage": "1 TB PCIe 4.0 NVMe SSD",
+        "Display": "15.6\" OLED Touch 3456×2160 60 Hz, 400 nits, 100% DCI-P3",
+        "Battery": "86 Wh",
+        "Ports": "2× TB4, USB-C 3.2, SD UHS-III, 3.5 mm",
+        "Connectivity": "Wi-Fi 6E, Bluetooth 5.3",
+        "Weight": "1.86 kg",
+        "OS": "Windows 11 Pro"
+      },
+      "colors": [
+        "SILVER",
+        "BLACK"
+      ],
+      "current_color": "BLACK",
+      "description": "The Dell XPS 15 9530 pairs a gorgeous 15.6-inch OLED touch display — one of the best screens ever fitted to a Windows laptop — with formidable Intel Core i9-13900H power and NVIDIA RTX 4070 graphics. Its CNC aluminium and carbon-fibre construction feels premium in every interaction. The thin bezels push screen-to-body ratio to 93.7%, creating an immersive canvas for content creators and power users alike. With Thunderbolt 4 and a robust SD card slot, connectivity leaves nothing to be desired.",
+      "rating_avg": 4.71,
+      "reviews": 156,
+      "created_at": "2024-04-18T14:00:00Z"
     }
   },
   {
     "model": "market.product",
     "pk": 9,
     "fields": {
-      "name": "ASUS ROG Swift 360Hz PG27AQN",
-      "category": "OTHER",
-      "series": 2,
-      "image": "",
-      "stock_quantity": 3,
-      "original_price": "1049.00",
-      "sale_price": "950.00",
-      "characteristics": {"panel": "Ultrafast IPS", "resolution": "2560x1440", "refresh_rate": "360Hz", "response_time": "1ms"},
-      "color": "#0F0F0F",
-      "description": "Esports monitor with NVIDIA G-SYNC analyzer.",
-      "status": true,
-      "rating_avg": 4.5,
-      "reviews": 29,
-      "created_at": "2023-09-10T15:30:00Z"
+      "name": "ASUS ROG Strix G16 2024 Gaming__BLACK",
+      "category": "LAPTOP",
+      "series": 1,
+      "stock_quantity": 18,
+      "original_price": "1849.99",
+      "sale_price": "1649.99",
+      "characteristics": {
+        "CPU": "Intel Core i9-14900HX (24C/32T, up to 5.8 GHz)",
+        "GPU": "NVIDIA GeForce RTX 4080 12 GB GDDR6",
+        "RAM": "16 GB DDR5-4800 (up to 64 GB)",
+        "Storage": "1 TB PCIe 4.0 NVMe SSD (2× M.2 slots)",
+        "Display": "16\" QHD+ 2560×1600 240 Hz IPS, 3ms, 100% DCI-P3",
+        "Battery": "90 Wh",
+        "Cooling": "Tri-fan, liquid metal, 4× exhaust vents",
+        "Ports": "2× TB4, 3× USB-A 3.2, HDMI 2.1, SD, 2.5G LAN",
+        "Weight": "2.5 kg",
+        "OS": "Windows 11 Home"
+      },
+      "colors": [
+        "BLACK",
+        "RED"
+      ],
+      "current_color": "BLACK",
+      "description": "Purpose-built for uncompromising gaming, the ASUS ROG Strix G16 2024 houses an Intel Core i9-14900HX — the fastest mobile processor of its generation — alongside an NVIDIA GeForce RTX 4080 12 GB. The 16-inch QHD+ display runs at a blistering 240 Hz, ensuring every frame of competitive gameplay is rendered with razor precision. ROG's Tri-fan Technology and liquid-metal thermal compound keep temperatures in check even under sustained 100% load, while Dolby Atmos audio transforms entertainment sessions.",
+      "rating_avg": 4.63,
+      "reviews": 278,
+      "created_at": "2024-05-01T10:00:00Z"
     }
   },
   {
     "model": "market.product",
     "pk": 10,
     "fields": {
-      "name": "OBD2 Bluetooth Scanner (Lada/VAZ)",
-      "category": "OTHER",
-      "series": 5,
-      "image": "",
+      "name": "ASUS ROG Strix G16 2024 Gaming__RED",
+      "category": "LAPTOP",
+      "series": 1,
+      "stock_quantity": 18,
+      "original_price": "1849.99",
+      "sale_price": "1649.99",
+      "characteristics": {
+        "CPU": "Intel Core i9-14900HX (24C/32T, up to 5.8 GHz)",
+        "GPU": "NVIDIA GeForce RTX 4080 12 GB GDDR6",
+        "RAM": "16 GB DDR5-4800 (up to 64 GB)",
+        "Storage": "1 TB PCIe 4.0 NVMe SSD (2× M.2 slots)",
+        "Display": "16\" QHD+ 2560×1600 240 Hz IPS, 3ms, 100% DCI-P3",
+        "Battery": "90 Wh",
+        "Cooling": "Tri-fan, liquid metal, 4× exhaust vents",
+        "Ports": "2× TB4, 3× USB-A 3.2, HDMI 2.1, SD, 2.5G LAN",
+        "Weight": "2.5 kg",
+        "OS": "Windows 11 Home"
+      },
+      "colors": [
+        "BLACK",
+        "RED"
+      ],
+      "current_color": "RED",
+      "description": "Purpose-built for uncompromising gaming, the ASUS ROG Strix G16 2024 houses an Intel Core i9-14900HX — the fastest mobile processor of its generation — alongside an NVIDIA GeForce RTX 4080 12 GB. The 16-inch QHD+ display runs at a blistering 240 Hz, ensuring every frame of competitive gameplay is rendered with razor precision. ROG's Tri-fan Technology and liquid-metal thermal compound keep temperatures in check even under sustained 100% load, while Dolby Atmos audio transforms entertainment sessions.",
+      "rating_avg": 4.63,
+      "reviews": 278,
+      "created_at": "2024-05-01T10:00:00Z"
+    }
+  },
+  {
+    "model": "market.product",
+    "pk": 11,
+    "fields": {
+      "name": "HP EliteBook 840 G10 Business__SILVER",
+      "category": "LAPTOP",
+      "series": 9,
       "stock_quantity": 25,
-      "original_price": "25.50",
-      "sale_price": "19.99",
-      "characteristics": {"compatibility": "VAZ 2115 (8-valve, injector) and others", "interface": "Bluetooth 4.0", "functions": "Read/Clear DTCs, Real-time RPM monitoring, Throttle position"},
-      "color": "#0047AB",
-      "description": "Diagnostic tool perfect for troubleshooting floating RPMs or injector issues on older cars.",
-      "status": false,
-      "rating_avg": 4.8,
+      "original_price": "1399.00",
+      "sale_price": null,
+      "characteristics": {
+        "CPU": "Intel Core Ultra 7 165H vPro (16C, up to 5.0 GHz)",
+        "RAM": "32 GB LPDDR5x",
+        "Storage": "512 GB PCIe 4.0 NVMe SSD",
+        "Display": "14\" IPS 1920×1200 400 nits, 100% sRGB",
+        "Security": "HP Wolf Security, Sure Start, IR camera, fingerprint",
+        "Battery": "51 Wh, HP Fast Charge",
+        "Connectivity": "Wi-Fi 6E, Bluetooth 5.3, 4G LTE",
+        "Ports": "2× TB4, 2× USB-A, HDMI 2.0, SD, smart card",
+        "Weight": "1.39 kg",
+        "OS": "Windows 11 Pro"
+      },
+      "colors": [
+        "SILVER",
+        "DARKGRAY"
+      ],
+      "current_color": "SILVER",
+      "description": "The HP EliteBook 840 G10 sets the standard for corporate computing in 2024. Intel vPro Evo platform certification guarantees top-tier responsiveness, manageability, and security. HP's Wolf Security suite — including Sure Start, Sure Click, and Sure Sense AI-based malware protection — makes it one of the most secure laptops available to enterprises. A 1000-nit Sure View Reflect privacy screen option prevents visual eavesdropping in open environments, while the 51 Wh battery and fast-charge support keep professionals productive all day.",
+      "rating_avg": 4.55,
+      "reviews": 88,
+      "created_at": "2024-06-12T08:00:00Z"
+    }
+  },
+  {
+    "model": "market.product",
+    "pk": 12,
+    "fields": {
+      "name": "HP EliteBook 840 G10 Business__DARKGRAY",
+      "category": "LAPTOP",
+      "series": 9,
+      "stock_quantity": 25,
+      "original_price": "1399.00",
+      "sale_price": null,
+      "characteristics": {
+        "CPU": "Intel Core Ultra 7 165H vPro (16C, up to 5.0 GHz)",
+        "RAM": "32 GB LPDDR5x",
+        "Storage": "512 GB PCIe 4.0 NVMe SSD",
+        "Display": "14\" IPS 1920×1200 400 nits, 100% sRGB",
+        "Security": "HP Wolf Security, Sure Start, IR camera, fingerprint",
+        "Battery": "51 Wh, HP Fast Charge",
+        "Connectivity": "Wi-Fi 6E, Bluetooth 5.3, 4G LTE",
+        "Ports": "2× TB4, 2× USB-A, HDMI 2.0, SD, smart card",
+        "Weight": "1.39 kg",
+        "OS": "Windows 11 Pro"
+      },
+      "colors": [
+        "SILVER",
+        "DARKGRAY"
+      ],
+      "current_color": "DARKGRAY",
+      "description": "The HP EliteBook 840 G10 sets the standard for corporate computing in 2024. Intel vPro Evo platform certification guarantees top-tier responsiveness, manageability, and security. HP's Wolf Security suite — including Sure Start, Sure Click, and Sure Sense AI-based malware protection — makes it one of the most secure laptops available to enterprises. A 1000-nit Sure View Reflect privacy screen option prevents visual eavesdropping in open environments, while the 51 Wh battery and fast-charge support keep professionals productive all day.",
+      "rating_avg": 4.55,
+      "reviews": 88,
+      "created_at": "2024-06-12T08:00:00Z"
+    }
+  },
+  {
+    "model": "market.product",
+    "pk": 13,
+    "fields": {
+      "name": "MSI Titan GT77 HX 17 Gaming__BLACK",
+      "category": "LAPTOP",
+      "series": 11,
+      "stock_quantity": 6,
+      "original_price": "3299.00",
+      "sale_price": "2999.00",
+      "characteristics": {
+        "CPU": "Intel Core i9-13980HX (24C/32T, up to 5.6 GHz)",
+        "GPU": "NVIDIA GeForce RTX 4090 16 GB GDDR6 (full 175 W TGP)",
+        "RAM": "64 GB DDR5-4800 (4× SODIMM, up to 128 GB)",
+        "Storage": "2 TB PCIe 4.0 NVMe RAID 0 (2× 1 TB)",
+        "Display": "17.3\" Mini-LED 3840×2160 144 Hz / 1920×1080 240 Hz, 1000 nits",
+        "Battery": "99.9 Wh",
+        "Keyboard": "Cherry MX Ultra Low Profile mechanical, per-key RGB",
+        "Ports": "3× USB-A 3.2, 2× TB4, HDMI 2.1, DP 1.4, SD, 2.5G LAN",
+        "Weight": "3.3 kg",
+        "OS": "Windows 11 Home"
+      },
+      "colors": [
+        "BLACK",
+        "DARKGRAY"
+      ],
+      "current_color": "BLACK",
+      "description": "The MSI Titan GT77 HX is the desktop replacement that refuses to compromise. At its heart beats an Intel Core i9-13980HX — Intel's most powerful mobile CPU — paired with a full-power NVIDIA GeForce RTX 4090 16 GB. The 17.3-inch Mini-LED display reaches 1000 nits of peak brightness with a 240 Hz refresh rate, covering 100% of the DCI-P3 colour space. Per-key RGB illumination, a mechanical keyboard with Cherry MX Ultra Low Profile switches, and a monstrous 99.9 Wh battery complete one of the most extravagant laptop packages money can buy.",
+      "rating_avg": 4.48,
+      "reviews": 67,
+      "created_at": "2024-07-20T12:00:00Z"
+    }
+  },
+  {
+    "model": "market.product",
+    "pk": 14,
+    "fields": {
+      "name": "MSI Titan GT77 HX 17 Gaming__DARKGRAY",
+      "category": "LAPTOP",
+      "series": 11,
+      "stock_quantity": 6,
+      "original_price": "3299.00",
+      "sale_price": "2999.00",
+      "characteristics": {
+        "CPU": "Intel Core i9-13980HX (24C/32T, up to 5.6 GHz)",
+        "GPU": "NVIDIA GeForce RTX 4090 16 GB GDDR6 (full 175 W TGP)",
+        "RAM": "64 GB DDR5-4800 (4× SODIMM, up to 128 GB)",
+        "Storage": "2 TB PCIe 4.0 NVMe RAID 0 (2× 1 TB)",
+        "Display": "17.3\" Mini-LED 3840×2160 144 Hz / 1920×1080 240 Hz, 1000 nits",
+        "Battery": "99.9 Wh",
+        "Keyboard": "Cherry MX Ultra Low Profile mechanical, per-key RGB",
+        "Ports": "3× USB-A 3.2, 2× TB4, HDMI 2.1, DP 1.4, SD, 2.5G LAN",
+        "Weight": "3.3 kg",
+        "OS": "Windows 11 Home"
+      },
+      "colors": [
+        "BLACK",
+        "DARKGRAY"
+      ],
+      "current_color": "DARKGRAY",
+      "description": "The MSI Titan GT77 HX is the desktop replacement that refuses to compromise. At its heart beats an Intel Core i9-13980HX — Intel's most powerful mobile CPU — paired with a full-power NVIDIA GeForce RTX 4090 16 GB. The 17.3-inch Mini-LED display reaches 1000 nits of peak brightness with a 240 Hz refresh rate, covering 100% of the DCI-P3 colour space. Per-key RGB illumination, a mechanical keyboard with Cherry MX Ultra Low Profile switches, and a monstrous 99.9 Wh battery complete one of the most extravagant laptop packages money can buy.",
+      "rating_avg": 4.48,
+      "reviews": 67,
+      "created_at": "2024-07-20T12:00:00Z"
+    }
+  },
+  {
+    "model": "market.product",
+    "pk": 15,
+    "fields": {
+      "name": "ASUS ROG Strix B550-F WiFi II__BLACK",
+      "category": "PC",
+      "series": 1,
+      "stock_quantity": 30,
+      "original_price": "249.99",
+      "sale_price": null,
+      "characteristics": {
+        "Socket": "AMD AM4",
+        "Chipset": "AMD B550",
+        "CPU Support": "AMD Ryzen 5000 / 4000 / 3000 series",
+        "Memory": "4× DDR4 DIMM, up to 128 GB, 5100+ MHz (OC)",
+        "Storage": "2× M.2 (PCIe 4.0 + 3.0), 6× SATA 6 Gb/s",
+        "Networking": "Intel 2.5G LAN, Intel Wi-Fi 6E",
+        "USB": "USB 3.2 Gen 2×2 (20 Gbps), 6× USB 3.2, 4× USB 2.0",
+        "RGB": "Aura Sync ARGB headers",
+        "Form Factor": "ATX",
+        "Power Phases": "12+2 Dr. MOS"
+      },
+      "colors": [
+        "BLACK",
+        "GRAY"
+      ],
+      "current_color": "BLACK",
+      "description": "The ASUS ROG Strix B550-F WiFi II is a feature-packed AMD B550 motherboard designed for builders who want flagship-level experience at a mid-range price point. It supports AMD Ryzen 5000 and 4000 series processors, features PCIe 4.0 for blazing-fast storage and graphics, and includes Intel Wi-Fi 6E 802.11ax for lag-free wireless gaming. Aura Sync RGB lighting, a comprehensive 12+2 power stage, and extensive monitoring via Armoury Crate make it a builder's favourite.",
+      "rating_avg": 4.68,
+      "reviews": 415,
+      "created_at": "2024-01-08T10:00:00Z"
+    }
+  },
+  {
+    "model": "market.product",
+    "pk": 16,
+    "fields": {
+      "name": "ASUS ROG Strix B550-F WiFi II__GRAY",
+      "category": "PC",
+      "series": 1,
+      "stock_quantity": 30,
+      "original_price": "249.99",
+      "sale_price": null,
+      "characteristics": {
+        "Socket": "AMD AM4",
+        "Chipset": "AMD B550",
+        "CPU Support": "AMD Ryzen 5000 / 4000 / 3000 series",
+        "Memory": "4× DDR4 DIMM, up to 128 GB, 5100+ MHz (OC)",
+        "Storage": "2× M.2 (PCIe 4.0 + 3.0), 6× SATA 6 Gb/s",
+        "Networking": "Intel 2.5G LAN, Intel Wi-Fi 6E",
+        "USB": "USB 3.2 Gen 2×2 (20 Gbps), 6× USB 3.2, 4× USB 2.0",
+        "RGB": "Aura Sync ARGB headers",
+        "Form Factor": "ATX",
+        "Power Phases": "12+2 Dr. MOS"
+      },
+      "colors": [
+        "BLACK",
+        "GRAY"
+      ],
+      "current_color": "GRAY",
+      "description": "The ASUS ROG Strix B550-F WiFi II is a feature-packed AMD B550 motherboard designed for builders who want flagship-level experience at a mid-range price point. It supports AMD Ryzen 5000 and 4000 series processors, features PCIe 4.0 for blazing-fast storage and graphics, and includes Intel Wi-Fi 6E 802.11ax for lag-free wireless gaming. Aura Sync RGB lighting, a comprehensive 12+2 power stage, and extensive monitoring via Armoury Crate make it a builder's favourite.",
+      "rating_avg": 4.68,
+      "reviews": 415,
+      "created_at": "2024-01-08T10:00:00Z"
+    }
+  },
+  {
+    "model": "market.product",
+    "pk": 17,
+    "fields": {
+      "name": "Lenovo ThinkStation P620 Tower__BLACK",
+      "category": "PC",
+      "series": 2,
+      "stock_quantity": 5,
+      "original_price": "4599.00",
+      "sale_price": "4199.00",
+      "characteristics": {
+        "CPU": "AMD Ryzen Threadripper PRO 5965WX (24C/48T, up to 4.5 GHz)",
+        "RAM": "128 GB DDR4-3200 ECC Registered (8× DIMM, max 512 GB)",
+        "GPU": "NVIDIA RTX A4000 16 GB (included)",
+        "Storage": "2 TB PCIe 4.0 NVMe + 4 TB HDD",
+        "PCIe Slots": "4× PCIe 4.0 x16, 1× PCIe 4.0 x8, 1× PCIe 3.0 x4",
+        "PSU": "1000 W 80+ Platinum",
+        "Networking": "Intel 10G LAN + Wi-Fi 6",
+        "USB": "USB 3.2 Gen 2, USB-C, USB-A front & rear",
+        "Form Factor": "Tower",
+        "ISV Certifications": "Autodesk, SolidWorks, Siemens NX, Adobe, DaVinci"
+      },
+      "colors": [
+        "BLACK",
+        "SILVER"
+      ],
+      "current_color": "BLACK",
+      "description": "The Lenovo ThinkStation P620 is the workstation engineers, architects, and VFX artists reach for when compromise is not an option. Powered by the AMD Ryzen Threadripper PRO 5965WX — a 24-core behemoth — it supports up to 512 GB of ECC Registered DDR4 memory across eight channels, ensuring your most intensive simulations run smoothly. Four PCIe 4.0 x16 slots accommodate multi-GPU configurations, while ISV certification across major CAD, DCC, and rendering applications provides peace of mind for professionals.",
+      "rating_avg": 4.82,
+      "reviews": 43,
+      "created_at": "2024-02-28T09:00:00Z"
+    }
+  },
+  {
+    "model": "market.product",
+    "pk": 18,
+    "fields": {
+      "name": "Lenovo ThinkStation P620 Tower__SILVER",
+      "category": "PC",
+      "series": 2,
+      "stock_quantity": 5,
+      "original_price": "4599.00",
+      "sale_price": "4199.00",
+      "characteristics": {
+        "CPU": "AMD Ryzen Threadripper PRO 5965WX (24C/48T, up to 4.5 GHz)",
+        "RAM": "128 GB DDR4-3200 ECC Registered (8× DIMM, max 512 GB)",
+        "GPU": "NVIDIA RTX A4000 16 GB (included)",
+        "Storage": "2 TB PCIe 4.0 NVMe + 4 TB HDD",
+        "PCIe Slots": "4× PCIe 4.0 x16, 1× PCIe 4.0 x8, 1× PCIe 3.0 x4",
+        "PSU": "1000 W 80+ Platinum",
+        "Networking": "Intel 10G LAN + Wi-Fi 6",
+        "USB": "USB 3.2 Gen 2, USB-C, USB-A front & rear",
+        "Form Factor": "Tower",
+        "ISV Certifications": "Autodesk, SolidWorks, Siemens NX, Adobe, DaVinci"
+      },
+      "colors": [
+        "BLACK",
+        "SILVER"
+      ],
+      "current_color": "SILVER",
+      "description": "The Lenovo ThinkStation P620 is the workstation engineers, architects, and VFX artists reach for when compromise is not an option. Powered by the AMD Ryzen Threadripper PRO 5965WX — a 24-core behemoth — it supports up to 512 GB of ECC Registered DDR4 memory across eight channels, ensuring your most intensive simulations run smoothly. Four PCIe 4.0 x16 slots accommodate multi-GPU configurations, while ISV certification across major CAD, DCC, and rendering applications provides peace of mind for professionals.",
+      "rating_avg": 4.82,
+      "reviews": 43,
+      "created_at": "2024-02-28T09:00:00Z"
+    }
+  },
+  {
+    "model": "market.product",
+    "pk": 19,
+    "fields": {
+      "name": "Cisco Catalyst 9200L 24Port PoE__GRAY",
+      "category": "NETWORK_DEVICE",
+      "series": 8,
+      "stock_quantity": 7,
+      "original_price": "3200.00",
+      "sale_price": null,
+      "characteristics": {
+        "Ports": "24× 10/100/1000 PoE+ (30W/port, 740W total)",
+        "Uplinks": "4× 1G SFP",
+        "Switching Capacity": "128 Gbps",
+        "Forwarding Rate": "95.2 Mpps",
+        "Stacking": "Up to 8 units, 80G StackWise-160",
+        "Software": "Cisco IOS-XE, DNA Center compatible",
+        "Security": "MACsec-128, TrustSec, Encrypted Traffic Analytics",
+        "Power Supply": "Dual redundant hot-swap",
+        "Form Factor": "1U rack-mount",
+        "MTBF": "> 200 000 h"
+      },
+      "colors": [
+        "GRAY",
+        "DARKGRAY"
+      ],
+      "current_color": "GRAY",
+      "description": "The Cisco Catalyst 9200L is an enterprise-grade Layer 3 stackable access switch engineered for resiliency and scalability. It provides 24 PoE+ ports capable of delivering up to 30W per port (740W PoE budget), making it ideal for powering IP phones, wireless access points, and IoT devices without separate power injectors. Cisco IOS-XE software, built-in encrypted traffic analytics, and Cisco DNA Center integration ensure this switch meets the most stringent enterprise networking standards.",
+      "rating_avg": 4.91,
+      "reviews": 29,
+      "created_at": "2023-11-14T10:00:00Z"
+    }
+  },
+  {
+    "model": "market.product",
+    "pk": 20,
+    "fields": {
+      "name": "Cisco Catalyst 9200L 24Port PoE__DARKGRAY",
+      "category": "NETWORK_DEVICE",
+      "series": 8,
+      "stock_quantity": 7,
+      "original_price": "3200.00",
+      "sale_price": null,
+      "characteristics": {
+        "Ports": "24× 10/100/1000 PoE+ (30W/port, 740W total)",
+        "Uplinks": "4× 1G SFP",
+        "Switching Capacity": "128 Gbps",
+        "Forwarding Rate": "95.2 Mpps",
+        "Stacking": "Up to 8 units, 80G StackWise-160",
+        "Software": "Cisco IOS-XE, DNA Center compatible",
+        "Security": "MACsec-128, TrustSec, Encrypted Traffic Analytics",
+        "Power Supply": "Dual redundant hot-swap",
+        "Form Factor": "1U rack-mount",
+        "MTBF": "> 200 000 h"
+      },
+      "colors": [
+        "GRAY",
+        "DARKGRAY"
+      ],
+      "current_color": "DARKGRAY",
+      "description": "The Cisco Catalyst 9200L is an enterprise-grade Layer 3 stackable access switch engineered for resiliency and scalability. It provides 24 PoE+ ports capable of delivering up to 30W per port (740W PoE budget), making it ideal for powering IP phones, wireless access points, and IoT devices without separate power injectors. Cisco IOS-XE software, built-in encrypted traffic analytics, and Cisco DNA Center integration ensure this switch meets the most stringent enterprise networking standards.",
+      "rating_avg": 4.91,
+      "reviews": 29,
+      "created_at": "2023-11-14T10:00:00Z"
+    }
+  },
+  {
+    "model": "market.product",
+    "pk": 21,
+    "fields": {
+      "name": "Cisco Catalyst 8200 Edge Router__GRAY",
+      "category": "NETWORK_DEVICE",
+      "series": 8,
+      "stock_quantity": 4,
+      "original_price": "5800.00",
+      "sale_price": "5300.00",
+      "characteristics": {
+        "Throughput": "Up to 25 Gbps (IPsec 2.5 Gbps)",
+        "WAN Ports": "2× 1G SFP, 2× 1G RJ-45",
+        "LAN Ports": "8× 1G RJ-45, 2× 10G SFP+",
+        "SD-WAN": "Cisco Catalyst SD-WAN (vManage)",
+        "Security": "Zone-based firewall, IPS, TLS/SSL inspection",
+        "Management": "Cisco DNA Center, REST API, NETCONF/YANG",
+        "Redundancy": "Dual hot-swap PSU option",
+        "Memory": "16 GB DRAM + 16 GB Flash",
+        "Form Factor": "1U rack-mount",
+        "Operating Temp": "0–40 °C"
+      },
+      "colors": [
+        "GRAY",
+        "BLACK"
+      ],
+      "current_color": "GRAY",
+      "description": "The Cisco Catalyst 8200 series edge platform delivers Cisco IOS XE innovation with SD-WAN, security, and cloud connectivity — all in a compact 1U form factor. It supports up to 25 Gbps throughput and can be managed through Cisco vManage for centralised policy orchestration across distributed enterprise branches. Integrated IPsec, firewall, and application visibility features eliminate the need for dedicated security appliances at the edge, reducing TCO significantly.",
+      "rating_avg": 4.88,
+      "reviews": 17,
+      "created_at": "2023-12-01T10:00:00Z"
+    }
+  },
+  {
+    "model": "market.product",
+    "pk": 22,
+    "fields": {
+      "name": "Cisco Catalyst 8200 Edge Router__BLACK",
+      "category": "NETWORK_DEVICE",
+      "series": 8,
+      "stock_quantity": 4,
+      "original_price": "5800.00",
+      "sale_price": "5300.00",
+      "characteristics": {
+        "Throughput": "Up to 25 Gbps (IPsec 2.5 Gbps)",
+        "WAN Ports": "2× 1G SFP, 2× 1G RJ-45",
+        "LAN Ports": "8× 1G RJ-45, 2× 10G SFP+",
+        "SD-WAN": "Cisco Catalyst SD-WAN (vManage)",
+        "Security": "Zone-based firewall, IPS, TLS/SSL inspection",
+        "Management": "Cisco DNA Center, REST API, NETCONF/YANG",
+        "Redundancy": "Dual hot-swap PSU option",
+        "Memory": "16 GB DRAM + 16 GB Flash",
+        "Form Factor": "1U rack-mount",
+        "Operating Temp": "0–40 °C"
+      },
+      "colors": [
+        "GRAY",
+        "BLACK"
+      ],
+      "current_color": "BLACK",
+      "description": "The Cisco Catalyst 8200 series edge platform delivers Cisco IOS XE innovation with SD-WAN, security, and cloud connectivity — all in a compact 1U form factor. It supports up to 25 Gbps throughput and can be managed through Cisco vManage for centralised policy orchestration across distributed enterprise branches. Integrated IPsec, firewall, and application visibility features eliminate the need for dedicated security appliances at the edge, reducing TCO significantly.",
+      "rating_avg": 4.88,
+      "reviews": 17,
+      "created_at": "2023-12-01T10:00:00Z"
+    }
+  },
+  {
+    "model": "market.product",
+    "pk": 23,
+    "fields": {
+      "name": "HP LaserJet Pro M404dn Mono__WHITE",
+      "category": "PRINTER_SCANNER",
+      "series": 7,
+      "stock_quantity": 22,
+      "original_price": "329.00",
+      "sale_price": null,
+      "characteristics": {
+        "Print Speed": "Up to 38 ppm (A4)",
+        "First Page Out": "< 6 s",
+        "Resolution": "1200×1200 dpi (ProRes 1200)",
+        "Monthly Duty Cycle": "up to 80 000 pages",
+        "Paper Capacity": "250-sheet tray + 100-sheet multipurpose",
+        "Duplex": "Automatic",
+        "Connectivity": "USB 2.0, Gigabit Ethernet",
+        "Processor": "1.0 GHz",
+        "Memory": "256 MB",
+        "Weight": "9.5 kg"
+      },
+      "colors": [
+        "WHITE",
+        "DARKGRAY"
+      ],
+      "current_color": "WHITE",
+      "description": "The HP LaserJet Pro M404dn is a workhorse mono laser printer designed for SMBs that demand high volume, low cost-per-page output. It prints at up to 38 pages per minute with a first-page-out time under 6 seconds, ensuring queues move quickly even in busy office environments. Duplex printing is automatic, halving paper consumption. HP JetIntelligence toner cartridges use a high-capacity design for lower running costs, while built-in Ethernet and USB connectivity accommodate shared office use out of the box.",
+      "rating_avg": 4.44,
+      "reviews": 631,
+      "created_at": "2023-10-05T10:00:00Z"
+    }
+  },
+  {
+    "model": "market.product",
+    "pk": 24,
+    "fields": {
+      "name": "HP LaserJet Pro M404dn Mono__DARKGRAY",
+      "category": "PRINTER_SCANNER",
+      "series": 7,
+      "stock_quantity": 22,
+      "original_price": "329.00",
+      "sale_price": null,
+      "characteristics": {
+        "Print Speed": "Up to 38 ppm (A4)",
+        "First Page Out": "< 6 s",
+        "Resolution": "1200×1200 dpi (ProRes 1200)",
+        "Monthly Duty Cycle": "up to 80 000 pages",
+        "Paper Capacity": "250-sheet tray + 100-sheet multipurpose",
+        "Duplex": "Automatic",
+        "Connectivity": "USB 2.0, Gigabit Ethernet",
+        "Processor": "1.0 GHz",
+        "Memory": "256 MB",
+        "Weight": "9.5 kg"
+      },
+      "colors": [
+        "WHITE",
+        "DARKGRAY"
+      ],
+      "current_color": "DARKGRAY",
+      "description": "The HP LaserJet Pro M404dn is a workhorse mono laser printer designed for SMBs that demand high volume, low cost-per-page output. It prints at up to 38 pages per minute with a first-page-out time under 6 seconds, ensuring queues move quickly even in busy office environments. Duplex printing is automatic, halving paper consumption. HP JetIntelligence toner cartridges use a high-capacity design for lower running costs, while built-in Ethernet and USB connectivity accommodate shared office use out of the box.",
+      "rating_avg": 4.44,
+      "reviews": 631,
+      "created_at": "2023-10-05T10:00:00Z"
+    }
+  },
+  {
+    "model": "market.product",
+    "pk": 25,
+    "fields": {
+      "name": "HP Color LaserJet Pro M255dw__WHITE",
+      "category": "PRINTER_SCANNER",
+      "series": 7,
+      "stock_quantity": 14,
+      "original_price": "419.00",
+      "sale_price": "369.00",
+      "characteristics": {
+        "Print Speed": "21 ppm colour + mono",
+        "Resolution": "600×600 dpi (ImageREt 3600)",
+        "Monthly Duty Cycle": "up to 40 000 pages",
+        "Paper Capacity": "250-sheet tray + 10-sheet manual feed",
+        "Duplex": "Manual",
+        "Connectivity": "USB, Gigabit Ethernet, Wi-Fi 5, AirPrint, Mopria",
+        "Display": "2.7\" colour touchscreen",
+        "Toner": "HP 206A/206X (C/M/Y/K)",
+        "First Page Out": "< 16 s (colour)",
+        "Weight": "17.9 kg"
+      },
+      "colors": [
+        "WHITE",
+        "BLACK"
+      ],
+      "current_color": "WHITE",
+      "description": "Bring vibrant, professional-quality colour printing to your small office with the HP Color LaserJet Pro M255dw. It prints 21 pages per minute in both colour and mono, with HP ColorSphere 3 toner technology delivering consistent colour accuracy across thousands of pages. Built-in Wi-Fi, Ethernet, and Apple AirPrint support mean practically any device on your network can print effortlessly. HP's advanced security features — including intrusion detection and automatic firmware updates — keep your network printer from becoming a vulnerability.",
+      "rating_avg": 4.38,
+      "reviews": 284,
+      "created_at": "2023-09-20T09:00:00Z"
+    }
+  },
+  {
+    "model": "market.product",
+    "pk": 26,
+    "fields": {
+      "name": "HP Color LaserJet Pro M255dw__BLACK",
+      "category": "PRINTER_SCANNER",
+      "series": 7,
+      "stock_quantity": 14,
+      "original_price": "419.00",
+      "sale_price": "369.00",
+      "characteristics": {
+        "Print Speed": "21 ppm colour + mono",
+        "Resolution": "600×600 dpi (ImageREt 3600)",
+        "Monthly Duty Cycle": "up to 40 000 pages",
+        "Paper Capacity": "250-sheet tray + 10-sheet manual feed",
+        "Duplex": "Manual",
+        "Connectivity": "USB, Gigabit Ethernet, Wi-Fi 5, AirPrint, Mopria",
+        "Display": "2.7\" colour touchscreen",
+        "Toner": "HP 206A/206X (C/M/Y/K)",
+        "First Page Out": "< 16 s (colour)",
+        "Weight": "17.9 kg"
+      },
+      "colors": [
+        "WHITE",
+        "BLACK"
+      ],
+      "current_color": "BLACK",
+      "description": "Bring vibrant, professional-quality colour printing to your small office with the HP Color LaserJet Pro M255dw. It prints 21 pages per minute in both colour and mono, with HP ColorSphere 3 toner technology delivering consistent colour accuracy across thousands of pages. Built-in Wi-Fi, Ethernet, and Apple AirPrint support mean practically any device on your network can print effortlessly. HP's advanced security features — including intrusion detection and automatic firmware updates — keep your network printer from becoming a vulnerability.",
+      "rating_avg": 4.38,
+      "reviews": 284,
+      "created_at": "2023-09-20T09:00:00Z"
+    }
+  },
+  {
+    "model": "market.product",
+    "pk": 27,
+    "fields": {
+      "name": "Canon PIXMA TR8620a Photo__WHITE",
+      "category": "PRINTER_SCANNER",
+      "series": 13,
+      "stock_quantity": 19,
+      "original_price": "199.99",
+      "sale_price": "169.99",
+      "characteristics": {
+        "Print System": "5-colour individual ink (C/M/Y/K/Grey)",
+        "Print Resolution": "4800×1200 dpi",
+        "Photo Speed": "4×6\" borderless in ~17 s",
+        "Scanner": "600×1200 dpi CIS, ADF 35 sheets",
+        "Fax": "Yes, 33.6 Kbps Super G3",
+        "Connectivity": "Wi-Fi, Bluetooth, USB, AirPrint, Mopria, Google Print",
+        "Display": "4.3\" tilting colour touchscreen",
+        "Paper Capacity": "200-sheet rear tray + 20-sheet front cassette",
+        "Max Print Size": "A4 / 4×6 borderless",
+        "Weight": "6.7 kg"
+      },
+      "colors": [
+        "WHITE",
+        "BLACK"
+      ],
+      "current_color": "WHITE",
+      "description": "The Canon PIXMA TR8620a is an all-in-one inkjet powerhouse for home offices and photo enthusiasts. Its 5-colour individual ink system — including a dedicated grey ink for stunning black-and-white photography — produces gallery-worthy borderless 4×6 photos in just 17 seconds. A 35-sheet automatic document feeder streamlines scanning of multi-page documents, while Bluetooth, Wi-Fi, and AirPrint keep printing effortless from any device. The 4.3-inch tilting touchscreen makes navigating menus and adjusting settings intuitive.",
+      "rating_avg": 4.29,
+      "reviews": 502,
+      "created_at": "2023-08-11T10:00:00Z"
+    }
+  },
+  {
+    "model": "market.product",
+    "pk": 28,
+    "fields": {
+      "name": "Canon PIXMA TR8620a Photo__BLACK",
+      "category": "PRINTER_SCANNER",
+      "series": 13,
+      "stock_quantity": 19,
+      "original_price": "199.99",
+      "sale_price": "169.99",
+      "characteristics": {
+        "Print System": "5-colour individual ink (C/M/Y/K/Grey)",
+        "Print Resolution": "4800×1200 dpi",
+        "Photo Speed": "4×6\" borderless in ~17 s",
+        "Scanner": "600×1200 dpi CIS, ADF 35 sheets",
+        "Fax": "Yes, 33.6 Kbps Super G3",
+        "Connectivity": "Wi-Fi, Bluetooth, USB, AirPrint, Mopria, Google Print",
+        "Display": "4.3\" tilting colour touchscreen",
+        "Paper Capacity": "200-sheet rear tray + 20-sheet front cassette",
+        "Max Print Size": "A4 / 4×6 borderless",
+        "Weight": "6.7 kg"
+      },
+      "colors": [
+        "WHITE",
+        "BLACK"
+      ],
+      "current_color": "BLACK",
+      "description": "The Canon PIXMA TR8620a is an all-in-one inkjet powerhouse for home offices and photo enthusiasts. Its 5-colour individual ink system — including a dedicated grey ink for stunning black-and-white photography — produces gallery-worthy borderless 4×6 photos in just 17 seconds. A 35-sheet automatic document feeder streamlines scanning of multi-page documents, while Bluetooth, Wi-Fi, and AirPrint keep printing effortless from any device. The 4.3-inch tilting touchscreen makes navigating menus and adjusting settings intuitive.",
+      "rating_avg": 4.29,
+      "reviews": 502,
+      "created_at": "2023-08-11T10:00:00Z"
+    }
+  },
+  {
+    "model": "market.product",
+    "pk": 29,
+    "fields": {
+      "name": "NVIDIA GeForce RTX 4090 24GB__BLACK",
+      "category": "PC_PART",
+      "series": 5,
+      "stock_quantity": 4,
+      "original_price": "1599.00",
+      "sale_price": "1449.00",
+      "characteristics": {
+        "Architecture": "Ada Lovelace (TSMC 4N)",
+        "CUDA Cores": "16 384",
+        "VRAM": "24 GB GDDR6X, 384-bit",
+        "Memory Bandwidth": "1 008 GB/s",
+        "Base / Boost Clock": "2235 / 2520 MHz",
+        "TDP": "450 W (PCIe 5.0 16-pin connector)",
+        "RT Cores": "128 (3rd gen)",
+        "Tensor Cores": "512 (4th gen)",
+        "Display Outputs": "3× DP 1.4a, 1× HDMI 2.1",
+        "Recommended PSU": "850 W"
+      },
+      "colors": [
+        "BLACK",
+        "WHITE"
+      ],
+      "current_color": "BLACK",
+      "description": "The NVIDIA GeForce RTX 4090 is the undisputed king of consumer graphics cards. Built on the Ada Lovelace architecture with 16 384 CUDA cores, 24 GB of GDDR6X memory on a 384-bit bus, and DLSS 3 Frame Generation technology, it renders 4K gaming at ultra settings with frames to spare. Content creators benefit equally — AV1 dual encoders enable 8K ProRes RAW capture, while AI-accelerated denoising slashes render times in DCC applications. The RTX 4090 is not merely the fastest GPU available; it is a generational leap.",
+      "rating_avg": 4.96,
+      "reviews": 743,
+      "created_at": "2024-01-15T10:00:00Z"
+    }
+  },
+  {
+    "model": "market.product",
+    "pk": 30,
+    "fields": {
+      "name": "NVIDIA GeForce RTX 4090 24GB__WHITE",
+      "category": "PC_PART",
+      "series": 5,
+      "stock_quantity": 4,
+      "original_price": "1599.00",
+      "sale_price": "1449.00",
+      "characteristics": {
+        "Architecture": "Ada Lovelace (TSMC 4N)",
+        "CUDA Cores": "16 384",
+        "VRAM": "24 GB GDDR6X, 384-bit",
+        "Memory Bandwidth": "1 008 GB/s",
+        "Base / Boost Clock": "2235 / 2520 MHz",
+        "TDP": "450 W (PCIe 5.0 16-pin connector)",
+        "RT Cores": "128 (3rd gen)",
+        "Tensor Cores": "512 (4th gen)",
+        "Display Outputs": "3× DP 1.4a, 1× HDMI 2.1",
+        "Recommended PSU": "850 W"
+      },
+      "colors": [
+        "BLACK",
+        "WHITE"
+      ],
+      "current_color": "WHITE",
+      "description": "The NVIDIA GeForce RTX 4090 is the undisputed king of consumer graphics cards. Built on the Ada Lovelace architecture with 16 384 CUDA cores, 24 GB of GDDR6X memory on a 384-bit bus, and DLSS 3 Frame Generation technology, it renders 4K gaming at ultra settings with frames to spare. Content creators benefit equally — AV1 dual encoders enable 8K ProRes RAW capture, while AI-accelerated denoising slashes render times in DCC applications. The RTX 4090 is not merely the fastest GPU available; it is a generational leap.",
+      "rating_avg": 4.96,
+      "reviews": 743,
+      "created_at": "2024-01-15T10:00:00Z"
+    }
+  },
+  {
+    "model": "market.product",
+    "pk": 31,
+    "fields": {
+      "name": "NVIDIA GeForce RTX 4080 Super__BLACK",
+      "category": "PC_PART",
+      "series": 5,
+      "stock_quantity": 9,
+      "original_price": "999.00",
+      "sale_price": "899.00",
+      "characteristics": {
+        "Architecture": "Ada Lovelace",
+        "CUDA Cores": "10 240",
+        "VRAM": "16 GB GDDR6X, 256-bit",
+        "Memory Bandwidth": "736 GB/s",
+        "Base / Boost Clock": "2295 / 2625 MHz",
+        "TDP": "320 W",
+        "Display Outputs": "3× DP 1.4a, 1× HDMI 2.1",
+        "RT Cores": "80 (3rd gen)",
+        "Tensor Cores": "320 (4th gen)",
+        "Recommended PSU": "750 W"
+      },
+      "colors": [
+        "BLACK",
+        "WHITE"
+      ],
+      "current_color": "BLACK",
+      "description": "NVIDIA's RTX 4080 Super delivers up to 20% more performance than the original RTX 4080, re-establishing the $999 tier as the sweet spot for enthusiast 4K gaming. With 10 240 CUDA cores, 16 GB GDDR6X, and DLSS 3 Frame Generation, it effortlessly exceeds 60 fps at 4K maximum settings in virtually every modern title. The Ada Lovelace architecture's third-generation RT cores cut ray-tracing workloads dramatically, enabling stunning global illumination without sacrificing frame rate. For creators, AV1 encoding and DLSS Super Resolution accelerate production pipelines.",
+      "rating_avg": 4.84,
       "reviews": 412,
-      "created_at": "2024-02-18T18:00:00Z"
+      "created_at": "2024-02-01T10:00:00Z"
+    }
+  },
+  {
+    "model": "market.product",
+    "pk": 32,
+    "fields": {
+      "name": "NVIDIA GeForce RTX 4080 Super__WHITE",
+      "category": "PC_PART",
+      "series": 5,
+      "stock_quantity": 9,
+      "original_price": "999.00",
+      "sale_price": "899.00",
+      "characteristics": {
+        "Architecture": "Ada Lovelace",
+        "CUDA Cores": "10 240",
+        "VRAM": "16 GB GDDR6X, 256-bit",
+        "Memory Bandwidth": "736 GB/s",
+        "Base / Boost Clock": "2295 / 2625 MHz",
+        "TDP": "320 W",
+        "Display Outputs": "3× DP 1.4a, 1× HDMI 2.1",
+        "RT Cores": "80 (3rd gen)",
+        "Tensor Cores": "320 (4th gen)",
+        "Recommended PSU": "750 W"
+      },
+      "colors": [
+        "BLACK",
+        "WHITE"
+      ],
+      "current_color": "WHITE",
+      "description": "NVIDIA's RTX 4080 Super delivers up to 20% more performance than the original RTX 4080, re-establishing the $999 tier as the sweet spot for enthusiast 4K gaming. With 10 240 CUDA cores, 16 GB GDDR6X, and DLSS 3 Frame Generation, it effortlessly exceeds 60 fps at 4K maximum settings in virtually every modern title. The Ada Lovelace architecture's third-generation RT cores cut ray-tracing workloads dramatically, enabling stunning global illumination without sacrificing frame rate. For creators, AV1 encoding and DLSS Super Resolution accelerate production pipelines.",
+      "rating_avg": 4.84,
+      "reviews": 412,
+      "created_at": "2024-02-01T10:00:00Z"
+    }
+  },
+  {
+    "model": "market.product",
+    "pk": 33,
+    "fields": {
+      "name": "AMD Ryzen 9 7950X Desktop CPU__BLACK",
+      "category": "PC_PART",
+      "series": 6,
+      "stock_quantity": 11,
+      "original_price": "699.00",
+      "sale_price": "599.00",
+      "characteristics": {
+        "Architecture": "Zen 4 (TSMC 5 nm)",
+        "Cores / Threads": "16C / 32T",
+        "Base / Max Boost": "4.5 / 5.7 GHz",
+        "L3 Cache": "64 MB",
+        "TDP / PPT": "170 W / 230 W",
+        "Socket": "AMD AM5",
+        "Memory Support": "DDR5-5200 (dual-channel)",
+        "PCIe": "PCIe 5.0 x16 + PCIe 4.0 x4",
+        "Integrated Graphics": "Radeon Graphics (RDNA 2)",
+        "Process": "TSMC 5 nm (compute) + 6 nm (I/O)"
+      },
+      "colors": [
+        "BLACK",
+        "SILVER"
+      ],
+      "current_color": "BLACK",
+      "description": "The AMD Ryzen 9 7950X remains the definitive 16-core desktop processor for professionals and hardcore enthusiasts. Built on TSMC 5 nm with Zen 4 cores, it achieves all-core boost frequencies beyond 4.5 GHz while peaking at 5.7 GHz on performance cores. PCIe 5.0 support ensures compatibility with the latest NVMe SSDs and graphics cards, while DDR5 memory unlocks unprecedented memory bandwidth. Whether you are compiling code, rendering 3D scenes, or running complex data models, the 7950X dispatches tasks faster than anything else in its class.",
+      "rating_avg": 4.91,
+      "reviews": 524,
+      "created_at": "2024-01-05T10:00:00Z"
+    }
+  },
+  {
+    "model": "market.product",
+    "pk": 34,
+    "fields": {
+      "name": "AMD Ryzen 9 7950X Desktop CPU__SILVER",
+      "category": "PC_PART",
+      "series": 6,
+      "stock_quantity": 11,
+      "original_price": "699.00",
+      "sale_price": "599.00",
+      "characteristics": {
+        "Architecture": "Zen 4 (TSMC 5 nm)",
+        "Cores / Threads": "16C / 32T",
+        "Base / Max Boost": "4.5 / 5.7 GHz",
+        "L3 Cache": "64 MB",
+        "TDP / PPT": "170 W / 230 W",
+        "Socket": "AMD AM5",
+        "Memory Support": "DDR5-5200 (dual-channel)",
+        "PCIe": "PCIe 5.0 x16 + PCIe 4.0 x4",
+        "Integrated Graphics": "Radeon Graphics (RDNA 2)",
+        "Process": "TSMC 5 nm (compute) + 6 nm (I/O)"
+      },
+      "colors": [
+        "BLACK",
+        "SILVER"
+      ],
+      "current_color": "SILVER",
+      "description": "The AMD Ryzen 9 7950X remains the definitive 16-core desktop processor for professionals and hardcore enthusiasts. Built on TSMC 5 nm with Zen 4 cores, it achieves all-core boost frequencies beyond 4.5 GHz while peaking at 5.7 GHz on performance cores. PCIe 5.0 support ensures compatibility with the latest NVMe SSDs and graphics cards, while DDR5 memory unlocks unprecedented memory bandwidth. Whether you are compiling code, rendering 3D scenes, or running complex data models, the 7950X dispatches tasks faster than anything else in its class.",
+      "rating_avg": 4.91,
+      "reviews": 524,
+      "created_at": "2024-01-05T10:00:00Z"
+    }
+  },
+  {
+    "model": "market.product",
+    "pk": 35,
+    "fields": {
+      "name": "AMD Ryzen 7 7800X3D Gaming CPU__BLACK",
+      "category": "PC_PART",
+      "series": 6,
+      "stock_quantity": 17,
+      "original_price": "449.00",
+      "sale_price": "399.00",
+      "characteristics": {
+        "Architecture": "Zen 4 + 3D V-Cache (TSMC 5 nm)",
+        "Cores / Threads": "8C / 16T",
+        "Base / Max Boost": "4.2 / 5.0 GHz",
+        "L3 Cache": "96 MB (3D V-Cache)",
+        "TDP": "120 W",
+        "Socket": "AMD AM5",
+        "Memory Support": "DDR5-5200 (dual-channel)",
+        "PCIe": "PCIe 5.0 x16",
+        "Integrated Graphics": "Radeon Graphics (RDNA 2)",
+        "Best For": "Gaming, high-FPS competitive, streaming"
+      },
+      "colors": [
+        "BLACK",
+        "SILVER"
+      ],
+      "current_color": "BLACK",
+      "description": "The AMD Ryzen 7 7800X3D is the undisputed gaming CPU champion. AMD's revolutionary 3D V-Cache technology stacks 64 MB of additional L3 cache directly onto the chiplet, bringing total L3 to 96 MB. This enormous cache dramatically reduces latency in CPU-bottlenecked game scenarios, pushing frame rates 10–30% beyond competing designs. In popular esports titles and open-world games alike, the 7800X3D consistently outperforms even higher-core-count competitors. With a 120 W TDP, it also runs cooler and quieter than performance rivals.",
+      "rating_avg": 4.97,
+      "reviews": 867,
+      "created_at": "2024-01-10T10:00:00Z"
+    }
+  },
+  {
+    "model": "market.product",
+    "pk": 36,
+    "fields": {
+      "name": "AMD Ryzen 7 7800X3D Gaming CPU__SILVER",
+      "category": "PC_PART",
+      "series": 6,
+      "stock_quantity": 17,
+      "original_price": "449.00",
+      "sale_price": "399.00",
+      "characteristics": {
+        "Architecture": "Zen 4 + 3D V-Cache (TSMC 5 nm)",
+        "Cores / Threads": "8C / 16T",
+        "Base / Max Boost": "4.2 / 5.0 GHz",
+        "L3 Cache": "96 MB (3D V-Cache)",
+        "TDP": "120 W",
+        "Socket": "AMD AM5",
+        "Memory Support": "DDR5-5200 (dual-channel)",
+        "PCIe": "PCIe 5.0 x16",
+        "Integrated Graphics": "Radeon Graphics (RDNA 2)",
+        "Best For": "Gaming, high-FPS competitive, streaming"
+      },
+      "colors": [
+        "BLACK",
+        "SILVER"
+      ],
+      "current_color": "SILVER",
+      "description": "The AMD Ryzen 7 7800X3D is the undisputed gaming CPU champion. AMD's revolutionary 3D V-Cache technology stacks 64 MB of additional L3 cache directly onto the chiplet, bringing total L3 to 96 MB. This enormous cache dramatically reduces latency in CPU-bottlenecked game scenarios, pushing frame rates 10–30% beyond competing designs. In popular esports titles and open-world games alike, the 7800X3D consistently outperforms even higher-core-count competitors. With a 120 W TDP, it also runs cooler and quieter than performance rivals.",
+      "rating_avg": 4.97,
+      "reviews": 867,
+      "created_at": "2024-01-10T10:00:00Z"
+    }
+  },
+  {
+    "model": "market.product",
+    "pk": 37,
+    "fields": {
+      "name": "ASUS ROG Maximus Z790 Hero ATX__BLACK",
+      "category": "PC_PART",
+      "series": 1,
+      "stock_quantity": 8,
+      "original_price": "699.99",
+      "sale_price": "629.99",
+      "characteristics": {
+        "Socket": "Intel LGA 1700",
+        "Chipset": "Intel Z790",
+        "CPU Support": "Intel Core 13th / 14th Gen",
+        "Memory": "4× DDR5 DIMM, up to 192 GB, DDR5-8000+ (OC)",
+        "Storage": "5× M.2 (incl. 1× PCIe 5.0), 6× SATA",
+        "Power Stages": "20+1 Dr. MOS 90A",
+        "Networking": "Intel 2.5G LAN + Intel Wi-Fi 6E",
+        "USB": "USB 3.2 Gen 2×2 (20 Gbps), Thunderbolt 4",
+        "Display": "ROG LiveDash 1.77\" OLED",
+        "Form Factor": "ATX"
+      },
+      "colors": [
+        "BLACK",
+        "GRAY"
+      ],
+      "current_color": "BLACK",
+      "description": "The ASUS ROG Maximus Z790 Hero is the flagship Intel Z790 motherboard for elite builders demanding maximum overclocking headroom and premium aesthetics. A staggering 20+1 power stage design — with 90A MOSFETs — feeds the most power-hungry Intel Core i9-14900K configurations without breaking a sweat. DDR5-8000+ OC support, PCIe 5.0 x16 primary slot, and M.2 PCIe 5.0 storage ensure the platform stays relevant for years. ROG's LiveDash OLED display, BIOS FlexKey, and Aura Sync lighting elevate the aesthetics to match the performance.",
+      "rating_avg": 4.76,
+      "reviews": 198,
+      "created_at": "2024-03-22T10:00:00Z"
+    }
+  },
+  {
+    "model": "market.product",
+    "pk": 38,
+    "fields": {
+      "name": "ASUS ROG Maximus Z790 Hero ATX__GRAY",
+      "category": "PC_PART",
+      "series": 1,
+      "stock_quantity": 8,
+      "original_price": "699.99",
+      "sale_price": "629.99",
+      "characteristics": {
+        "Socket": "Intel LGA 1700",
+        "Chipset": "Intel Z790",
+        "CPU Support": "Intel Core 13th / 14th Gen",
+        "Memory": "4× DDR5 DIMM, up to 192 GB, DDR5-8000+ (OC)",
+        "Storage": "5× M.2 (incl. 1× PCIe 5.0), 6× SATA",
+        "Power Stages": "20+1 Dr. MOS 90A",
+        "Networking": "Intel 2.5G LAN + Intel Wi-Fi 6E",
+        "USB": "USB 3.2 Gen 2×2 (20 Gbps), Thunderbolt 4",
+        "Display": "ROG LiveDash 1.77\" OLED",
+        "Form Factor": "ATX"
+      },
+      "colors": [
+        "BLACK",
+        "GRAY"
+      ],
+      "current_color": "GRAY",
+      "description": "The ASUS ROG Maximus Z790 Hero is the flagship Intel Z790 motherboard for elite builders demanding maximum overclocking headroom and premium aesthetics. A staggering 20+1 power stage design — with 90A MOSFETs — feeds the most power-hungry Intel Core i9-14900K configurations without breaking a sweat. DDR5-8000+ OC support, PCIe 5.0 x16 primary slot, and M.2 PCIe 5.0 storage ensure the platform stays relevant for years. ROG's LiveDash OLED display, BIOS FlexKey, and Aura Sync lighting elevate the aesthetics to match the performance.",
+      "rating_avg": 4.76,
+      "reviews": 198,
+      "created_at": "2024-03-22T10:00:00Z"
+    }
+  },
+  {
+    "model": "market.product",
+    "pk": 39,
+    "fields": {
+      "name": "Samsung 990 Pro 2TB PCIe NVMe__BLACK",
+      "category": "PC_PART",
+      "series": 12,
+      "stock_quantity": 35,
+      "original_price": "189.99",
+      "sale_price": "159.99",
+      "characteristics": {
+        "Interface": "PCIe 4.0 ×4, NVMe 2.0",
+        "Sequential Read": "7 450 MB/s",
+        "Sequential Write": "6 900 MB/s",
+        "Random Read": "1 600 000 IOPS",
+        "Random Write": "1 550 000 IOPS",
+        "NAND": "Samsung 176L V-NAND TLC",
+        "Controller": "Samsung Elpis",
+        "DRAM Cache": "2 GB LPDDR4",
+        "Endurance": "1 200 TBW",
+        "Warranty": "5 years / limited"
+      },
+      "colors": [
+        "BLACK",
+        "SILVER"
+      ],
+      "current_color": "BLACK",
+      "description": "The Samsung 990 Pro is the fastest consumer NVMe SSD Samsung has ever made. Leveraging PCIe 4.0 ×4 with Samsung's in-house Elpis controller and 176-layer V-NAND, it reaches 7 450 MB/s sequential read and 6 900 MB/s sequential write — pushing the very limits of the PCIe 4.0 interface. Thermal throttling is almost non-existent thanks to a redesigned heat spreader and dynamic thermal guard, making the 990 Pro an ideal choice for PS5 upgrades, demanding workstations, and content creation rigs where sustained throughput matters.",
+      "rating_avg": 4.83,
+      "reviews": 1204,
+      "created_at": "2024-04-01T10:00:00Z"
+    }
+  },
+  {
+    "model": "market.product",
+    "pk": 40,
+    "fields": {
+      "name": "Samsung 990 Pro 2TB PCIe NVMe__SILVER",
+      "category": "PC_PART",
+      "series": 12,
+      "stock_quantity": 35,
+      "original_price": "189.99",
+      "sale_price": "159.99",
+      "characteristics": {
+        "Interface": "PCIe 4.0 ×4, NVMe 2.0",
+        "Sequential Read": "7 450 MB/s",
+        "Sequential Write": "6 900 MB/s",
+        "Random Read": "1 600 000 IOPS",
+        "Random Write": "1 550 000 IOPS",
+        "NAND": "Samsung 176L V-NAND TLC",
+        "Controller": "Samsung Elpis",
+        "DRAM Cache": "2 GB LPDDR4",
+        "Endurance": "1 200 TBW",
+        "Warranty": "5 years / limited"
+      },
+      "colors": [
+        "BLACK",
+        "SILVER"
+      ],
+      "current_color": "SILVER",
+      "description": "The Samsung 990 Pro is the fastest consumer NVMe SSD Samsung has ever made. Leveraging PCIe 4.0 ×4 with Samsung's in-house Elpis controller and 176-layer V-NAND, it reaches 7 450 MB/s sequential read and 6 900 MB/s sequential write — pushing the very limits of the PCIe 4.0 interface. Thermal throttling is almost non-existent thanks to a redesigned heat spreader and dynamic thermal guard, making the 990 Pro an ideal choice for PS5 upgrades, demanding workstations, and content creation rigs where sustained throughput matters.",
+      "rating_avg": 4.83,
+      "reviews": 1204,
+      "created_at": "2024-04-01T10:00:00Z"
+    }
+  },
+  {
+    "model": "market.product",
+    "pk": 41,
+    "fields": {
+      "name": "Corsair Dominator Platinum RGB__BLACK",
+      "category": "PC_PART",
+      "series": 10,
+      "stock_quantity": 28,
+      "original_price": "249.99",
+      "sale_price": null,
+      "characteristics": {
+        "Standard": "DDR5-5600 (XMP 3.0, up to DDR5-6400)",
+        "Capacity": "64 GB (2× 32 GB)",
+        "Latency": "CL36-36-36-76",
+        "Voltage": "1.25 V",
+        "RGB": "12× CAPELLIX LEDs per DIMM, iCUE",
+        "Cooling": "Patented DHX aluminium heat spreader",
+        "Compatibility": "Intel 12th/13th/14th Gen Z-series; AMD AM5",
+        "ECC": "Non-ECC",
+        "Profile": "XMP 3.0, EXPO",
+        "Height": "56 mm (low-profile available)"
+      },
+      "colors": [
+        "BLACK",
+        "WHITE"
+      ],
+      "current_color": "BLACK",
+      "description": "Corsair Dominator Platinum RGB DDR5 is the aspirational choice for enthusiasts who refuse to compromise on speed or aesthetics. Each kit undergoes hand-screening for the tightest tolerances, enabling aggressive XMP 3.0 profiles starting at DDR5-5600 and reaching DDR5-6400 with superb stability. Twelve individually addressable CAPELLIX RGB LEDs per DIMM integrate with iCUE software for synchronised lighting across the entire Corsair ecosystem. At 64 GB (2×32 GB), this kit provides ample headroom for content creation and multitasking alongside high-FPS gaming.",
+      "rating_avg": 4.72,
+      "reviews": 389,
+      "created_at": "2024-02-14T10:00:00Z"
+    }
+  },
+  {
+    "model": "market.product",
+    "pk": 42,
+    "fields": {
+      "name": "Corsair Dominator Platinum RGB__WHITE",
+      "category": "PC_PART",
+      "series": 10,
+      "stock_quantity": 28,
+      "original_price": "249.99",
+      "sale_price": null,
+      "characteristics": {
+        "Standard": "DDR5-5600 (XMP 3.0, up to DDR5-6400)",
+        "Capacity": "64 GB (2× 32 GB)",
+        "Latency": "CL36-36-36-76",
+        "Voltage": "1.25 V",
+        "RGB": "12× CAPELLIX LEDs per DIMM, iCUE",
+        "Cooling": "Patented DHX aluminium heat spreader",
+        "Compatibility": "Intel 12th/13th/14th Gen Z-series; AMD AM5",
+        "ECC": "Non-ECC",
+        "Profile": "XMP 3.0, EXPO",
+        "Height": "56 mm (low-profile available)"
+      },
+      "colors": [
+        "BLACK",
+        "WHITE"
+      ],
+      "current_color": "WHITE",
+      "description": "Corsair Dominator Platinum RGB DDR5 is the aspirational choice for enthusiasts who refuse to compromise on speed or aesthetics. Each kit undergoes hand-screening for the tightest tolerances, enabling aggressive XMP 3.0 profiles starting at DDR5-5600 and reaching DDR5-6400 with superb stability. Twelve individually addressable CAPELLIX RGB LEDs per DIMM integrate with iCUE software for synchronised lighting across the entire Corsair ecosystem. At 64 GB (2×32 GB), this kit provides ample headroom for content creation and multitasking alongside high-FPS gaming.",
+      "rating_avg": 4.72,
+      "reviews": 389,
+      "created_at": "2024-02-14T10:00:00Z"
     }
   }
 ]

@@ -1,52 +1,32 @@
-import classNames from 'classnames';
-import styles from './Slider.module.scss';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { useEffect, useRef } from 'react';
-import { Autoplay, Navigation } from 'swiper/modules';
-import 'swiper/css';
-import 'swiper/css/navigation';
-import { getSignboardService } from '../../services/signboardService';
-// import type { Signboard } from '../../types/Signboard';
-// import { getSignboardService } from '../../services/signboardService';
+import { Swiper, SwiperSlide } from "swiper/react";
+import { useEffect, useRef, useState } from "react";
+import { Autoplay, Navigation } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import type { Signboard } from "@/types/Signboard";
+import { getSignboardService } from "@/services/signboardService";
 
 export const Slider = () => {
   const prevRef = useRef<HTMLButtonElement>(null);
   const nextRef = useRef<HTMLButtonElement>(null);
-  // const [slides, setSlides] = useState<Signboard[]>([]);
-
+  const [sliderImages, setSliderImages] = useState<Signboard[]>([]);
 
   useEffect(() => {
-    getSignboardService().then(data => console.log(data));
+   getSignboardService().then((signboards) => setSliderImages(signboards))
   }, [])
 
-  const sliderImages = [
-    {
-      desktop: 'images/slide-1.png',
-    },
-    {
-      desktop: 'images/slide-2.png',
-    },
-    {
-      desktop: 'images/slide-3.png',
-    },
-  ];
-
   return (
-    <section className={styles.slider}>
-      <div className={styles.container}>
-        <div className={styles.slider__inner}>
+    <section className="pt-[12px]">
+      <div className="max-w-[1370px] px-[15px] mx-auto my-0 w-[100%]">
+        <div className="relative">
 
-          <div className={styles.slider__navigation}>
-            <button
-              ref={prevRef}
-              className={classNames(
-                styles.slider__btn,
-                styles.slider__btnPrev
-              )}
-            >
-              <img src="icons/slider-arrow.svg" alt="Prev arrow" />
-            </button>
-          </div>
+          <button
+            ref={prevRef}
+            className="absolute left-0 top-1/2 -translate-y-1/2 bg-[rgba(37,41,49,0.5)] w-[36px] h-[48px] md:w-[27px] md:h-[36px] flex items-center justify-center z-[10] cursor-pointer rounded-r-[30px]"
+          >
+            <ChevronLeft color="#fff" width={"16px"} height={"16px"} />
+          </button>
 
           <Swiper
             modules={[Navigation, Autoplay]}
@@ -55,17 +35,19 @@ export const Slider = () => {
               delay: 4000,
               disableOnInteraction: false,
             }}
-            className={styles.slider__box}
             onBeforeInit={(swiper) => {
               const nav = swiper.params.navigation;
-              if (nav && typeof nav !== 'boolean') {
+              if (nav && typeof nav !== "boolean") {
                 nav.prevEl = prevRef.current;
                 nav.nextEl = nextRef.current;
               }
             }}
             onSwiper={(swiper) => {
               setTimeout(() => {
-                if (swiper.params.navigation && typeof swiper.params.navigation !== 'boolean') {
+                if (
+                  swiper.params.navigation &&
+                  typeof swiper.params.navigation !== "boolean"
+                ) {
                   swiper.params.navigation.prevEl = prevRef.current;
                   swiper.params.navigation.nextEl = nextRef.current;
                 }
@@ -75,32 +57,28 @@ export const Slider = () => {
               });
             }}
           >
-            {sliderImages.map((img, index) => (
-              <SwiperSlide key={index}>
+            {sliderImages.map((img) => (
+              <SwiperSlide key={img.id}>
                 <picture>
                   <img
-                    className={styles.slider__slide}
-                    src={img.desktop}
-                    alt={`Slide ${index + 1}`}
+                    className="w-full"
+                    src={img.image}
+                    alt={`Slide ${img.id}`}
                   />
                 </picture>
               </SwiperSlide>
             ))}
           </Swiper>
 
-          <div className={styles.slider__navigation}>
-            <button
-              ref={nextRef}
-              className={classNames(
-                styles.slider__btn,
-                styles.slider__btnNext
-              )}
-            >
-              <img src="icons/slider-arrow.svg" alt="Next arrow" />
-            </button>
-          </div>
+          <button
+            ref={nextRef}
+            className="absolute right-0 top-1/2 -translate-y-1/2 bg-[rgba(37,41,49,0.5)] w-[36px] h-[48px] md:w-[27px] md:h-[36px] flex items-center justify-center z-[10] cursor-pointer rounded-l-[30px]"
+          >
+            <ChevronRight color="#fff" width={"16px"} height={"16px"} />
+          </button>
+
         </div>
       </div>
     </section>
   );
-}
+};

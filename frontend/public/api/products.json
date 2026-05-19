@@ -1,0 +1,402 @@
+[
+  {
+    "id": 1,
+    "name": "MSI GS66 Stealth",
+    "category": "Laptops",
+    "series": "MSI GS Series",
+    "image": null,
+    "stock_quantity": 12,
+    "original_price": "2099.99",
+    "sale_price": "1999.99",
+    "characteristics": {
+      "CPU": "Intel Core i7",
+      "RAM": "16GB",
+      "Storage": "1TB SSD"
+    },
+    "color": "#000000",
+    "description": "Ultra-thin and light gaming laptop.",
+    "status": true,
+    "reviews": 32,
+    "rating_avg": "4.8"
+  },
+  {
+    "id": 2,
+    "name": "MSI GS75 Stealth",
+    "category": "Laptops",
+    "series": "MSI GS Series",
+    "image": null,
+    "stock_quantity": 5,
+    "original_price": "2299.00",
+    "sale_price": null,
+    "characteristics": {
+      "CPU": "Intel Core i9",
+      "RAM": "32GB",
+      "Storage": "1TB SSD"
+    },
+    "color": "#1A1A1A",
+    "description": "17-inch premium thin gaming laptop.",
+    "status": true,
+    "reviews": 15,
+    "rating_avg": "4.5"
+  },
+  {
+    "id": 3,
+    "name": "MSI GT76 Titan",
+    "category": "Laptops",
+    "series": "MSI GT Series",
+    "image": null,
+    "stock_quantity": 3,
+    "original_price": "3999.50",
+    "sale_price": "3800.00",
+    "characteristics": {
+      "CPU": "Intel Core i9 Desktop",
+      "RAM": "64GB",
+      "Storage": "2TB SSD"
+    },
+    "color": "#2C2C2C",
+    "description": "Desktop performance in a laptop.",
+    "status": true,
+    "reviews": 42,
+    "rating_avg": "4.9"
+  },
+  {
+    "id": 4,
+    "name": "MSI GT83VR Titan SLI",
+    "category": "Laptops",
+    "series": "MSI GT Series",
+    "image": null,
+    "stock_quantity": 2,
+    "original_price": "4500.00",
+    "sale_price": "4100.00",
+    "characteristics": {
+      "CPU": "Intel Core i7",
+      "GPU": "Dual RTX 2080",
+      "RAM": "32GB"
+    },
+    "color": "#000000",
+    "description": "Mechanical keyboard and dual GPUs.",
+    "status": false,
+    "reviews": 10,
+    "rating_avg": "4.2"
+  },
+  {
+    "id": 5,
+    "name": "MSI GL65 Leopard",
+    "category": "Laptops",
+    "series": "MSI GL Series",
+    "image": null,
+    "stock_quantity": 25,
+    "original_price": "1199.00",
+    "sale_price": "1099.00",
+    "characteristics": {
+      "CPU": "Intel Core i7",
+      "RAM": "16GB",
+      "Storage": "512GB SSD"
+    },
+    "color": "#333333",
+    "description": "Solid performance for everyday gaming.",
+    "status": true,
+    "reviews": 50,
+    "rating_avg": "4.4"
+  },
+  {
+    "id": 6,
+    "name": "MSI GL75 Leopard",
+    "category": "Laptops",
+    "series": "MSI GL Series",
+    "image": null,
+    "stock_quantity": 18,
+    "original_price": "1399.00",
+    "sale_price": null,
+    "characteristics": {
+      "CPU": "Intel Core i7",
+      "RAM": "16GB",
+      "Storage": "1TB HDD + 512GB SSD"
+    },
+    "color": "#000000",
+    "description": "17-inch screen for better immersion.",
+    "status": true,
+    "reviews": 28,
+    "rating_avg": "4.3"
+  },
+  {
+    "id": 7,
+    "name": "MSI GE66 Raider",
+    "category": "Laptops",
+    "series": "MSI GE Series",
+    "image": null,
+    "stock_quantity": 10,
+    "original_price": "1899.00",
+    "sale_price": "1750.00",
+    "characteristics": {
+      "CPU": "Intel Core i7",
+      "RAM": "32GB",
+      "Display": "240Hz"
+    },
+    "color": "#111111",
+    "description": "RGB light bar and high refresh rate.",
+    "status": true,
+    "reviews": 38,
+    "rating_avg": "4.7"
+  },
+  {
+    "id": 8,
+    "name": "MSI GE75 Raider",
+    "category": "Laptops",
+    "series": "MSI GE Series",
+    "image": null,
+    "stock_quantity": 8,
+    "original_price": "2100.00",
+    "sale_price": "1999.00",
+    "characteristics": {
+      "CPU": "Intel Core i9",
+      "RAM": "16GB",
+      "Display": "144Hz"
+    },
+    "color": "#222222",
+    "description": "Large display enthusiast gaming laptop.",
+    "status": true,
+    "reviews": 19,
+    "rating_avg": "4.6"
+  },
+  {
+    "id": 9,
+    "name": "Custom PC Build Alpha",
+    "category": "Desktop PC`s",
+    "series": "Custom PCs",
+    "image": null,
+    "stock_quantity": 5,
+    "original_price": "1500.00",
+    "sale_price": "1450.00",
+    "characteristics": {
+      "CPU": "AMD Ryzen 5",
+      "GPU": "RTX 3060",
+      "RAM": "16GB"
+    },
+    "color": "#FFFFFF",
+    "description": "Great entry-level custom PC.",
+    "status": true,
+    "reviews": 12,
+    "rating_avg": "4.1"
+  },
+  {
+    "id": 10,
+    "name": "Custom PC Build Beta",
+    "category": "Desktop PC`s",
+    "series": "Custom PCs",
+    "image": null,
+    "stock_quantity": 4,
+    "original_price": "2200.00",
+    "sale_price": null,
+    "characteristics": {
+      "CPU": "AMD Ryzen 7",
+      "GPU": "RTX 3080",
+      "RAM": "32GB"
+    },
+    "color": "#000000",
+    "description": "High-end 4K gaming machine.",
+    "status": true,
+    "reviews": 8,
+    "rating_avg": "4.9"
+  },
+  {
+    "id": 11,
+    "name": "Custom PC Build Omega",
+    "category": "Desktop PC`s",
+    "series": "Custom PCs",
+    "image": null,
+    "stock_quantity": 1,
+    "original_price": "3500.00",
+    "sale_price": "3400.00",
+    "characteristics": {
+      "CPU": "Intel Core i9",
+      "GPU": "RTX 4090",
+      "RAM": "64GB"
+    },
+    "color": "#FF0000",
+    "description": "Ultimate custom build for professionals.",
+    "status": true,
+    "reviews": 3,
+    "rating_avg": "5.0"
+  },
+  {
+    "id": 12,
+    "name": "MSI Infinite A",
+    "category": "Desktop PC`s",
+    "series": "MSI Infinute Series",
+    "image": null,
+    "stock_quantity": 7,
+    "original_price": "1600.00",
+    "sale_price": "1500.00",
+    "characteristics": {
+      "CPU": "Intel Core i7",
+      "GPU": "GTX 1660 Ti",
+      "RAM": "16GB"
+    },
+    "color": "#121212",
+    "description": "Pre-built gaming desktop with silent cooling.",
+    "status": true,
+    "reviews": 14,
+    "rating_avg": "4.2"
+  },
+  {
+    "id": 13,
+    "name": "MSI Infinite X",
+    "category": "Desktop PC`s",
+    "series": "MSI Infinute Series",
+    "image": null,
+    "stock_quantity": 4,
+    "original_price": "2500.00",
+    "sale_price": "2400.00",
+    "characteristics": {
+      "CPU": "Intel Core i9",
+      "GPU": "RTX 2080 Super",
+      "RAM": "32GB"
+    },
+    "color": "#000000",
+    "description": "Tempered glass panel and liquid cooling.",
+    "status": true,
+    "reviews": 21,
+    "rating_avg": "4.7"
+  },
+  {
+    "id": 14,
+    "name": "MSI Trident 3",
+    "category": "Desktop PC`s",
+    "series": "MSI Triden",
+    "image": null,
+    "stock_quantity": 11,
+    "original_price": "1099.00",
+    "sale_price": "999.00",
+    "characteristics": {
+      "CPU": "Intel Core i5",
+      "RAM": "8GB",
+      "Size": "Console-sized"
+    },
+    "color": "#FFFFFF",
+    "description": "Compact PC with the footprint of a console.",
+    "status": true,
+    "reviews": 45,
+    "rating_avg": "4.0"
+  },
+  {
+    "id": 15,
+    "name": "MSI Trident X",
+    "category": "Desktop PC`s",
+    "series": "MSI Triden",
+    "image": null,
+    "stock_quantity": 6,
+    "original_price": "2199.00",
+    "sale_price": null,
+    "characteristics": {
+      "CPU": "Intel Core i7",
+      "PSU": "SFX Form Factor",
+      "RAM": "16GB"
+    },
+    "color": "#1A1A1A",
+    "description": "Small form factor, massive power.",
+    "status": true,
+    "reviews": 22,
+    "rating_avg": "4.6"
+  },
+  {
+    "id": 16,
+    "name": "MSI Trident AS",
+    "category": "Desktop PC`s",
+    "series": "MSI Triden",
+    "image": null,
+    "stock_quantity": 9,
+    "original_price": "1750.00",
+    "sale_price": "1600.00",
+    "characteristics": {
+      "CPU": "Intel Core i7",
+      "GPU": "RTX 3070",
+      "RAM": "16GB"
+    },
+    "color": "#000000",
+    "description": "Mid-tier compact pre-built.",
+    "status": true,
+    "reviews": 11,
+    "rating_avg": "4.5"
+  },
+  {
+    "id": 17,
+    "name": "MSI Nightblade MI3",
+    "category": "Desktop PC`s",
+    "series": "MSI Nightblade",
+    "image": null,
+    "stock_quantity": 14,
+    "original_price": "950.00",
+    "sale_price": "850.00",
+    "characteristics": {
+      "CPU": "Intel Core i5",
+      "RAM": "8GB",
+      "Storage": "1TB HDD"
+    },
+    "color": "#333333",
+    "description": "Budget friendly compact gaming rig.",
+    "status": true,
+    "reviews": 52,
+    "rating_avg": "3.8"
+  },
+  {
+    "id": 18,
+    "name": "MSI Nightblade X2",
+    "category": "Desktop PC`s",
+    "series": "MSI Nightblade",
+    "image": null,
+    "stock_quantity": 2,
+    "original_price": "1800.00",
+    "sale_price": "1700.00",
+    "characteristics": {
+      "CPU": "Intel Core i7",
+      "RAM": "16GB",
+      "Handle": "Built-in"
+    },
+    "color": "#000000",
+    "description": "Portable LAN party machine.",
+    "status": false,
+    "reviews": 16,
+    "rating_avg": "4.4"
+  },
+  {
+    "id": 19,
+    "name": "MSI GS65 Stealth Thin",
+    "category": "Laptops",
+    "series": "MSI GS Series",
+    "image": null,
+    "stock_quantity": 20,
+    "original_price": "1499.99",
+    "sale_price": "1299.99",
+    "characteristics": {
+      "CPU": "Intel Core i7",
+      "RAM": "16GB",
+      "Weight": "1.88kg"
+    },
+    "color": "#000000",
+    "description": "Previous gen ultra-portable gaming.",
+    "status": true,
+    "reviews": 40,
+    "rating_avg": "4.6"
+  },
+  {
+    "id": 20,
+    "name": "MSI GE65 Raider",
+    "category": "Laptops",
+    "series": "MSI GE Series",
+    "image": null,
+    "stock_quantity": 0,
+    "original_price": "1600.00",
+    "sale_price": null,
+    "characteristics": {
+      "CPU": "Intel Core i7",
+      "GPU": "RTX 2070",
+      "RAM": "16GB"
+    },
+    "color": "#111111",
+    "description": "Reliable 15-inch powerhouse.",
+    "status": false,
+    "reviews": 27,
+    "rating_avg": "4.3"
+  }
+]
