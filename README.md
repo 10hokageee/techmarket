@@ -6,9 +6,8 @@
 
 <br/>
 
-[![Backend Live](https://img.shields.io/badge/Backend-Live-success?style=for-the-badge&logo=render)](http://techmarket-backend.onrender.com/)
+[![Backend Live](https://img.shields.io/badge/Backend-Live-success?style=for-the-badge&logo=render)](http://techmarket-backend.onrender.com/market/?format=json)
 [![Frontend Live](https://img.shields.io/badge/Frontend-Live-success?style=for-the-badge&logo=render)](https://techmarket-shop.onrender.com/)
-[![API Docs](https://img.shields.io/badge/OpenAPI-Docs-blue?style=for-the-badge&logo=swagger)](http://techmarket-backend.onrender.com/api/schema/swagger-ui/)
 
 </div>
 
@@ -16,10 +15,10 @@
 
 ## 📌 Table of Contents
 
-- [Overview](#-overview)
-- [Tech Stack](#-tech-stack)
-- [Architecture](#-architecture)
-- [Backend](#-backend)
+- [Overview](#overview)
+- [Tech Stack](#tech-stack)
+- [Architecture](#architecture)
+- [Backend](#backend)
   - [Apps & Modules](#apps--modules)
   - [Data Models](#data-models)
   - [REST API](#rest-api)
@@ -28,14 +27,15 @@
   - [Analytics Engine](#analytics-engine)
   - [Performance & Optimization](#performance--optimization)
   - [Deployment](#deployment--containerization)
-- [Frontend](#-frontend)
+- [Frontend](#frontend)
   - [UI & Components](#ui--components)
   - [State Management](#state-management)
   - [API Integration](#api-integration)
-- [Team](#-team)
+- [Team](#team)
 
 ---
 
+<a id="overview"></a>
 ## 🌐 Overview
 
 **TechMarket** is a complete e-commerce solution tailored for consumer electronics. It covers the full shopping lifecycle — from browsing a multi-category catalog with rich filtering, to checkout via Stripe, to order history and receipt delivery. The platform also includes a proprietary analytics system that tracks user sessions, behavioral events, geography, and device data, enabling product and business insights out of the box.
@@ -44,6 +44,7 @@ The backend is a **Django REST Framework** API deployed with **Gunicorn** + **Do
 
 ---
 
+<a id="tech-stack"></a>
 ## 🧰 Tech Stack
 
 ### Backend
@@ -59,7 +60,6 @@ The backend is a **Django REST Framework** API deployed with **Gunicorn** + **Do
   <img src="https://img.shields.io/badge/Gunicorn-WSGI Server-499848?style=flat-square&logo=gunicorn&logoColor=white"/>
   <img src="https://img.shields.io/badge/Docker-Containerized-2496ED?style=flat-square&logo=docker&logoColor=white"/>
   <img src="https://img.shields.io/badge/WhiteNoise-Static Files-lightgrey?style=flat-square"/>
-  <img src="https://img.shields.io/badge/drf--spectacular-OpenAPI 3.0-brightgreen?style=flat-square"/>
 </p>
 
 ### Frontend
@@ -79,6 +79,7 @@ The backend is a **Django REST Framework** API deployed with **Gunicorn** + **Do
 
 ---
 
+<a id="architecture"></a>
 ## 🏗 Architecture
 
 ```
@@ -105,8 +106,10 @@ techmarket/
 
 ---
 
+<a id="backend"></a>
 ## ⚙️ Backend
 
+<a id="apps--modules"></a>
 ### Apps & Modules
 
 The backend is organized as a set of focused Django apps, each responsible for a clear domain:
@@ -121,7 +124,12 @@ The backend is organized as a set of focused Django apps, each responsible for a
 
 ---
 
+<a id="data-models"></a>
 ### Data Models
+
+#### Database Schema
+
+[![DB Schema](https://app.eraser.io/workspace/0nMUqCax4cXy8Dg6Wglb/preview)](https://app.eraser.io/workspace/0nMUqCax4cXy8Dg6Wglb)
 
 #### Product System
 
@@ -148,6 +156,7 @@ The `actual_price` property on `Product` returns `sale_price or original_price`,
 
 ---
 
+<a id="rest-api"></a>
 ### REST API
 
 Built with **Django REST Framework**
@@ -205,6 +214,7 @@ Switching product color is handled entirely in the ORM — extracting the base n
 
 ---
 
+<a id="authentication--security"></a>
 ### Authentication & Security
 
 - **JWT via SimpleJWT** — 30-minute access tokens, 7-day refresh tokens
@@ -218,6 +228,7 @@ Switching product color is handled entirely in the ORM — extracting the base n
 
 ---
 
+<a id="payments-stripe-integration"></a>
 ### Payments (Stripe Integration)
 
 The payment flow is fully webhook-driven, making it robust against network failures and client-side manipulation:
@@ -236,6 +247,7 @@ A 20-minute cooldown guard on payment updates (`UPDATE_PAYMENT_MINUTES = 20`) pr
 
 ---
 
+<a id="analytics-engine"></a>
 ### Analytics Engine
 
 TechMarket includes a **custom-built analytics system**, avoiding third-party tracking dependencies:
@@ -271,6 +283,7 @@ The frontend sends these events to `/analytics/events/` using an authenticated `
 
 ---
 
+<a id="performance--optimization"></a>
 ### Performance & Optimization
 
 - **`select_related` + `prefetch_related`** used consistently across all querysets — `Product` always eagerly loads `series` and `images` to eliminate N+1 queries
@@ -284,6 +297,7 @@ The frontend sends these events to `/analytics/events/` using an authenticated `
 
 ---
 
+<a id="deployment--containerization"></a>
 ### Deployment & Containerization
 
 The backend runs in a minimal **Alpine-based Docker container** (`python:3.14-alpine`) with a dedicated non-root user (`tech_user`) for process isolation:
@@ -300,8 +314,10 @@ The `build.sh` script handles migrations and Gunicorn startup, both within the s
 
 ---
 
+<a id="frontend"></a>
 ## 🎨 Frontend
 
+<a id="ui--components"></a>
 ### UI & Components
 
 The frontend is a **React 19 SPA** built with **Vite 7**, organized with a clear separation between page-level modules (`/modules`) and reusable feature components (`/components`).
@@ -334,6 +350,7 @@ The design system is built on **shadcn/ui** components (Accordion, Carousel, But
 
 ---
 
+<a id="state-management"></a>
 ### State Management
 
 Cart state is managed with **Redux Toolkit**, persisted to `localStorage` so the cart survives page refreshes and browser restarts. The store is initialized from the serialized state on load via a `loadState` / `saveState` pattern using `store.subscribe`.
@@ -350,6 +367,7 @@ Auth tokens (JWT access + refresh) are stored in `localStorage` and managed thro
 
 ---
 
+<a id="api-integration"></a>
 ### API Integration
 
 **`authFetch`** — a thin wrapper around `fetch` that automatically injects the `Authorization: Bearer <token>` header for authenticated requests, removing boilerplate from all protected API calls.
@@ -366,13 +384,14 @@ The `category.ts` and `categoryToSlug.ts` utilities handle bidirectional mapping
 
 ---
 
+<a id="team"></a>
 ## 👥 Team
 
 <table>
   <tr>
     <td align="center"><strong>Arsenii Kushnir</strong><br/>Backend Developer & Deploy<br/><a href="https://github.com/PythonBossUA">@PythonBossUA</a></td>
     <td align="center"><strong>Nikita Serdyukov</strong><br/>Frontend Developer<br/><a href="https://github.com/10hokageee">@10hokageee</a></td>
-    <td align="center"><strong>Iryna Savelieva</strong><br/>Data Analyst</td>
+    <td align="center"><strong>Iryna Savelieva</strong><br/>Data Analyst<br/><a href="https://github.com/iro44ka8888-droid">@iro44ka8888-droid</a></td>
     <td align="center"><strong>Olga Skrypnyk</strong><br/>QA Engineer<br/><a href="https://github.com/qaaug25-OlgaSkrypnyk">@qaaug25-OlgaSkrypnyk</a></td>
   </tr>
 </table>
